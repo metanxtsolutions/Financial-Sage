@@ -1,0 +1,97 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { Container } from "@/components/Container";
+import { Button } from "@/components/Button";
+import { siteConfig } from "@/lib/site-config";
+
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "GST Registration", href: "/gst-registration" },
+  { label: "GST Return Filing", href: "/gst-return-filing" },
+  { label: "GST Compliance", href: "/gst-compliance" },
+  { label: "GST Tools", href: "/gst-tools" },
+  { label: "GST Guides", href: "/gst-guides" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
+
+export function Header() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <header className="sticky top-0 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur">
+      <Container className="flex h-16 items-center justify-between">
+        <Link href="/" className="flex items-center gap-2 text-lg font-bold text-brand-700">
+          {siteConfig.name}
+        </Link>
+
+        <nav className="hidden items-center gap-6 lg:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium text-neutral-700 hover:text-brand-700"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden items-center gap-3 lg:flex">
+          <Link href={siteConfig.loginUrl} className="text-sm font-medium text-neutral-700 hover:text-brand-700">
+            Client Login
+          </Link>
+          <Button href="/gst-registration" variant="primary">
+            Talk to GST Expert
+          </Button>
+        </div>
+
+        <button
+          aria-label="Toggle menu"
+          className="flex h-10 w-10 items-center justify-center rounded-md border border-neutral-200 lg:hidden"
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span className="sr-only">Menu</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            {open ? (
+              <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+            ) : (
+              <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap="round" />
+            )}
+          </svg>
+        </button>
+      </Container>
+
+      {open && (
+        <div className="border-t border-neutral-200 bg-white lg:hidden">
+          <Container className="flex flex-col gap-1 py-3">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="rounded-md px-2 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50"
+                onClick={() => setOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              href={siteConfig.loginUrl}
+              className="rounded-md px-2 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50"
+            >
+              Client Login
+            </Link>
+            <div className="mt-2 px-2">
+              <Button href="/gst-registration" variant="primary" className="w-full">
+                Talk to GST Expert
+              </Button>
+            </div>
+          </Container>
+        </div>
+      )}
+    </header>
+  );
+}

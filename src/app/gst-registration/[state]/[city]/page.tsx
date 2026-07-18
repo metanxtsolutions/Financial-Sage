@@ -1,0 +1,126 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { Section } from "@/components/Container";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { StickyLeadSidebar } from "@/components/StickyLeadSidebar";
+import { FaqAccordion } from "@/components/FaqAccordion";
+import { JsonLd, faqPageSchema, serviceSchema, breadcrumbSchema } from "@/lib/schema";
+import { siteConfig } from "@/lib/site-config";
+import { cities, getCity } from "@/data/cities";
+import { getFaqsByIds } from "@/data/faqs";
+
+// Programmatic city pages — see src/data/cities.ts for the single source of
+// truth. Add more state/city entries there to scale to hundreds of pages
+// with no template changes.
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return cities.map((c) => ({ state: c.stateSlug, city: c.citySlug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ state: string; city: string }>;
+}): Promise<Metadata> {
+  const { state, city } = await params;
+  const entry = getCity(state, city);
+  if (!entry) return {};
+  return {
+    title: { absolute: `GST Registration in ${entry.city}, ${entry.state} | Financial Sage` },
+    description: `Apply for GST registration in ${entry.city} online — documents, process, and fees explained. Financial Sage files within 24 hours, Pan-India.`,
+    alternates: { canonical: `/gst-registration/${entry.stateSlug}/${entry.citySlug}` },
+  };
+}
+
+const faqIds = [
+  "who-needs-gst-registration",
+  "how-long-gst-registration-takes",
+  "govt-fee-gst-registration",
+  "does-financial-sage-serve-pan-india",
+];
+
+export default async function CityGstPage({
+  params,
+}: {
+  params: Promise<{ state: string; city: string }>;
+}) {
+  const { state, city } = await params;
+  const entry = getCity(state, city);
+  if (!entry) notFound();
+
+  const faqs = getFaqsByIds(faqIds);
+  const breadcrumbs = [
+    { name: "Home", url: siteConfig.url },
+    { name: "GST Registration", url: `${siteConfig.url}/gst-registration` },
+    { name: entry.city, url: `${siteConfig.url}/gst-registration/${entry.stateSlug}/${entry.citySlug}` },
+  ];
+
+  return (
+    <>
+      <JsonLd
+        data={[
+          serviceSchema({
+            name: `GST Registration in ${entry.city}`,
+            description: `GST registration service for businesses in ${entry.city}, ${entry.state}.`,
+            url: `${siteConfig.url}/gst-registration/${entry.stateSlug}/${entry.citySlug}`,
+          }),
+          faqPageSchema(faqs),
+          breadcrumbSchema(breadcrumbs),
+        ]}
+      />
+
+      <Section className="pb-6 pt-8">
+        <Breadcrumbs
+          items={[
+            { name: "Home", href: "/" },
+            { name: "GST Registration", href: "/gst-registration" },
+            { name: entry.city, href: `/gst-registration/${entry.stateSlug}/${entry.citySlug}` },
+          ]}
+        />
+      </Section>
+
+      <Section className="pt-0">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
+          <div className="lg:col-span-2">
+            <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">
+              GST Registration in {entry.city}, {entry.state}
+            </h1>
+            <p className="mt-4 text-lg text-neutral-600">
+              Financial Sage helps businesses in {entry.city} register for GST fully online — no
+              visit to a tax office required. {entry.localNote} We file your application within 24
+              hours of receiving documents and payment, and track it through to GSTIN issuance.
+            </p>
+
+            <h2 className="mt-10 text-2xl font-bold text-neutral-900">
+              Who in {entry.city} Needs GST Registration?
+            </h2>
+            <p className="mt-3 text-neutral-700">
+              Any business in {entry.city} supplying goods with turnover above ₹40 lakh, or services
+              above ₹20 lakh, must register for GST — regardless of which part of {entry.state} they
+              operate in. E-commerce sellers and inter-state suppliers based in {entry.city} must
+              register regardless of turnover.
+            </p>
+
+            <h2 className="mt-10 text-2xl font-bold text-neutral-900">How We Work With {entry.city} Businesses</h2>
+            <ul className="mt-3 space-y-2 text-neutral-700">
+              <li>• Document collection over WhatsApp or email — no office visit needed</li>
+              <li>• Application filed within 24 hours of receiving documents and payment</li>
+              <li>• Real-time ARN tracking until your GSTIN is issued</li>
+              <li>• Ongoing monthly/quarterly filing support once registered</li>
+            </ul>
+
+            <h2 className="mt-10 text-2xl font-bold text-neutral-900">Frequently Asked Questions</h2>
+            <div className="mt-4">
+              <FaqAccordion faqs={faqs} />
+            </div>
+          </div>
+
+          <div>
+            <StickyLeadSidebar source={`city-${entry.stateSlug}-${entry.citySlug}`} />
+          </div>
+        </div>
+      </Section>
+    </>
+  );
+}

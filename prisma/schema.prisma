@@ -1,0 +1,37 @@
+// Prisma schema for Financial Sage — Phase 1 (public site + lead capture only).
+// The client portal (User, GSTRecord, Document, ServiceHistory) is Phase 2 —
+// see README.md for the split and the models to add when the portal is built.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  CONVERTED
+  CLOSED
+}
+
+model Lead {
+  id           String     @id @default(cuid())
+  name         String
+  phone        String
+  email        String?
+  businessType String?
+  city         String?
+  message      String?
+  source       String? // e.g. "gst-registration-page", "homepage-hero"
+  pageUrl      String?
+  utmSource    String?
+  utmMedium    String?
+  utmCampaign  String?
+  status       LeadStatus @default(NEW)
+  createdAt    DateTime   @default(now())
+}

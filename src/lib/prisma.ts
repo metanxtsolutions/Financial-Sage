@@ -18,8 +18,21 @@ function createPrismaClient() {
   return new PrismaClient({ adapter });
 }
 
-export const prisma = globalForPrisma.prisma ?? createPrismaClient();
-
-if (process.env.NODE_ENV !== "production") {
-  globalForPrisma.prisma = prisma;
+// Lazy by design: constructing PrismaClient at module scope would run at
+// import time, which includes Next.js's build-time "collecting page data"
+// step for every API route — so a missing DATABASE_URL would fail the whole
+// build, not just the request that actually needs the database. Deferring
+// construction to first property access means a misconfigured env only
+// breaks the specific request that touches the DB.
+function getPrismaClient(): PrismaClient {
+  if (!globalForPrisma.prisma) {
+    globalForPrisma.prisma = createPrismaClient();
+  }
+  return globalForPrisma.prisma;
 }
+
+export const prisma: PrismaClient = new Proxy({} as PrismaClient, {
+  get(_target, prop, receiver) {
+    return Reflect.get(getPrismaClient() as object, prop, receiver);
+  },
+});

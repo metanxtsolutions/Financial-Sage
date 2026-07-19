@@ -25,7 +25,7 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={clsx("py-12 sm:py-16", className)}>
+    <section id={id} className={clsx("py-16 sm:py-20 lg:py-28", className)}>
       <Container>{children}</Container>
     </section>
   );

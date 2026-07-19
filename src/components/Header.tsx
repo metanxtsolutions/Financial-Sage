@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import clsx from "clsx";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
 import { siteConfig } from "@/lib/site-config";
@@ -20,10 +21,30 @@ const navLinks = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 8);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur">
-      <Container className="flex h-16 items-center justify-between">
+    <header
+      className={clsx(
+        "sticky top-0 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur transition-shadow duration-200",
+        scrolled && "shadow-card",
+      )}
+    >
+      <Container
+        className={clsx(
+          "flex items-center justify-between transition-[height] duration-200",
+          scrolled ? "h-14" : "h-16",
+        )}
+      >
         <Link href="/" className="flex items-center gap-2 text-lg font-bold text-brand-700">
           {siteConfig.name}
         </Link>

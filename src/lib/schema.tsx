@@ -1,5 +1,6 @@
 import { siteConfig } from "@/lib/site-config";
 import type { Faq } from "@/data/faqs";
+import type { PricingTier } from "@/data/pricing";
 
 // JSON-LD builders. Deliberately excludes Review/AggregateRating schema —
 // our testimonials are sample/placeholder content, and marking them up as
@@ -73,6 +74,26 @@ export function faqPageSchema(faqs: Faq[]) {
       },
     })),
   };
+}
+
+export function pricingOfferSchema(tiers: PricingTier[]) {
+  return tiers.map((tier) => ({
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: `${siteConfig.name} — ${tier.name} Plan`,
+    description: tier.description,
+    brand: {
+      "@type": "Organization",
+      name: siteConfig.name,
+    },
+    offers: {
+      "@type": "Offer",
+      url: `${siteConfig.url}/pricing`,
+      priceCurrency: "INR",
+      price: tier.price,
+      availability: "https://schema.org/InStock",
+    },
+  }));
 }
 
 export function breadcrumbSchema(items: { name: string; url: string }[]) {

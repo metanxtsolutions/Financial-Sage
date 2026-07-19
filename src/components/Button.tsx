@@ -5,10 +5,10 @@ import { ReactNode } from "react";
 type Variant = "primary" | "secondary" | "whatsapp" | "outline";
 
 const variantClasses: Record<Variant, string> = {
-  primary: "bg-brand-600 text-white hover:bg-brand-700",
-  secondary: "bg-neutral-900 text-white hover:bg-neutral-700",
-  whatsapp: "bg-accent-500 text-white hover:bg-accent-600",
-  outline: "border border-neutral-200 text-neutral-900 hover:bg-neutral-50",
+  primary: "bg-brand-600 text-white shadow-card hover:bg-brand-700 hover:shadow-card-hover hover:-translate-y-0.5",
+  secondary: "bg-neutral-900 text-white shadow-card hover:bg-neutral-700 hover:shadow-card-hover hover:-translate-y-0.5",
+  whatsapp: "bg-accent-500 text-white shadow-card hover:bg-accent-600 hover:shadow-card-hover hover:-translate-y-0.5",
+  outline: "border border-neutral-200 text-neutral-900 hover:border-brand-300 hover:bg-neutral-50",
 };
 
 interface ButtonProps {
@@ -31,7 +31,7 @@ export function Button({
   disabled,
 }: ButtonProps) {
   const classes = clsx(
-    "inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed",
+    "inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none",
     variantClasses[variant],
     className,
   );

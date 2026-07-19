@@ -4,19 +4,19 @@ import { pricingTiers } from "@/data/pricing";
 
 export function PricingTable() {
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:items-center">
       {pricingTiers.map((tier) => (
         <div
           key={tier.id}
           className={clsx(
-            "flex flex-col rounded-2xl border p-6",
+            "relative flex flex-col rounded-2xl border p-6 transition-all duration-200",
             tier.highlighted
-              ? "border-brand-600 bg-brand-50 shadow-md"
-              : "border-neutral-200 bg-white",
+              ? "z-10 border-2 border-gold-500 bg-white shadow-card-hover md:-my-3 md:scale-105 md:p-8"
+              : "border-neutral-200 bg-white shadow-card hover:-translate-y-1 hover:shadow-card-hover",
           )}
         >
           {tier.highlighted && (
-            <span className="mb-3 inline-block w-fit rounded-full bg-brand-600 px-3 py-1 text-xs font-semibold text-white">
+            <span className="absolute -top-3 left-1/2 w-fit -translate-x-1/2 rounded-full bg-gold-500 px-3 py-1 text-xs font-semibold whitespace-nowrap text-white shadow-card">
               Most Popular
             </span>
           )}

@@ -7,7 +7,7 @@ export function FaqAccordion({ faqs }: { faqs: Faq[] }) {
   const [openId, setOpenId] = useState<string | null>(faqs[0]?.id ?? null);
 
   return (
-    <div className="divide-y divide-neutral-200 rounded-xl border border-neutral-200">
+    <div className="divide-y divide-neutral-200 rounded-xl border border-neutral-200 bg-white">
       {faqs.map((faq) => {
         const isOpen = openId === faq.id;
         return (
@@ -19,11 +19,18 @@ export function FaqAccordion({ faqs }: { faqs: Faq[] }) {
               className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-neutral-900 hover:bg-neutral-50"
             >
               {faq.question}
-              <span className="shrink-0 text-neutral-400">{isOpen ? "−" : "+"}</span>
+              <span
+                className="shrink-0 text-lg leading-none text-brand-600 transition-transform duration-200"
+                style={{ transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}
+              >
+                +
+              </span>
             </button>
-            {isOpen && (
-              <div className="px-5 pb-4 text-sm text-neutral-600">{faq.answer}</div>
-            )}
+            <div className="accordion-panel" data-open={isOpen ? "true" : "false"}>
+              <div>
+                <div className="px-5 pb-4 text-sm text-neutral-600">{faq.answer}</div>
+              </div>
+            </div>
           </div>
         );
       })}

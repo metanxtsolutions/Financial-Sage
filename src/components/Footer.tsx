@@ -82,8 +82,13 @@ export function Footer() {
       </Container>
 
       <div className="border-t border-neutral-200 py-6">
-        <Container className="flex flex-col gap-2 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between">
+        <Container className="flex flex-col gap-3 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
+          <div className="flex flex-wrap gap-x-4 gap-y-1">
+            <Link href="/privacy-policy" className="hover:text-brand-700">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-brand-700">Terms of Service</Link>
+            <Link href="/refund-policy" className="hover:text-brand-700">Refund Policy</Link>
+          </div>
           <p>{siteConfig.legalNote}</p>
         </Container>
       </div>

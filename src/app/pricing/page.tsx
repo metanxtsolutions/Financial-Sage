@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Section } from "@/components/Container";
 import { PricingTable } from "@/components/PricingTable";
 import { FaqAccordion } from "@/components/FaqAccordion";
-import { JsonLd, faqPageSchema } from "@/lib/schema";
+import { JsonLd, faqPageSchema, pricingOfferSchema } from "@/lib/schema";
 import { getFaqsByIds } from "@/data/faqs";
-import { monthlyFilingFrom } from "@/data/pricing";
+import { monthlyFilingFrom, pricingTiers } from "@/data/pricing";
 
 export const metadata: Metadata = {
   title: "Pricing — Transparent GST Registration & Filing Plans",
@@ -18,7 +18,7 @@ export default function PricingPage() {
   const faqs = getFaqsByIds(faqIds);
   return (
     <>
-      <JsonLd data={faqPageSchema(faqs)} />
+      <JsonLd data={[faqPageSchema(faqs), ...pricingOfferSchema(pricingTiers)]} />
       <Section>
         <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">Transparent Pricing</h1>
         <p className="mt-4 max-w-2xl text-lg text-neutral-600">

@@ -45,20 +45,22 @@ export default function HomePage() {
       <JsonLd data={faqPageSchema(homeFaqs)} />
 
       {/* Hero */}
-      <Section className="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white pt-12 sm:pt-16">
+      <Section className="hero-mesh relative overflow-hidden pt-12 sm:pt-16">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.35]"
+          className="pointer-events-none absolute inset-0 opacity-[0.4]"
           style={{
             backgroundImage: "radial-gradient(var(--color-brand-200) 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-            maskImage: "linear-gradient(to bottom, black, transparent 85%)",
+            backgroundSize: "26px 26px",
+            maskImage: "radial-gradient(60% 50% at 40% 20%, black, transparent 80%)",
           }}
         />
-        <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start">
+        <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
-            <h1 className="text-4xl font-extrabold tracking-tight text-neutral-900 sm:text-5xl lg:text-6xl">
-              GST Registration &amp; Filing Made Simple for Indian Businesses
+            <span className="eyebrow">GST specialists for Indian MSMEs</span>
+            <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-neutral-900 sm:text-5xl lg:text-[3.4rem]">
+              GST Registration &amp; Filing,{" "}
+              <span className="text-gradient">made simple</span> for Indian businesses
             </h1>
             <p className="mt-5 max-w-xl text-lg text-neutral-600">
               Expert-assisted GST registration and monthly filing for MSMEs, freelancers, and
@@ -74,26 +76,39 @@ export default function HomePage() {
               </Button>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-9 grid max-w-lg grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4">
               {trustStats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-full border border-brand-200 bg-white/80 px-4 py-2 shadow-card backdrop-blur"
-                >
-                  <span className="font-heading text-sm font-bold text-brand-700">
+                <div key={stat.label}>
+                  <div className="font-heading text-2xl font-extrabold text-neutral-900">
                     <CountUp label={stat.value} />
-                  </span>
-                  <span className="ml-1.5 text-xs text-neutral-500">{stat.label}</span>
+                  </div>
+                  <div className="mt-0.5 text-xs leading-tight text-neutral-500">{stat.label}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-card">
-            <h2 className="text-lg font-bold text-neutral-900">Get a free GST consultation</h2>
-            <p className="mt-1 text-sm text-neutral-600">Tell us about your business, and we&apos;ll take it from there.</p>
-            <div className="mt-4">
-              <LeadForm source="homepage-hero" />
+          <div className="relative">
+            <div
+              aria-hidden="true"
+              className="absolute -inset-4 rounded-[1.75rem] bg-brand-gradient opacity-[0.12] blur-2xl"
+            />
+            <div className="glass-card relative rounded-2xl p-6 sm:p-7">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex h-2 w-2 rounded-full bg-accent-500" />
+                <span className="text-xs font-semibold uppercase tracking-wide text-accent-600">
+                  Free consultation
+                </span>
+              </div>
+              <h2 className="mt-3 font-heading text-xl font-bold text-neutral-900">
+                Get your GST sorted
+              </h2>
+              <p className="mt-1 text-sm text-neutral-600">
+                Tell us about your business, and we&apos;ll take it from there.
+              </p>
+              <div className="mt-5">
+                <LeadForm source="homepage-hero" />
+              </div>
             </div>
           </div>
         </div>
@@ -102,20 +117,24 @@ export default function HomePage() {
       {/* Core GST services */}
       <Section>
         <ScrollReveal>
-          <h2 className="text-3xl font-bold text-neutral-900 sm:text-4xl">Core GST Services</h2>
+          <span className="eyebrow">What we do</span>
+          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">Core GST Services</h2>
           <p className="mt-2 max-w-2xl text-neutral-600">Everything you need to register and stay compliant. Nothing you don&apos;t.</p>
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {coreServices.map((service) => (
               <Link
                 key={service.title}
                 href={service.href}
-                className="group rounded-xl border border-neutral-200 bg-white p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
+                className="group rounded-2xl border border-neutral-200 bg-white p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-brand-200 hover:shadow-card-hover"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand-50 text-brand-600 transition-colors group-hover:bg-brand-600 group-hover:text-white">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-[0_8px_20px_-8px_rgba(79,70,229,0.6)]">
                   <Icon name={service.icon} className="h-6 w-6" />
                 </div>
                 <h3 className="mt-4 font-semibold text-neutral-900">{service.title}</h3>
                 <p className="mt-2 text-sm text-neutral-600">{service.description}</p>
+                <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                  Learn more <span aria-hidden="true">&rarr;</span>
+                </span>
               </Link>
             ))}
           </div>
@@ -125,14 +144,15 @@ export default function HomePage() {
       {/* Why Financial Sage */}
       <Section className="bg-neutral-50">
         <ScrollReveal>
-          <h2 className="text-3xl font-bold text-neutral-900 sm:text-4xl">Why Financial Sage</h2>
+          <span className="eyebrow">Why us</span>
+          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">Why Financial Sage</h2>
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {whyFinancialSage.map((item) => (
               <div
                 key={item.title}
-                className="rounded-xl bg-white p-5 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
+                className="rounded-2xl border border-neutral-200/60 bg-white p-5 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-500/10 text-accent-600">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
                   <Icon name={item.icon} className="h-5 w-5" />
                 </div>
                 <h3 className="mt-3 font-semibold text-neutral-900">{item.title}</h3>
@@ -146,7 +166,8 @@ export default function HomePage() {
       {/* Who needs GST */}
       <Section>
         <ScrollReveal>
-          <h2 className="text-3xl font-bold text-neutral-900 sm:text-4xl">Who Needs GST Registration?</h2>
+          <span className="eyebrow">Who it&apos;s for</span>
+          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">Who Needs GST Registration?</h2>
           <p className="mt-2 max-w-2xl text-neutral-600">
             If you run any of these businesses, GST registration probably applies to you. Tap yours to see the specifics.
           </p>
@@ -167,16 +188,17 @@ export default function HomePage() {
       {/* Process */}
       <Section className="bg-neutral-50">
         <ScrollReveal>
-          <h2 className="text-3xl font-bold text-neutral-900 sm:text-4xl">How It Works</h2>
+          <span className="eyebrow">How it works</span>
+          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">Three steps, that&apos;s it</h2>
           <div className="relative mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
             <div
               aria-hidden="true"
-              className="absolute top-[22px] right-0 left-0 hidden h-0.5 bg-brand-200 sm:block"
+              className="absolute top-[26px] right-0 left-0 hidden h-0.5 bg-gradient-to-r from-brand-200 via-violet-400 to-brand-200 sm:block"
               style={{ marginInline: "16.6%" }}
             />
             {processSteps.map((step, i) => (
-              <div key={step.title} className="relative rounded-xl bg-white p-6 shadow-card">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-600 font-heading text-sm font-bold text-white">
+              <div key={step.title} className="relative rounded-2xl border border-neutral-200/60 bg-white p-6 shadow-card">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-gradient font-heading text-base font-bold text-white shadow-[0_8px_20px_-8px_rgba(79,70,229,0.6)]">
                   {i + 1}
                 </div>
                 <h3 className="mt-4 font-semibold text-neutral-900">{step.title}</h3>
@@ -199,7 +221,8 @@ export default function HomePage() {
       {/* Pricing */}
       <Section>
         <ScrollReveal>
-          <h2 className="text-3xl font-bold text-neutral-900 sm:text-4xl">Transparent Pricing</h2>
+          <span className="eyebrow">Pricing</span>
+          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">Transparent Pricing</h2>
           <p className="mt-2 max-w-2xl text-neutral-600">No hidden fees, no &quot;request a quote&quot; forms.</p>
           <div className="mt-8">
             <PricingTable />
@@ -213,17 +236,17 @@ export default function HomePage() {
       {/* Testimonials */}
       <Section className="bg-neutral-50">
         <ScrollReveal>
-          <h2 className="text-3xl font-bold text-neutral-900 sm:text-4xl">What MSMEs Say</h2>
-          <p className="mt-1 text-xs uppercase tracking-wide text-neutral-400">Sample client feedback</p>
+          <span className="eyebrow">Sample client feedback</span>
+          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">What MSMEs Say</h2>
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
             {testimonials.map((t) => (
-              <div key={t.name} className="relative rounded-xl bg-white p-6 shadow-card">
-                <span className="font-heading text-4xl leading-none text-brand-100" aria-hidden="true">
+              <div key={t.name} className="relative rounded-2xl border border-neutral-200/60 bg-white p-6 shadow-card">
+                <span className="text-gradient font-heading text-5xl leading-none" aria-hidden="true">
                   &ldquo;
                 </span>
-                <p className="-mt-2 text-sm text-neutral-700">{t.quote}</p>
+                <p className="-mt-3 text-sm text-neutral-700">{t.quote}</p>
                 <div className="mt-4 flex items-center gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-gradient text-sm font-bold text-white">
                     {t.name.charAt(0)}
                   </div>
                   <div>
@@ -240,7 +263,8 @@ export default function HomePage() {
       {/* FAQ teaser */}
       <Section>
         <ScrollReveal>
-          <h2 className="text-3xl font-bold text-neutral-900 sm:text-4xl">Frequently Asked Questions</h2>
+          <span className="eyebrow">Answers</span>
+          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">Frequently Asked Questions</h2>
           <div className="mt-8 max-w-3xl">
             <FaqAccordion faqs={homeFaqs} />
           </div>
@@ -251,15 +275,28 @@ export default function HomePage() {
       </Section>
 
       {/* Final CTA */}
-      <Section className="bg-brand-700">
-        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-          <div>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">Ready to get GST-registered?</h2>
-            <p className="mt-2 text-brand-100">Free consultation. Transparent pricing. Filed within 24 hours.</p>
+      <Section className="py-16 sm:py-20 lg:py-24">
+        <div className="bg-brand-gradient relative overflow-hidden rounded-3xl px-8 py-12 shadow-[0_30px_60px_-24px_rgba(79,70,229,0.55)] sm:px-12 sm:py-14">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 opacity-20"
+            style={{
+              backgroundImage:
+                "radial-gradient(24rem 18rem at 90% -20%, rgba(255,255,255,0.7), transparent 60%), radial-gradient(20rem 16rem at 0% 120%, rgba(255,255,255,0.5), transparent 55%)",
+            }}
+          />
+          <div className="relative flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-white sm:text-4xl">Ready to get GST-registered?</h2>
+              <p className="mt-2 text-white/80">Free consultation. Transparent pricing. Filed within 24 hours.</p>
+            </div>
+            <Link
+              href="/gst-registration"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-brand-700 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
+            >
+              Start GST Registration <span aria-hidden="true">&rarr;</span>
+            </Link>
           </div>
-          <Button href="/gst-registration" variant="whatsapp">
-            Start GST Registration
-          </Button>
         </div>
       </Section>
     </>

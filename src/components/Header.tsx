@@ -47,9 +47,14 @@ export function Header() {
       >
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2 text-lg font-bold whitespace-nowrap text-brand-700"
+          className="flex shrink-0 items-center gap-2 whitespace-nowrap"
         >
-          {siteConfig.name}
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-gradient text-sm font-bold text-white shadow-[0_6px_16px_-6px_rgba(79,70,229,0.6)]">
+            FS
+          </span>
+          <span className="font-heading text-lg font-bold tracking-tight text-neutral-900">
+            {siteConfig.name}
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-4 xl:flex">

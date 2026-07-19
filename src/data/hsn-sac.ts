@@ -1,5 +1,5 @@
 // Reference subset of common HSN (goods) and SAC (services) codes with
-// indicative GST rates. Not exhaustive — for exact classification of a
+// indicative GST rates. Not exhaustive. For exact classification of a
 // specific product, cross-check the official CBIC rate finder.
 
 export interface HsnSacEntry {

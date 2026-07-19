@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// Animates the leading integer in a label (e.g. "150+" -> counts 0..150, keeps
-// the "+" suffix; "40–50" counts the first number, keeps "–50" as a suffix).
+// Animates the leading integer in a label (e.g. "150+" counts 0..150 and keeps
+// the "+" suffix; "40-50" counts the first number and keeps "-50" as a suffix).
 export function CountUp({ label, className }: { label: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [display, setDisplay] = useState<string>(label.replace(/^\d+/, "0"));

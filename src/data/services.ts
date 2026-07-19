@@ -10,7 +10,7 @@ export interface CoreService {
 export const coreServices: CoreService[] = [
   {
     title: "GST Registration",
-    description: "New GST registration for proprietorships, partnerships, LLPs, and companies — filed within 24 hours of documents.",
+    description: "New GST registration for proprietorships, partnerships, LLPs, and companies, filed within 24 hours of your documents.",
     href: "/gst-registration",
     icon: "document-check",
   },
@@ -72,14 +72,14 @@ export const whoNeedsGst: BusinessTypeCard[] = [
 export const processSteps = [
   { title: "Choose Service", body: "Pick GST registration, filing, or a compliance plan that fits your business stage." },
   { title: "Submit Details", body: "Share your documents and business details over WhatsApp, email, or our online form." },
-  { title: "We Handle the Rest", body: "We file, follow up, and keep you updated until it's done — no portal logins or paperwork on your end." },
+  { title: "We Handle the Rest", body: "We file, follow up, and keep you posted until it's done. No portal logins or paperwork on your end." },
 ];
 
 export const whyFinancialSage: { title: string; body: string; icon: IconName }[] = [
   { title: "Transparent subscription pricing", body: "Published prices, no 'request a quote' games.", icon: "tag" },
   { title: "WhatsApp-first onboarding", body: "Share documents and get updates where you already are.", icon: "chat" },
   { title: "MSME-focused support", body: "We build our process around small business realities, not enterprise red tape.", icon: "users" },
-  { title: "Pan-India coverage", body: "Fully remote — we serve clients across every state.", icon: "globe" },
+  { title: "Pan-India coverage", body: "Fully remote. We serve clients in every state.", icon: "globe" },
   { title: "Fast response", body: `We respond within ${"40 minutes"} during business hours.`, icon: "clock" },
   { title: "Dedicated GST expert", body: "One point of contact who knows your filing history.", icon: "user-check" },
   { title: "CA-reviewed filings", body: "Every filing is reviewed for accuracy before submission.", icon: "badge-check" },

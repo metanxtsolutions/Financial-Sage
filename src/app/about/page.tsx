@@ -6,7 +6,7 @@ import { whyFinancialSage } from "@/data/services";
 
 export const metadata: Metadata = {
   title: "About Financial Sage",
-  description: "Financial Sage is India's GST registration and compliance specialist for MSMEs — transparent pricing, WhatsApp-first support, Pan-India coverage.",
+  description: "Financial Sage is India's GST registration and compliance specialist for MSMEs. Transparent pricing, WhatsApp-first support, Pan-India coverage.",
   alternates: { canonical: "/about" },
 };
 
@@ -17,16 +17,15 @@ export default function AboutPage() {
         <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">About {siteConfig.name}</h1>
         <p className="mt-4 text-lg text-neutral-600">
           {siteConfig.name} is India&apos;s GST registration and compliance specialist for MSMEs.
-          GST is the entire focus of what we do — not one of twenty services competing for
-          attention, but the thing we&apos;ve built our entire process around.
+          GST is all we do. It isn&apos;t one of twenty services fighting for attention, it&apos;s
+          the thing we&apos;ve built our whole process around.
         </p>
 
         <h2 className="mt-10 text-2xl font-bold text-neutral-900">Why We Exist</h2>
         <p className="mt-3 text-neutral-700">
           Most GST consultancies treat registration and filing as one line item among dozens of
-          legal services. We went the other way: build deep expertise in one thing, keep pricing
-          transparent, and stay reachable on the channel small business owners already use —
-          WhatsApp.
+          legal services. We went the other way: deep expertise in one thing, pricing kept
+          transparent, and support on the channel small business owners already use, WhatsApp.
         </p>
 
         <h2 className="mt-10 text-2xl font-bold text-neutral-900">Where We Stand Today</h2>
@@ -45,7 +44,7 @@ export default function AboutPage() {
           </li>
         </ul>
         <p className="mt-3 text-sm text-neutral-500">
-          We&apos;re a focused, growing GST practice — not the biggest name in the market, but one
+          We&apos;re a focused, growing GST practice. Not the biggest name in the market, but one
           that answers the phone and knows your filing history.
         </p>
 
@@ -62,7 +61,7 @@ export default function AboutPage() {
         <h2 className="mt-10 text-2xl font-bold text-neutral-900">Beyond GST</h2>
         <p className="mt-3 text-neutral-700">
           We also help with company registration, trademark filing, ITR, and MSME/Udyam
-          registration — as secondary services alongside our core GST practice. See{" "}
+          registration, as secondary services alongside our core GST practice. See{" "}
           <Link href="/other-services" className="font-medium text-brand-700 underline">
             Other Services
           </Link>{" "}

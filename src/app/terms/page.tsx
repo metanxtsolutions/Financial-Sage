@@ -25,7 +25,7 @@ export default function TermsPage() {
         <p className="mt-3 text-neutral-700">
           {siteConfig.name} is a private GST and business-compliance service provider. We are not a
           government body, and we do not control the GST department&apos;s review, approval, or
-          processing timelines. Timelines we mention (such as 24-hour filing or 3–7 day GSTIN
+          processing timelines. Timelines we mention (such as 24-hour filing or 3 to 7 day GSTIN
           issuance) refer to our own turnaround, not a guarantee of government processing time.
         </p>
 
@@ -40,8 +40,8 @@ export default function TermsPage() {
         <p className="mt-3 text-neutral-700">
           Our published fees (see the{" "}
           <Link href="/pricing" className="font-medium text-brand-700 underline">Pricing page</Link>) cover
-          the professional service of preparing, reviewing, and filing your application or return —
-          they are separate from any government/GST fee, which is paid directly where applicable.
+          the professional service of preparing, reviewing, and filing your application or return.
+          They are separate from any government/GST fee, which is paid directly where applicable.
           See our{" "}
           <Link href="/refund-policy" className="font-medium text-brand-700 underline">Refund Policy</Link>{" "}
           for what happens if a filing doesn&apos;t proceed.

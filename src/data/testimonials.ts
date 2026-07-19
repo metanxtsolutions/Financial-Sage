@@ -1,9 +1,9 @@
-// Sample MSME testimonials for illustrative purposes only — clearly labelled
-// as such in the UI. Replace with real client feedback as it comes in.
-// NOTE: We deliberately do NOT emit Review/AggregateRating JSON-LD for these,
-// since they are placeholder text rather than verified customer reviews —
-// doing so would violate Google's structured data guidelines. Swap in real
-// reviews before adding review schema.
+// Sample MSME testimonials for illustration only, labelled as such in the UI.
+// Replace with real client feedback as it comes in.
+// NOTE: We deliberately do NOT emit Review/AggregateRating JSON-LD for these.
+// They are placeholder text, not verified customer reviews, and marking them
+// up would violate Google's structured data guidelines. Swap in real reviews
+// before adding review schema.
 
 export interface Testimonial {
   name: string;
@@ -18,7 +18,7 @@ export const testimonials: Testimonial[] = [
     business: "Textile Trading Firm",
     city: "Kolkata",
     quote:
-      "Our GSTIN came through in under a week and the team explained every document we needed upfront — no back and forth.",
+      "Our GSTIN came through in under a week, and the team explained every document we needed upfront, with no back and forth.",
   },
   {
     name: "Priya Nair",

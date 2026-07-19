@@ -15,7 +15,7 @@ import { testimonials } from "@/data/testimonials";
 import { getFaqsByIds } from "@/data/faqs";
 
 export const metadata: Metadata = {
-  title: { absolute: `${siteConfig.name} — GST Registration & Filing Made Simple for Indian Businesses` },
+  title: { absolute: `${siteConfig.name}: GST Registration & Filing Made Simple for Indian Businesses` },
   description:
     "Expert-assisted GST registration and filing for Indian MSMEs. GST registration from ₹399, transparent pricing, Pan-India coverage, response within 40 minutes.",
   alternates: { canonical: "/" },
@@ -62,7 +62,7 @@ export default function HomePage() {
             </h1>
             <p className="mt-5 max-w-xl text-lg text-neutral-600">
               Expert-assisted GST registration and monthly filing for MSMEs, freelancers, and
-              e-commerce sellers — transparent pricing, Pan-India coverage, and a real response
+              e-commerce sellers. Transparent pricing, Pan-India coverage, and a real reply
               within {siteConfig.responseTime} during business hours.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
@@ -91,7 +91,7 @@ export default function HomePage() {
 
           <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-card">
             <h2 className="text-lg font-bold text-neutral-900">Get a free GST consultation</h2>
-            <p className="mt-1 text-sm text-neutral-600">Tell us about your business — we&apos;ll take it from there.</p>
+            <p className="mt-1 text-sm text-neutral-600">Tell us about your business, and we&apos;ll take it from there.</p>
             <div className="mt-4">
               <LeadForm source="homepage-hero" />
             </div>
@@ -103,7 +103,7 @@ export default function HomePage() {
       <Section>
         <ScrollReveal>
           <h2 className="text-3xl font-bold text-neutral-900 sm:text-4xl">Core GST Services</h2>
-          <p className="mt-2 max-w-2xl text-neutral-600">Everything you need to register and stay compliant — nothing you don&apos;t.</p>
+          <p className="mt-2 max-w-2xl text-neutral-600">Everything you need to register and stay compliant. Nothing you don&apos;t.</p>
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {coreServices.map((service) => (
               <Link
@@ -148,7 +148,7 @@ export default function HomePage() {
         <ScrollReveal>
           <h2 className="text-3xl font-bold text-neutral-900 sm:text-4xl">Who Needs GST Registration?</h2>
           <p className="mt-2 max-w-2xl text-neutral-600">
-            If you run any of these businesses, GST registration probably applies to you — tap yours to see the specifics.
+            If you run any of these businesses, GST registration probably applies to you. Tap yours to see the specifics.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             {whoNeedsGst.map((item) => (

@@ -21,7 +21,7 @@ export function HsnSacSearchTool() {
       </label>
 
       {query && results.length === 0 && (
-        <p className="text-sm text-neutral-500">No matches in our reference list — check the official CBIC rate finder for an exhaustive search.</p>
+        <p className="text-sm text-neutral-500">No matches in our reference list. Check the official CBIC rate finder for an exhaustive search.</p>
       )}
 
       {results.length > 0 && (
@@ -41,7 +41,7 @@ export function HsnSacSearchTool() {
 
       <p className="text-xs text-neutral-500">
         * Rates marked with an asterisk vary by sub-category or conditions (e.g. ITC availed vs
-        not). This is a reference subset, not exhaustive — confirm on the official CBIC rate finder
+        not). This is a reference subset, not exhaustive, so confirm on the official CBIC rate finder
         for final classification.
       </p>
     </div>

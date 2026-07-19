@@ -51,7 +51,7 @@ export default async function OtherServicePage({ params }: { params: Promise<{ s
           </ul>
 
           <p className="mt-8 text-sm text-neutral-500">
-            This is a secondary service alongside our core GST practice — if your business also
+            This is a secondary service alongside our core GST practice. If your business also
             needs GST registration, see our{" "}
             <Link href="/gst-registration" className="font-medium text-brand-700 underline">
               GST Registration

@@ -70,7 +70,7 @@ export function LeadForm({ source, compact = false }: LeadFormProps) {
   if (status === "success") {
     return (
       <div className="rounded-xl border border-accent-500/30 bg-accent-500/5 p-6 text-center">
-        <p className="text-lg font-semibold text-neutral-900">Thanks — we&apos;ve got your details.</p>
+        <p className="text-lg font-semibold text-neutral-900">Thanks, we&apos;ve got your details.</p>
         <p className="mt-1 text-sm text-neutral-600">
           We respond within {siteConfig.responseTime} during business hours. Want a faster reply?
         </p>
@@ -87,7 +87,7 @@ export function LeadForm({ source, compact = false }: LeadFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
-      {/* Honeypot field — hidden from real users via CSS, not display:none, so basic bots that skip hidden fields still get caught */}
+      {/* Honeypot field, hidden from real users via CSS (not display:none) so basic bots that skip hidden fields still get caught */}
       <input
         type="text"
         name="companyWebsite"

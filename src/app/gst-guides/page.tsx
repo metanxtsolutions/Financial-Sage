@@ -4,7 +4,7 @@ import { Section } from "@/components/Container";
 import { getAllPosts, blogCategories } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "GST Guides — Registration, Filing & Compliance Explained",
+  title: "GST Guides: Registration, Filing & Compliance Explained",
   description: "Plain-English guides on GST registration, filing, notices, ITC, and compliance for Indian MSMEs and freelancers.",
   alternates: { canonical: "/gst-guides" },
 };
@@ -16,7 +16,7 @@ export default function GstGuidesPage() {
     <Section>
       <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">GST Guides</h1>
       <p className="mt-4 max-w-2xl text-lg text-neutral-600">
-        Plain-English writing on GST registration, filing, notices, and compliance — no jargon, no filler.
+        Plain-English writing on GST registration, filing, notices, and compliance. No jargon, no filler.
       </p>
 
       <div className="mt-6 flex flex-wrap gap-2">

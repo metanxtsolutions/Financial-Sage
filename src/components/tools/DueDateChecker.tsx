@@ -71,7 +71,7 @@ export function DueDateChecker() {
       </div>
 
       <p className="text-xs text-neutral-500">
-        Dates shown are the standard 11th/20th (monthly) or 13th/22nd/25th (QRMP) pattern — the
+        Dates shown follow the standard 11th/20th (monthly) or 13th/22nd/25th (QRMP) pattern. The
         government can extend specific due dates by notification, so confirm on the GST portal
         before a filing deadline.
       </p>

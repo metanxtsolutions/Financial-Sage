@@ -6,7 +6,7 @@ import { siteConfig, whatsappLink, defaultWhatsappMessage } from "@/lib/site-con
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: "Get in touch with Financial Sage for GST registration and filing — WhatsApp, phone, email, or the form below.",
+  description: "Get in touch with Financial Sage for GST registration and filing on WhatsApp, phone, email, or the form below.",
   alternates: { canonical: "/contact" },
 };
 
@@ -35,7 +35,7 @@ export default function ContactPage() {
             </div>
             <div className="text-neutral-700">
               <div className="font-semibold">Coverage</div>
-              <p className="text-sm text-neutral-600">Pan-India — fully remote, no office visit required.</p>
+              <p className="text-sm text-neutral-600">Pan-India, fully remote, no office visit required.</p>
             </div>
           </div>
         </div>

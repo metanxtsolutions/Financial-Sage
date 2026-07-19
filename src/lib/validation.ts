@@ -15,7 +15,7 @@ export const leadSchema = z.object({
   utmSource: z.string().trim().max(200).optional().or(z.literal("")),
   utmMedium: z.string().trim().max(200).optional().or(z.literal("")),
   utmCampaign: z.string().trim().max(200).optional().or(z.literal("")),
-  // Honeypot — real users never fill this in; bots often do.
+  // Honeypot: real users never fill this in; bots often do.
   companyWebsite: z.string().max(0).optional().or(z.literal("")),
 });
 

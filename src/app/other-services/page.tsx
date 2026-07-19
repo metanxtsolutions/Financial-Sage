@@ -4,7 +4,7 @@ import { Section } from "@/components/Container";
 import { otherServices } from "@/data/other-services";
 
 export const metadata: Metadata = {
-  title: "Other Services — Company Registration, Trademark, ITR & More",
+  title: "Other Services: Company Registration, Trademark, ITR & More",
   description: "Secondary business services from Financial Sage alongside our core GST practice: company/LLP registration, trademark, ITR filing, and ROC compliance.",
   alternates: { canonical: "/other-services" },
 };
@@ -14,7 +14,7 @@ export default function OtherServicesPage() {
     <Section>
       <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">Other Services</h1>
       <p className="mt-4 max-w-2xl text-lg text-neutral-600">
-        GST is our specialisation — these are secondary services we offer alongside it, with the
+        GST is our specialisation. These are secondary services we offer alongside it, on the
         same document-first, WhatsApp-friendly process.
       </p>
 

@@ -94,7 +94,7 @@ h1, h2, h3, h4 {
   letter-spacing: -0.02em;
 }
 
-/* Smooth-height accordion panels (grid-rows trick — no JS height measuring) */
+/* Smooth-height accordion panels (grid-rows trick, no JS height measuring) */
 .accordion-panel {
   display: grid;
   grid-template-rows: 0fr;

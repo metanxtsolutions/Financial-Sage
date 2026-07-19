@@ -1,5 +1,5 @@
 // next-sitemap runs as plain Node/CJS after `next build`, so we can't import
-// the .ts data files directly — re-derive the same lists here instead.
+// the .ts data files directly, so re-derive the same lists here instead.
 // Keep these arrays in sync with src/data/*.ts if you add new entries.
 
 const clusterSlugs = [

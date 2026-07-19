@@ -65,7 +65,7 @@ export function LateFeeCalculator() {
 
       <p className="text-xs text-neutral-500">
         Based on the standard ₹50/day (regular) or ₹20/day (NIL) late fee, subject to a
-        government-notified maximum cap that depends on turnover — confirm the exact cap on the GST
+        government-notified maximum cap that depends on turnover. Confirm the exact cap on the GST
         portal before payment.
       </p>
     </div>

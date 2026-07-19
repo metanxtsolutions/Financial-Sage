@@ -7,7 +7,7 @@ import { getFaqsByIds } from "@/data/faqs";
 import { monthlyFilingFrom, pricingTiers } from "@/data/pricing";
 
 export const metadata: Metadata = {
-  title: "Pricing — Transparent GST Registration & Filing Plans",
+  title: "Pricing: Transparent GST Registration & Filing Plans",
   description: `GST registration from ₹399, monthly filing from ₹${monthlyFilingFrom}. No hidden fees, published pricing for every plan.`,
   alternates: { canonical: "/pricing" },
 };
@@ -22,8 +22,8 @@ export default function PricingPage() {
       <Section>
         <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">Transparent Pricing</h1>
         <p className="mt-4 max-w-2xl text-lg text-neutral-600">
-          No &quot;request a quote&quot; forms — every plan is priced and published here. Standalone
-          monthly GST filing (without a bundled registration) starts from ₹{monthlyFilingFrom}.
+          No &quot;request a quote&quot; forms. Every plan is priced and published here. Standalone
+          monthly GST filing, without a bundled registration, starts from ₹{monthlyFilingFrom}.
         </p>
 
         <div className="mt-10">

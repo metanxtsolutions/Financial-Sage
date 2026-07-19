@@ -54,7 +54,7 @@ export function GstinValidator() {
       )}
 
       <p className="text-xs text-neutral-500">
-        This checks structural format only (state code, PAN, entity code, checksum position) — it
+        This checks structural format only (state code, PAN, entity code, checksum position). It
         doesn&apos;t confirm the GSTIN is active or real. Cross-check on the official GST portal for
         that.
       </p>

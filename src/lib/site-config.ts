@@ -1,5 +1,5 @@
-// Single source of truth for real business facts. Do not inflate these numbers —
-// see project brief: Financial Sage competes on transparent pricing and
+// Single source of truth for real business facts. Do not inflate these numbers.
+// Per the project brief, Financial Sage competes on transparent pricing and
 // responsiveness, not on bigger-than-life stats.
 
 export const siteConfig = {
@@ -16,7 +16,7 @@ export const siteConfig = {
   responseTime: "40 minutes",
   stats: {
     registrations: "150+",
-    activeClients: "40–50",
+    activeClients: "40-50",
     enquiries: "800+",
   },
   pricingFrom: {

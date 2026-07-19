@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/site-config";
 import { cities, getCity } from "@/data/cities";
 import { getFaqsByIds } from "@/data/faqs";
 
-// Programmatic city pages — see src/data/cities.ts for the single source of
+// Programmatic city pages. See src/data/cities.ts for the single source of
 // truth. Add more state/city entries there to scale to hundreds of pages
 // with no template changes.
 export const dynamicParams = false;
@@ -28,7 +28,7 @@ export async function generateMetadata({
   if (!entry) return {};
   return {
     title: { absolute: `GST Registration in ${entry.city}, ${entry.state} | Financial Sage` },
-    description: `Apply for GST registration in ${entry.city} online — documents, process, and fees explained. Financial Sage files within 24 hours, Pan-India.`,
+    description: `Apply for GST registration in ${entry.city} online. Documents, process, and fees explained. Financial Sage files within 24 hours, Pan-India.`,
     alternates: { canonical: `/gst-registration/${entry.stateSlug}/${entry.citySlug}` },
   };
 }
@@ -84,8 +84,8 @@ export default async function CityGstPage({
               GST Registration in {entry.city}, {entry.state}
             </h1>
             <p className="mt-4 text-lg text-neutral-600">
-              Financial Sage helps businesses in {entry.city} register for GST fully online — no
-              visit to a tax office required. {entry.localNote} We file your application within 24
+              Financial Sage helps businesses in {entry.city} register for GST fully online, with no
+              visit to a tax office. {entry.localNote} We file your application within 24
               hours of receiving documents and payment, and track it through to GSTIN issuance.
             </p>
 
@@ -94,14 +94,14 @@ export default async function CityGstPage({
             </h2>
             <p className="mt-3 text-neutral-700">
               Any business in {entry.city} supplying goods with turnover above ₹40 lakh, or services
-              above ₹20 lakh, must register for GST — regardless of which part of {entry.state} they
-              operate in. E-commerce sellers and inter-state suppliers based in {entry.city} must
+              above ₹20 lakh, must register for GST, wherever in {entry.state} they
+              operate. E-commerce sellers and inter-state suppliers based in {entry.city} must
               register regardless of turnover.
             </p>
 
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">How We Work With {entry.city} Businesses</h2>
             <ul className="mt-3 space-y-2 text-neutral-700">
-              <li>• Document collection over WhatsApp or email — no office visit needed</li>
+              <li>• Document collection over WhatsApp or email, with no office visit</li>
               <li>• Application filed within 24 hours of receiving documents and payment</li>
               <li>• Real-time ARN tracking until your GSTIN is issued</li>
               <li>• Ongoing monthly/quarterly filing support once registered</li>

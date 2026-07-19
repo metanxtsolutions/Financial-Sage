@@ -10,7 +10,7 @@ import { getFaqsByIds } from "@/data/faqs";
 import { monthlyFilingFrom } from "@/data/pricing";
 
 export const metadata: Metadata = {
-  title: "GST Return Filing — GSTR-1, GSTR-3B & GSTR-9",
+  title: "GST Return Filing: GSTR-1, GSTR-3B & GSTR-9",
   description:
     "Monthly and quarterly GST return filing (GSTR-1, GSTR-3B, GSTR-9) for Indian businesses, starting from ₹299. On-time filing, reconciled before submission.",
   alternates: { canonical: "/gst-return-filing" },
@@ -29,7 +29,7 @@ const pageFaqIds = [
 ];
 
 const returnTypes = [
-  { name: "GSTR-1", body: "Monthly/quarterly statement of outward supplies (sales) — feeds your buyers' input tax credit." },
+  { name: "GSTR-1", body: "Monthly/quarterly statement of outward supplies (sales). Feeds your buyers' input tax credit." },
   { name: "GSTR-3B", body: "Monthly summary return declaring sales, purchases, tax liability, and net GST payment." },
   { name: "GSTR-9", body: "Annual return consolidating all monthly/quarterly filings for the financial year." },
   { name: "GSTR-9C", body: "Reconciliation statement required alongside GSTR-9 above a notified turnover threshold." },
@@ -61,11 +61,11 @@ export default function GstReturnFilingPage() {
         <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">
-              GST Return Filing — Monthly, Quarterly & Annual
+              GST Return Filing: Monthly, Quarterly & Annual
             </h1>
             <p className="mt-4 text-lg text-neutral-600">
-              Every GST-registered business must file returns on a fixed schedule — regardless of
-              whether there was any sale in that period. Our GST filing plans start from ₹{monthlyFilingFrom}{" "}
+              Every GST-registered business must file returns on a fixed schedule, whether or not
+              there was any sale in that period. Our GST filing plans start from ₹{monthlyFilingFrom}{" "}
               per return, with every filing reconciled against your purchase and sales data before
               submission.
             </p>
@@ -98,8 +98,8 @@ export default function GstReturnFilingPage() {
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">The QRMP Scheme</h2>
             <p className="mt-3 text-neutral-700">
               Businesses with turnover up to ₹5 crore can opt for QRMP (Quarterly Return, Monthly
-              Payment) — filing GSTR-1 and GSTR-3B quarterly while still paying tax monthly via a
-              simple challan. It reduces filing frequency without delaying tax payment to the
+              Payment). You file GSTR-1 and GSTR-3B quarterly while still paying tax monthly via a
+              simple challan. It cuts filing frequency without delaying tax payment to the
               government.
             </p>
 
@@ -120,7 +120,7 @@ export default function GstReturnFilingPage() {
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">Late Fees & Interest</h2>
             <p className="mt-3 text-neutral-700">
               Late filing attracts ₹50/day (₹25 CGST + ₹25 SGST) for regular returns, or ₹20/day for
-              NIL returns, subject to a turnover-based cap — plus 18% per annum interest on any tax
+              NIL returns, subject to a turnover-based cap, plus 18% per annum interest on any tax
               paid late. Try our{" "}
               <Link href="/gst-tools/gst-late-fee-calculator" className="font-medium text-brand-700 underline">
                 late fee calculator
@@ -144,7 +144,7 @@ export default function GstReturnFilingPage() {
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">Why Financial Sage</h2>
             <p className="mt-3 text-neutral-700">
               We reconcile your GSTR-1 and GSTR-3B figures every month before filing, track your due
-              dates so you never file late, and flag ITC mismatches against GSTR-2B proactively — see
+              dates so you never file late, and flag ITC mismatches against GSTR-2B early. See
               our{" "}
               <Link href="/pricing" className="font-medium text-brand-700 underline">
                 Business and Compliance Pro plans

@@ -10,7 +10,7 @@ import { siteConfig } from "@/lib/site-config";
 import { getClusterBySlug, getClusterSlugs } from "@/data/gst-clusters";
 import { getFaqsByIds } from "@/data/faqs";
 
-// Programmatic GST topical cluster — see src/data/gst-clusters.ts for the
+// Programmatic GST topical cluster. See src/data/gst-clusters.ts for the
 // single source of truth. dynamicParams is false, so any slug not in that
 // file 404s instead of silently rendering.
 export const dynamicParams = false;
@@ -113,8 +113,8 @@ export default async function ClusterPageRoute({ params }: { params: Promise<{ s
             )}
 
             <p className="mt-8 text-sm text-neutral-500">
-              For the full GST registration walkthrough — eligibility, documents, fees, and
-              penalties — see our main{" "}
+              For the full GST registration walkthrough, covering eligibility, documents, fees, and
+              penalties, see our main{" "}
               <Link href="/gst-registration" className="font-medium text-brand-700 underline">
                 GST Registration guide
               </Link>

@@ -7,9 +7,9 @@ export async function sendLeadNotification(lead: LeadInput) {
   const from = process.env.RESEND_FROM_EMAIL;
 
   if (!apiKey || !to || !from) {
-    // Free-tier Resend not configured yet — don't fail the lead submission,
+    // Free-tier Resend not configured yet. Don't fail the lead submission,
     // just skip the email. The lead is already saved to the database.
-    console.warn("Resend not configured — skipping lead email notification.");
+    console.warn("Resend not configured. Skipping lead email notification.");
     return;
   }
 

@@ -1,6 +1,6 @@
 // Single source of truth for programmatic city pages at
-// /gst-registration/[state]/[city]. Add more entries here to scale —
-// no template changes needed.
+// /gst-registration/[state]/[city]. Add more entries here to scale.
+// No template changes needed.
 
 export interface CityEntry {
   state: string;
@@ -34,7 +34,7 @@ export const cities: CityEntry[] = [
     city: "Mumbai",
     citySlug: "mumbai",
     localNote:
-      "Mumbai's fast-moving trading and finance businesses need GST registration turned around quickly — our 24-hour filing timeline is built for that.",
+      "Mumbai's fast-moving trading and finance businesses need GST registration turned around quickly, which is exactly what our 24-hour filing timeline is built for.",
   },
   {
     state: "Karnataka",
@@ -50,7 +50,7 @@ export const cities: CityEntry[] = [
     city: "Hyderabad",
     citySlug: "hyderabad",
     localNote:
-      "Hyderabad's pharma, IT, and trading businesses each come with slightly different documentation needs — we tailor the checklist accordingly.",
+      "Hyderabad's pharma, IT, and trading businesses each come with slightly different documentation needs, so we tailor the checklist to each one.",
   },
   {
     state: "Maharashtra",
@@ -74,7 +74,7 @@ export const cities: CityEntry[] = [
     city: "Ahmedabad",
     citySlug: "ahmedabad",
     localNote:
-      "Ahmedabad's textile and trading businesses are among the most GST-active in India — we're familiar with the common HSN classifications here.",
+      "Ahmedabad's textile and trading businesses are among the most GST-active in India, so we know the common HSN classifications here well.",
   },
   {
     state: "Odisha",

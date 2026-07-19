@@ -17,8 +17,8 @@ export default function RefundPolicyPage() {
 
         <p className="mt-6 text-neutral-700">
           Our fee covers the professional work of reviewing your documents, preparing your
-          application, and filing it correctly — not the outcome of a government decision, which is
-          outside our control. This policy explains when a refund applies.
+          application, and filing it correctly. It does not cover the outcome of a government
+          decision, which is outside our control. This policy explains when a refund applies.
         </p>
 
         <h2 className="mt-10 text-2xl font-bold text-neutral-900">Before We Start Work</h2>
@@ -30,7 +30,7 @@ export default function RefundPolicyPage() {
         <h2 className="mt-10 text-2xl font-bold text-neutral-900">After Filing</h2>
         <p className="mt-3 text-neutral-700">
           Once we&apos;ve filed your application or return, the service fee is considered earned,
-          since the work it covers — document review and filing — is complete. If the GST
+          since the work it covers, document review and filing, is complete. If the GST
           department raises a clarification or the application is rejected for reasons outside our
           error, we handle the response or re-filing at no additional charge as part of the original
           engagement.
@@ -47,8 +47,8 @@ export default function RefundPolicyPage() {
         <h2 className="mt-10 text-2xl font-bold text-neutral-900">Government Fees</h2>
         <p className="mt-3 text-neutral-700">
           Where a government/GST fee is charged separately and paid directly to the department, our
-          refund policy does not apply to that amount — refunds of government fees, where
-          applicable, are subject to the department&apos;s own rules.
+          refund policy does not apply to that amount. Refunds of government fees, where
+          applicable, follow the department&apos;s own rules.
         </p>
 
         <h2 className="mt-10 text-2xl font-bold text-neutral-900">How to Request a Refund</h2>
@@ -57,7 +57,7 @@ export default function RefundPolicyPage() {
           <a href={`mailto:${siteConfig.email}`} className="font-medium text-brand-700 underline">
             {siteConfig.email}
           </a>{" "}
-          with your name and payment details. We aim to resolve refund requests within 7–10
+          with your name and payment details. We aim to resolve refund requests within 7 to 10
           business days.
         </p>
       </Container>

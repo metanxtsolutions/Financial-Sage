@@ -1,4 +1,4 @@
-// Minimal hand-rolled line icons — avoids pulling in an icon library dependency.
+// Minimal hand-rolled line icons. Avoids pulling in an icon library dependency.
 // 24x24 viewBox, stroke-based, inherits color via currentColor.
 
 const common = {

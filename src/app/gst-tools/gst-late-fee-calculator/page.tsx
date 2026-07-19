@@ -4,7 +4,7 @@ import { LateFeeCalculator } from "@/components/tools/LateFeeCalculator";
 
 export const metadata: Metadata = {
   title: "GST Late Fee Calculator",
-  description: "Estimate the late fee for filing GSTR-1 or GSTR-3B after the due date — regular or NIL return.",
+  description: "Estimate the late fee for filing GSTR-1 or GSTR-3B after the due date, for a regular or NIL return.",
   alternates: { canonical: "/gst-tools/gst-late-fee-calculator" },
 };
 

@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/site-config";
 import { getFaqsByIds } from "@/data/faqs";
 
 export const metadata: Metadata = {
-  title: "GST Registration Online in India — Documents, Fees & Process",
+  title: "GST Registration Online in India: Documents, Fees & Process",
   description:
     "Complete guide to GST registration in India: eligibility, turnover thresholds, documents by entity type, fees, process, and penalties. Registration starts from ₹399.",
   alternates: { canonical: "/gst-registration" },
@@ -56,10 +56,10 @@ const documentsByEntity = [
 
 const processSteps = [
   { title: "Free consultation", body: "We confirm whether you need or should opt for GST registration and identify the right document checklist for your entity type." },
-  { title: "Document collection", body: "Share documents over WhatsApp or email — we review for completeness before filing to avoid delays." },
+  { title: "Document collection", body: "Share documents over WhatsApp or email. We review them for completeness before filing to avoid delays." },
   { title: "Application filing", body: "We complete and submit Form REG-01 on the GST portal along with your reviewed documents." },
   { title: "ARN & verification", body: "You get an Application Reference Number instantly; Aadhaar e-KYC verification typically happens online." },
-  { title: "GSTIN issued", body: "Once approved, your GSTIN and REG-06 certificate are generated — usually within 3–7 working days." },
+  { title: "GSTIN issued", body: "Once approved, your GSTIN and REG-06 certificate are generated, usually within 3 to 7 working days." },
   { title: "Post-registration support", body: "We help you set up compliant invoicing and flag your first return due date." },
 ];
 
@@ -92,16 +92,16 @@ export default function GstRegistrationPage() {
               GST Registration Online in India
             </h1>
             <p className="mt-4 text-lg text-neutral-600">
-              GST registration is the process of enrolling your business under India&apos;s Goods and
-              Services Tax system and obtaining a GSTIN. Financial Sage handles the entire process —
-              from document review to GSTIN issuance — starting from ₹399, with filing completed
-              within 24 hours of receiving your documents and payment.
+              GST registration enrols your business under India&apos;s Goods and Services Tax system
+              and gives you a GSTIN. Financial Sage handles the whole process, from document review
+              to GSTIN issuance, from ₹399, with filing completed within 24 hours of receiving your
+              documents and payment.
             </p>
 
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">What is GST & GSTIN?</h2>
             <p className="mt-3 text-neutral-700">
               GST (Goods and Services Tax) is India&apos;s unified indirect tax on the supply of goods
-              and services. Every business registered under GST is issued a GSTIN — a unique
+              and services. Every business registered under GST gets a GSTIN, a unique
               15-digit, state-specific, PAN-based identification number used on every invoice,
               return, and payment.
             </p>
@@ -132,10 +132,10 @@ export default function GstRegistrationPage() {
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">Types of GST</h2>
             <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {[
-                { name: "CGST", body: "Central GST — collected by the central government on intra-state sales." },
-                { name: "SGST", body: "State GST — collected by the state government on intra-state sales, alongside CGST." },
-                { name: "IGST", body: "Integrated GST — collected on inter-state sales and imports." },
-                { name: "UTGST", body: "Union Territory GST — applies instead of SGST in Union Territories without their own legislature." },
+                { name: "CGST", body: "Central GST, collected by the central government on intra-state sales." },
+                { name: "SGST", body: "State GST, collected by the state government on intra-state sales, alongside CGST." },
+                { name: "IGST", body: "Integrated GST, collected on inter-state sales and imports." },
+                { name: "UTGST", body: "Union Territory GST, which applies instead of SGST in Union Territories without their own legislature." },
               ].map((t) => (
                 <div key={t.name} className="rounded-lg border border-neutral-200 bg-white p-4 shadow-card">
                   <div className="font-semibold text-neutral-900">{t.name}</div>
@@ -191,14 +191,14 @@ export default function GstRegistrationPage() {
               The government charges <strong>zero fee</strong> for GST registration. Our service fee
               starts from <strong>₹399</strong> and covers consultation, document review, filing, and
               follow-up. We file your application within 24 hours of receiving documents and payment;
-              GSTIN issuance typically takes 3–7 working days depending on the department&apos;s review.
+              GSTIN issuance typically takes 3 to 7 working days depending on the department&apos;s review.
             </p>
 
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">Penalties for Non-Compliance</h2>
             <p className="mt-3 text-neutral-700">
               Operating without mandatory GST registration attracts a penalty of 10% of the tax due
-              (minimum ₹10,000), or 100% of the tax due in cases of deliberate evasion — on top of
-              losing the ability to claim input tax credit or legally invoice GST-registered clients.
+              (minimum ₹10,000), or 100% of the tax due in cases of deliberate evasion. On top of
+              that, you lose the ability to claim input tax credit or legally invoice GST-registered clients.
             </p>
 
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">Common Mistakes to Avoid</h2>
@@ -213,8 +213,8 @@ export default function GstRegistrationPage() {
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">Why Financial Sage</h2>
             <p className="mt-3 text-neutral-700">
               We review every document before filing to avoid clarification notices, track your ARN
-              proactively instead of leaving you to check the portal, and stay reachable on WhatsApp
-              throughout — all at a transparent, published price.
+              instead of leaving you to check the portal, and stay reachable on WhatsApp
+              throughout, all at a transparent, published price.
             </p>
 
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">Frequently Asked Questions</h2>

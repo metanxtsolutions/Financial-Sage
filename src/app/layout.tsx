@@ -29,11 +29,11 @@ const sora = Sora({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — ${siteConfig.tagline}`,
+    default: `${siteConfig.name}: ${siteConfig.tagline}`,
     template: `%s | ${siteConfig.name}`,
   },
   description:
-    "GST registration from ₹399, monthly GST filing, and compliance support for Indian MSMEs — transparent pricing, WhatsApp-first support, Pan-India coverage.",
+    "GST registration from ₹399, monthly GST filing, and compliance support for Indian MSMEs. Transparent pricing, WhatsApp-first support, Pan-India coverage.",
   openGraph: {
     type: "website",
     locale: "en_IN",

@@ -2,7 +2,7 @@ import { siteConfig } from "@/lib/site-config";
 import type { Faq } from "@/data/faqs";
 import type { PricingTier } from "@/data/pricing";
 
-// JSON-LD builders. Deliberately excludes Review/AggregateRating schema —
+// JSON-LD builders. Deliberately excludes Review/AggregateRating schema,
 // our testimonials are sample/placeholder content, and marking them up as
 // schema.org Reviews would violate Google's structured data policies for
 // fake/unverified reviews. Add that once real client reviews exist.
@@ -80,7 +80,7 @@ export function pricingOfferSchema(tiers: PricingTier[]) {
   return tiers.map((tier) => ({
     "@context": "https://schema.org",
     "@type": "Product",
-    name: `${siteConfig.name} — ${tier.name} Plan`,
+    name: `${siteConfig.name} ${tier.name} Plan`,
     description: tier.description,
     brand: {
       "@type": "Organization",

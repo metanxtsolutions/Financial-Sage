@@ -44,7 +44,7 @@ export const faqs: Faq[] = [
     category: "gst-basics",
     question: "What is GSTIN?",
     answer:
-      "GSTIN (Goods and Services Tax Identification Number) is a unique 15-digit alphanumeric code assigned to every business registered under GST. It is state-specific and PAN-based — the first 2 digits represent the state code, the next 10 are your PAN, followed by entity and checksum digits.",
+      "GSTIN (Goods and Services Tax Identification Number) is a unique 15-digit alphanumeric code assigned to every business registered under GST. It is state-specific and PAN-based. The first 2 digits represent the state code, the next 10 are your PAN, followed by entity and checksum digits.",
   },
   {
     id: "gst-vs-old-tax",
@@ -58,7 +58,7 @@ export const faqs: Faq[] = [
     category: "gst-basics",
     question: "What are CGST, SGST, IGST, and UTGST?",
     answer:
-      "CGST (Central GST) and SGST (State GST) apply on intra-state sales — the tax is split equally between the central and state governments. IGST (Integrated GST) applies on inter-state sales and imports, collected by the centre and apportioned to the destination state. UTGST applies instead of SGST for supplies within a Union Territory without its own legislature.",
+      "CGST (Central GST) and SGST (State GST) apply on intra-state sales, and the tax is split equally between the central and state governments. IGST (Integrated GST) applies on inter-state sales and imports, collected by the centre and apportioned to the destination state. UTGST applies instead of SGST for supplies within a Union Territory without its own legislature.",
   },
   {
     id: "who-collects-gst",
@@ -79,7 +79,7 @@ export const faqs: Faq[] = [
     category: "gst-basics",
     question: "What are the GST rate slabs?",
     answer:
-      "GST rates are commonly structured as 0%, 5%, 12%, 18%, and 28%, depending on the good or service (with some items attracting cess on top). Rates are notified by the GST Council and can change — always confirm the current HSN/SAC-wise rate before invoicing. Our GST tools include an HSN/SAC search to help you check applicable rates.",
+      "GST rates are commonly structured as 0%, 5%, 12%, 18%, and 28%, depending on the good or service (with some items attracting cess on top). Rates are notified by the GST Council and can change, so always confirm the current HSN/SAC-wise rate before invoicing. Our GST tools include an HSN/SAC search to help you check applicable rates.",
   },
 
   // ---------- Registration ----------
@@ -102,7 +102,7 @@ export const faqs: Faq[] = [
     category: "registration",
     question: "What are the exact turnover thresholds for GST registration?",
     answer:
-      "For goods: ₹40 lakh in most states, ₹20 lakh in special-category states (like most North-Eastern and hill states). For services: ₹20 lakh in most states, ₹10 lakh in special-category states. If you supply both goods and services, the goods threshold generally applies once services stay within limits — we'll check your specific case during the free consultation.",
+      "For goods: ₹40 lakh in most states, ₹20 lakh in special-category states (like most North-Eastern and hill states). For services: ₹20 lakh in most states, ₹10 lakh in special-category states. If you supply both goods and services, the goods threshold generally applies once services stay within limits. We'll check your specific case during the free consultation.",
   },
   {
     id: "multiple-state-registration",
@@ -137,7 +137,7 @@ export const faqs: Faq[] = [
     category: "registration",
     question: "Can I have multiple GST registrations for different businesses under the same PAN?",
     answer:
-      "Yes. If you run multiple business verticals in the same state, you can opt for separate GST registrations for each vertical under the same PAN, or register them together under a single GSTIN — whichever suits your accounting and billing needs.",
+      "Yes. If you run multiple business verticals in the same state, you can opt for separate GST registrations for each vertical under the same PAN, or register them together under a single GSTIN, whichever suits your accounting and billing needs.",
   },
 
   // ---------- Documents & Eligibility ----------
@@ -195,7 +195,7 @@ export const faqs: Faq[] = [
     category: "documents",
     question: "Are there specific photo or format requirements for uploading documents?",
     answer:
-      "Yes — photographs must be in JPEG format (up to 100 KB), and most documents (PDF/JPEG) must be under 1 MB (some under 500 KB for specific categories). We handle formatting and compression of your documents as part of our filing service so you don't have to worry about upload errors.",
+      "Yes. Photographs must be in JPEG format (up to 100 KB), and most documents (PDF/JPEG) must be under 1 MB, with some under 500 KB for specific categories. We handle formatting and compression of your documents as part of our filing service, so you don't have to worry about upload errors.",
   },
 
   // ---------- Fees & Timeline ----------
@@ -204,14 +204,14 @@ export const faqs: Faq[] = [
     category: "fees-timeline",
     question: "Is there a government fee for GST registration?",
     answer:
-      "No, GST registration itself is free of cost on the government portal. What you pay us covers document preparation, application filing, error-free submission, and follow-up with the GST department until your GSTIN is issued — our GST Registration plan starts from ₹399.",
+      "No, GST registration itself is free of cost on the government portal. What you pay us covers document preparation, application filing, error-free submission, and follow-up with the GST department until your GSTIN is issued. Our GST Registration plan starts from ₹399.",
   },
   {
     id: "how-long-gst-registration-takes",
     category: "fees-timeline",
     question: "How long does GST registration take?",
     answer:
-      "Once you share your documents and complete payment, we prepare and file your application within 24 hours. After filing, the GST department typically issues the GSTIN within 3–7 working days if there are no clarification queries — occasionally it can take longer if the officer requests additional documents.",
+      "Once you share your documents and complete payment, we prepare and file your application within 24 hours. After filing, the GST department typically issues the GSTIN within 3 to 7 working days if there are no clarification queries. Occasionally it takes longer if the officer asks for additional documents.",
   },
   {
     id: "arn-meaning",
@@ -232,7 +232,7 @@ export const faqs: Faq[] = [
     category: "fees-timeline",
     question: "Will a GST officer visit my premises for verification?",
     answer:
-      "Physical verification is not done for most straightforward applications processed via Aadhaar authentication. It may be triggered if Aadhaar authentication fails, if there are discrepancies in documents, or for specific risk categories — in which case the officer visits the declared business address before approval.",
+      "Physical verification is not done for most straightforward applications processed via Aadhaar authentication. It may be triggered if Aadhaar authentication fails, if there are discrepancies in documents, or for specific risk categories, in which case the officer visits the declared business address before approval.",
   },
 
   // ---------- Return Filing ----------
@@ -241,7 +241,7 @@ export const faqs: Faq[] = [
     category: "return-filing",
     question: "What is the difference between GSTR-1 and GSTR-3B?",
     answer:
-      "GSTR-1 is a monthly/quarterly statement of all outward supplies (sales) — it feeds your buyers' input tax credit. GSTR-3B is a monthly summary return where you declare total sales, purchases, tax liability, and pay the net GST due. Both must be filed even if there's no business activity in a period (as a NIL return).",
+      "GSTR-1 is a monthly/quarterly statement of all outward supplies (sales), and it feeds your buyers' input tax credit. GSTR-3B is a monthly summary return where you declare total sales, purchases, tax liability, and pay the net GST due. Both must be filed even if there's no business activity in a period (as a NIL return).",
   },
   {
     id: "gst-return-due-dates",
@@ -276,7 +276,7 @@ export const faqs: Faq[] = [
     category: "return-filing",
     question: "When is an e-way bill required?",
     answer:
-      "An e-way bill is required for the movement of goods valued above ₹50,000 (single invoice or consolidated) when transported by road, rail, air, or vessel — whether it's a sale, transfer, or return of goods. It must be generated before the goods start moving and carried along with the consignment.",
+      "An e-way bill is required for the movement of goods valued above ₹50,000 (single invoice or consolidated) when transported by road, rail, air, or vessel, whether it's a sale, transfer, or return of goods. It must be generated before the goods start moving and carried along with the consignment.",
   },
   {
     id: "revising-filed-return",
@@ -306,7 +306,7 @@ export const faqs: Faq[] = [
     category: "compliance-penalties",
     question: "What should I do if I receive a GST notice?",
     answer:
-      "Don't ignore it — GST notices have a fixed response window (commonly 7–15 days depending on the notice type), and non-response can lead to a best-judgment assessment or penalty. Read the notice section carefully, gather the requested documents, and respond through the GST portal. Our Compliance Pro plan includes notice handling and drafting support.",
+      "Don't ignore it. GST notices have a fixed response window, commonly 7 to 15 days depending on the notice type, and non-response can lead to a best-judgment assessment or penalty. Read the notice section carefully, gather the requested documents, and respond through the GST portal. Our Compliance Pro plan includes notice handling and drafting support.",
   },
   {
     id: "gstr3a-notice",
@@ -327,7 +327,7 @@ export const faqs: Faq[] = [
     category: "compliance-penalties",
     question: "What are common mistakes businesses make during GST registration?",
     answer:
-      "The most frequent ones we see: mismatched name/address across PAN and address proof, uploading blurry or oversized documents, choosing the wrong business constitution type, missing the authorised signatory's digital signature/e-sign, and selecting incorrect HSN/SAC codes for the principal business activity — each of which can delay approval or trigger a clarification notice.",
+      "The most frequent ones we see: mismatched name/address across PAN and address proof, uploading blurry or oversized documents, choosing the wrong business constitution type, missing the authorised signatory's digital signature/e-sign, and selecting incorrect HSN/SAC codes for the principal business activity. Each of these can delay approval or trigger a clarification notice.",
   },
   {
     id: "common-filing-mistakes",
@@ -371,7 +371,7 @@ export const faqs: Faq[] = [
     category: "itc",
     question: "Do you help with ITC reconciliation and advisory?",
     answer:
-      "Yes — our Compliance Pro plan includes ongoing ITC advisory, where we review your purchase register against GSTR-2B each month, flag mismatches before filing, and advise on credits you may be missing or wrongly claiming.",
+      "Yes. Our Compliance Pro plan includes ongoing ITC advisory. We review your purchase register against GSTR-2B each month, flag mismatches before filing, and advise on credits you may be missing or wrongly claiming.",
   },
 
   // ---------- GST for E-commerce & Freelancers ----------
@@ -394,14 +394,14 @@ export const faqs: Faq[] = [
     category: "ecommerce-freelancers",
     question: "Do I need GST if I sell through my own Shopify/website store?",
     answer:
-      "If you sell directly through your own website (not via a marketplace operator), standard GST registration thresholds apply based on turnover (₹40 lakh for goods, ₹20 lakh for services) rather than the marketplace-specific mandatory rule — but registering early is still advisable if you plan to scale or sell inter-state.",
+      "If you sell directly through your own website (not via a marketplace operator), standard GST registration thresholds apply based on turnover (₹40 lakh for goods, ₹20 lakh for services) rather than the marketplace-specific mandatory rule. Registering early is still worth it if you plan to scale or sell inter-state.",
   },
   {
     id: "gst-for-exporters",
     category: "ecommerce-freelancers",
     question: "How does GST apply to exports and import/export businesses?",
     answer:
-      "Exports of goods and services are treated as 'zero-rated' supplies under GST — you can either export under a Letter of Undertaking (LUT) without paying GST and claim a refund of accumulated ITC, or pay IGST on export and claim a refund of the tax paid. Imports attract IGST at the point of customs clearance, which can usually be claimed as ITC.",
+      "Exports of goods and services are treated as 'zero-rated' supplies under GST. You can either export under a Letter of Undertaking (LUT) without paying GST and claim a refund of accumulated ITC, or pay IGST on export and claim a refund of the tax paid. Imports attract IGST at the point of customs clearance, which can usually be claimed as ITC.",
   },
   {
     id: "gst-for-restaurants",
@@ -424,14 +424,14 @@ export const faqs: Faq[] = [
     category: "tools",
     question: "How does the GST calculator work?",
     answer:
-      "Enter the base amount and the applicable GST rate — our calculator instantly shows the GST amount, the CGST/SGST (or IGST) split, and the final invoice value. It works both ways: add GST to a base price, or extract the GST already included in a final price.",
+      "Enter the base amount and the applicable GST rate, and the calculator instantly shows the GST amount, the CGST/SGST (or IGST) split, and the final invoice value. It works both ways: add GST to a base price, or extract the GST already included in a final price.",
   },
   {
     id: "reverse-gst-calculator-use",
     category: "tools",
     question: "When should I use the reverse GST calculator?",
     answer:
-      "Use the reverse calculator when you have a GST-inclusive price (e.g., an MRP or invoice total) and need to find the base price and GST amount hidden within it — common for retail pricing, marketplace payouts, and expense reconciliation.",
+      "Use the reverse calculator when you have a GST-inclusive price (e.g., an MRP or invoice total) and need to find the base price and GST amount hidden within it. It's handy for retail pricing, marketplace payouts, and expense reconciliation.",
   },
   {
     id: "hsn-sac-search-tool",
@@ -445,14 +445,14 @@ export const faqs: Faq[] = [
     category: "tools",
     question: "How does the GSTIN format validator work?",
     answer:
-      "It checks whether a 15-digit GSTIN follows the correct structure — state code, PAN, entity code, and checksum digit — and flags obviously invalid numbers. It's a quick format sanity-check; for full verification of an active, real GSTIN, cross-check on the official GST portal.",
+      "It checks whether a 15-digit GSTIN follows the correct structure (state code, PAN, entity code, and checksum digit) and flags obviously invalid numbers. It's a quick format check. For full verification of an active, real GSTIN, cross-check on the official GST portal.",
   },
   {
     id: "are-tools-free",
     category: "tools",
     question: "Are Financial Sage's GST tools free to use?",
     answer:
-      "Yes, all our GST calculators and lookup tools are completely free, with no login or signup required. We built them to help any Indian business — client or not — handle everyday GST calculations correctly.",
+      "Yes, all our GST calculators and lookup tools are completely free, with no login or signup required. We built them to help any Indian business, client or not, handle everyday GST calculations correctly.",
   },
 
   // ---------- About Financial Sage ----------
@@ -461,49 +461,49 @@ export const faqs: Faq[] = [
     category: "financial-sage",
     question: "Why should I choose Financial Sage over a larger competitor?",
     answer:
-      "We focus exclusively on GST — it's not one of twenty services we offer, it's the only thing we do well. That means transparent, published pricing (not hidden behind a 'get a quote' form), a real response within 40 minutes during business hours, and a dedicated expert who actually knows your filing history, rather than a call-centre queue.",
+      "We work on GST and nothing else. It's the only thing we do, so you get published pricing instead of a 'get a quote' form, a real reply within 40 minutes during business hours, and a dedicated expert who knows your filing history rather than a call-centre queue.",
   },
   {
     id: "how-financial-sage-communicates",
     category: "financial-sage",
     question: "How do I communicate with my GST expert at Financial Sage?",
     answer:
-      "We're WhatsApp-first — you can share documents, ask questions, and get filing updates directly on WhatsApp, which is faster than email for most of our clients. Phone and email support are also available.",
+      "We're WhatsApp-first. You can share documents, ask questions, and get filing updates right there, which is faster than email for most of our clients. Phone and email support are also available.",
   },
   {
     id: "does-financial-sage-serve-pan-india",
     category: "financial-sage",
     question: "Does Financial Sage serve businesses across India?",
     answer:
-      "Yes, our GST registration and filing services are fully remote and available Pan-India — you don't need to be in any specific city. Documents and signatures are handled digitally (Aadhaar e-sign or DSC), so location doesn't slow anything down.",
+      "Yes. Our GST registration and filing services are fully remote and available Pan-India, so you don't need to be in any specific city. Documents and signatures are handled digitally (Aadhaar e-sign or DSC), so location never slows anything down.",
   },
   {
     id: "how-many-clients-financial-sage",
     category: "financial-sage",
     question: "How experienced is Financial Sage with GST?",
     answer:
-      "We've completed 150+ GST registrations and currently manage monthly filings for 40–50 active clients, with over 800 business enquiries handled to date. We're a focused, growing GST practice — not the biggest name in the market, but one that answers the phone and knows your file.",
+      "We've completed 150+ GST registrations and currently manage monthly filings for 40 to 50 active clients, with over 800 business enquiries handled to date. We're a focused, growing GST practice. We're not the biggest name in the market, but we answer the phone and know your file.",
   },
   {
     id: "what-if-i-need-help-after-registration",
     category: "financial-sage",
     question: "Does Financial Sage help after GST registration, or just with the registration itself?",
     answer:
-      "Both. Beyond one-time registration, our Business and Compliance Pro plans cover ongoing monthly/quarterly return filing, annual returns, ITC advisory, and notice handling — so you have one point of contact for GST instead of juggling registration and filing separately.",
+      "Both. Beyond one-time registration, our Business and Compliance Pro plans cover ongoing monthly/quarterly return filing, annual returns, ITC advisory, and notice handling, so you have one point of contact for GST instead of juggling registration and filing separately.",
   },
   {
     id: "can-financial-sage-help-with-other-registrations",
     category: "financial-sage",
     question: "Does Financial Sage also help with company registration, trademark, or ITR filing?",
     answer:
-      "Yes, as secondary services alongside our core GST practice — see our Other Services page for company/LLP/OPC registration, MSME/Udyam registration, trademark filing, ITR filing, and ROC annual compliance. GST remains our specialisation, so these are handled with the same document-first, WhatsApp-friendly process.",
+      "Yes, as secondary services alongside our core GST practice. See our Other Services page for company/LLP/OPC registration, MSME/Udyam registration, trademark filing, ITR filing, and ROC annual compliance. GST stays our specialisation, so these run on the same document-first, WhatsApp-friendly process.",
   },
   {
     id: "payment-refund-policy",
     category: "financial-sage",
     question: "What is Financial Sage's refund policy if my application isn't approved?",
     answer:
-      "Our service fee covers the effort of preparing and filing your application correctly the first time. If a GST officer raises a clarification, we handle the response at no extra cost. Talk to our team about your specific situation — we'll always be upfront about what's recoverable versus what's a government-side delay outside our control.",
+      "Our service fee covers the effort of preparing and filing your application correctly the first time. If a GST officer raises a clarification, we handle the response at no extra cost. Talk to our team about your specific situation. We'll always be upfront about what's recoverable and what's a government-side delay outside our control.",
   },
 ];
 

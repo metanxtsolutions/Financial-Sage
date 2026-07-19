@@ -9,7 +9,7 @@ export interface PricingTier {
   ctaLabel: string;
 }
 
-// Edit prices here — this file is the single place pricing is defined.
+// Edit prices here. This file is the only place pricing is defined.
 export const pricingTiers: PricingTier[] = [
   {
     id: "starter",

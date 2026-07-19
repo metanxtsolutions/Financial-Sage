@@ -7,7 +7,7 @@ import { tools } from "@/data/tools";
 export const metadata: Metadata = {
   title: "Free GST Tools & Calculators",
   description:
-    "Free GST calculator, reverse GST calculator, late fee & interest calculators, HSN/SAC search, GSTIN validator, and due-date checker — no login required.",
+    "Free GST calculator, reverse GST calculator, late fee & interest calculators, HSN/SAC search, GSTIN validator, and due-date checker. No login required.",
   alternates: { canonical: "/gst-tools" },
 };
 
@@ -16,7 +16,7 @@ export default function GstToolsPage() {
     <Section>
       <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">GST Tools</h1>
       <p className="mt-4 max-w-2xl text-lg text-neutral-600">
-        Free calculators and lookup tools for everyday GST tasks — no login, no cost. Built and
+        Free calculators and lookup tools for everyday GST tasks. No login, no cost. Built and
         maintained by {siteConfig.name}.
       </p>
 

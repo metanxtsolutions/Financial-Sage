@@ -1,6 +1,6 @@
 import Script from "next/script";
 
-// Reads GA4/GTM IDs from env vars — leave them blank to disable.
+// Reads GA4/GTM IDs from env vars. Leave them blank to disable.
 // See .env.example: NEXT_PUBLIC_GA_ID, NEXT_PUBLIC_GTM_ID.
 export function Analytics() {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;

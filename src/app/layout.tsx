@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Analytics } from "@/components/Analytics";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { JsonLd, organizationSchema, localBusinessSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
 
@@ -54,6 +55,7 @@ export default function RootLayout({
         <Footer />
         <WhatsAppButton />
         <Analytics />
+        <VercelAnalytics />
       </body>
     </html>
   );

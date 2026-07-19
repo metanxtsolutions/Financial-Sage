@@ -59,18 +59,29 @@ export default function HomePage() {
           <div>
             <span className="eyebrow">GST specialists for Indian MSMEs</span>
             <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-neutral-900 sm:text-5xl lg:text-[3.4rem]">
-              GST Registration &amp; Filing,{" "}
-              <span className="text-gradient">made simple</span> for Indian businesses
+              GST, <span className="text-gradient">done for you.</span> From ₹399.
             </h1>
             <p className="mt-5 max-w-xl text-lg text-neutral-600">
-              Expert-assisted GST registration and monthly filing for MSMEs, freelancers, and
-              e-commerce sellers. Transparent pricing, Pan-India coverage, and a real reply
-              within {siteConfig.responseTime} during business hours.
+              Registration and monthly filing for MSMEs, freelancers, and sellers. One expert,
+              real replies in {siteConfig.responseTime}.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Button href="/gst-registration" variant="primary">
-                Start GST Registration from ₹399
-              </Button>
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+              <div className="relative inline-flex">
+                <span
+                  aria-hidden="true"
+                  className="cta-pulse absolute -inset-1 rounded-2xl bg-brand-gradient blur-lg"
+                />
+                <Button
+                  href="/gst-registration"
+                  variant="primary"
+                  className="group relative px-6 py-3.5 text-base"
+                >
+                  Get GST from ₹399
+                  <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">
+                    &rarr;
+                  </span>
+                </Button>
+              </div>
               <Button href="/contact" variant="outline">
                 Talk to a GST Expert
               </Button>

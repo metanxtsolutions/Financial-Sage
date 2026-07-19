@@ -141,6 +141,18 @@ h1, h2, h3, h4 {
     radial-gradient(30rem 24rem at 60% 120%, rgba(22, 163, 74, 0.08), transparent 60%);
 }
 
+/* Soft pulsing glow behind the hero primary CTA */
+@keyframes cta-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(1.05); }
+}
+.cta-pulse {
+  animation: cta-pulse 2.6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta-pulse { animation: none; opacity: 0.35; }
+}
+
 /* Small uppercase section label */
 .eyebrow {
   display: inline-flex;

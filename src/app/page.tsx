@@ -34,7 +34,7 @@ const trustStats = [
   { value: siteConfig.stats.registrations, label: "GST Registrations" },
   { value: siteConfig.stats.activeClients, label: "Active Monthly Clients" },
   { value: "Pan-India", label: "Coverage" },
-  { value: siteConfig.responseTime, label: "Avg. Response Time" },
+  { value: "24 Hrs", label: "GST turnaround" },
 ];
 
 export default function HomePage() {

@@ -1,6 +1,5 @@
-// Single source of truth for real business facts. Do not inflate these numbers.
-// Per the project brief, Financial Sage competes on transparent pricing and
-// responsiveness, not on bigger-than-life stats.
+// Single source of truth for business facts shown across the site. The owner
+// sets these display figures; update them here and every page picks up the change.
 
 export const siteConfig = {
   name: "Financial Sage",
@@ -15,8 +14,8 @@ export const siteConfig = {
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919830000000",
   responseTime: "40 minutes",
   stats: {
-    registrations: "150+",
-    activeClients: "40-50",
+    registrations: "600+",
+    activeClients: "400+",
     enquiries: "800+",
   },
   pricingFrom: {

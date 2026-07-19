@@ -23,10 +23,10 @@ export default function OtherServicesPage() {
           <Link
             key={service.slug}
             href={`/other-services/${service.slug}`}
-            className="rounded-xl border border-neutral-200 bg-white p-6 transition-shadow hover:shadow-md"
+            className="flex flex-col rounded-xl border border-neutral-200 bg-white p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
           >
             <h2 className="font-semibold text-neutral-900">{service.title}</h2>
-            <p className="mt-2 text-sm text-neutral-600">{service.summary}</p>
+            <p className="mt-2 flex-1 text-sm text-neutral-600">{service.summary}</p>
             <p className="mt-3 text-sm font-semibold text-brand-700">From ₹{service.startingPrice}</p>
           </Link>
         ))}

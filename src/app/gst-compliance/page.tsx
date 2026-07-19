@@ -50,12 +50,9 @@ export default function GstCompliancePage() {
         ]}
       />
 
-      <Section className="pb-6 pt-8">
+      <Section>
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "GST Compliance", href: "/gst-compliance" }]} />
-      </Section>
-
-      <Section className="pt-0">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">
               GST Compliance — ITC, Notices & Penalty Avoidance

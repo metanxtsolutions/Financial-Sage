@@ -25,9 +25,12 @@ export default function GstToolsPage() {
           <Link
             key={tool.slug}
             href={`/gst-tools/${tool.slug}`}
-            className="rounded-xl border border-neutral-200 bg-white p-6 transition-shadow hover:shadow-md"
+            className="group rounded-xl border border-neutral-200 bg-white p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
           >
-            <h2 className="font-semibold text-neutral-900">{tool.title}</h2>
+            <h2 className="flex items-center justify-between font-semibold text-neutral-900">
+              {tool.title}
+              <span className="text-neutral-300 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-brand-600">→</span>
+            </h2>
             <p className="mt-2 text-sm text-neutral-600">{tool.description}</p>
           </Link>
         ))}

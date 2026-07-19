@@ -56,12 +56,9 @@ export default function GstReturnFilingPage() {
         ]}
       />
 
-      <Section className="pb-6 pt-8">
+      <Section>
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "GST Return Filing", href: "/gst-return-filing" }]} />
-      </Section>
-
-      <Section className="pt-0">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">
               GST Return Filing — Monthly, Quarterly & Annual
@@ -76,7 +73,7 @@ export default function GstReturnFilingPage() {
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">Overview of GST Returns</h2>
             <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {returnTypes.map((t) => (
-                <div key={t.name} className="rounded-lg border border-neutral-200 p-4">
+                <div key={t.name} className="rounded-lg border border-neutral-200 bg-white p-4 shadow-card">
                   <div className="font-semibold text-neutral-900">{t.name}</div>
                   <div className="mt-1 text-sm text-neutral-600">{t.body}</div>
                 </div>

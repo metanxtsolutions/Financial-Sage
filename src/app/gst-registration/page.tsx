@@ -84,12 +84,9 @@ export default function GstRegistrationPage() {
         ]}
       />
 
-      <Section className="pb-6 pt-8">
+      <Section>
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "GST Registration", href: "/gst-registration" }]} />
-      </Section>
-
-      <Section className="pt-0">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">
               GST Registration Online in India
@@ -140,7 +137,7 @@ export default function GstRegistrationPage() {
                 { name: "IGST", body: "Integrated GST — collected on inter-state sales and imports." },
                 { name: "UTGST", body: "Union Territory GST — applies instead of SGST in Union Territories without their own legislature." },
               ].map((t) => (
-                <div key={t.name} className="rounded-lg border border-neutral-200 p-4">
+                <div key={t.name} className="rounded-lg border border-neutral-200 bg-white p-4 shadow-card">
                   <div className="font-semibold text-neutral-900">{t.name}</div>
                   <div className="mt-1 text-sm text-neutral-600">{t.body}</div>
                 </div>

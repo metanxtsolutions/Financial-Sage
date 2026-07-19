@@ -26,7 +26,7 @@ export function ToolPageShell({
       <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">{title}</h1>
       <p className="mt-3 max-w-2xl text-lg text-neutral-600">{description}</p>
 
-      <div className="mt-8 max-w-xl rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
+      <div className="mt-8 max-w-xl rounded-2xl border border-neutral-200 bg-white p-6 shadow-card">
         {children}
       </div>
 

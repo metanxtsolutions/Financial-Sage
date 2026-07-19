@@ -31,15 +31,15 @@ export default function AboutPage() {
 
         <h2 className="mt-10 text-2xl font-bold text-neutral-900">Where We Stand Today</h2>
         <ul className="mt-3 grid grid-cols-1 gap-3 text-neutral-700 sm:grid-cols-3">
-          <li className="rounded-lg border border-neutral-200 p-4">
+          <li className="rounded-lg border border-neutral-200 bg-white p-4 shadow-card">
             <div className="text-2xl font-extrabold text-brand-700">{siteConfig.stats.registrations}</div>
             <div className="text-sm text-neutral-600">GST registrations completed</div>
           </li>
-          <li className="rounded-lg border border-neutral-200 p-4">
+          <li className="rounded-lg border border-neutral-200 bg-white p-4 shadow-card">
             <div className="text-2xl font-extrabold text-brand-700">{siteConfig.stats.activeClients}</div>
             <div className="text-sm text-neutral-600">Active monthly filing clients</div>
           </li>
-          <li className="rounded-lg border border-neutral-200 p-4">
+          <li className="rounded-lg border border-neutral-200 bg-white p-4 shadow-card">
             <div className="text-2xl font-extrabold text-brand-700">{siteConfig.stats.enquiries}</div>
             <div className="text-sm text-neutral-600">Business enquiries handled</div>
           </li>

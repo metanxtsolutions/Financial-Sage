@@ -40,7 +40,7 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
+        <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-card">
           <h2 className="text-lg font-bold text-neutral-900">Send us your details</h2>
           <p className="mt-1 text-sm text-neutral-600">We&apos;ll reach out to understand your requirement.</p>
           <div className="mt-4">

@@ -32,7 +32,7 @@ export default function GstGuidesPage() {
           <Link
             key={post.slug}
             href={`/gst-guides/${post.slug}`}
-            className="rounded-xl border border-neutral-200 bg-white p-6 transition-shadow hover:shadow-md"
+            className="rounded-xl border border-neutral-200 bg-white p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
           >
             <span className="text-xs font-semibold uppercase tracking-wide text-brand-600">{post.category}</span>
             <h2 className="mt-2 font-semibold text-neutral-900">{post.title}</h2>

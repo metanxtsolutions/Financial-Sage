@@ -60,7 +60,7 @@ export default async function ClusterPageRoute({ params }: { params: Promise<{ s
         ]}
       />
 
-      <Section className="pb-6 pt-8">
+      <Section>
         <Breadcrumbs
           items={[
             { name: "Home", href: "/" },
@@ -68,17 +68,17 @@ export default async function ClusterPageRoute({ params }: { params: Promise<{ s
             { name: cluster.h1, href: `/${cluster.slug}` },
           ]}
         />
-      </Section>
-
-      <Section className="pt-0">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">{cluster.h1}</h1>
             <p className="mt-4 text-lg text-neutral-600">{cluster.intro}</p>
 
             <div className="mt-8 grid grid-cols-1 gap-4">
               {cluster.highlights.map((h) => (
-                <div key={h.title} className="rounded-lg border border-neutral-200 p-5">
+                <div
+                  key={h.title}
+                  className="rounded-lg border border-neutral-200 border-l-4 border-l-brand-500 bg-white p-5 shadow-card"
+                >
                   <div className="font-semibold text-neutral-900">{h.title}</div>
                   <div className="mt-1 text-sm text-neutral-600">{h.body}</div>
                 </div>

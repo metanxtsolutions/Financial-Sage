@@ -70,7 +70,7 @@ export default async function CityGstPage({
         ]}
       />
 
-      <Section className="pb-6 pt-8">
+      <Section>
         <Breadcrumbs
           items={[
             { name: "Home", href: "/" },
@@ -78,10 +78,7 @@ export default async function CityGstPage({
             { name: entry.city, href: `/gst-registration/${entry.stateSlug}/${entry.citySlug}` },
           ]}
         />
-      </Section>
-
-      <Section className="pt-0">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">
               GST Registration in {entry.city}, {entry.state}

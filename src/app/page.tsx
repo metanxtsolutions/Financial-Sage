@@ -45,55 +45,51 @@ export default function HomePage() {
       <JsonLd data={faqPageSchema(homeFaqs)} />
 
       {/* Hero */}
-      <Section className="hero-mesh relative overflow-hidden pt-12 sm:pt-16">
+      <Section className="hero-dark relative overflow-hidden pt-12 sm:pt-16">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.4]"
+          className="pointer-events-none absolute inset-0 opacity-[0.12]"
           style={{
-            backgroundImage: "radial-gradient(var(--color-brand-200) 1px, transparent 1px)",
-            backgroundSize: "26px 26px",
-            maskImage: "radial-gradient(60% 50% at 40% 20%, black, transparent 80%)",
+            backgroundImage: "radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+            maskImage: "radial-gradient(60% 55% at 35% 25%, black, transparent 80%)",
           }}
         />
-        <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div className="relative grid grid-cols-1 gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
-            <span className="eyebrow">GST specialists for Indian MSMEs</span>
-            <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-neutral-900 sm:text-5xl lg:text-[3.4rem]">
-              GST, <span className="text-gradient">done for you.</span> From ₹399.
+            <span className="eyebrow eyebrow-light">GST specialists for Indian MSMEs</span>
+            <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-[3.4rem]">
+              GST, <span className="text-gradient-light">done for you.</span>
+              <br />
+              From ₹399.
             </h1>
-            <p className="mt-5 max-w-xl text-lg text-neutral-600">
+            <p className="mt-5 max-w-xl text-lg text-white/70">
               Registration and monthly filing for MSMEs, freelancers, and sellers. One expert,
               real replies in {siteConfig.responseTime}.
             </p>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <div className="relative inline-flex">
-                <span
-                  aria-hidden="true"
-                  className="cta-pulse absolute -inset-1 rounded-2xl bg-brand-gradient blur-lg"
-                />
-                <Button
-                  href="/gst-registration"
-                  variant="primary"
-                  className="group relative px-6 py-3.5 text-base"
-                >
-                  Get GST from ₹399
-                  <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">
-                    &rarr;
-                  </span>
-                </Button>
-              </div>
-              <Button href="/contact" variant="outline">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Button
+                href="/gst-registration"
+                variant="primary"
+                className="group px-6 py-3.5 text-base"
+              >
+                Get GST from ₹399
+                <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">
+                  &rarr;
+                </span>
+              </Button>
+              <Button href="/contact" variant="ghostDark">
                 Talk to a GST Expert
               </Button>
             </div>
 
-            <div className="mt-9 grid max-w-lg grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4">
+            <div className="mt-10 flex max-w-xl flex-wrap gap-x-10 gap-y-5 border-t border-white/10 pt-7">
               {trustStats.map((stat) => (
                 <div key={stat.label}>
-                  <div className="font-heading text-2xl font-extrabold text-neutral-900">
+                  <div className="font-heading text-2xl font-extrabold text-white">
                     <CountUp label={stat.value} />
                   </div>
-                  <div className="mt-0.5 text-xs leading-tight text-neutral-500">{stat.label}</div>
+                  <div className="mt-0.5 text-xs leading-tight text-white/50">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -102,9 +98,9 @@ export default function HomePage() {
           <div className="relative">
             <div
               aria-hidden="true"
-              className="absolute -inset-4 rounded-[1.75rem] bg-brand-gradient opacity-[0.12] blur-2xl"
+              className="absolute -inset-5 rounded-[2rem] bg-brand-gradient opacity-25 blur-3xl"
             />
-            <div className="glass-card relative rounded-2xl p-6 sm:p-7">
+            <div className="relative rounded-2xl bg-white p-6 shadow-[0_32px_64px_-24px_rgba(0,0,0,0.5)] sm:p-7">
               <div className="flex items-center gap-2">
                 <span className="inline-flex h-2 w-2 rounded-full bg-accent-500" />
                 <span className="text-xs font-semibold uppercase tracking-wide text-accent-600">

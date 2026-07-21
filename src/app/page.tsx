@@ -59,9 +59,9 @@ export default function HomePage() {
           <div>
             <span className="eyebrow eyebrow-light">GST specialists for Indian MSMEs</span>
             <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-[3.4rem]">
-              GST, <span className="text-gradient-light">done for you.</span>
+              Your GST.
               <br />
-              From ₹399.
+              <span className="text-gradient-light">Our headache.</span>
             </h1>
             <p className="mt-5 max-w-xl text-lg text-white/70">
               Most CAs charge ₹10,000 or more a year and still leave you confused about ITC. We

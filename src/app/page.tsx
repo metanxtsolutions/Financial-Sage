@@ -45,7 +45,7 @@ export default function HomePage() {
       <JsonLd data={faqPageSchema(homeFaqs)} />
 
       {/* Hero */}
-      <Section className="hero-dark relative overflow-hidden pt-12 sm:pt-16">
+      <Section className="hero-dark relative -mt-16 overflow-hidden pt-28 sm:pt-32">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-[0.12]"

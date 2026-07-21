@@ -58,7 +58,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col pb-16 lg:pb-0">
         <JsonLd data={[organizationSchema(), localBusinessSchema()]} />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pt-16">{children}</main>
         <Footer />
         <WhatsAppButton />
         <MobileStickyCta />

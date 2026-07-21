@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { Container } from "@/components/Container";
@@ -20,6 +21,7 @@ const navLinks = [
 ];
 
 export function Header() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -32,19 +34,21 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // The dark hero only exists on the homepage. Elsewhere, or once the user
+  // has scrolled past it, the header is always solid.
+  const onHero = pathname === "/" && !scrolled && !open;
+
   return (
     <header
       className={clsx(
-        "sticky top-0 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur transition-shadow duration-200",
+        "fixed inset-x-0 top-0 z-40 backdrop-blur transition-colors duration-300",
+        onHero
+          ? "border-b border-white/10 bg-transparent backdrop-blur-none"
+          : "border-b border-neutral-200 bg-white/95",
         scrolled && "shadow-card",
       )}
     >
-      <div
-        className={clsx(
-          "mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 transition-[height] duration-200 sm:px-6 lg:px-8",
-          scrolled ? "h-14" : "h-16",
-        )}
-      >
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
           className="flex shrink-0 items-center gap-2 whitespace-nowrap"
@@ -52,7 +56,12 @@ export function Header() {
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-gradient text-sm font-bold text-white shadow-[0_6px_16px_-6px_rgba(79,70,229,0.6)]">
             FS
           </span>
-          <span className="font-heading text-lg font-bold tracking-tight text-neutral-900">
+          <span
+            className={clsx(
+              "font-heading text-lg font-bold tracking-tight transition-colors duration-300",
+              onHero ? "text-white" : "text-neutral-900",
+            )}
+          >
             {siteConfig.name}
           </span>
         </Link>
@@ -62,7 +71,10 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium whitespace-nowrap text-neutral-700 hover:text-brand-700"
+              className={clsx(
+                "text-sm font-medium whitespace-nowrap transition-colors duration-300",
+                onHero ? "text-white/75 hover:text-white" : "text-neutral-700 hover:text-brand-700",
+              )}
             >
               {link.label}
             </Link>
@@ -72,7 +84,10 @@ export function Header() {
         <div className="hidden shrink-0 items-center gap-3 xl:flex">
           <Link
             href={siteConfig.loginUrl}
-            className="text-sm font-medium whitespace-nowrap text-neutral-700 hover:text-brand-700"
+            className={clsx(
+              "text-sm font-medium whitespace-nowrap transition-colors duration-300",
+              onHero ? "text-white/75 hover:text-white" : "text-neutral-700 hover:text-brand-700",
+            )}
           >
             Client Login
           </Link>
@@ -83,7 +98,10 @@ export function Header() {
 
         <button
           aria-label="Toggle menu"
-          className="flex h-10 w-10 items-center justify-center rounded-md border border-neutral-200 xl:hidden"
+          className={clsx(
+            "flex h-10 w-10 items-center justify-center rounded-md border transition-colors duration-300 xl:hidden",
+            onHero ? "border-white/30 text-white" : "border-neutral-200 text-neutral-900",
+          )}
           onClick={() => setOpen((v) => !v)}
         >
           <span className="sr-only">Menu</span>

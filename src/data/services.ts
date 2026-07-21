@@ -10,37 +10,37 @@ export interface CoreService {
 export const coreServices: CoreService[] = [
   {
     title: "GST Registration",
-    description: "New GST registration for proprietorships, partnerships, LLPs, and companies, filed within 24 hours of your documents.",
+    description: "Any entity type, filed within 24 hours of your documents. No office visits, no waiting on a CA's calendar.",
     href: "/gst-registration",
     icon: "document-check",
   },
   {
     title: "Monthly / Quarterly GST Filing",
-    description: "GSTR-1 and GSTR-3B filed on time, every time, with reconciliation before submission.",
+    description: "GSTR-1 and GSTR-3B, reconciled and filed on time, every time. Never a surprise late fee again.",
     href: "/gst-return-filing",
     icon: "refresh",
   },
   {
     title: "ITC Advisory",
-    description: "Monthly reconciliation of your purchases against GSTR-2B to catch mismatches and unclaimed credit.",
+    description: "We check your purchases against GSTR-2B every month, so you claim every rupee of credit you're owed.",
     href: "/gst-compliance",
     icon: "shield-check",
   },
   {
     title: "GST Notice Handling",
-    description: "Response drafting and representation for GST notices, clarifications, and scrutiny.",
+    description: "A notice showed up? We read it, draft the response, and deal with the portal so you don't have to.",
     href: "/gst-compliance",
     icon: "bell",
   },
   {
     title: "Annual Return (GSTR-9)",
-    description: "Year-end consolidation and filing of your annual GST return, reconciled against monthly filings.",
+    description: "Your annual return, reconciled against every monthly filing and submitted well before the deadline.",
     href: "/gst-return-filing",
     icon: "calendar-check",
   },
   {
     title: "E-Way Bill Support",
-    description: "Generation and validation support for e-way bills on goods movement above ₹50,000.",
+    description: "E-way bills generated and checked for shipments over ₹50,000, so goods never get stuck at a checkpost.",
     href: "/gst-compliance",
     icon: "truck",
   },
@@ -76,12 +76,12 @@ export const processSteps = [
 ];
 
 export const whyFinancialSage: { title: string; body: string; icon: IconName }[] = [
-  { title: "Transparent subscription pricing", body: "Published prices, no 'request a quote' games.", icon: "tag" },
-  { title: "WhatsApp-first onboarding", body: "Share documents and get updates where you already are.", icon: "chat" },
-  { title: "MSME-focused support", body: "We build our process around small business realities, not enterprise red tape.", icon: "users" },
-  { title: "Pan-India coverage", body: "Fully remote. We serve clients in every state.", icon: "globe" },
-  { title: "Fast response", body: `We respond within ${"40 minutes"} during business hours.`, icon: "clock" },
-  { title: "Dedicated GST expert", body: "One point of contact who knows your filing history.", icon: "user-check" },
-  { title: "CA-reviewed filings", body: "Every filing is reviewed for accuracy before submission.", icon: "badge-check" },
+  { title: "A fraction of a CA's retainer", body: "Traditional CAs charge ₹10,000 or more a year. Our plans start at ₹399.", icon: "tag" },
+  { title: "WhatsApp-first onboarding", body: "Send documents, ask questions, get updates. All on the app you already use all day.", icon: "chat" },
+  { title: "Built for MSME budgets", body: "Priced and designed for a business with five employees, not five hundred.", icon: "users" },
+  { title: "Pan-India coverage", body: "Fully remote. We serve clients in every state, from Tier 1 metros to Tier 3 towns.", icon: "globe" },
+  { title: "Fast response", body: `We respond within ${"40 minutes"} during business hours, not next week.`, icon: "clock" },
+  { title: "Dedicated GST expert", body: "One point of contact who knows your filing history, not a rotating call queue.", icon: "user-check" },
+  { title: "CA-reviewed filings", body: "Every return is checked for accuracy before it goes anywhere near the GST portal.", icon: "badge-check" },
   { title: "Secure documentation", body: "Your documents are handled confidentially and never shared beyond your filing.", icon: "lock" },
 ];

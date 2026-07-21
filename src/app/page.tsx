@@ -64,8 +64,9 @@ export default function HomePage() {
               From ₹399.
             </h1>
             <p className="mt-5 max-w-xl text-lg text-white/70">
-              Registration and monthly filing for MSMEs, freelancers, and sellers. One expert,
-              real replies in {siteConfig.responseTime}.
+              Most CAs charge ₹10,000 or more a year and still leave you confused about ITC. We
+              register, file, and explain everything over WhatsApp, real replies in{" "}
+              {siteConfig.responseTime}.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Button
@@ -153,6 +154,7 @@ export default function HomePage() {
         <ScrollReveal>
           <span className="eyebrow">Why us</span>
           <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">Why Financial Sage</h2>
+          <p className="mt-2 max-w-2xl text-neutral-600">You focus on business. We handle compliance.</p>
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {whyFinancialSage.map((item) => (
               <div
@@ -176,7 +178,7 @@ export default function HomePage() {
           <span className="eyebrow">Who it&apos;s for</span>
           <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">Who Needs GST Registration?</h2>
           <p className="mt-2 max-w-2xl text-neutral-600">
-            If you run any of these businesses, GST registration probably applies to you. Tap yours to see the specifics.
+            If you run any of these, GST registration probably already applies to you. Tap yours to see the specifics.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             {whoNeedsGst.map((item) => (
@@ -294,14 +296,14 @@ export default function HomePage() {
           />
           <div className="relative flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
             <div>
-              <h2 className="text-3xl font-bold text-white sm:text-4xl">Ready to get GST-registered?</h2>
+              <h2 className="text-3xl font-bold text-white sm:text-4xl">Stop paying CA prices for GST.</h2>
               <p className="mt-2 text-white/80">Free consultation. Transparent pricing. Filed within 24 hours.</p>
             </div>
             <Link
               href="/gst-registration"
               className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-brand-700 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
             >
-              Start GST Registration <span aria-hidden="true">&rarr;</span>
+              Get GST from ₹399 <span aria-hidden="true">&rarr;</span>
             </Link>
           </div>
         </div>

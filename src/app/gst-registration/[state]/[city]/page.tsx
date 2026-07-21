@@ -33,13 +33,6 @@ export async function generateMetadata({
   };
 }
 
-const faqIds = [
-  "who-needs-gst-registration",
-  "how-long-gst-registration-takes",
-  "govt-fee-gst-registration",
-  "does-financial-sage-serve-pan-india",
-];
-
 export default async function CityGstPage({
   params,
 }: {
@@ -49,6 +42,12 @@ export default async function CityGstPage({
   const entry = getCity(state, city);
   if (!entry) notFound();
 
+  const faqIds = [
+    entry.featuredFaqId,
+    "how-long-gst-registration-takes",
+    "govt-fee-gst-registration",
+    "does-financial-sage-serve-pan-india",
+  ];
   const faqs = getFaqsByIds(faqIds);
   const breadcrumbs = [
     { name: "Home", url: siteConfig.url },
@@ -96,7 +95,7 @@ export default async function CityGstPage({
               Any business in {entry.city} supplying goods with turnover above ₹40 lakh, or services
               above ₹20 lakh, must register for GST, wherever in {entry.state} they
               operate. E-commerce sellers and inter-state suppliers based in {entry.city} must
-              register regardless of turnover.
+              register regardless of turnover. {entry.localSectors}
             </p>
 
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">How We Work With {entry.city} Businesses</h2>

@@ -14,7 +14,8 @@ export default function AboutPage() {
   return (
     <Section>
       <Container className="max-w-3xl px-0">
-        <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">About {siteConfig.name}</h1>
+        <span className="eyebrow">About Us</span>
+        <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">About {siteConfig.name}</h1>
         <p className="mt-4 text-lg text-neutral-600">
           {siteConfig.name} is India&apos;s GST registration and compliance specialist for MSMEs.
           GST is all we do. It isn&apos;t one of twenty services fighting for attention, it&apos;s

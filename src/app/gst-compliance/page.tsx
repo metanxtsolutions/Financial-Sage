@@ -54,7 +54,8 @@ export default function GstCompliancePage() {
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "GST Compliance", href: "/gst-compliance" }]} />
         <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">
+            <span className="eyebrow">GST Compliance</span>
+            <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">
               GST Compliance: ITC, Notices & Penalty Avoidance
             </h1>
             <p className="mt-4 text-lg text-neutral-600">

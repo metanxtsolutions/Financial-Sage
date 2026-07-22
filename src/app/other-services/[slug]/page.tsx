@@ -39,7 +39,8 @@ export default async function OtherServicePage({ params }: { params: Promise<{ s
       />
       <div className="mt-4 grid grid-cols-1 gap-10 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">{service.title}</h1>
+          <span className="eyebrow">Other Services</span>
+          <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">{service.title}</h1>
           <p className="mt-4 text-lg text-neutral-600">{service.summary}</p>
           <p className="mt-4 text-xl font-bold text-brand-700">From ₹{service.startingPrice}</p>
 

@@ -14,7 +14,8 @@ export const metadata: Metadata = {
 export default function GstToolsPage() {
   return (
     <Section>
-      <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">GST Tools</h1>
+      <span className="eyebrow">Free Tools</span>
+      <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">GST Tools</h1>
       <p className="mt-4 max-w-2xl text-lg text-neutral-600">
         Free calculators and lookup tools for everyday GST tasks. No login, no cost. Built and
         maintained by {siteConfig.name}.

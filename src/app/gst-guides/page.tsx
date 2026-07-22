@@ -15,7 +15,8 @@ export default function GstGuidesPage() {
 
   return (
     <Section>
-      <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">GST Guides</h1>
+      <span className="eyebrow">Guides</span>
+      <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">GST Guides</h1>
       <p className="mt-4 max-w-2xl text-lg text-neutral-600">
         Plain-English writing on GST registration, filing, notices, and compliance. No jargon, no filler.
       </p>

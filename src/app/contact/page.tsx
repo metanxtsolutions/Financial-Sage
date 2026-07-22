@@ -15,7 +15,8 @@ export default function ContactPage() {
     <Section>
       <Container className="grid grid-cols-1 gap-10 px-0 lg:grid-cols-2">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">Contact Us</h1>
+          <span className="eyebrow">Get in Touch</span>
+          <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">Contact Us</h1>
           <p className="mt-4 text-lg text-neutral-600">
             We respond within {siteConfig.responseTime} during business hours. WhatsApp is the
             fastest way to reach us.

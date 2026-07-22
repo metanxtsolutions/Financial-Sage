@@ -60,7 +60,8 @@ export default function GstReturnFilingPage() {
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "GST Return Filing", href: "/gst-return-filing" }]} />
         <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">
+            <span className="eyebrow">GST Return Filing</span>
+            <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">
               GST Return Filing: Monthly, Quarterly & Annual
             </h1>
             <p className="mt-4 text-lg text-neutral-600">

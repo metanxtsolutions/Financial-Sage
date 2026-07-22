@@ -482,7 +482,7 @@ export const faqs: Faq[] = [
     category: "financial-sage",
     question: "How experienced is Financial Sage with GST?",
     answer:
-      "We've completed 150+ GST registrations and currently manage monthly filings for 40 to 50 active clients, with over 800 business enquiries handled to date. We're a focused, growing GST practice. We're not the biggest name in the market, but we answer the phone and know your file.",
+      "We've completed 600+ GST registrations and currently manage monthly filings for 400+ active clients, with over 800 business enquiries handled to date. We're a focused, growing GST practice. We're not the biggest name in the market, but we answer the phone and know your file.",
   },
   {
     id: "what-if-i-need-help-after-registration",

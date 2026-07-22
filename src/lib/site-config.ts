@@ -6,7 +6,7 @@ export const siteConfig = {
   tagline: "India's GST Registration & Compliance Specialist for MSMEs",
   legalNote:
     "Financial Sage is a GST and business-compliance service provider. We are not a government body; GSTIN issuance and approval timelines are determined by the GST department.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://financialsage.co.in",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.financialsage.co.in",
   loginUrl: "https://login.financialsage.co.in",
   phoneDisplay: "+91 98300 00000",
   phoneE164: "+919830000000",

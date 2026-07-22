@@ -44,6 +44,7 @@ export function DueDateChecker() {
         <button
           type="button"
           onClick={() => setFilerType("monthly")}
+          aria-pressed={filerType === "monthly"}
           className={`rounded-lg border px-3 py-2 text-sm font-medium ${filerType === "monthly" ? "border-brand-600 bg-brand-50 text-brand-700" : "border-neutral-200 text-neutral-600"}`}
         >
           Monthly Filer
@@ -51,6 +52,7 @@ export function DueDateChecker() {
         <button
           type="button"
           onClick={() => setFilerType("qrmp")}
+          aria-pressed={filerType === "qrmp"}
           className={`rounded-lg border px-3 py-2 text-sm font-medium ${filerType === "qrmp" ? "border-brand-600 bg-brand-50 text-brand-700" : "border-neutral-200 text-neutral-600"}`}
         >
           QRMP Filer

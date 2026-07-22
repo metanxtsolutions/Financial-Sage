@@ -30,7 +30,7 @@ export function PricingTable() {
           <ul className="mt-5 space-y-2 text-sm text-neutral-700">
             {tier.features.map((feature) => (
               <li key={feature} className="flex items-start gap-2">
-                <span className="mt-0.5 text-accent-500">✓</span>
+                <span aria-hidden="true" className="mt-0.5 text-accent-500">✓</span>
                 {feature}
               </li>
             ))}

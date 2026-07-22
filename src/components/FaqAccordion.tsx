@@ -20,6 +20,7 @@ export function FaqAccordion({ faqs }: { faqs: Faq[] }) {
             >
               {faq.question}
               <span
+                aria-hidden="true"
                 className="shrink-0 text-lg leading-none text-brand-600 transition-transform duration-200"
                 style={{ transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}
               >

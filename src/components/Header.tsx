@@ -98,6 +98,8 @@ export function Header() {
 
         <button
           aria-label="Toggle menu"
+          aria-expanded={open}
+          aria-controls="mobile-nav"
           className={clsx(
             "flex h-10 w-10 items-center justify-center rounded-md border transition-colors duration-300 xl:hidden",
             onHero ? "border-white/30 text-white" : "border-neutral-200 text-neutral-900",
@@ -116,7 +118,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-neutral-200 bg-white xl:hidden">
+        <div id="mobile-nav" className="border-t border-neutral-200 bg-white xl:hidden">
           <Container className="flex flex-col gap-1 py-3">
             {navLinks.map((link) => (
               <Link

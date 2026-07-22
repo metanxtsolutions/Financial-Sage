@@ -98,46 +98,80 @@ export function LeadForm({ source, compact = false }: LeadFormProps) {
       />
 
       <div className={compact ? "grid grid-cols-1 gap-3" : "grid grid-cols-1 gap-3 sm:grid-cols-2"}>
-        <input
-          name="name"
-          required
-          placeholder="Full Name"
-          className="rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none"
-        />
-        <input
-          name="phone"
-          required
-          placeholder="Phone Number"
-          className="rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none"
-        />
-        <input
-          name="email"
-          type="email"
-          placeholder="Email (optional)"
-          className="rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none"
-        />
-        <select
-          name="businessType"
-          defaultValue=""
-          className="rounded-lg border border-neutral-200 px-4 py-3 text-sm text-neutral-700 focus:border-brand-500 focus:outline-none"
-        >
-          <option value="" disabled>
+        <div>
+          <label htmlFor={`${source}-name`} className="sr-only">
+            Full Name
+          </label>
+          <input
+            id={`${source}-name`}
+            name="name"
+            required
+            placeholder="Full Name"
+            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+          />
+        </div>
+        <div>
+          <label htmlFor={`${source}-phone`} className="sr-only">
+            Phone Number
+          </label>
+          <input
+            id={`${source}-phone`}
+            name="phone"
+            required
+            placeholder="Phone Number"
+            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+          />
+        </div>
+        <div>
+          <label htmlFor={`${source}-email`} className="sr-only">
+            Email (optional)
+          </label>
+          <input
+            id={`${source}-email`}
+            name="email"
+            type="email"
+            placeholder="Email (optional)"
+            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+          />
+        </div>
+        <div>
+          <label htmlFor={`${source}-businessType`} className="sr-only">
             Business Type
-          </option>
-          {businessTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
+          </label>
+          <select
+            id={`${source}-businessType`}
+            name="businessType"
+            defaultValue=""
+            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-neutral-700 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+          >
+            <option value="" disabled>
+              Business Type
             </option>
-          ))}
-        </select>
-        <input
-          name="city"
-          placeholder="City"
-          className="rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none sm:col-span-2"
-        />
+            {businessTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="sm:col-span-2">
+          <label htmlFor={`${source}-city`} className="sr-only">
+            City
+          </label>
+          <input
+            id={`${source}-city`}
+            name="city"
+            placeholder="City"
+            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+          />
+        </div>
       </div>
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && (
+        <p role="alert" aria-live="polite" className="text-sm text-red-600">
+          {error}
+        </p>
+      )}
 
       <Button type="submit" disabled={status === "submitting"} className="w-full">
         {status === "submitting" ? "Submitting…" : "Start GST Registration"}

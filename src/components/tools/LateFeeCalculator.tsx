@@ -23,6 +23,7 @@ export function LateFeeCalculator() {
         <button
           type="button"
           onClick={() => setReturnType("regular")}
+          aria-pressed={returnType === "regular"}
           className={`rounded-lg border px-3 py-2 text-sm font-medium ${returnType === "regular" ? "border-brand-600 bg-brand-50 text-brand-700" : "border-neutral-200 text-neutral-600"}`}
         >
           Regular Return
@@ -30,6 +31,7 @@ export function LateFeeCalculator() {
         <button
           type="button"
           onClick={() => setReturnType("nil")}
+          aria-pressed={returnType === "nil"}
           className={`rounded-lg border px-3 py-2 text-sm font-medium ${returnType === "nil" ? "border-brand-600 bg-brand-50 text-brand-700" : "border-neutral-200 text-neutral-600"}`}
         >
           NIL Return

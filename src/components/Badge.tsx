@@ -6,7 +6,8 @@ type Variant = "solid" | "outline";
 
 const toneClasses: Record<Tone, Record<Variant, string>> = {
   gold: {
-    solid: "bg-gold-500 text-white",
+    // Dark ink text, not white: white-on-gold-500 fails WCAG AA contrast (~2.3:1).
+    solid: "bg-gold-500 text-neutral-900",
     outline: "border border-gold-500 text-gold-600",
   },
   brand: {

@@ -27,6 +27,7 @@ export default function PricingPage() {
           monthly GST filing, without a bundled registration, starts from ₹{monthlyFilingFrom}.
         </p>
 
+        <h2 className="sr-only">Choose Your Plan</h2>
         <div className="mt-10">
           <PricingTable />
         </div>

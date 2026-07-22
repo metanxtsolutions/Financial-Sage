@@ -43,6 +43,7 @@ export function GstCalculator() {
         <button
           type="button"
           onClick={() => setMode("exclusive")}
+          aria-pressed={mode === "exclusive"}
           className={`rounded-lg border px-3 py-2 text-sm font-medium ${mode === "exclusive" ? "border-brand-600 bg-brand-50 text-brand-700" : "border-neutral-200 text-neutral-600"}`}
         >
           Add GST
@@ -50,6 +51,7 @@ export function GstCalculator() {
         <button
           type="button"
           onClick={() => setMode("inclusive")}
+          aria-pressed={mode === "inclusive"}
           className={`rounded-lg border px-3 py-2 text-sm font-medium ${mode === "inclusive" ? "border-brand-600 bg-brand-50 text-brand-700" : "border-neutral-200 text-neutral-600"}`}
         >
           Remove GST
@@ -87,6 +89,7 @@ export function GstCalculator() {
         <button
           type="button"
           onClick={() => setSupplyType("intra")}
+          aria-pressed={supplyType === "intra"}
           className={`rounded-lg border px-3 py-2 text-sm font-medium ${supplyType === "intra" ? "border-brand-600 bg-brand-50 text-brand-700" : "border-neutral-200 text-neutral-600"}`}
         >
           Intra-state (CGST+SGST)
@@ -94,6 +97,7 @@ export function GstCalculator() {
         <button
           type="button"
           onClick={() => setSupplyType("inter")}
+          aria-pressed={supplyType === "inter"}
           className={`rounded-lg border px-3 py-2 text-sm font-medium ${supplyType === "inter" ? "border-brand-600 bg-brand-50 text-brand-700" : "border-neutral-200 text-neutral-600"}`}
         >
           Inter-state (IGST)

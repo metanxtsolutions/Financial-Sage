@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
 import { pricingTiers } from "@/data/pricing";
 
@@ -16,9 +17,9 @@ export function PricingTable() {
           )}
         >
           {tier.highlighted && (
-            <span className="absolute -top-3 left-1/2 w-fit -translate-x-1/2 rounded-full bg-gold-500 px-3 py-1 text-xs font-semibold whitespace-nowrap text-white shadow-card">
+            <Badge tone="gold" variant="solid" className="absolute -top-3 left-1/2 -translate-x-1/2 shadow-card">
               Most Popular
-            </span>
+            </Badge>
           )}
           <h3 className="text-xl font-bold text-neutral-900">{tier.name}</h3>
           <p className="mt-1 text-sm text-neutral-600">{tier.description}</p>

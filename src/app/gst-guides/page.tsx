@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Badge } from "@/components/Badge";
 import { Section } from "@/components/Container";
 import { getAllPosts, blogCategories } from "@/lib/blog";
 
@@ -21,9 +22,9 @@ export default function GstGuidesPage() {
 
       <div className="mt-6 flex flex-wrap gap-2">
         {blogCategories.map((cat) => (
-          <span key={cat} className="rounded-full border border-neutral-200 px-3 py-1 text-xs font-medium text-neutral-600">
+          <Badge key={cat} tone="neutral" variant="outline">
             {cat}
-          </span>
+          </Badge>
         ))}
       </div>
 
@@ -34,7 +35,7 @@ export default function GstGuidesPage() {
             href={`/gst-guides/${post.slug}`}
             className="rounded-xl border border-neutral-200 bg-white p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
           >
-            <span className="text-xs font-semibold uppercase tracking-wide text-brand-600">{post.category}</span>
+            <Badge tone="brand" variant="outline">{post.category}</Badge>
             <h2 className="mt-2 font-semibold text-neutral-900">{post.title}</h2>
             <p className="mt-2 text-sm text-neutral-600">{post.excerpt}</p>
             <p className="mt-3 text-xs text-neutral-400">

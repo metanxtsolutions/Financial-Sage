@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Badge } from "@/components/Badge";
 import { Section } from "@/components/Container";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { MdxContent } from "@/components/MdxContent";
@@ -47,7 +48,7 @@ export default async function GstGuidePostPage({ params }: { params: Promise<{ s
           ]}
         />
         <div className="mx-auto mt-4 max-w-2xl">
-          <span className="text-xs font-semibold uppercase tracking-wide text-brand-600">{post.category}</span>
+          <Badge tone="brand" variant="outline">{post.category}</Badge>
           <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">{post.title}</h1>
           <p className="mt-3 text-sm text-neutral-400">
             {new Date(post.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}

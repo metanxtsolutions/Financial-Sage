@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Section } from "@/components/Container";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -41,6 +42,10 @@ export default async function CityGstPage({
   const { state, city } = await params;
   const entry = getCity(state, city);
   if (!entry) notFound();
+
+  const siblingCities = cities.filter(
+    (c) => c.stateSlug === entry.stateSlug && c.citySlug !== entry.citySlug,
+  );
 
   const faqIds = [
     entry.featuredFaqId,
@@ -105,6 +110,36 @@ export default async function CityGstPage({
               <li>• Real-time ARN tracking until your GSTIN is issued</li>
               <li>• Ongoing monthly/quarterly filing support once registered</li>
             </ul>
+            <p className="mt-4 text-sm text-neutral-500">
+              This page covers registration specific to {entry.city}. For the full documents
+              checklist, fee breakdown, and step-by-step process, see our{" "}
+              <Link href="/gst-registration" className="font-medium text-brand-700 underline">
+                GST registration guide
+              </Link>
+              .
+            </p>
+
+            {siblingCities.length > 0 && (
+              <>
+                <h2 className="mt-10 text-2xl font-bold text-neutral-900">Also Serving {entry.state}</h2>
+                <p className="mt-3 text-neutral-700">
+                  We also handle GST registration for businesses elsewhere in {entry.state}:
+                </p>
+                <ul className="mt-3 space-y-2 text-neutral-700">
+                  {siblingCities.map((sibling) => (
+                    <li key={sibling.citySlug}>
+                      •{" "}
+                      <Link
+                        href={`/gst-registration/${sibling.stateSlug}/${sibling.citySlug}`}
+                        className="font-medium text-brand-700 underline"
+                      >
+                        GST Registration in {sibling.city}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
 
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">Frequently Asked Questions</h2>
             <div className="mt-4">

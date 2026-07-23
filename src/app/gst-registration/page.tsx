@@ -190,7 +190,8 @@ export default function GstRegistrationPage() {
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">Fees & Timeline</h2>
             <p className="mt-3 text-neutral-700">
               The government charges <strong>zero fee</strong> for GST registration. Our service fee
-              starts from <strong>₹399</strong> and covers consultation, document review, filing, and
+              starts from <strong>₹399</strong>{" "}
+              and covers consultation, document review, filing, and
               follow-up. We file your application within 24 hours of receiving documents and payment;
               GSTIN issuance typically takes 3 to 7 working days depending on the department&apos;s review.
             </p>

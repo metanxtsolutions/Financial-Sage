@@ -9,7 +9,6 @@ import { Button } from "@/components/Button";
 import { siteConfig } from "@/lib/site-config";
 
 const navLinks = [
-  { label: "Home", href: "/" },
   { label: "GST Registration", href: "/gst-registration" },
   { label: "GST Return Filing", href: "/gst-return-filing" },
   { label: "GST Compliance", href: "/gst-compliance" },

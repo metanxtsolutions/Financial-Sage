@@ -23,7 +23,8 @@ export default function TermsPage() {
 
         <h2 className="mt-10 text-2xl font-bold text-neutral-900">Our Role</h2>
         <p className="mt-3 text-neutral-700">
-          {siteConfig.name} is a private GST and business-compliance service provider. We are not a
+          {siteConfig.name}{" "}
+          is a private GST and business-compliance service provider. We are not a
           government body, and we do not control the GST department&apos;s review, approval, or
           processing timelines. Timelines we mention (such as 24-hour filing or 3 to 7 day GSTIN
           issuance) refer to our own turnaround, not a guarantee of government processing time.

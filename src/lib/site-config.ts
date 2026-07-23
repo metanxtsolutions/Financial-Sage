@@ -19,7 +19,7 @@ export const siteConfig = {
     enquiries: "800+",
   },
   pricingFrom: {
-    gstRegistration: 399,
+    gstRegistration: 999,
     otherRegistration: 999,
     filing: 299,
   },

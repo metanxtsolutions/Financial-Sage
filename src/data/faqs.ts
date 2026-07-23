@@ -204,7 +204,7 @@ export const faqs: Faq[] = [
     category: "fees-timeline",
     question: "Is there a government fee for GST registration?",
     answer:
-      "No, GST registration itself is free of cost on the government portal. What you pay us covers document preparation, application filing, error-free submission, and follow-up with the GST department until your GSTIN is issued. Our GST Registration plan starts from ₹399.",
+      "No, GST registration itself is free of cost on the government portal. What you pay us covers document preparation, application filing, error-free submission, and follow-up with the GST department until your GSTIN is issued. Our GST Registration plan starts from ₹999.",
   },
   {
     id: "how-long-gst-registration-takes",

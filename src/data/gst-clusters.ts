@@ -18,7 +18,7 @@ export const clusterPages: ClusterPage[] = [
     h1: "GST Registration Online, From Anywhere in India",
     metaTitle: "GST Registration Online | Apply in Minutes | Financial Sage",
     metaDescription:
-      "Apply for GST registration online with Financial Sage. Share documents on WhatsApp and we file within 24 hours. GST registration starts from ₹399.",
+      "Apply for GST registration online with Financial Sage. Share documents on WhatsApp and we file within 24 hours. GST registration starts from ₹999.",
     intro:
       "Online GST registration means no tax-office visit and no queue. Document collection, application filing, and Aadhaar verification all happen digitally. You send your documents over WhatsApp or email, we prepare and file your application within 24 hours, and you can track approval right up to the moment your GSTIN is issued.",
     highlights: [
@@ -49,16 +49,16 @@ export const clusterPages: ClusterPage[] = [
     h1: "GST Registration Fees: Government Cost vs Service Cost",
     metaTitle: "GST Registration Fees & Charges in India | Financial Sage",
     metaDescription:
-      "GST registration has no government fee. See exactly what Financial Sage charges. GST registration starts from ₹399, published upfront, with no hidden costs.",
+      "GST registration has no government fee. See exactly what Financial Sage charges. GST registration starts from ₹999, published upfront, with no hidden costs.",
     intro:
-      "Most confusion around 'GST registration fees' comes from mixing up two things. The government charges nothing to issue a GSTIN. What you pay a consultant is for preparing an error-free application, formatting documents correctly, and following up with the department. Our fee for that is published and starts at ₹399, with no surprise add-ons at the end.",
+      "Most confusion around 'GST registration fees' comes from mixing up two things. The government charges nothing to issue a GSTIN. What you pay a consultant is for preparing an error-free application, formatting documents correctly, and following up with the department. Our fee for that is published and starts at ₹999, with no surprise add-ons at the end.",
     highlights: [
       {
         title: "Government fee: ₹0",
         body: "Standard GST registration on the official portal carries no government fee. Anyone telling you otherwise is padding their invoice.",
       },
       {
-        title: "Our service fee: from ₹399",
+        title: "Our service fee: from ₹999",
         body: "Covers consultation, document review, filing, and follow-up until your GSTIN is issued. See the Pricing page for what each tier includes.",
       },
       {

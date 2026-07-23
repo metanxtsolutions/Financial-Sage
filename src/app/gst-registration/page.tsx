@@ -11,7 +11,7 @@ import { getFaqsByIds } from "@/data/faqs";
 export const metadata: Metadata = {
   title: "GST Registration Online in India: Documents, Fees & Process",
   description:
-    "Complete guide to GST registration in India: eligibility, turnover thresholds, documents by entity type, fees, process, and penalties. Registration starts from ₹399.",
+    "Complete guide to GST registration in India: eligibility, turnover thresholds, documents by entity type, fees, process, and penalties. Registration starts from ₹999.",
   alternates: { canonical: "/gst-registration" },
 };
 
@@ -76,7 +76,7 @@ export default function GstRegistrationPage() {
         data={[
           serviceSchema({
             name: "GST Registration",
-            description: "Expert-assisted GST registration for Indian businesses, starting from ₹399.",
+            description: "Expert-assisted GST registration for Indian businesses, starting from ₹999.",
             url: `${siteConfig.url}/gst-registration`,
           }),
           faqPageSchema(faqs),
@@ -95,7 +95,7 @@ export default function GstRegistrationPage() {
             <p className="mt-4 text-lg text-neutral-600">
               GST registration enrols your business under India&apos;s Goods and Services Tax system
               and gives you a GSTIN. Financial Sage handles the whole process, from document review
-              to GSTIN issuance, from ₹399, with filing completed within 24 hours of receiving your
+              to GSTIN issuance, from ₹999, with filing completed within 24 hours of receiving your
               documents and payment.
             </p>
 
@@ -190,7 +190,7 @@ export default function GstRegistrationPage() {
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">Fees & Timeline</h2>
             <p className="mt-3 text-neutral-700">
               The government charges <strong>zero fee</strong> for GST registration. Our service fee
-              starts from <strong>₹399</strong>{" "}
+              starts from <strong>₹999</strong>{" "}
               and covers consultation, document review, filing, and
               follow-up. We file your application within 24 hours of receiving documents and payment;
               GSTIN issuance typically takes 3 to 7 working days depending on the department&apos;s review.

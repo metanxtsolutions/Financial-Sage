@@ -17,7 +17,7 @@ import { getFaqsByIds } from "@/data/faqs";
 export const metadata: Metadata = {
   title: { absolute: `${siteConfig.name}: GST Registration & Filing Made Simple for Indian Businesses` },
   description:
-    "Expert-assisted GST registration and filing for Indian MSMEs. GST registration from ₹399, transparent pricing, Pan-India coverage, response within 40 minutes.",
+    "Expert-assisted GST registration and filing for Indian MSMEs. GST registration from ₹999, transparent pricing, Pan-India coverage, response within 40 minutes.",
   alternates: { canonical: "/" },
 };
 
@@ -59,9 +59,9 @@ export default function HomePage() {
           <div>
             <span className="eyebrow eyebrow-light">GST specialists for Indian MSMEs</span>
             <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-[3.4rem]">
-              Your GST.
+              Get your GST
               <br />
-              <span className="text-gradient-light">Our headache.</span>
+              <span className="text-gradient-light">at ₹999.</span>
             </h1>
             <p className="mt-5 max-w-xl text-lg text-white/70">
               Most CAs charge ₹10,000 or more a year and still leave you confused about ITC. We
@@ -74,7 +74,7 @@ export default function HomePage() {
                 variant="primary"
                 className="group px-6 py-3.5 text-base"
               >
-                Get GST from ₹399
+                Get GST from ₹999
                 <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">
                   &rarr;
                 </span>
@@ -303,7 +303,7 @@ export default function HomePage() {
               href="/gst-registration"
               className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-brand-700 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
             >
-              Get GST from ₹399 <span aria-hidden="true">&rarr;</span>
+              Get GST from ₹999 <span aria-hidden="true">&rarr;</span>
             </Link>
           </div>
         </div>

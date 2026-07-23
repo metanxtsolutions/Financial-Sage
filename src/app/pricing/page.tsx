@@ -8,7 +8,7 @@ import { monthlyFilingFrom, pricingTiers } from "@/data/pricing";
 
 export const metadata: Metadata = {
   title: "Pricing: Transparent GST Registration & Filing Plans",
-  description: `GST registration from ₹399, monthly filing from ₹${monthlyFilingFrom}. No hidden fees, published pricing for every plan.`,
+  description: `GST registration from ₹999, monthly filing from ₹${monthlyFilingFrom}. No hidden fees, published pricing for every plan.`,
   alternates: { canonical: "/pricing" },
 };
 

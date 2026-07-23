@@ -14,7 +14,7 @@ export const pricingTiers: PricingTier[] = [
   {
     id: "starter",
     name: "Starter",
-    price: 399,
+    price: 999,
     priceNote: "+ applicable Govt fee",
     description: "GST registration only, for businesses just getting started.",
     features: [

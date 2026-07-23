@@ -76,7 +76,7 @@ export const processSteps = [
 ];
 
 export const whyFinancialSage: { title: string; body: string; icon: IconName }[] = [
-  { title: "A fraction of a CA's retainer", body: "Traditional CAs charge ₹10,000 or more a year. Our plans start at ₹399.", icon: "tag" },
+  { title: "A fraction of a CA's retainer", body: "Traditional CAs charge ₹10,000 or more a year. Our plans start at ₹999.", icon: "tag" },
   { title: "WhatsApp-first onboarding", body: "Send documents, ask questions, get updates. All on the app you already use all day.", icon: "chat" },
   { title: "Built for MSME budgets", body: "Priced and designed for a business with five employees, not five hundred.", icon: "users" },
   { title: "Pan-India coverage", body: "Fully remote. We serve clients in every state, from Tier 1 metros to Tier 3 towns.", icon: "globe" },

@@ -8,10 +8,10 @@ export const siteConfig = {
     "Financial Sage is a GST and business-compliance service provider. We are not a government body; GSTIN issuance and approval timelines are determined by the GST department.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.financialsage.co.in",
   loginUrl: "https://login.financialsage.co.in",
-  phoneDisplay: "+91 98300 00000",
-  phoneE164: "+919830000000",
+  phoneDisplay: "+91 70295 58200",
+  phoneE164: "+917029558200",
   email: "hello@financialsage.co.in",
-  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919830000000",
+  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "917029558200",
   responseTime: "40 minutes",
   stats: {
     registrations: "600+",

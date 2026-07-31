@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Sora } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { MainContent } from "@/components/MainContent";
+import { ConditionalChrome } from "@/components/ConditionalChrome";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { MobileStickyCta } from "@/components/MobileStickyCta";
 import { Analytics } from "@/components/Analytics";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { JsonLd, organizationSchema, localBusinessSchema } from "@/lib/schema";
@@ -64,10 +64,9 @@ export default function RootLayout({
         </a>
         <JsonLd data={[organizationSchema(), localBusinessSchema()]} />
         <Header />
-        <main id="main-content" className="flex-1 pt-16">{children}</main>
-        <Footer />
+        <MainContent>{children}</MainContent>
+        <ConditionalChrome />
         <WhatsAppButton />
-        <MobileStickyCta />
         <Analytics />
         <VercelAnalytics />
       </body>

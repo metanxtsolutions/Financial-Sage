@@ -4,6 +4,8 @@ import { useState } from "react";
 import Script from "next/script";
 import { Button } from "@/components/Button";
 
+type ButtonVariant = "primary" | "secondary" | "whatsapp" | "outline" | "ghostDark";
+
 declare global {
   interface Window {
     Razorpay: new (options: Record<string, unknown>) => {
@@ -26,6 +28,16 @@ interface RazorpayCheckoutButtonProps {
   name?: string;
   description?: string;
   className?: string;
+  /** Base Button variant. Use "outline" (not "primary") when overriding colors via
+   * className - "primary" paints a background-image gradient that sits on top of
+   * and hides any background-color override, no matter the class order. */
+  variant?: ButtonVariant;
+  /** Passed through to /api/create-order, e.g. an application id to reconcile later. */
+  receipt?: string;
+  /** Modal accent color, e.g. the ITR wizard's green instead of the default brand indigo. */
+  themeColor?: string;
+  /** Fires after the signature is confirmed valid, before this component's own success panel renders. */
+  onSuccess?: (result: { orderId: string; paymentId: string; signature: string }) => void;
 }
 
 export function RazorpayCheckoutButton({
@@ -34,6 +46,10 @@ export function RazorpayCheckoutButton({
   name = "Financial Sage",
   description = "GST service payment",
   className,
+  variant = "primary",
+  receipt,
+  themeColor = "#4f46e5",
+  onSuccess,
 }: RazorpayCheckoutButtonProps) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
@@ -48,7 +64,7 @@ export function RazorpayCheckoutButton({
       const orderRes = await fetch("/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: Math.round(amount * 100), currency: "INR" }),
+        body: JSON.stringify({ amount: Math.round(amount * 100), currency: "INR", receipt }),
       });
       const orderData = await orderRes.json();
       if (!orderRes.ok) {
@@ -75,6 +91,11 @@ export function RazorpayCheckoutButton({
             }
             setPaymentId(response.razorpay_payment_id);
             setStatus("success");
+            onSuccess?.({
+              orderId: response.razorpay_order_id,
+              paymentId: response.razorpay_payment_id,
+              signature: response.razorpay_signature,
+            });
           } catch (err) {
             setStatus("error");
             setError(
@@ -89,7 +110,7 @@ export function RazorpayCheckoutButton({
             setStatus((current) => (current === "loading" ? "idle" : current));
           },
         },
-        theme: { color: "#4f46e5" },
+        theme: { color: themeColor },
       });
 
       razorpayCheckout.on("payment.failed", (response) => {
@@ -120,7 +141,7 @@ export function RazorpayCheckoutButton({
         type="button"
         onClick={handlePay}
         disabled={status === "loading" || !scriptReady}
-        variant="primary"
+        variant={variant}
         className={className}
       >
         {status === "loading" ? "Processing…" : label}

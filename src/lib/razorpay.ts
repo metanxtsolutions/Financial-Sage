@@ -1,4 +1,5 @@
 import Razorpay from "razorpay";
+import { createHmac, timingSafeEqual } from "crypto";
 
 // Lazy by design, same reasoning as src/lib/prisma.ts: constructing the
 // client at module scope would run during Next.js's build-time page-data
@@ -31,3 +32,25 @@ export const razorpay: Razorpay = new Proxy({} as Razorpay, {
     return Reflect.get(getRazorpayClient() as object, prop, receiver);
   },
 });
+
+// Shared by /api/verify-payment and any endpoint (e.g. /api/itr/mark-paid)
+// that mutates state on a successful payment - each must re-verify the
+// signature itself rather than trust a client-reported "already verified"
+// flag. Constant-time comparison so response timing can't leak the correct
+// signature.
+export function verifyRazorpaySignature(
+  orderId: string,
+  paymentId: string,
+  signature: string,
+): boolean {
+  const keySecret = process.env.RAZORPAY_KEY_SECRET;
+  if (!keySecret) {
+    throw new Error("RAZORPAY_KEY_SECRET is not set. Add it to .env (see .env.example).");
+  }
+
+  const expectedSignature = createHmac("sha256", keySecret).update(`${orderId}|${paymentId}`).digest("hex");
+
+  const expectedBuffer = Buffer.from(expectedSignature, "hex");
+  const providedBuffer = Buffer.from(signature, "hex");
+  return expectedBuffer.length === providedBuffer.length && timingSafeEqual(expectedBuffer, providedBuffer);
+}

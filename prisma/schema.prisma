@@ -1,6 +1,8 @@
-// Prisma schema for Financial Sage — Phase 1 (public site + lead capture only).
-// The client portal (User, GSTRecord, Document, ServiceHistory) is Phase 2 —
-// see README.md for the split and the models to add when the portal is built.
+// Prisma schema for Financial Sage — Phase 1 (public site + lead capture only),
+// plus the standalone ITR filing wizard (ItrApplication/ItrDocument below).
+// The ITR wizard intentionally has no user accounts: it's a single-session
+// pay-then-upload flow, not the client portal. A full client portal (User,
+// OTP auth, GSTRecord, ServiceHistory) is still Phase 2 — see README.md.
 
 generator client {
   provider = "prisma-client"
@@ -34,4 +36,53 @@ model Lead {
   utmCampaign  String?
   status       LeadStatus @default(NEW)
   createdAt    DateTime   @default(now())
+}
+
+enum ItrType {
+  ITR_1
+  ITR_2
+  ITR_3
+  ITR_4
+}
+
+enum ItrApplicationStatus {
+  PAYMENT_PENDING
+  PAYMENT_RECEIVED
+  DOCUMENTS_PENDING
+  UNDER_REVIEW
+  NEED_CLARIFICATION
+  FILED
+  COMPLETED
+}
+
+model ItrApplication {
+  id                String               @id @default(cuid())
+  itrType           ItrType
+  name              String
+  phone             String
+  email             String
+  pan               String
+  state             String?
+  amount            Int // paise, e.g. 99900 for ₹999
+  status            ItrApplicationStatus @default(PAYMENT_PENDING)
+  razorpayOrderId   String?
+  razorpayPaymentId String?
+  documents         ItrDocument[]
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+}
+
+// Metadata only. The actual file bytes are not persisted anywhere durable
+// yet — that needs a cloud storage provider (Vercel Blob, S3, Cloudinary)
+// to be chosen before this is production-ready. See README.md.
+model ItrDocument {
+  id            String         @id @default(cuid())
+  application   ItrApplication @relation(fields: [applicationId], references: [id])
+  applicationId String
+  category      String // e.g. "PAN Card", "Form 16"
+  isMandatory   Boolean
+  fileName      String
+  fileSize      Int
+  mimeType      String
+  createdAt     DateTime       @default(now())
 }

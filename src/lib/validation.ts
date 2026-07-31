@@ -36,3 +36,35 @@ export const verifyPaymentSchema = z.object({
 });
 
 export type VerifyPaymentInput = z.infer<typeof verifyPaymentSchema>;
+
+export const itrApplicationSchema = z.object({
+  itrType: z.enum(["ITR_1", "ITR_2", "ITR_3", "ITR_4"]),
+  name: z.string().trim().min(2, "Please enter your name").max(120),
+  phone: z
+    .string()
+    .trim()
+    .regex(/^[0-9+\-\s]{8,15}$/, "Enter a valid phone number"),
+  email: z.string().trim().email("Enter a valid email"),
+  pan: z
+    .string()
+    .trim()
+    .toUpperCase()
+    .regex(/^[A-Z]{5}[0-9]{4}[A-Z]$/, "Enter a valid 10-character PAN"),
+  state: z.string().trim().max(120).optional().or(z.literal("")),
+  consent: z.literal(true, { message: "Please accept the Terms & Privacy Policy" }),
+});
+
+export type ItrApplicationInput = z.infer<typeof itrApplicationSchema>;
+
+export const itrMarkPaidSchema = z.object({
+  applicationId: z.string().trim().min(1, "Missing applicationId"),
+  razorpay_order_id: z.string().trim().min(1, "Missing razorpay_order_id"),
+  razorpay_payment_id: z.string().trim().min(1, "Missing razorpay_payment_id"),
+  razorpay_signature: z.string().trim().min(1, "Missing razorpay_signature"),
+});
+
+export type ItrMarkPaidInput = z.infer<typeof itrMarkPaidSchema>;
+
+// Max upload size, matching the spec's "Maximum 20MB" per document.
+export const ITR_MAX_FILE_BYTES = 20 * 1024 * 1024;
+export const ITR_ALLOWED_MIME_TYPES = ["application/pdf", "image/jpeg", "image/png"];

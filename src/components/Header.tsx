@@ -37,6 +37,11 @@ export function Header() {
   // has scrolled past it, the header is always solid.
   const onHero = pathname === "/" && !scrolled && !open;
 
+  // The ITR wizard is a focused, distraction-free flow - no site nav during
+  // the actual filing steps. The /itr-filing landing page keeps the normal
+  // header.
+  if (pathname?.startsWith("/itr-filing/apply")) return null;
+
   return (
     <header
       className={clsx(

@@ -37,6 +37,15 @@
   --color-gold-500: #e0a000;
   --color-gold-600: #b87f00;
 
+  /* Scoped to the /itr-filing wizard only - a deliberately separate visual
+     identity from the brand-* tokens used everywhere else on the site. */
+  --color-itr-green-50: #eaf5e6;
+  --color-itr-green-100: #cfe8c4;
+  --color-itr-green-500: #3f8f2c;
+  --color-itr-green-600: #337524;
+  --color-itr-navy-500: #0b1f3a;
+  --color-itr-navy-700: #071426;
+
   --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -12px rgba(15, 23, 42, 0.12);
   --shadow-card-hover: 0 4px 8px rgba(15, 23, 42, 0.06), 0 20px 40px -14px rgba(29, 55, 201, 0.22);
   --shadow-glow: 0 10px 30px -8px rgba(79, 70, 229, 0.45);
@@ -70,6 +79,13 @@
   --color-gold-400: var(--color-gold-400);
   --color-gold-500: var(--color-gold-500);
   --color-gold-600: var(--color-gold-600);
+
+  --color-itr-green-50: var(--color-itr-green-50);
+  --color-itr-green-100: var(--color-itr-green-100);
+  --color-itr-green-500: var(--color-itr-green-500);
+  --color-itr-green-600: var(--color-itr-green-600);
+  --color-itr-navy-500: var(--color-itr-navy-500);
+  --color-itr-navy-700: var(--color-itr-navy-700);
 
   --color-neutral-50: var(--color-neutral-50);
   --color-neutral-100: var(--color-neutral-100);

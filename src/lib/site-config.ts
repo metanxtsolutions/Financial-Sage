@@ -22,6 +22,9 @@ export const siteConfig = {
     gstRegistration: 999,
     otherRegistration: 999,
     filing: 299,
+    // Standalone ITR filing wizard price (/itr-filing). Distinct from the
+    // ₹299 listing on /other-services/itr-filing - that page is untouched.
+    itrFilingWizard: 999,
   },
 } as const;
 

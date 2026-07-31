@@ -1,42 +1,24 @@
 "use client";
 
-import { useState } from "react";
-import { RazorpayCheckoutButton } from "@/components/RazorpayCheckoutButton";
+import { PayUCheckoutButton } from "@/components/PayUCheckoutButton";
 import { siteConfig } from "@/lib/site-config";
 
 const paymentMethods = ["UPI", "Cards", "Net Banking", "Wallets"];
 
 export function ItrStepPayment({
   applicationId,
-  onPaid,
+  name,
+  email,
+  phone,
+  paymentFailed,
 }: {
   applicationId: string;
-  onPaid: () => void;
+  name: string;
+  email: string;
+  phone: string;
+  paymentFailed?: boolean;
 }) {
-  const [error, setError] = useState<string | null>(null);
   const price = siteConfig.pricingFrom.itrFilingWizard;
-
-  async function handleSuccess(result: { orderId: string; paymentId: string; signature: string }) {
-    try {
-      const res = await fetch("/api/itr/mark-paid", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          applicationId,
-          razorpay_order_id: result.orderId,
-          razorpay_payment_id: result.paymentId,
-          razorpay_signature: result.signature,
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || "Payment could not be confirmed");
-      }
-      onPaid();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Payment could not be confirmed. Contact support.");
-    }
-  }
 
   return (
     <div>
@@ -65,19 +47,25 @@ export function ItrStepPayment({
         ))}
       </div>
 
+      {paymentFailed && (
+        <p className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600">
+          Payment did not go through. Please try again.
+        </p>
+      )}
+
       <div className="mt-5">
-        <RazorpayCheckoutButton
+        <PayUCheckoutButton
           amount={price}
+          name={name}
+          email={email}
+          phone={phone}
+          productinfo="Financial Sage ITR Filing"
+          udf1={applicationId}
           label={`Pay Now — ₹${price}`}
-          description="Financial Sage ITR Filing"
-          receipt={applicationId}
-          themeColor="#3f8f2c"
           variant="outline"
           className="w-full rounded-xl !border-itr-green-500 !bg-itr-green-500 px-5 py-3.5 text-sm font-semibold !text-white hover:!bg-itr-green-600"
-          onSuccess={handleSuccess}
         />
       </div>
-      {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
     </div>
   );
 }

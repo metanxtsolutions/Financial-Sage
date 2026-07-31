@@ -19,6 +19,7 @@ export interface ItrWizardState {
   pan: string;
   state: string;
   applicationId: string | null;
+  paymentFailed?: boolean;
 }
 
 const STORAGE_KEY = "itr-wizard-progress";
@@ -34,18 +35,40 @@ const initialState: ItrWizardState = {
   applicationId: null,
 };
 
-// Reads any saved progress synchronously. Safe as a lazy useState initializer
-// only because this component is loaded with { ssr: false } (see
-// src/app/itr-filing/apply/page.tsx) - it never runs on the server, so there's
-// no server/client markup to mismatch.
+// Reads any saved progress synchronously, then reconciles it against a
+// return trip from PayU's hosted checkout (a full-page redirect, so this
+// component remounts fresh - there's no other hook to catch that return).
+// Safe as a lazy useState initializer only because this component is loaded
+// with { ssr: false } (see src/app/itr-filing/apply/page.tsx) - it never
+// runs on the server, so there's no server/client markup to mismatch, and
+// reading window.location here is a one-time client bootstrap, not a render
+// side effect that needs an effect of its own.
 function restoreWizardState(): ItrWizardState {
+  let base: ItrWizardState = initialState;
   try {
     const saved = sessionStorage.getItem(STORAGE_KEY);
-    if (saved) return JSON.parse(saved);
+    if (saved) base = JSON.parse(saved);
   } catch {
     // Corrupt/unavailable storage - just start fresh.
   }
-  return initialState;
+
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const payuStatus = params.get("payu");
+    const returnedAppId = params.get("applicationId");
+
+    if (payuStatus && (!returnedAppId || base.applicationId === returnedAppId)) {
+      window.history.replaceState(null, "", window.location.pathname);
+      if (payuStatus === "success") {
+        return { ...base, step: 4, paymentFailed: false };
+      }
+      return { ...base, step: 3, paymentFailed: true };
+    }
+  } catch {
+    // URL unavailable - fall through with whatever was saved.
+  }
+
+  return base;
 }
 
 export function ItrWizard() {
@@ -94,7 +117,10 @@ export function ItrWizard() {
       {wizard.step === 3 && wizard.applicationId && (
         <ItrStepPayment
           applicationId={wizard.applicationId}
-          onPaid={() => goToStep(4)}
+          name={wizard.name}
+          email={wizard.email}
+          phone={wizard.phone}
+          paymentFailed={wizard.paymentFailed}
         />
       )}
 

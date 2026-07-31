@@ -4,7 +4,13 @@
     {
       "name": "financial-sage-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": ["run", "dev", "--", "-p", "4000"],
+      "port": 4000
+    },
+    {
+      "name": "financial-sage-prod",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
       "port": 3000
     }
   ]

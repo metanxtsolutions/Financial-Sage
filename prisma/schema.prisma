@@ -65,8 +65,8 @@ model ItrApplication {
   state             String?
   amount            Int // paise, e.g. 99900 for ₹999
   status            ItrApplicationStatus @default(PAYMENT_PENDING)
-  razorpayOrderId   String?
-  razorpayPaymentId String?
+  payuTxnId         String?
+  payuPaymentId     String?
   documents         ItrDocument[]
   createdAt         DateTime             @default(now())
   updatedAt         DateTime             @updatedAt

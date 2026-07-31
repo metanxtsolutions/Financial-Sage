@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 
 // Client-only: this is a purely interactive, noindex flow (step state, file
-// uploads, the Razorpay SDK) with no SEO value in server-rendering it, and
+// uploads, PayU's redirect-based checkout) with no SEO value in server-rendering it, and
 // skipping SSR here means the sessionStorage-restored step never has to
 // reconcile against a mismatched server-rendered version. `ssr: false` is
 // only allowed inside a Client Component, hence this thin wrapper - the page

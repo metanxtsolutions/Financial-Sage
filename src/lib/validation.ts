@@ -20,3 +20,19 @@ export const leadSchema = z.object({
 });
 
 export type LeadInput = z.infer<typeof leadSchema>;
+
+export const createOrderSchema = z.object({
+  amount: z.number().int().min(100, "Amount must be at least 100 paise"),
+  currency: z.string().trim().length(3).optional().default("INR"),
+  receipt: z.string().trim().max(200).optional(),
+});
+
+export type CreateOrderInput = z.infer<typeof createOrderSchema>;
+
+export const verifyPaymentSchema = z.object({
+  razorpay_order_id: z.string().trim().min(1, "Missing razorpay_order_id"),
+  razorpay_payment_id: z.string().trim().min(1, "Missing razorpay_payment_id"),
+  razorpay_signature: z.string().trim().min(1, "Missing razorpay_signature"),
+});
+
+export type VerifyPaymentInput = z.infer<typeof verifyPaymentSchema>;

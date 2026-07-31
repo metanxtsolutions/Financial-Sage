@@ -35,7 +35,7 @@ module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://www.financialsage.co.in",
   generateRobotsTxt: true,
   generateIndexSitemap: false,
-  exclude: ["/api/*", "/login*"],
+  exclude: ["/api/*", "/login*", "/razorpay-test"],
   additionalPaths: async () => [
     ...clusterSlugs.map((slug) => ({ loc: `/${slug}` })),
     ...cityPaths.map(([state, city]) => ({ loc: `/gst-registration/${state}/${city}` })),

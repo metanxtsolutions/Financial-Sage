@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { itrDocumentCategories, itrMandatoryDocumentLabels } from "@/data/itr-documents";
+import { getItrDocumentCategories, getItrMandatoryDocumentLabels } from "@/data/itr-documents";
+import type { ItrType } from "@/components/itr/ItrWizard";
 
 interface UploadedDoc {
   id: string;
@@ -137,14 +138,17 @@ function DocumentSlot({
 
 export function ItrStepUpload({
   applicationId,
+  itrType,
   onDone,
 }: {
   applicationId: string;
+  itrType: ItrType;
   onDone: () => void;
 }) {
   const [uploaded, setUploaded] = useState<Record<string, UploadedDoc>>({});
 
-  const mandatoryDone = itrMandatoryDocumentLabels.every((label) => uploaded[label]);
+  const itrDocumentCategories = getItrDocumentCategories(itrType);
+  const mandatoryDone = getItrMandatoryDocumentLabels(itrType).every((label) => uploaded[label]);
 
   return (
     <div>

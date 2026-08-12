@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { ITR_ALLOWED_MIME_TYPES, ITR_MAX_FILE_BYTES } from "@/lib/validation";
-import { itrDocumentCategories } from "@/data/itr-documents";
+import { getItrDocumentCategories } from "@/data/itr-documents";
+import type { ItrType } from "@/components/itr/ItrWizard";
 
 // Records document metadata only. The file bytes are validated (size, type)
 // but not persisted anywhere durable - that needs a cloud storage provider
@@ -19,9 +20,6 @@ export async function POST(request: Request) {
   if (typeof applicationId !== "string" || !applicationId) {
     return NextResponse.json({ error: "Missing applicationId" }, { status: 400 });
   }
-  if (typeof category !== "string" || !itrDocumentCategories.some((c) => c.label === category)) {
-    return NextResponse.json({ error: "Invalid document category" }, { status: 400 });
-  }
   if (!(file instanceof File)) {
     return NextResponse.json({ error: "Missing file" }, { status: 400 });
   }
@@ -38,7 +36,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Application not found" }, { status: 404 });
   }
 
-  const isMandatory = itrDocumentCategories.find((c) => c.label === category)?.isMandatory ?? false;
+  // The valid/mandatory category set depends on this application's ITR type
+  // (see src/data/itr-documents.ts), so it can only be resolved after the
+  // application lookup above - not from a single global list.
+  const documentCategories = getItrDocumentCategories(application.itrType as ItrType);
+  if (typeof category !== "string" || !documentCategories.some((c) => c.label === category)) {
+    return NextResponse.json({ error: "Invalid document category" }, { status: 400 });
+  }
+
+  const isMandatory = documentCategories.find((c) => c.label === category)?.isMandatory ?? false;
 
   const document = await prisma.itrDocument.create({
     data: {

@@ -124,8 +124,8 @@ export function ItrWizard() {
         />
       )}
 
-      {wizard.step === 4 && wizard.applicationId && (
-        <ItrStepUpload applicationId={wizard.applicationId} onDone={() => goToStep(5)} />
+      {wizard.step === 4 && wizard.applicationId && wizard.itrType && (
+        <ItrStepUpload applicationId={wizard.applicationId} itrType={wizard.itrType} onDone={() => goToStep(5)} />
       )}
 
       {wizard.step === 5 && wizard.applicationId && (

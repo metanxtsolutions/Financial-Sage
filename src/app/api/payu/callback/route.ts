@@ -50,8 +50,7 @@ export async function POST(request: Request) {
   }
 
   // udf1 carries our own applicationId through untouched - only the ITR
-  // wizard's payment step sets it, so a plain test payment (e.g. /payu-test)
-  // has nothing to reconcile against.
+  // wizard's payment step sets it.
   if (!udf1) {
     return redirectToApp(siteUrl, { payu: status === "success" ? "success" : "failed" });
   }

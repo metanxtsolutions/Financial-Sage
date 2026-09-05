@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "check:sitemap": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/alias-loader-register.mjs scripts/check-sitemap-parity.ts",
     "check:similarity": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/alias-loader-register.mjs scripts/content-similarity.ts",
-    "verify:geo": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/alias-loader-register.mjs scripts/verify-geo.ts"
+    "verify:geo": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/alias-loader-register.mjs scripts/verify-geo.ts",
+    "content:status": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/alias-loader-register.mjs scripts/content-status.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",

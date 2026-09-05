@@ -16,6 +16,7 @@ import { ComparisonTable } from "@/components/home/ComparisonTable";
 import { JsonLd, faqPageSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
 import { coreServices, whoNeedsGst, processSteps, whyFinancialSage } from "@/data/services";
+import { serviceCategories, otherServices } from "@/data/other-services";
 import { testimonials } from "@/data/testimonials";
 import { getFaqsByIds } from "@/data/faqs";
 
@@ -71,7 +72,8 @@ export default function HomePage() {
             <p className="mt-5 max-w-xl text-lg text-white/70">
               Most CAs charge ₹10,000 or more a year and still leave you confused about ITC. We
               register, file, and explain everything over WhatsApp, real replies in{" "}
-              {siteConfig.responseTime}.
+              {siteConfig.responseTime}. And when the business needs more than GST, the same team
+              handles that too.
             </p>
 
             <ReviewBadges />
@@ -101,6 +103,25 @@ export default function HomePage() {
                   <div className="mt-0.5 text-xs leading-tight text-white/50">{stat.label}</div>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-8 border-t border-white/10 pt-6">
+              <p className="text-xs font-semibold tracking-wide text-white/40 uppercase">
+                Beyond GST, same team &middot; {otherServices.length} services
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {serviceCategories
+                  .filter((category) => category.id !== "gst-specialist")
+                  .map((category) => (
+                    <Link
+                      key={category.id}
+                      href={`/services/${category.slug}`}
+                      className="rounded-full border border-white/15 bg-white/[0.06] px-3 py-1.5 text-xs font-medium text-white/70 transition-colors duration-200 hover:border-white/35 hover:text-white"
+                    >
+                      {category.title}
+                    </Link>
+                  ))}
+              </div>
             </div>
           </div>
 

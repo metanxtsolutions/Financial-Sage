@@ -61,6 +61,29 @@ export function serviceSchema(opts: {
   };
 }
 
+export function articleSchema(opts: {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: opts.title,
+    description: opts.description,
+    url: opts.url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": opts.url },
+    datePublished: opts.datePublished,
+    dateModified: opts.datePublished,
+    // Posts are written by the firm rather than a named individual, so the
+    // organisation is both author and publisher.
+    author: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
+    publisher: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
+    inLanguage: "en-IN",
+  };
+}
+
 export function faqPageSchema(faqs: Faq[]) {
   return {
     "@context": "https://schema.org",

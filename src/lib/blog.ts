@@ -50,3 +50,20 @@ export function getPostBySlug(slug: string): Post | undefined {
 export function getAllPostSlugs(): string[] {
   return fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".mdx")).map((f) => f.replace(/\.mdx$/, ""));
 }
+
+/**
+ * Posts to show at the foot of an article: same category first, then the most
+ * recent of anything else. Without this every guide is a dead end, which wastes
+ * both the reader and the crawl budget that got them there.
+ */
+export function getRelatedPosts(slug: string, limit = 3): Post[] {
+  const all = getAllPosts();
+  const current = all.find((p) => p.slug === slug);
+  if (!current) return [];
+
+  const others = all.filter((p) => p.slug !== slug);
+  const sameCategory = others.filter((p) => p.category === current.category);
+  const rest = others.filter((p) => p.category !== current.category);
+
+  return [...sameCategory, ...rest].slice(0, limit);
+}

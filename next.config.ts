@@ -1,6 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async rewrites() {
+    return [
+      {
+        // generateSitemaps() reserves /sitemap.xml without serving it, so the
+        // sitemap index is served from /sitemap-index.xml and surfaced at the
+        // URL Search Console already has. See src/app/sitemap-index.xml/route.ts.
+        source: "/sitemap.xml",
+        destination: "/sitemap-index.xml",
+      },
+    ];
+  },
   async redirects() {
     return [
       {

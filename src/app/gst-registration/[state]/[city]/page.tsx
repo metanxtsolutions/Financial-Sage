@@ -68,6 +68,7 @@ export default async function CityGstPage({
             name: `GST Registration in ${entry.city}`,
             description: `GST registration service for businesses in ${entry.city}, ${entry.state}.`,
             url: `${siteConfig.url}/gst-registration/${entry.stateSlug}/${entry.citySlug}`,
+            areaServed: { level: "city", city: entry.city, state: entry.state },
           }),
           faqPageSchema(faqs),
           breadcrumbSchema(breadcrumbs),

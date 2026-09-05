@@ -37,10 +37,49 @@ export function localBusinessSchema() {
   };
 }
 
+// The area a Service page actually covers. Every location page used to emit
+// areaServed: India regardless of the place it was about, which told search
+// engines the Kolkata page and the national page served the same area - the one
+// signal a location page exists to send. Levels nest through containedInPlace.
+export type AreaServed =
+  | { level: "country" }
+  | { level: "state"; state: string }
+  | { level: "city"; city: string; state: string }
+  | { level: "locality"; locality: string; city: string; state: string };
+
+const INDIA = { "@type": "Country", name: "India" } as const;
+
+function areaServedNode(area: AreaServed): object {
+  switch (area.level) {
+    case "country":
+      return INDIA;
+    case "state":
+      return { "@type": "State", name: area.state, containedInPlace: INDIA };
+    case "city":
+      return {
+        "@type": "City",
+        name: area.city,
+        containedInPlace: { "@type": "State", name: area.state, containedInPlace: INDIA },
+      };
+    case "locality":
+      return {
+        "@type": "Place",
+        name: area.locality,
+        containedInPlace: {
+          "@type": "City",
+          name: area.city,
+          containedInPlace: { "@type": "State", name: area.state, containedInPlace: INDIA },
+        },
+      };
+  }
+}
+
 export function serviceSchema(opts: {
   name: string;
   description: string;
   url: string;
+  /** Defaults to the whole of India, which is correct for pillar pages only. */
+  areaServed?: AreaServed;
 }) {
   return {
     "@context": "https://schema.org",
@@ -54,10 +93,7 @@ export function serviceSchema(opts: {
       name: siteConfig.name,
       url: siteConfig.url,
     },
-    areaServed: {
-      "@type": "Country",
-      name: "India",
-    },
+    areaServed: areaServedNode(opts.areaServed ?? { level: "country" }),
   };
 }
 

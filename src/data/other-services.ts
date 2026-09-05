@@ -4,7 +4,9 @@
 // (/gst-registration, /gst-return-filing, /gst-compliance). Everything here is
 // an adjacent statutory service, grouped into categories so the catalogue stays
 // navigable as it grows and so each category can own its own long-tail search
-// intent.
+// intent. Each category also has a hub page at /services/[slug].
+
+import type { Faq } from "@/data/faqs";
 
 export type ServiceCategoryId =
   | "company-incorporation"
@@ -17,51 +19,362 @@ export type ServiceCategoryId =
 
 export interface ServiceCategory {
   id: ServiceCategoryId;
+  /** URL segment for the hub page at /services/[slug]. */
+  slug: string;
   title: string;
+  /** One-line summary, used in navigation and on the catalogue index. */
   blurb: string;
+
+  // --- Hub page content. A hub that only repeats the service list is a thin
+  // --- duplicate of the catalogue section it came from, so each one carries
+  // --- its own heading, intro and decision guidance.
+  h1: string;
+  metaTitle: string;
+  metaDescription: string;
+  /** Two or three sentences setting up the category. */
+  intro: string;
+  /** The question someone browsing this category is actually trying to answer. */
+  guidance: { heading: string; body: string; points: string[] };
+  faqs: Faq[];
+  ctaHeading: string;
+  ctaSubmitLabel: string;
 }
 
 // Order here is the order they appear in navigation and on /other-services.
+// The `faqs` below are scoped to hub pages and never enter the global `faqs`
+// array, so they don't show on /faq; the category field on them is nominal.
 export const serviceCategories: ServiceCategory[] = [
   {
     id: "company-incorporation",
+    slug: "company-incorporation",
     title: "Company & Entity Registration",
     blurb: "Pick a legal structure and get incorporated, from a one-person company to a subsidiary of a foreign parent.",
+    h1: "Company & Entity Registration in India",
+    metaTitle: "Company Registration in India: Pvt Ltd, LLP, OPC & More | Financial Sage",
+    metaDescription: "Register a private limited company, LLP, OPC, or partnership firm. Compare structures, see what each one costs to run, and get incorporated from ₹999.",
+    intro:
+      "The structure you incorporate under decides how much compliance you carry every year, how easily you can raise money, and whether your personal assets are exposed. It is far cheaper to choose correctly now than to convert later.",
+    guidance: {
+      heading: "Which structure should you choose?",
+      body: "There is no single best answer, only the one that fits how you intend to trade and who you intend to raise money from. In practice the choice comes down to four questions.",
+      points: [
+        "Are you raising external investment? Investors expect a private limited company. Almost no institutional investor will put money into an LLP or a proprietorship.",
+        "How much annual compliance can you carry? A private limited company files AOC-4, MGT-7 and holds board meetings every year. An LLP is lighter. A proprietorship has none of it.",
+        "Is limited liability the point? A proprietorship and a partnership expose personal assets. An LLP, OPC and private limited company do not.",
+        "Are you on your own? A private limited company needs two directors and two shareholders. A One Person Company gives a solo founder the same protection with a nominee instead.",
+      ],
+    },
+    faqs: [
+      {
+        id: "cat-inc-which",
+        category: "financial-sage",
+        question: "Private limited or LLP?",
+        answer:
+          "Take a private limited company if you plan to raise investment, issue shares to a co-founder, or sell to enterprise customers who check the register. Take an LLP if it is a professional practice or a stable trading business with no outside investors, since the annual compliance is lighter and there is no dividend distribution to plan around.",
+      },
+      {
+        id: "cat-inc-cost",
+        category: "financial-sage",
+        question: "What does incorporation actually cost?",
+        answer:
+          "Our fee starts at ₹999. On top of that sit government fees and stamp duty, and stamp duty is set by the state, so the same company costs a different amount to incorporate in Maharashtra than in Gujarat. We quote both parts before filing rather than after.",
+      },
+      {
+        id: "cat-inc-convert",
+        category: "financial-sage",
+        question: "Can I convert later if I choose wrong?",
+        answer:
+          "Yes, and it is a common route: a partnership converts into an LLP, or a proprietorship incorporates as a private limited company. But conversion means fresh GST registration, a new PAN, moving bank accounts and contracts, and its own filing fees, so it is worth a few minutes of thought now.",
+      },
+    ],
+    ctaHeading: "Not sure which structure fits?",
+    ctaSubmitLabel: "Get a Recommendation",
   },
   {
     id: "licences",
+    slug: "licences-and-certifications",
     title: "Licences & Certifications",
     blurb: "The sector licences and certifications a business needs before it can legally trade, import, or manufacture.",
+    h1: "Business Licences & Certifications",
+    metaTitle: "Business Licences in India: FSSAI, IEC, BIS, ISO & More | Financial Sage",
+    metaDescription: "FSSAI, Import Export Code, AD Code, BIS, ISO, trade licence, drug licence and more. Find which licences your sector needs and get them filed from ₹999.",
+    intro:
+      "Most licences are triggered by what you sell and where you sell it, not by how big you are. A single food stall needs FSSAI registration; so does a company turning over crores, just at a different tier. Trading without the licence your sector requires carries penalties that dwarf the cost of getting one.",
+    guidance: {
+      heading: "Which licences apply to you?",
+      body: "Work from your activity rather than from a list. These are the usual triggers.",
+      points: [
+        "Handling food in any form, including a home kitchen or a cloud kitchen: FSSAI, at the basic, state, or central tier depending on turnover and whether you cross state lines.",
+        "Importing or exporting: an Import Export Code from DGFT, plus AD Code registration at each port you ship from, or customs will not generate your shipping bill.",
+        "Manufacturing a product under a mandatory standard, particularly electronics: BIS registration under CRS, or FMCS if the factory is outside India.",
+        "Operating from commercial premises at all: a Shop & Establishment registration, and in many municipalities a trade licence on top.",
+        "Selling to government or applying for MSME schemes: Udyam registration, which is free of statutory fee and quick.",
+      ],
+    },
+    faqs: [
+      {
+        id: "cat-lic-which",
+        category: "financial-sage",
+        question: "How do I know which licences I need?",
+        answer:
+          "Tell us your activity, your state, and whether you sell across state lines or abroad. Those three facts determine almost all of it. We would rather tell you that you need fewer licences than you feared than sell you ones that do not apply.",
+      },
+      {
+        id: "cat-lic-expiry",
+        category: "financial-sage",
+        question: "Do licences expire?",
+        answer:
+          "Most do. FSSAI runs one to five years, trade licences are usually annual, IEC does not expire but must be updated every year to stay active. Lapsing is the common failure, so we track renewal dates for anything we file for you.",
+      },
+      {
+        id: "cat-lic-penalty",
+        category: "financial-sage",
+        question: "What happens if I trade without one?",
+        answer:
+          "It varies by statute and can be severe. Operating a food business without FSSAI registration carries penalties and the risk of the premises being sealed; exporting without an IEC simply is not possible, since customs will block the consignment. Getting the licence first is always cheaper.",
+      },
+    ],
+    ctaHeading: "Tell us your sector",
+    ctaSubmitLabel: "Check What I Need",
   },
   {
     id: "tax-filing",
+    slug: "income-tax-and-tds",
     title: "Income Tax & TDS",
     blurb: "Return filing, TDS compliance, and notice handling for individuals, firms, and companies.",
+    h1: "Income Tax & TDS Filing",
+    metaTitle: "Income Tax Return & TDS Filing Services | Financial Sage",
+    metaDescription: "ITR-1 through ITR-7, quarterly TDS returns, PF and ESI filing, advance tax planning and notice responses. Filed and reconciled from ₹299.",
+    intro:
+      "Most filing problems are not arithmetic. They are the wrong form, a mismatch against the Annual Information Statement, or a deadline missed by a week. All three are avoidable, and all three are expensive to fix after the fact.",
+    guidance: {
+      heading: "Getting the return right the first time",
+      body: "A return that is filed but defective is worse than one filed late, because the clock keeps running while you fix it.",
+      points: [
+        "Pick the form from your income mix, not from last year. Adding capital gains or a second house property moves you off ITR-1, and filing ITR-1 anyway gets the return marked defective.",
+        "Reconcile against the AIS and Form 26AS before filing. The department already has that data, and a mismatch is the most common reason a query lands.",
+        "Compute both regimes. The new regime is the default, which is not the same as it being the cheaper one for you.",
+        "Report losses even when there is no tax to pay. Reporting them is what lets you carry them forward against future gains.",
+      ],
+    },
+    faqs: [
+      {
+        id: "cat-tax-form",
+        category: "financial-sage",
+        question: "Which ITR form do I need?",
+        answer:
+          "Salary with one house property up to ₹50 lakh is ITR-1. Capital gains, more than one property, or foreign assets move you to ITR-2. Business or professional income is ITR-3, or ITR-4 under presumptive taxation. Trusts and NGOs file ITR-7. We pick it from your actual income rather than assuming.",
+      },
+      {
+        id: "cat-tax-deadline",
+        category: "financial-sage",
+        question: "What if I have missed the deadline?",
+        answer:
+          "A belated return can still be filed, with a fee under Section 234F and interest on unpaid tax. What you lose is the ability to carry forward most losses. Filing late is always better than not filing, and the sooner the smaller the interest.",
+      },
+      {
+        id: "cat-tax-notice",
+        category: "financial-sage",
+        question: "I have received a notice. What now?",
+        answer:
+          "Most notices are routine. A 143(1) intimation is usually an arithmetic or TDS mismatch and is resolved by responding on the portal. Send it to us and we will tell you what it actually is before you worry about it.",
+      },
+    ],
+    ctaHeading: "Talk to a Tax Expert",
+    ctaSubmitLabel: "Get My Return Filed",
   },
   {
     id: "roc-compliance",
+    slug: "roc-compliance",
     title: "ROC & Annual Compliance",
     blurb: "The recurring filings that keep a registered company or LLP in good standing with the Registrar.",
+    h1: "ROC & Annual Compliance",
+    metaTitle: "ROC Annual Compliance for Companies & LLPs | Financial Sage",
+    metaDescription: "AOC-4, MGT-7, LLP Form 11 and Form 8, DIR-3 KYC, INC-20A and auditor appointment. Annual ROC compliance filed on time from ₹999.",
+    intro:
+      "Annual compliance is the part founders forget, because nothing appears to go wrong when it is skipped. The penalties accrue quietly, per day, against the company and its directors personally, and they do not lapse.",
+    guidance: {
+      heading: "What a registered entity owes every year",
+      body: "The obligations start at incorporation, not at your first rupee of revenue. A dormant company still files.",
+      points: [
+        "A private limited company files AOC-4 with its financial statements and MGT-7 with its annual return, appoints an auditor in ADT-1, and holds board meetings that have to be minuted.",
+        "An LLP files Form 11 and Form 8. Late filing carries ₹100 per day, per form, with no ceiling, which is how dormant LLPs end up owing more than they ever earned.",
+        "Every director files DIR-3 KYC each year. Miss it and the DIN is deactivated, which blocks every other filing until it is restored.",
+        "A newly incorporated company must file INC-20A within 180 days before it can legally commence business or borrow.",
+      ],
+    },
+    faqs: [
+      {
+        id: "cat-roc-dormant",
+        category: "financial-sage",
+        question: "My company is dormant. Do I still have to file?",
+        answer:
+          "Yes. Filing obligations follow registration, not activity. A company with no revenue still files AOC-4 and MGT-7, and an LLP still files Form 11 and Form 8. If you are genuinely done with the entity, striking it off is cheaper than leaving it to accrue penalties.",
+      },
+      {
+        id: "cat-roc-penalty",
+        category: "financial-sage",
+        question: "How bad are the late filing penalties?",
+        answer:
+          "For an LLP, ₹100 per day per form with no upper limit, which compounds fast across two forms and several years. For companies, additional fees scale with how late you are, and persistent default can lead to directors being disqualified.",
+      },
+      {
+        id: "cat-roc-behind",
+        category: "financial-sage",
+        question: "I am several years behind. Can it be fixed?",
+        answer:
+          "Usually yes. Pending filings are brought up to date in order, penalties are quantified so you know the number before committing, and DINs are reactivated where they have been deactivated. It is rarely as bad as people expect once it is laid out.",
+      },
+    ],
+    ctaHeading: "Behind on filings?",
+    ctaSubmitLabel: "Get a Compliance Check",
   },
   {
     id: "ipr",
+    slug: "trademark-and-ip",
     title: "Trademark & Intellectual Property",
     blurb: "Protect the brand name, logo, design, or invention your business is built on.",
+    h1: "Trademark & Intellectual Property",
+    metaTitle: "Trademark Registration, Copyright & Patent Filing | Financial Sage",
+    metaDescription: "Trademark search and registration, objection replies, oppositions and renewals, plus copyright, patent and design filing. From ₹999.",
+    intro:
+      "Registering a company name does not protect it. The MCA register and the trademark register are separate, and it is the trademark that stops someone else trading under your name. Businesses usually discover this when somebody else files first.",
+    guidance: {
+      heading: "What protects what",
+      body: "The four rights cover different things, and applying for the wrong one protects nothing.",
+      points: [
+        "A trademark protects a name, logo, or tagline used in trade, within the classes you register it in. Register in the classes you actually trade in.",
+        "Copyright protects an original work: software, writing, artwork, music, film. It exists on creation, but registration gives you a dated public record to rely on in a dispute.",
+        "A patent protects an invention, and only if it is new. Publishing or selling before filing can destroy novelty, so file before you launch.",
+        "A design registration protects how a product looks: its shape, pattern, or ornamentation, for up to fifteen years.",
+      ],
+    },
+    faqs: [
+      {
+        id: "cat-ipr-company-name",
+        category: "financial-sage",
+        question: "I registered my company name. Is it protected?",
+        answer:
+          "No. Company name approval only stops another company registering an identical name at the MCA. It does not stop a business trading under your brand, and it does not stop someone else registering it as a trademark. The two registers are independent.",
+      },
+      {
+        id: "cat-ipr-timeline",
+        category: "financial-sage",
+        question: "How long does a trademark take?",
+        answer:
+          "You can use the ™ symbol as soon as the application is filed. Registration itself commonly takes a year or more, longer if an examination report or an opposition is raised. The filing date is what secures your priority, so filing early matters more than the wait.",
+      },
+      {
+        id: "cat-ipr-objection",
+        category: "financial-sage",
+        question: "I have received a trademark objection.",
+        answer:
+          "That is routine and not a refusal. You have thirty days to reply to the examination report, after which the application is treated as abandoned. We draft the reply against the specific grounds raised and file it on the IP India portal.",
+      },
+    ],
+    ctaHeading: "Protect your brand",
+    ctaSubmitLabel: "Start a Trademark Search",
   },
   {
     id: "business-changes",
+    slug: "business-changes",
     title: "Business Changes & Closure",
     blurb: "Change what is on record with the Registrar, restructure ownership, or wind a company down cleanly.",
+    h1: "Business Changes & Closure",
+    metaTitle: "Change Company Name, Directors, Address or Close a Company | Financial Sage",
+    metaDescription: "Name and address changes, director appointments and removals, share transfers, capital increases, conversions and strike off. Filed from ₹999.",
+    intro:
+      "Almost every change to a registered entity has a filing attached to it, and most of them run on a thirty-day clock from the date of the decision, not the date you get round to it. Missing the window turns a routine filing into a penalty.",
+    guidance: {
+      heading: "Changes that carry a deadline",
+      body: "The board resolution is the start of the clock, not the end of the job.",
+      points: [
+        "Appointing or removing a director: DIR-12 within 30 days. A resigning director files DIR-11 separately in their own name.",
+        "Changing the LLP agreement, including capital or profit share: Form 3 within 30 days, with stamp duty set by the state.",
+        "Transferring shares: an SH-4 instrument, stamped, board-approved, and the register of members updated. Without that, the transfer is not effective.",
+        "Closing down: strike off in STK-2 for a company or Form 24 for an LLP, and both require pending annual filings to be cleared first.",
+      ],
+    },
+    faqs: [
+      {
+        id: "cat-chg-name",
+        category: "financial-sage",
+        question: "What is involved in changing my company name?",
+        answer:
+          "Name availability, a special resolution filed in MGT-14, and approval in INC-24, after which a fresh incorporation certificate is issued. The part people forget is downstream: GST, PAN, bank accounts, licences and contracts all carry the old name and each needs updating.",
+      },
+      {
+        id: "cat-chg-close",
+        category: "financial-sage",
+        question: "Is it worth formally closing a company I no longer use?",
+        answer:
+          "Almost always. An unused company keeps accruing filing obligations and penalties against you personally as a director. Strike off costs once; leaving it dormant costs every year, indefinitely.",
+      },
+      {
+        id: "cat-chg-address",
+        category: "financial-sage",
+        question: "Does moving office need a filing?",
+        answer:
+          "Yes, in INC-22. Within the same city it is straightforward. Moving to another state additionally needs regional director approval in INC-23, which takes longer and should be planned before you sign a new lease.",
+      },
+    ],
+    ctaHeading: "Need to change something on record?",
+    ctaSubmitLabel: "Request a Callback",
   },
   {
     id: "gst-specialist",
+    slug: "specialist-gst",
     title: "Specialist GST Work",
     blurb: "One-off GST jobs that sit outside a monthly filing plan. Our core GST pages cover registration and returns.",
+    h1: "Specialist GST Services",
+    metaTitle: "GST Cancellation, Revocation, LUT, Refunds & E-Invoicing | Financial Sage",
+    metaDescription: "One-off GST work: cancellation and revocation, LUT filing for exporters, refund claims, e-invoicing setup, e-way bill registration and place-of-business amendments.",
+    intro:
+      "These are the GST jobs that fall outside a monthly filing plan: closing a registration, getting a cancelled one back, claiming a refund, or setting up e-invoicing after crossing the threshold. If you need registration or ongoing returns instead, those have their own pages.",
+    guidance: {
+      heading: "The ones that are time-sensitive",
+      body: "Several of these carry a window that closes, and missing it turns a form into a much longer process.",
+      points: [
+        "A Letter of Undertaking has to be refiled at the start of every financial year. Without it in force, an exporter has to pay IGST upfront and claim it back.",
+        "Revocation of a cancelled registration must be applied for within the prescribed window after the cancellation order, and pending returns have to be cleared first.",
+        "A final return in GSTR-10 is due within three months of a cancellation order, and it is commonly missed because the business has already stopped trading.",
+        "An additional place of business must be added before you store stock or invoice from it, not after.",
+      ],
+    },
+    faqs: [
+      {
+        id: "cat-gst-vs-core",
+        category: "financial-sage",
+        question: "Is this different from your main GST service?",
+        answer:
+          "Yes. Registration and monthly or quarterly return filing are our core practice and have their own pages. This category covers one-off jobs, usually triggered by something specific: an export order, a cancellation order, or crossing the e-invoicing threshold.",
+      },
+      {
+        id: "cat-gst-cancelled",
+        category: "financial-sage",
+        question: "My GSTIN was cancelled by the officer. Can I get it back?",
+        answer:
+          "Usually, through revocation in REG-21, but only inside the prescribed window and only after the pending returns and dues that triggered the cancellation are cleared. The sooner you start the better, since the window is not generous.",
+      },
+      {
+        id: "cat-gst-refund",
+        category: "financial-sage",
+        question: "How long does a GST refund take?",
+        answer:
+          "Once RFD-01 is filed with complete annexures, sanction commonly follows within a couple of months. Most delay comes from a deficiency memo in RFD-03, which restarts the process, so getting the reconciliation right at filing is what actually determines the speed.",
+      },
+    ],
+    ctaHeading: "Talk to a GST Expert",
+    ctaSubmitLabel: "Get Help With GST",
   },
 ];
 
 export function getServiceCategory(id: ServiceCategoryId): ServiceCategory | undefined {
   return serviceCategories.find((c) => c.id === id);
+}
+
+export function getServiceCategoryBySlug(slug: string): ServiceCategory | undefined {
+  return serviceCategories.find((c) => c.slug === slug);
 }
 
 export interface OtherService {

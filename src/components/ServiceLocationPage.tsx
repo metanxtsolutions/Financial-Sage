@@ -55,6 +55,7 @@ export function ServiceLocationPage({
             name: `${service.label} in ${city.city}`,
             description: `${service.label} for businesses and individuals in ${city.city}, ${city.state}.`,
             url: `${siteConfig.url}${href}`,
+            areaServed: { level: "city", city: city.city, state: city.state },
           }),
           faqPageSchema(faqs),
           breadcrumbSchema(breadcrumbs),

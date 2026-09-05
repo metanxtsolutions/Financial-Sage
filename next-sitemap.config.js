@@ -64,9 +64,19 @@ if (otherServiceSlugs.length === 0 || serviceCategorySlugs.length === 0) {
   throw new Error("next-sitemap: no service or category slugs found in other-services.ts.");
 }
 
-const blogSlugs = [
-  "gst-registration-checklist-2026", "gstr1-vs-gstr3b-explained", "gst-for-first-time-amazon-sellers",
-];
+// Read the posts straight off disk. The previous hardcoded list had already
+// drifted once; a directory listing cannot.
+const blogSlugs = (() => {
+  const dir = path.join(__dirname, "content", "gst-guides");
+  const slugs = fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith(".mdx"))
+    .map((f) => f.replace(/\.mdx$/, ""));
+  if (slugs.length === 0) {
+    throw new Error("next-sitemap: no posts found in content/gst-guides.");
+  }
+  return slugs;
+})();
 
 // Location pages for services other than GST. Derived from the same data file
 // the routes use, so a new city appears in the sitemap automatically.

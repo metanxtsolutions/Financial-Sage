@@ -3,15 +3,32 @@ import Link from "next/link";
 import { Section } from "@/components/Container";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
+export interface ToolSection {
+  label: string;
+  href: string;
+}
+
+const gstToolsSection: ToolSection = { label: "GST Tools", href: "/gst-tools" };
+
 export function ToolPageShell({
   title,
   description,
   slug,
+  // Defaults keep every existing /gst-tools page rendering exactly as before.
+  // /tax-tools pages pass their own section and call to action.
+  section = gstToolsSection,
+  ctaLabel = "Talk to a GST expert",
+  ctaHref = "/gst-registration",
+  footnote,
   children,
 }: {
   title: string;
   description: string;
   slug: string;
+  section?: ToolSection;
+  ctaLabel?: string;
+  ctaHref?: string;
+  footnote?: ReactNode;
   children: ReactNode;
 }) {
   return (
@@ -19,8 +36,8 @@ export function ToolPageShell({
       <Breadcrumbs
         items={[
           { name: "Home", href: "/" },
-          { name: "GST Tools", href: "/gst-tools" },
-          { name: title, href: `/gst-tools/${slug}` },
+          { name: section.label, href: section.href },
+          { name: title, href: `${section.href}/${slug}` },
         ]}
       />
       <span className="eyebrow mt-4">Free Tools</span>
@@ -31,10 +48,12 @@ export function ToolPageShell({
         {children}
       </div>
 
+      {footnote && <div className="mt-6 max-w-2xl text-sm text-neutral-500">{footnote}</div>}
+
       <p className="mt-6 text-sm text-neutral-500">
         Need help beyond a calculation?{" "}
-        <Link href="/gst-registration" className="font-medium text-brand-700 underline">
-          Talk to a GST expert
+        <Link href={ctaHref} className="font-medium text-brand-700 underline">
+          {ctaLabel}
         </Link>
         .
       </p>

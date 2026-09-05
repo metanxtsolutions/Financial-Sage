@@ -10,7 +10,12 @@ import { MobileStickyCta } from "@/components/MobileStickyCta";
 // it off during the wizard itself).
 export function ConditionalChrome() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/itr-filing")) return null;
+  // Hidden on the ITR landing page and throughout the wizard, but NOT on the
+  // /itr-filing/[state]/[city] pages - those are ordinary SEO pages and need
+  // the footer's internal links.
+  const isItrLanding = pathname === "/itr-filing";
+  const isItrWizard = pathname?.startsWith("/itr-filing/apply");
+  if (isItrLanding || isItrWizard) return null;
 
   return (
     <>

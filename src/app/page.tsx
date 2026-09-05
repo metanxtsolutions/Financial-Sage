@@ -8,6 +8,11 @@ import { FaqAccordion } from "@/components/FaqAccordion";
 import { Icon } from "@/components/Icon";
 import { CountUp } from "@/components/CountUp";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { Marquee } from "@/components/home/Marquee";
+import { TrustLogos } from "@/components/home/TrustLogos";
+import { ReviewBadges } from "@/components/home/ReviewBadges";
+import { ServiceExplorer } from "@/components/home/ServiceExplorer";
+import { ComparisonTable } from "@/components/home/ComparisonTable";
 import { JsonLd, faqPageSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
 import { coreServices, whoNeedsGst, processSteps, whyFinancialSage } from "@/data/services";
@@ -68,6 +73,9 @@ export default function HomePage() {
               register, file, and explain everything over WhatsApp, real replies in{" "}
               {siteConfig.responseTime}.
             </p>
+
+            <ReviewBadges />
+
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Button
                 href="/gst-registration"
@@ -122,6 +130,9 @@ export default function HomePage() {
         </div>
       </Section>
 
+      <Marquee />
+      <TrustLogos />
+
       {/* Core GST services */}
       <Section>
         <ScrollReveal>
@@ -149,6 +160,23 @@ export default function HomePage() {
         </ScrollReveal>
       </Section>
 
+      {/* Everything beyond GST */}
+      <Section className="bg-neutral-50">
+        <ScrollReveal>
+          <span className="eyebrow">Beyond GST</span>
+          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">
+            Everything Else We File
+          </h2>
+          <p className="mt-2 max-w-2xl text-neutral-600">
+            GST is the specialisation, but it is rarely the only thing a business needs. Pick a
+            category to see what we handle.
+          </p>
+          <div className="mt-8">
+            <ServiceExplorer />
+          </div>
+        </ScrollReveal>
+      </Section>
+
       {/* Why Financial Sage */}
       <Section className="bg-neutral-50">
         <ScrollReveal>
@@ -168,6 +196,22 @@ export default function HomePage() {
                 <p className="mt-1 text-sm text-neutral-600">{item.body}</p>
               </div>
             ))}
+          </div>
+        </ScrollReveal>
+      </Section>
+
+      {/* Comparison */}
+      <Section>
+        <ScrollReveal>
+          <span className="eyebrow">The difference</span>
+          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">
+            What You Get Instead of a Retainer
+          </h2>
+          <p className="mt-2 max-w-2xl text-neutral-600">
+            The same statutory work, done on a different operating model.
+          </p>
+          <div className="mt-8">
+            <ComparisonTable />
           </div>
         </ScrollReveal>
       </Section>
@@ -212,6 +256,14 @@ export default function HomePage() {
                 </div>
                 <h3 className="mt-4 font-semibold text-neutral-900">{step.title}</h3>
                 <p className="mt-1 text-sm text-neutral-600">{step.body}</p>
+                <ul className="mt-4 space-y-2 border-t border-neutral-100 pt-4">
+                  {step.details.map((detail) => (
+                    <li key={detail} className="flex items-start gap-2 text-sm text-neutral-600">
+                      <span aria-hidden="true" className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" />
+                      {detail}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>

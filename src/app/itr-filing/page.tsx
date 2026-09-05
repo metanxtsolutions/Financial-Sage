@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Section } from "@/components/Container";
 import { siteConfig } from "@/lib/site-config";
+import { getLocationPages } from "@/data/service-locations";
 
 export const metadata: Metadata = {
   title: "File Your Income Tax Return in Minutes",
@@ -42,6 +43,26 @@ export default function ItrFilingLandingPage() {
               </li>
             ))}
           </ul>
+        </div>
+
+        {/* This page has no footer (see ConditionalChrome), so the city pages
+            need their internal links here. Kept quiet so they don't compete
+            with the Start Filing CTA above. */}
+        <div className="mt-10 border-t border-neutral-200 pt-6">
+          <p className="text-xs font-semibold uppercase tracking-wide text-neutral-400">
+            ITR filing near you
+          </p>
+          <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-2">
+            {getLocationPages("itr-filing").map(({ city }) => (
+              <Link
+                key={`${city.stateSlug}-${city.citySlug}`}
+                href={`/itr-filing/${city.stateSlug}/${city.citySlug}`}
+                className="text-sm text-neutral-500 hover:text-itr-green-600"
+              >
+                {city.city}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </Section>

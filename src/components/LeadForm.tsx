@@ -17,9 +17,11 @@ const businessTypes = [
 interface LeadFormProps {
   source: string;
   compact?: boolean;
+  /** Submit button text. Defaults to the GST wording used across the site. */
+  submitLabel?: string;
 }
 
-export function LeadForm({ source, compact = false }: LeadFormProps) {
+export function LeadForm({ source, compact = false, submitLabel = "Start GST Registration" }: LeadFormProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -174,7 +176,7 @@ export function LeadForm({ source, compact = false }: LeadFormProps) {
       )}
 
       <Button type="submit" disabled={status === "submitting"} className="w-full">
-        {status === "submitting" ? "Submitting…" : "Start GST Registration"}
+        {status === "submitting" ? "Submitting…" : submitLabel}
       </Button>
 
       <p className="text-center text-xs text-neutral-500">

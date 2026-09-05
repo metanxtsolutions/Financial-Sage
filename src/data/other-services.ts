@@ -1,8 +1,72 @@
-// Secondary services, footer-only and low emphasis. GST stays the core focus.
-// These exist so we don't turn away adjacent-service enquiries.
+// Service catalogue for everything outside the core GST pillar pages.
+//
+// GST remains the specialisation and keeps its own top-level pages
+// (/gst-registration, /gst-return-filing, /gst-compliance). Everything here is
+// an adjacent statutory service, grouped into categories so the catalogue stays
+// navigable as it grows and so each category can own its own long-tail search
+// intent.
+
+export type ServiceCategoryId =
+  | "company-incorporation"
+  | "licences"
+  | "tax-filing"
+  | "roc-compliance"
+  | "ipr"
+  | "business-changes"
+  | "gst-specialist";
+
+export interface ServiceCategory {
+  id: ServiceCategoryId;
+  title: string;
+  blurb: string;
+}
+
+// Order here is the order they appear in navigation and on /other-services.
+export const serviceCategories: ServiceCategory[] = [
+  {
+    id: "company-incorporation",
+    title: "Company & Entity Registration",
+    blurb: "Pick a legal structure and get incorporated, from a one-person company to a subsidiary of a foreign parent.",
+  },
+  {
+    id: "licences",
+    title: "Licences & Certifications",
+    blurb: "The sector licences and certifications a business needs before it can legally trade, import, or manufacture.",
+  },
+  {
+    id: "tax-filing",
+    title: "Income Tax & TDS",
+    blurb: "Return filing, TDS compliance, and notice handling for individuals, firms, and companies.",
+  },
+  {
+    id: "roc-compliance",
+    title: "ROC & Annual Compliance",
+    blurb: "The recurring filings that keep a registered company or LLP in good standing with the Registrar.",
+  },
+  {
+    id: "ipr",
+    title: "Trademark & Intellectual Property",
+    blurb: "Protect the brand name, logo, design, or invention your business is built on.",
+  },
+  {
+    id: "business-changes",
+    title: "Business Changes & Closure",
+    blurb: "Change what is on record with the Registrar, restructure ownership, or wind a company down cleanly.",
+  },
+  {
+    id: "gst-specialist",
+    title: "Specialist GST Work",
+    blurb: "One-off GST jobs that sit outside a monthly filing plan. Our core GST pages cover registration and returns.",
+  },
+];
+
+export function getServiceCategory(id: ServiceCategoryId): ServiceCategory | undefined {
+  return serviceCategories.find((c) => c.id === id);
+}
 
 export interface OtherService {
   slug: string;
+  category: ServiceCategoryId;
   title: string;
   metaTitle: string;
   metaDescription: string;
@@ -12,8 +76,12 @@ export interface OtherService {
 }
 
 export const otherServices: OtherService[] = [
+  // ---------------------------------------------------------------------
+  // Company & Entity Registration
+  // ---------------------------------------------------------------------
   {
     slug: "company-registration",
+    category: "company-incorporation",
     title: "Private Limited Company Registration",
     metaTitle: "Private Limited Company Registration | Financial Sage",
     metaDescription: "Register your Private Limited company online. MOA/AOA drafting, DIN, DSC, and incorporation certificate from ₹999.",
@@ -23,6 +91,7 @@ export const otherServices: OtherService[] = [
   },
   {
     slug: "llp-registration",
+    category: "company-incorporation",
     title: "LLP Registration",
     metaTitle: "LLP Registration Online | Financial Sage",
     metaDescription: "Register a Limited Liability Partnership online. LLP agreement drafting, DPIN, and incorporation from ₹999.",
@@ -32,6 +101,7 @@ export const otherServices: OtherService[] = [
   },
   {
     slug: "opc-registration",
+    category: "company-incorporation",
     title: "One Person Company (OPC) Registration",
     metaTitle: "OPC Registration Online | Financial Sage",
     metaDescription: "Register a One Person Company online, for solo founders who want a corporate structure with limited liability. From ₹999.",
@@ -41,6 +111,7 @@ export const otherServices: OtherService[] = [
   },
   {
     slug: "partnership-firm-registration",
+    category: "company-incorporation",
     title: "Partnership Firm Registration",
     metaTitle: "Partnership Firm Registration | Financial Sage",
     metaDescription: "Draft and register a partnership deed for your firm, starting from ₹999.",
@@ -50,6 +121,7 @@ export const otherServices: OtherService[] = [
   },
   {
     slug: "sole-proprietorship-registration",
+    category: "company-incorporation",
     title: "Sole Proprietorship Registration",
     metaTitle: "Sole Proprietorship Registration | Financial Sage",
     metaDescription: "Set up your sole proprietorship the right way. Udyam registration, GST, and current-account support from ₹999.",
@@ -58,7 +130,72 @@ export const otherServices: OtherService[] = [
     bullets: ["Udyam (MSME) registration", "Shop & Establishment guidance", "Current account opening documents", "GST registration (if applicable)"],
   },
   {
+    slug: "section-8-company-registration",
+    category: "company-incorporation",
+    title: "Section 8 Company Registration",
+    metaTitle: "Section 8 Company Registration for NGOs | Financial Sage",
+    metaDescription: "Register a Section 8 (not-for-profit) company. Licence application, MOA/AOA drafting, and incorporation from ₹999.",
+    summary: "Incorporation of a not-for-profit company under Section 8 of the Companies Act, the structure most NGOs use when they want corporate credibility and access to CSR funding.",
+    startingPrice: 999,
+    bullets: ["Section 8 licence application (INC-12)", "Name reservation", "MOA & AOA drafting for charitable objects", "Certificate of Incorporation", "Guidance on 12A/80G next steps"],
+  },
+  {
+    slug: "public-limited-company-registration",
+    category: "company-incorporation",
+    title: "Public Limited Company Registration",
+    metaTitle: "Public Limited Company Registration | Financial Sage",
+    metaDescription: "Incorporate a Public Limited company with a minimum of seven members and three directors. Full ROC filing support from ₹999.",
+    summary: "Incorporation of a Public Limited company, for businesses that intend to raise capital from the public or list in future.",
+    startingPrice: 999,
+    bullets: ["Name reservation", "MOA & AOA drafting", "DIN & DSC for all directors", "Certificate of Incorporation", "Post-incorporation compliance briefing"],
+  },
+  {
+    slug: "nidhi-company-registration",
+    category: "company-incorporation",
+    title: "Nidhi Company Registration",
+    metaTitle: "Nidhi Company Registration Online | Financial Sage",
+    metaDescription: "Register a Nidhi company for member-based lending and savings. Incorporation plus NDH-4 guidance from ₹999.",
+    summary: "Incorporation of a Nidhi company, the mutual-benefit structure used for borrowing and lending among members without an RBI licence.",
+    startingPrice: 999,
+    bullets: ["Name reservation", "MOA & AOA drafting", "Certificate of Incorporation", "Member and capital requirement planning", "NDH-4 declaration guidance"],
+  },
+  {
+    slug: "producer-company-registration",
+    category: "company-incorporation",
+    title: "Producer Company Registration",
+    metaTitle: "Farmer Producer Company (FPC) Registration | Financial Sage",
+    metaDescription: "Register a Farmer Producer Company with ten or more producer members. Incorporation and compliance setup from ₹999.",
+    summary: "Incorporation of a Producer Company for groups of farmers or primary producers who want to aggregate, process, and market collectively.",
+    startingPrice: 999,
+    bullets: ["Name reservation", "MOA & AOA drafting for producer objects", "DIN & DSC for directors", "Certificate of Incorporation", "Member onboarding documentation"],
+  },
+  {
+    slug: "indian-subsidiary-registration",
+    category: "company-incorporation",
+    title: "Indian Subsidiary Registration",
+    metaTitle: "Indian Subsidiary Company Registration for Foreign Parents | Financial Sage",
+    metaDescription: "Set up an Indian subsidiary of a foreign company. Incorporation, FEMA reporting, and RBI compliance from ₹999.",
+    summary: "Incorporation of an Indian subsidiary for a foreign parent company, including the FEMA and RBI reporting that follows the first inward remittance.",
+    startingPrice: 999,
+    bullets: ["Name reservation", "Apostilled document handling", "MOA & AOA drafting", "Certificate of Incorporation", "FC-GPR filing guidance for share allotment"],
+  },
+  {
+    slug: "startup-india-registration",
+    category: "company-incorporation",
+    title: "Startup India (DPIIT) Recognition",
+    metaTitle: "Startup India DPIIT Recognition | Financial Sage",
+    metaDescription: "Get DPIIT recognition under Startup India for tax benefits, self-certification, and tender relaxations. From ₹999.",
+    summary: "DPIIT recognition under the Startup India scheme, which unlocks self-certification on labour laws, tender relaxations, and eligibility for the 80-IAC tax holiday.",
+    startingPrice: 999,
+    bullets: ["Eligibility assessment", "Innovation write-up drafting", "DPIIT application filing", "Recognition certificate", "Briefing on 80-IAC and Section 56 exemptions"],
+  },
+
+  // ---------------------------------------------------------------------
+  // Licences & Certifications
+  // ---------------------------------------------------------------------
+  {
     slug: "msme-udyam-registration",
+    category: "licences",
     title: "MSME / Udyam Registration",
     metaTitle: "MSME Udyam Registration Online | Financial Sage",
     metaDescription: "Register your business under Udyam (MSME) to access government schemes, collateral-free loans, and delayed-payment protection, starting from ₹999.",
@@ -67,16 +204,182 @@ export const otherServices: OtherService[] = [
     bullets: ["Udyam certificate", "Access to MSME loan schemes", "Delayed payment protection under MSME Act", "Government tender eligibility"],
   },
   {
-    slug: "trademark-registration",
-    title: "Trademark Registration",
-    metaTitle: "Trademark Registration Online | Financial Sage",
-    metaDescription: "Protect your brand name and logo with trademark registration. Class search, application filing, and objection support from ₹999.",
-    summary: "Trademark search and application filing to protect your brand name, logo, or tagline nationally.",
+    slug: "fssai-registration",
+    category: "licences",
+    title: "FSSAI Registration (Basic)",
+    metaTitle: "FSSAI Basic Registration for Food Businesses | Financial Sage",
+    metaDescription: "Get your FSSAI basic registration for a food business with turnover under ₹12 lakh. Application and certificate from ₹999.",
+    summary: "FSSAI basic registration for small food businesses, home kitchens, and stalls with annual turnover below ₹12 lakh.",
     startingPrice: 999,
-    bullets: ["Trademark class search", "Application filing (TM-A)", "Objection/opposition support", "Renewal reminders"],
+    bullets: ["Eligibility and category check", "Form A application filing", "Document preparation", "FSSAI registration certificate", "Renewal reminders"],
   },
   {
+    slug: "fssai-state-licence",
+    category: "licences",
+    title: "FSSAI State Licence",
+    metaTitle: "FSSAI State Licence for Food Businesses | Financial Sage",
+    metaDescription: "Apply for an FSSAI state licence for food businesses with turnover between ₹12 lakh and ₹20 crore. From ₹999.",
+    summary: "FSSAI state licence for restaurants, cloud kitchens, and manufacturers operating in a single state with turnover between ₹12 lakh and ₹20 crore.",
+    startingPrice: 999,
+    bullets: ["Form B application filing", "Layout and equipment documentation", "Food safety management plan", "State licence certificate", "Renewal and annual return reminders"],
+  },
+  {
+    slug: "fssai-central-licence",
+    category: "licences",
+    title: "FSSAI Central Licence",
+    metaTitle: "FSSAI Central Licence Application | Financial Sage",
+    metaDescription: "Apply for an FSSAI central licence for large or multi-state food businesses, importers, and exporters. From ₹999.",
+    summary: "FSSAI central licence for food businesses operating across states, importing, exporting, or crossing ₹20 crore in turnover.",
+    startingPrice: 999,
+    bullets: ["Form B application filing", "Multi-state premises documentation", "Import/export category mapping", "Central licence certificate", "Annual return (Form D1) support"],
+  },
+  {
+    slug: "import-export-code",
+    category: "licences",
+    title: "Import Export Code (IEC)",
+    metaTitle: "IEC Registration Online | Import Export Code | Financial Sage",
+    metaDescription: "Get your Import Export Code from DGFT, the mandatory licence for any business importing into or exporting out of India. From ₹999.",
+    summary: "IEC registration with the DGFT, the ten-digit code every business needs before it can legally import into or export out of India.",
+    startingPrice: 999,
+    bullets: ["DGFT application filing", "Digital signature coordination", "Bank certificate handling", "IEC certificate", "Annual IEC update filing"],
+  },
+  {
+    slug: "ad-code-registration",
+    category: "licences",
+    title: "AD Code Registration",
+    metaTitle: "AD Code Registration for Exporters | Financial Sage",
+    metaDescription: "Register your bank's AD Code at the port or ICD so your export shipping bills clear customs. From ₹999.",
+    summary: "AD Code registration at the ports and ICDs you ship from, without which customs will not generate your shipping bill.",
+    startingPrice: 999,
+    bullets: ["AD Code letter from your bank", "Port and ICD registration", "ICEGATE profile linking", "Multi-port registration", "Shipping bill troubleshooting"],
+  },
+  {
+    slug: "shop-and-establishment-registration",
+    category: "licences",
+    title: "Shop & Establishment Registration",
+    metaTitle: "Shop and Establishment Licence (Gumasta) | Financial Sage",
+    metaDescription: "Register your shop, office, or commercial establishment under your state's Shops & Establishments Act. From ₹999.",
+    summary: "Shop & Establishment registration, the state licence that legitimises a commercial premises and is usually the first thing a bank asks for on a current account.",
+    startingPrice: 999,
+    bullets: ["State-specific application filing", "Employer and employee particulars", "Premises documentation", "Registration certificate", "Renewal reminders"],
+  },
+  {
+    slug: "professional-tax-registration",
+    category: "licences",
+    title: "Professional Tax Registration",
+    metaTitle: "Professional Tax Registration (PTEC & PTRC) | Financial Sage",
+    metaDescription: "Register for professional tax as an employer (PTRC) or an individual professional (PTEC) in your state. From ₹999.",
+    summary: "Professional tax enrolment and registration in states that levy it, covering both the employer certificate (PTRC) and the individual enrolment certificate (PTEC).",
+    startingPrice: 999,
+    bullets: ["PTEC enrolment certificate", "PTRC employer registration", "State slab mapping", "Monthly/annual return filing", "Late payment interest calculation"],
+  },
+  {
+    slug: "iso-certification",
+    category: "licences",
+    title: "ISO Certification",
+    metaTitle: "ISO Certification for Indian Businesses | Financial Sage",
+    metaDescription: "Get ISO 9001, 14001, or 27001 certified through an accredited body. Gap assessment to certificate, from ₹999.",
+    summary: "ISO certification support across the common standards, from gap assessment and documentation through to the audit with an accredited certification body.",
+    startingPrice: 999,
+    bullets: ["Standard selection (9001 / 14001 / 27001 and others)", "Gap assessment", "Documentation and manual drafting", "Audit coordination", "Certificate issuance"],
+  },
+  {
+    slug: "bis-registration",
+    category: "licences",
+    title: "BIS Registration",
+    metaTitle: "BIS Registration & ISI Mark Certification | Financial Sage",
+    metaDescription: "Register your product with the Bureau of Indian Standards under CRS or FMCS, including ISI mark certification. From ₹999.",
+    summary: "BIS registration for products that fall under a mandatory standard, covering the CRS scheme for electronics and the FMCS route for foreign manufacturers.",
+    startingPrice: 999,
+    bullets: ["Product and standard mapping", "Sample testing at a BIS lab", "CRS or FMCS application filing", "ISI mark / registration certificate", "Renewal support"],
+  },
+  {
+    slug: "trade-licence",
+    category: "licences",
+    title: "Trade Licence",
+    metaTitle: "Municipal Trade Licence Application | Financial Sage",
+    metaDescription: "Apply for the municipal trade licence your local body requires before you can operate commercially. From ₹999.",
+    summary: "Trade licence application with your municipal corporation, the local-body permission required before a commercial activity can be carried on from a premises.",
+    startingPrice: 999,
+    bullets: ["Municipality and category identification", "Application filing", "Premises and NOC documentation", "Trade licence certificate", "Annual renewal"],
+  },
+  {
+    slug: "psara-licence",
+    category: "licences",
+    title: "PSARA Licence",
+    metaTitle: "PSARA Licence for Private Security Agencies | Financial Sage",
+    metaDescription: "Get a PSARA licence to run a private security agency, including police verification and training tie-ups. From ₹999.",
+    summary: "PSARA licence for private security agencies, covering the controlling authority application, police verification, and the mandatory training-institute tie-up.",
+    startingPrice: 999,
+    bullets: ["Controlling authority application", "Police verification coordination", "Training institute MoU", "State-wise licence filing", "Renewal support"],
+  },
+  {
+    slug: "drug-licence",
+    category: "licences",
+    title: "Drug Licence",
+    metaTitle: "Drug Licence for Pharmacies & Wholesalers | Financial Sage",
+    metaDescription: "Apply for a retail or wholesale drug licence from your state drug control authority. From ₹999.",
+    summary: "Retail and wholesale drug licence applications with the state drug control authority, including the pharmacist and premises requirements inspectors check.",
+    startingPrice: 999,
+    bullets: ["Retail or wholesale category assessment", "Pharmacist and premises documentation", "Form 19/20 application filing", "Inspection preparation", "Licence certificate"],
+  },
+  {
+    slug: "cdsco-registration",
+    category: "licences",
+    title: "CDSCO Registration",
+    metaTitle: "CDSCO Registration for Medical Devices & Cosmetics | Financial Sage",
+    metaDescription: "Register medical devices, cosmetics, or drugs for import with CDSCO on the SUGAM portal. From ₹999.",
+    summary: "CDSCO registration and import licensing for medical devices, cosmetics, and drugs, filed through the SUGAM portal.",
+    startingPrice: 999,
+    bullets: ["Device or product classification", "SUGAM portal application", "Technical dossier compilation", "Import licence (Form MD-14/15)", "Post-approval compliance"],
+  },
+  {
+    slug: "apeda-registration",
+    category: "licences",
+    title: "APEDA Registration",
+    metaTitle: "APEDA RCMC Registration for Agri Exporters | Financial Sage",
+    metaDescription: "Register with APEDA to export scheduled agricultural and processed food products from India. From ₹999.",
+    summary: "APEDA registration-cum-membership for exporters of scheduled agricultural and processed food products, which also unlocks APEDA's export incentive schemes.",
+    startingPrice: 999,
+    bullets: ["Product schedule verification", "RCMC application filing", "Bank and IEC documentation", "APEDA certificate", "Scheme and incentive briefing"],
+  },
+  {
+    slug: "rcmc-registration",
+    category: "licences",
+    title: "RCMC Registration",
+    metaTitle: "RCMC Registration with Export Promotion Councils | Financial Sage",
+    metaDescription: "Get your Registration-cum-Membership Certificate from the right export promotion council for DGFT benefits. From ₹999.",
+    summary: "RCMC registration with the export promotion council that covers your product line, a prerequisite for most DGFT export benefits.",
+    startingPrice: 999,
+    bullets: ["Council identification by product", "Application and fee handling", "IEC and bank documentation", "RCMC certificate", "Amendment and renewal support"],
+  },
+  {
+    slug: "ngo-darpan-registration",
+    category: "licences",
+    title: "NGO Darpan Registration",
+    metaTitle: "NGO Darpan Registration & Unique ID | Financial Sage",
+    metaDescription: "Register your NGO on the NITI Aayog Darpan portal and get the Unique ID needed for government grants. From ₹999.",
+    summary: "NGO Darpan registration with NITI Aayog, which issues the Unique ID that government ministries require before releasing any grant.",
+    startingPrice: 999,
+    bullets: ["Darpan portal application", "Office bearer KYC", "Registration document upload", "Unique ID issuance", "Profile update support"],
+  },
+  {
+    slug: "12a-80g-registration",
+    category: "licences",
+    title: "12A & 80G Registration",
+    metaTitle: "12A and 80G Registration for NGOs & Trusts | Financial Sage",
+    metaDescription: "Get 12A registration for tax exemption and 80G so your donors can claim a deduction. Filed on Form 10A. From ₹999.",
+    summary: "12A and 80G registration for trusts, societies, and Section 8 companies, giving the organisation income tax exemption and its donors a deduction.",
+    startingPrice: 999,
+    bullets: ["Form 10A / 10AB filing", "Activity and expenditure documentation", "Provisional and regular registration", "Departmental query response", "Renewal tracking"],
+  },
+
+  // ---------------------------------------------------------------------
+  // Income Tax & TDS
+  // ---------------------------------------------------------------------
+  {
     slug: "itr-filing",
+    category: "tax-filing",
     title: "ITR Filing",
     metaTitle: "Income Tax Return (ITR) Filing | Financial Sage",
     metaDescription: "Individual and business income tax return filing, with deduction planning, starting from ₹299.",
@@ -85,7 +388,102 @@ export const otherServices: OtherService[] = [
     bullets: ["Income & deduction review", "ITR form selection & filing", "Advance tax estimation", "Notice/refund follow-up"],
   },
   {
+    slug: "itr-1-filing",
+    category: "tax-filing",
+    title: "ITR-1 (Sahaj) Filing",
+    metaTitle: "ITR-1 Sahaj Filing for Salaried Individuals | Financial Sage",
+    metaDescription: "File ITR-1 for salary, one house property, and other income up to ₹50 lakh. Reviewed by a preparer, from ₹299.",
+    summary: "ITR-1 filing for salaried individuals with income up to ₹50 lakh from salary, one house property, and other sources.",
+    startingPrice: 299,
+    bullets: ["Form 16 and AIS reconciliation", "Deduction review under the chosen regime", "Return preparation and e-filing", "E-verification support", "Refund tracking"],
+  },
+  {
+    slug: "itr-2-filing",
+    category: "tax-filing",
+    title: "ITR-2 Filing",
+    metaTitle: "ITR-2 Filing for Capital Gains & Multiple Properties | Financial Sage",
+    metaDescription: "File ITR-2 if you have capital gains, more than one house property, or foreign income. From ₹299.",
+    summary: "ITR-2 filing for individuals and HUFs with capital gains, multiple house properties, foreign assets, or income above the ITR-1 threshold.",
+    startingPrice: 299,
+    bullets: ["Capital gains computation", "House property income schedules", "Foreign asset and income reporting", "Return preparation and e-filing", "Refund tracking"],
+  },
+  {
+    slug: "itr-3-filing",
+    category: "tax-filing",
+    title: "ITR-3 Filing",
+    metaTitle: "ITR-3 Filing for Business & Professional Income | Financial Sage",
+    metaDescription: "File ITR-3 for proprietors and professionals with business income, including books of account and audit checks. From ₹299.",
+    summary: "ITR-3 filing for proprietors and professionals carrying on a business, including the profit and loss and balance sheet schedules.",
+    startingPrice: 299,
+    bullets: ["Profit & loss and balance sheet schedules", "Business income computation", "Audit applicability check", "Return preparation and e-filing", "Refund tracking"],
+  },
+  {
+    slug: "itr-4-filing",
+    category: "tax-filing",
+    title: "ITR-4 (Sugam) Filing",
+    metaTitle: "ITR-4 Sugam Filing for Presumptive Taxation | Financial Sage",
+    metaDescription: "File ITR-4 under presumptive taxation (Section 44AD/44ADA) for small businesses and professionals. From ₹299.",
+    summary: "ITR-4 filing under the presumptive taxation scheme, the simplest route for small businesses and professionals below the turnover limits of Section 44AD and 44ADA.",
+    startingPrice: 299,
+    bullets: ["Presumptive eligibility check", "44AD / 44ADA computation", "Turnover and receipt reconciliation", "Return preparation and e-filing", "Refund tracking"],
+  },
+  {
+    slug: "itr-7-filing",
+    category: "tax-filing",
+    title: "ITR-7 Filing",
+    metaTitle: "ITR-7 Filing for Trusts, NGOs & Societies | Financial Sage",
+    metaDescription: "File ITR-7 for trusts, NGOs, political parties, and institutions claiming exemption. From ₹999.",
+    summary: "ITR-7 filing for trusts, societies, Section 8 companies, and other entities claiming exemption under Sections 11 to 13.",
+    startingPrice: 999,
+    bullets: ["Exemption schedule preparation", "Corpus and application of income working", "Audit report (Form 10B) coordination", "Return preparation and e-filing", "Registration compliance check"],
+  },
+  {
+    slug: "tds-return-filing",
+    category: "tax-filing",
+    title: "TDS Return Filing",
+    metaTitle: "TDS Return Filing (24Q, 26Q, 27Q) | Financial Sage",
+    metaDescription: "Quarterly TDS return filing with challan reconciliation and Form 16/16A generation. From ₹299.",
+    summary: "Quarterly TDS return filing across Forms 24Q, 26Q, and 27Q, with challan reconciliation and certificate generation.",
+    startingPrice: 299,
+    bullets: ["Deduction and challan reconciliation", "24Q / 26Q / 27Q preparation", "Return upload and correction statements", "Form 16 and 16A generation", "Default and late fee resolution"],
+  },
+  {
+    slug: "pf-return-filing",
+    category: "tax-filing",
+    title: "PF & ESI Return Filing",
+    metaTitle: "PF and ESI Return Filing for Employers | Financial Sage",
+    metaDescription: "Monthly PF (ECR) and ESI return filing, with challan generation and employee onboarding. From ₹299.",
+    summary: "Monthly provident fund and ESI return filing for employers, including ECR upload, challan generation, and new-employee onboarding.",
+    startingPrice: 299,
+    bullets: ["Monthly ECR preparation and upload", "Challan generation and payment support", "New employee UAN and ESI onboarding", "Exit and settlement filings", "Inspection and notice support"],
+  },
+  {
+    slug: "income-tax-notice-response",
+    category: "tax-filing",
+    title: "Income Tax Notice Response",
+    metaTitle: "Income Tax Notice Reply & Representation | Financial Sage",
+    metaDescription: "Received a 143(1), 139(9), or 148 notice? We read it, draft the response, and file it on the portal. From ₹999.",
+    summary: "Reading, drafting, and filing responses to income tax notices, from a simple 143(1) intimation mismatch through to a scrutiny or reassessment notice.",
+    startingPrice: 999,
+    bullets: ["Notice interpretation and deadline mapping", "Document and evidence compilation", "Response drafting", "E-proceedings portal submission", "Follow-up until closure"],
+  },
+  {
+    slug: "advance-tax-planning",
+    category: "tax-filing",
+    title: "Advance Tax Planning",
+    metaTitle: "Advance Tax Calculation & Payment Planning | Financial Sage",
+    metaDescription: "Estimate and schedule your quarterly advance tax so you avoid 234B and 234C interest. From ₹299.",
+    summary: "Quarterly advance tax estimation and payment scheduling, so you avoid the interest that Sections 234B and 234C add for shortfalls and late instalments.",
+    startingPrice: 299,
+    bullets: ["Income projection for the year", "Instalment-wise liability computation", "Challan 280 payment support", "234B / 234C interest check", "Year-end true-up"],
+  },
+
+  // ---------------------------------------------------------------------
+  // ROC & Annual Compliance
+  // ---------------------------------------------------------------------
+  {
     slug: "roc-annual-filing",
+    category: "roc-compliance",
     title: "ROC Annual Filing",
     metaTitle: "ROC Annual Filing for Companies & LLPs | Financial Sage",
     metaDescription: "Annual ROC compliance for Private Limited companies and LLPs. AOC-4, MGT-7, and LLP Form 11/8 from ₹999.",
@@ -93,8 +491,375 @@ export const otherServices: OtherService[] = [
     startingPrice: 999,
     bullets: ["AOC-4 (financial statements)", "MGT-7 (annual return)", "LLP Form 11 & Form 8", "Director KYC (DIR-3 KYC)"],
   },
+  {
+    slug: "private-limited-annual-compliance",
+    category: "roc-compliance",
+    title: "Private Limited Annual Compliance",
+    metaTitle: "Annual Compliance Package for Private Limited Companies | Financial Sage",
+    metaDescription: "A full-year compliance package for a Private Limited company: board meetings, statutory registers, AOC-4, MGT-7, and DIR-3 KYC. From ₹999.",
+    summary: "A single package covering everything a Private Limited company must do in a financial year, from board meeting minutes through to the annual ROC filings.",
+    startingPrice: 999,
+    bullets: ["Board and AGM minutes drafting", "Statutory register maintenance", "AOC-4 and MGT-7 filing", "DIR-3 KYC for every director", "Auditor appointment (ADT-1)"],
+  },
+  {
+    slug: "llp-annual-compliance",
+    category: "roc-compliance",
+    title: "LLP Annual Compliance",
+    metaTitle: "LLP Annual Compliance: Form 11 & Form 8 | Financial Sage",
+    metaDescription: "Annual LLP compliance including Form 11, Form 8, and the income tax return. Filed before the deadline, from ₹999.",
+    summary: "Annual compliance for an LLP, covering Form 11, Form 8, and the LLP income tax return, filed well before the deadlines that carry ₹100-a-day penalties.",
+    startingPrice: 999,
+    bullets: ["Form 11 (annual return)", "Form 8 (statement of accounts & solvency)", "LLP income tax return", "DIR-3 KYC for designated partners", "Penalty exposure review"],
+  },
+  {
+    slug: "dir-3-kyc",
+    category: "roc-compliance",
+    title: "DIR-3 KYC Filing",
+    metaTitle: "DIR-3 KYC Filing for Directors | Financial Sage",
+    metaDescription: "File DIR-3 KYC before 30 September and keep your DIN active. Reactivate a deactivated DIN too. From ₹999.",
+    summary: "Annual DIR-3 KYC filing for every director and designated partner, plus reactivation where a DIN has already been deactivated.",
+    startingPrice: 999,
+    bullets: ["DIR-3 KYC or KYC-WEB filing", "DSC and OTP verification", "Deactivated DIN reactivation", "₹5,000 penalty handling where applicable", "Deadline reminders"],
+  },
+  {
+    slug: "form-inc-20a",
+    category: "roc-compliance",
+    title: "Form INC-20A Filing",
+    metaTitle: "Form INC-20A: Declaration of Commencement of Business | Financial Sage",
+    metaDescription: "File INC-20A within 180 days of incorporation so your company can legally start business and borrow. From ₹999.",
+    summary: "Declaration of commencement of business in Form INC-20A, due within 180 days of incorporation, without which a company cannot legally begin operations or borrow.",
+    startingPrice: 999,
+    bullets: ["Subscription money verification", "Bank statement documentation", "INC-20A preparation and filing", "Professional certification", "Late filing penalty assessment"],
+  },
+  {
+    slug: "appointment-of-auditor-adt-1",
+    category: "roc-compliance",
+    title: "Auditor Appointment (ADT-1)",
+    metaTitle: "Auditor Appointment Filing (Form ADT-1) | Financial Sage",
+    metaDescription: "File ADT-1 within 15 days of appointing your statutory auditor. First appointment, reappointment, or casual vacancy. From ₹999.",
+    summary: "Form ADT-1 filing for the appointment or reappointment of a statutory auditor, including appointments made to fill a casual vacancy.",
+    startingPrice: 999,
+    bullets: ["Board resolution drafting", "Auditor consent and eligibility certificate", "ADT-1 preparation and filing", "Casual vacancy handling", "Tenure and rotation tracking"],
+  },
+  {
+    slug: "bookkeeping-and-accounting",
+    category: "roc-compliance",
+    title: "Bookkeeping & Accounting",
+    metaTitle: "Outsourced Bookkeeping & Accounting Services | Financial Sage",
+    metaDescription: "Monthly bookkeeping, bank reconciliation, and management accounts, kept ready for GST and income tax filing. From ₹999.",
+    summary: "Monthly bookkeeping kept in a state where your GST returns, TDS returns, and annual accounts can all be filed from the same set of books.",
+    startingPrice: 999,
+    bullets: ["Purchase and sales entry", "Bank and card reconciliation", "GST-ready ledger maintenance", "Monthly P&L and balance sheet", "Year-end finalisation for audit"],
+  },
+  {
+    slug: "nidhi-company-compliance",
+    category: "roc-compliance",
+    title: "Nidhi Company Compliance",
+    metaTitle: "Nidhi Company Annual Compliance (NDH-1, NDH-3) | Financial Sage",
+    metaDescription: "Annual Nidhi company compliance including NDH-1, NDH-3, and the standard ROC filings. From ₹999.",
+    summary: "Annual compliance for a Nidhi company, covering the Nidhi-specific NDH returns alongside the usual ROC and income tax filings.",
+    startingPrice: 999,
+    bullets: ["NDH-1 (statutory compliance return)", "NDH-3 (half-yearly return)", "AOC-4 and MGT-7 filing", "Member and deposit ratio monitoring", "Income tax return"],
+  },
+  {
+    slug: "ngo-annual-compliance",
+    category: "roc-compliance",
+    title: "NGO Annual Compliance",
+    metaTitle: "Annual Compliance for NGOs, Trusts & Societies | Financial Sage",
+    metaDescription: "Keep your NGO's exemptions intact with Form 10B audit, ITR-7, and annual filings. From ₹999.",
+    summary: "Annual compliance for trusts, societies, and Section 8 companies, keeping the 12A and 80G exemptions intact and the registrations current.",
+    startingPrice: 999,
+    bullets: ["Form 10B / 10BB audit report", "ITR-7 filing", "Section 8 ROC filings where applicable", "Darpan and FCRA renewals", "Donation receipt and 80G statement (Form 10BD)"],
+  },
+  {
+    slug: "partnership-firm-tax-return",
+    category: "roc-compliance",
+    title: "Partnership Firm Tax Return",
+    metaTitle: "Partnership Firm Income Tax Return Filing | Financial Sage",
+    metaDescription: "File your partnership firm's ITR-5 with partner remuneration and interest computed correctly. From ₹999.",
+    summary: "Income tax return filing for a partnership firm, with partner remuneration and interest computed inside the Section 40(b) limits.",
+    startingPrice: 999,
+    bullets: ["Firm accounts finalisation", "Section 40(b) remuneration working", "ITR-5 preparation and filing", "Audit applicability check", "Partner capital account reconciliation"],
+  },
+
+  // ---------------------------------------------------------------------
+  // Trademark & Intellectual Property
+  // ---------------------------------------------------------------------
+  {
+    slug: "trademark-registration",
+    category: "ipr",
+    title: "Trademark Registration",
+    metaTitle: "Trademark Registration Online | Financial Sage",
+    metaDescription: "Protect your brand name and logo with trademark registration. Class search, application filing, and objection support from ₹999.",
+    summary: "Trademark search and application filing to protect your brand name, logo, or tagline nationally.",
+    startingPrice: 999,
+    bullets: ["Trademark class search", "Application filing (TM-A)", "Objection/opposition support", "Renewal reminders"],
+  },
+  {
+    slug: "trademark-objection-reply",
+    category: "ipr",
+    title: "Trademark Objection Reply",
+    metaTitle: "Reply to a Trademark Examination Report | Financial Sage",
+    metaDescription: "Got a trademark objection under Section 9 or 11? We draft and file the reply within the 30-day window. From ₹999.",
+    summary: "Drafting and filing a reply to a trademark examination report, within the 30-day window after which the application is treated as abandoned.",
+    startingPrice: 999,
+    bullets: ["Examination report analysis", "Section 9 / 11 ground-by-ground reply", "Evidence of use compilation", "Reply filing on the IP India portal", "Show cause hearing representation"],
+  },
+  {
+    slug: "trademark-opposition",
+    category: "ipr",
+    title: "Trademark Opposition",
+    metaTitle: "Trademark Opposition & Counter-Statement | Financial Sage",
+    metaDescription: "Oppose a conflicting mark, or defend yours with a counter-statement inside the two-month deadline. From ₹999.",
+    summary: "Filing an opposition against a conflicting mark, or defending your own application with a counter-statement and evidence.",
+    startingPrice: 999,
+    bullets: ["Notice of opposition (Form TM-O)", "Counter-statement drafting", "Evidence affidavit preparation", "Hearing representation", "Settlement and coexistence advice"],
+  },
+  {
+    slug: "trademark-renewal",
+    category: "ipr",
+    title: "Trademark Renewal",
+    metaTitle: "Trademark Renewal Before Expiry | Financial Sage",
+    metaDescription: "Renew your trademark every ten years, or restore a lapsed mark within the grace period. From ₹999.",
+    summary: "Trademark renewal filing before the ten-year expiry, and restoration where a mark has already lapsed but is still inside the grace period.",
+    startingPrice: 999,
+    bullets: ["Renewal (Form TM-R) filing", "Expiry and grace period tracking", "Restoration of a lapsed mark", "Registration certificate update", "Ten-year renewal reminders"],
+  },
+  {
+    slug: "copyright-registration",
+    category: "ipr",
+    title: "Copyright Registration",
+    metaTitle: "Copyright Registration in India | Financial Sage",
+    metaDescription: "Register copyright in software, literary work, artwork, music, or film with the Copyright Office. From ₹999.",
+    summary: "Copyright registration for software, literary work, artistic work, music, and film, giving you a dated public record of authorship to rely on in a dispute.",
+    startingPrice: 999,
+    bullets: ["Work classification", "Form XIV application filing", "NOC and authorship documentation", "Objection and discrepancy response", "Registration certificate"],
+  },
+  {
+    slug: "patent-registration",
+    category: "ipr",
+    title: "Patent Registration",
+    metaTitle: "Patent Filing & Registration in India | Financial Sage",
+    metaDescription: "Patent search, provisional or complete specification drafting, and filing with the Indian Patent Office. From ₹999.",
+    summary: "Patent filing support from prior-art search and specification drafting through to examination response, with the provisional route available when you need an early priority date.",
+    startingPrice: 999,
+    bullets: ["Prior-art and patentability search", "Provisional or complete specification drafting", "Form 1 / 2 / 5 filing", "Request for examination", "First examination report response"],
+  },
+  {
+    slug: "design-registration",
+    category: "ipr",
+    title: "Design Registration",
+    metaTitle: "Industrial Design Registration in India | Financial Sage",
+    metaDescription: "Protect the shape, pattern, or ornamentation of your product with a registered design. From ₹999.",
+    summary: "Industrial design registration protecting the visual appearance of a product, its shape, configuration, pattern, or ornamentation, for up to fifteen years.",
+    startingPrice: 999,
+    bullets: ["Novelty search", "Class and Locarno classification", "Representation sheet preparation", "Form 1 application filing", "Objection response"],
+  },
+
+  // ---------------------------------------------------------------------
+  // Business Changes & Closure
+  // ---------------------------------------------------------------------
+  {
+    slug: "change-company-name",
+    category: "business-changes",
+    title: "Change Company Name",
+    metaTitle: "Change a Private Limited Company Name | Financial Sage",
+    metaDescription: "Change your company's registered name with RUN, MGT-14, and INC-24, and update every downstream registration. From ₹999.",
+    summary: "Changing a company's registered name end to end, from name reservation through to updating the GST, PAN, and bank records that carry the old name.",
+    startingPrice: 999,
+    bullets: ["Name availability check (RUN)", "Special resolution and MGT-14", "INC-24 approval application", "Fresh incorporation certificate", "Downstream GST, PAN, and bank updates"],
+  },
+  {
+    slug: "change-registered-office",
+    category: "business-changes",
+    title: "Change Registered Office",
+    metaTitle: "Change of Registered Office Address Filing | Financial Sage",
+    metaDescription: "Shift your registered office within a city, between cities, or across states. INC-22 and INC-23 filed for you. From ₹999.",
+    summary: "Registered office address changes, whether within the same city, to another city in the same state, or across state lines where regional director approval is needed.",
+    startingPrice: 999,
+    bullets: ["Board or special resolution drafting", "INC-22 filing with premises proof", "INC-23 regional director application for interstate shifts", "MGT-14 where required", "GST and bank address updates"],
+  },
+  {
+    slug: "change-in-director",
+    category: "business-changes",
+    title: "Add or Change a Director",
+    metaTitle: "Director Appointment & Change Filing (DIR-12) | Financial Sage",
+    metaDescription: "Appoint a new director or change an existing one, with DIN, DSC, and DIR-12 filed within 30 days. From ₹999.",
+    summary: "Appointing a director or changing the particulars of an existing one, including DIN application where the appointee does not already hold one.",
+    startingPrice: 999,
+    bullets: ["DIN application (DIR-3) if needed", "Digital signature issuance", "Consent (DIR-2) and board resolution", "DIR-12 filing within 30 days", "Statutory register update"],
+  },
+  {
+    slug: "removal-of-director",
+    category: "business-changes",
+    title: "Removal or Resignation of a Director",
+    metaTitle: "Director Removal & Resignation Filing | Financial Sage",
+    metaDescription: "Remove a director by shareholder resolution, or file a resignation via DIR-11 and DIR-12. From ₹999.",
+    summary: "Removing a director under Section 169 or recording a resignation, with the DIR-11 and DIR-12 filings that make the change effective on the MCA record.",
+    startingPrice: 999,
+    bullets: ["Special notice and shareholder resolution", "Opportunity-to-be-heard compliance", "DIR-11 (resignation by the director)", "DIR-12 filing by the company", "Register of directors update"],
+  },
+  {
+    slug: "add-designated-partner",
+    category: "business-changes",
+    title: "Add or Remove a Designated Partner",
+    metaTitle: "Add or Remove an LLP Designated Partner | Financial Sage",
+    metaDescription: "Admit or retire a designated partner in your LLP with Form 3 and Form 4, plus the supplementary agreement. From ₹999.",
+    summary: "Admitting or retiring a designated partner in an LLP, including the supplementary agreement and the Form 3 and Form 4 filings.",
+    startingPrice: 999,
+    bullets: ["DPIN application if needed", "Supplementary LLP agreement drafting", "Form 4 (partner change) filing", "Form 3 (agreement change) filing", "Capital contribution adjustment"],
+  },
+  {
+    slug: "change-in-llp-agreement",
+    category: "business-changes",
+    title: "Change in LLP Agreement",
+    metaTitle: "LLP Agreement Amendment Filing (Form 3) | Financial Sage",
+    metaDescription: "Amend your LLP agreement for capital, profit sharing, business activity, or partner rights. Form 3 filed within 30 days. From ₹999.",
+    summary: "Amending an LLP agreement for changes in capital contribution, profit-sharing ratio, business activity, or partner rights, filed in Form 3 within 30 days.",
+    startingPrice: 999,
+    bullets: ["Supplementary deed drafting", "Stamp duty computation by state", "Partner consent documentation", "Form 3 filing within 30 days", "Master data verification"],
+  },
+  {
+    slug: "increase-authorised-capital",
+    category: "business-changes",
+    title: "Increase Authorised Capital",
+    metaTitle: "Increase Authorised Share Capital (SH-7) | Financial Sage",
+    metaDescription: "Raise your company's authorised share capital with an MOA amendment and SH-7 filing. From ₹999.",
+    summary: "Increasing authorised share capital so the company can issue more shares, including the MOA amendment and the stamp duty that varies by state.",
+    startingPrice: 999,
+    bullets: ["Board and shareholder resolutions", "MOA capital clause amendment", "SH-7 filing", "MGT-14 where required", "Stamp duty and ROC fee computation"],
+  },
+  {
+    slug: "transfer-of-shares",
+    category: "business-changes",
+    title: "Transfer of Shares",
+    metaTitle: "Share Transfer in a Private Limited Company | Financial Sage",
+    metaDescription: "Transfer shares with SH-4, stamp duty, and board approval, and keep the register of members correct. From ₹999.",
+    summary: "Share transfers in a private limited company, covering the SH-4 instrument, stamp duty, board approval, and the register updates that make the transfer valid.",
+    startingPrice: 999,
+    bullets: ["Share transfer deed (SH-4)", "Stamp duty computation", "Board resolution for approval", "Share certificate endorsement", "Register of members update"],
+  },
+  {
+    slug: "convert-partnership-to-llp",
+    category: "business-changes",
+    title: "Convert a Partnership into an LLP",
+    metaTitle: "Convert a Partnership Firm into an LLP | Financial Sage",
+    metaDescription: "Convert your partnership firm into an LLP with Form 17, keeping continuity of assets and licences. From ₹999.",
+    summary: "Conversion of a registered partnership firm into an LLP, so the business keeps trading while the partners gain limited liability.",
+    startingPrice: 999,
+    bullets: ["Partner and creditor consent", "Name reservation for the LLP", "Form 17 conversion application", "LLP agreement drafting", "Post-conversion PAN, GST, and bank updates"],
+  },
+  {
+    slug: "close-private-limited-company",
+    category: "business-changes",
+    title: "Close a Private Limited Company",
+    metaTitle: "Company Strike Off & Closure (Form STK-2) | Financial Sage",
+    metaDescription: "Close a dormant company through the fast-track strike off route with Form STK-2, and stop the penalties accruing. From ₹999.",
+    summary: "Fast-track strike off of a dormant company under Section 248, which stops annual filing penalties from continuing to accrue against the directors.",
+    startingPrice: 999,
+    bullets: ["Eligibility and pending filing review", "Board and shareholder resolutions", "Affidavits and indemnity bonds", "STK-2 filing", "Bank account closure documentation"],
+  },
+  {
+    slug: "close-llp",
+    category: "business-changes",
+    title: "Close an LLP",
+    metaTitle: "LLP Strike Off & Closure (Form 24) | Financial Sage",
+    metaDescription: "Strike off a dormant LLP with Form 24, after clearing pending Form 8 and Form 11 filings. From ₹999.",
+    summary: "Striking off a dormant LLP under Form 24, including the pending Form 8 and Form 11 filings the Registrar will insist on first.",
+    startingPrice: 999,
+    bullets: ["Pending Form 8 and Form 11 clearance", "Partner consent and affidavits", "Statement of accounts certification", "Form 24 filing", "Bank account closure documentation"],
+  },
+
+  // ---------------------------------------------------------------------
+  // Specialist GST work
+  //
+  // These are one-off GST jobs that fall outside a monthly filing plan. The
+  // core GST pages (/gst-registration, /gst-return-filing, /gst-compliance)
+  // remain the primary entry points and every page here links back to them.
+  // ---------------------------------------------------------------------
+  {
+    slug: "gst-registration-cancellation",
+    category: "gst-specialist",
+    title: "GST Registration Cancellation",
+    metaTitle: "Cancel or Surrender a GST Registration | Financial Sage",
+    metaDescription: "Cancel a GST registration you no longer need, file the final GSTR-10, and stop late fees accruing. From ₹999.",
+    summary: "Voluntary cancellation or surrender of a GSTIN, including the final return in GSTR-10 that has to be filed within three months of the cancellation order.",
+    startingPrice: 999,
+    bullets: ["Pending return clearance", "REG-16 cancellation application", "Input tax credit reversal working", "Final return (GSTR-10) filing", "Departmental query response"],
+  },
+  {
+    slug: "gst-registration-revocation",
+    category: "gst-specialist",
+    title: "Revocation of Cancelled GST Registration",
+    metaTitle: "Revoke a Cancelled GST Registration (REG-21) | Financial Sage",
+    metaDescription: "GSTIN cancelled by the officer? Apply for revocation in REG-21 within the deadline and get your registration back. From ₹999.",
+    summary: "Revocation of a GSTIN cancelled by the department, filed in REG-21 after the pending returns and dues that triggered the cancellation are cleared.",
+    startingPrice: 999,
+    bullets: ["Cancellation order analysis", "Pending return and tax dues clearance", "REG-21 revocation application", "Show cause response where issued", "Restoration confirmation"],
+  },
+  {
+    slug: "additional-place-of-business-gst",
+    category: "gst-specialist",
+    title: "Add a Place of Business to GST",
+    metaTitle: "Add an Additional Place of Business in GST (REG-14) | Financial Sage",
+    metaDescription: "Add a warehouse, branch, or godown to your GST registration with a REG-14 amendment. From ₹999.",
+    summary: "Adding an additional place of business to an existing GSTIN, which you must do before storing stock or invoicing from a new warehouse or branch.",
+    startingPrice: 999,
+    bullets: ["Premises document preparation", "REG-14 amendment filing", "Core field approval tracking", "Updated registration certificate", "E-way bill address alignment"],
+  },
+  {
+    slug: "gst-lut-filing",
+    category: "gst-specialist",
+    title: "GST LUT Filing for Exporters",
+    metaTitle: "LUT Filing in GST RFD-11 for Exporters | Financial Sage",
+    metaDescription: "File your Letter of Undertaking so you can export without paying IGST. Filed fresh every financial year. From ₹999.",
+    summary: "Letter of Undertaking filing in Form RFD-11, which lets an exporter ship without paying IGST upfront. It has to be refiled at the start of every financial year.",
+    startingPrice: 999,
+    bullets: ["Eligibility verification", "RFD-11 preparation and filing", "Witness and declaration documentation", "Acknowledgement reference number", "Annual refiling reminders"],
+  },
+  {
+    slug: "gst-refund-application",
+    category: "gst-specialist",
+    title: "GST Refund Application",
+    metaTitle: "GST Refund Claim Filing (RFD-01) | Financial Sage",
+    metaDescription: "Claim a GST refund on exports, inverted duty structure, or excess cash ledger balance. Filed in RFD-01, from ₹999.",
+    summary: "GST refund claims in Form RFD-01, covering export refunds, inverted duty structure accumulation, and excess balance sitting in the electronic cash ledger.",
+    startingPrice: 999,
+    bullets: ["Refund category and eligibility mapping", "Statement and invoice reconciliation", "RFD-01 filing with annexures", "Deficiency memo (RFD-03) response", "Sanction and disbursal follow-up"],
+  },
+  {
+    slug: "gst-e-invoice-setup",
+    category: "gst-specialist",
+    title: "GST E-Invoicing Setup",
+    metaTitle: "GST E-Invoicing Registration & Setup | Financial Sage",
+    metaDescription: "Crossed the e-invoicing turnover threshold? We register you on the IRP and get IRN generation working. From ₹999.",
+    summary: "E-invoicing setup for businesses that have crossed the turnover threshold, from IRP registration through to IRN and QR code generation working in your billing system.",
+    startingPrice: 999,
+    bullets: ["Applicability and turnover assessment", "IRP portal registration", "Billing software integration guidance", "IRN and QR code testing", "Staff walkthrough"],
+  },
+  {
+    slug: "e-way-bill-registration",
+    category: "gst-specialist",
+    title: "E-Way Bill Registration",
+    metaTitle: "E-Way Bill Portal Registration & Setup | Financial Sage",
+    metaDescription: "Register on the e-way bill portal, set up sub-users for your transporters, and generate bills correctly. From ₹999.",
+    summary: "E-way bill portal registration and setup, including the sub-user accounts your dispatch team and transporters need to generate bills themselves.",
+    startingPrice: 999,
+    bullets: ["Portal registration and credentials", "Transporter ID enrolment", "Sub-user creation for dispatch staff", "Distance and validity rules briefing", "Cancellation and extension support"],
+  },
 ];
 
 export function getOtherService(slug: string): OtherService | undefined {
   return otherServices.find((s) => s.slug === slug);
+}
+
+export function getServicesByCategory(category: ServiceCategoryId): OtherService[] {
+  return otherServices.filter((s) => s.category === category);
+}
+
+/** Other services in the same category, for the cross-links on a service page. */
+export function getRelatedServices(slug: string, limit = 6): OtherService[] {
+  const service = getOtherService(slug);
+  if (!service) return [];
+  return otherServices.filter((s) => s.category === service.category && s.slug !== slug).slice(0, limit);
 }

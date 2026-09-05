@@ -61,6 +61,32 @@ export function Header({ searchIndex }: { searchIndex: SearchEntry[] }) {
   const [mobileMenu, setMobileMenu] = useState<MenuId | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Closing on a bare mouseleave is brittle: the panel is positioned against
+  // the viewport, so there can be a few pixels of dead space between a trigger
+  // and its panel, and crossing them would shut the menu before you arrived.
+  // A short delay makes the traversal forgiving and is cancelled the moment
+  // the pointer re-enters the trigger or the panel (both are inside the same
+  // wrapper, so re-entry fires mouseenter again).
+  function openMenu(id: MenuId) {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+    setMenu(id);
+  }
+
+  function scheduleClose() {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setMenu(null), 180);
+  }
+
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
 
   useEffect(() => {
     function onScroll() {
@@ -141,19 +167,19 @@ export function Header({ searchIndex }: { searchIndex: SearchEntry[] }) {
           </span>
         </Link>
 
-        <nav ref={navRef} className="hidden items-center gap-5 lg:flex">
+        <nav ref={navRef} className="hidden items-center gap-5 self-stretch lg:flex">
           {menus.map((m) => (
             <div
               key={m.id}
-              className="relative"
-              onMouseEnter={() => setMenu(m.id)}
-              onMouseLeave={() => setMenu(null)}
+              className="flex h-full items-center"
+              onMouseEnter={() => openMenu(m.id)}
+              onMouseLeave={scheduleClose}
             >
               <Link
                 href={m.href}
                 aria-expanded={menu === m.id}
                 aria-controls={`menu-${m.id}`}
-                onFocus={() => setMenu(m.id)}
+                onFocus={() => openMenu(m.id)}
                 className={clsx(linkClass, "flex items-center gap-1")}
               >
                 {m.label}
@@ -175,8 +201,13 @@ export function Header({ searchIndex }: { searchIndex: SearchEntry[] }) {
                 <div
                   id={`menu-${m.id}`}
                   className={clsx(
-                    "absolute top-full left-1/2 z-50 -translate-x-1/2 pt-3",
-                    m.id === "services" ? "w-[min(72rem,calc(100vw-4rem))]" : "w-[min(46rem,calc(100vw-4rem))]",
+                    // top-16 unconditionally: onHero is false whenever a menu is
+                    // open (see its definition), so the bar is always the solid
+                    // 64px variant here and the panel always sits flush under it.
+                    "fixed top-16 left-1/2 z-50 -translate-x-1/2 pt-3",
+                    m.id === "services"
+                      ? "w-[min(72rem,calc(100vw-2rem))]"
+                      : "w-[min(46rem,calc(100vw-2rem))]",
                   )}
                 >
                   <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-card-hover">

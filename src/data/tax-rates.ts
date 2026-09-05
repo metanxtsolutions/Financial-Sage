@@ -1,16 +1,33 @@
 // Income tax slab and rate data - the single source of truth for every tax
 // calculator on the site.
 //
-// !! VERIFY BEFORE EACH FINANCIAL YEAR !!
-// These figures are for FY 2025-26 (Assessment Year 2026-27) and reflect the
-// slabs as amended by the Finance Act 2025. Slabs, the 87A rebate, the standard
-// deduction, and surcharge thresholds are all changed by the annual Budget.
-// When the next Budget lands, update this file and bump `financialYear` and
-// `assessmentYear` below - every calculator picks the change up automatically.
+// VERIFIED 5 September 2026 against the Income Tax Department's own figures
+// for AY 2026-27 ("Salaried Individuals for AY 2026-27" on incometax.gov.in).
+// Every slab boundary, the 87A rebate under both regimes, all four surcharge
+// bands including the 25% new-regime cap, and the 4% cess were checked against
+// that page; the Rs 75,000 standard deduction is s.16(ia) as amended by the
+// Finance Act 2025.
+//
+// Budget 2026 left the slabs unchanged, so the same figures apply to
+// FY 2026-27 as well - hence `alsoApplies` below.
+//
+// !! STILL RE-CHECK AFTER EACH BUDGET !!
+// Slabs, the rebate, the standard deduction and surcharge thresholds are all
+// the annual Budget's to change. When the next one lands, update this file and
+// bump the years below; every calculator picks the change up automatically.
+//
+// SEPARATE ISSUE, NOT ABOUT THESE NUMBERS: the Income Tax Act 2025 replaces
+// the 1961 Act for income earned from 1 April 2026 and renumbers nearly every
+// section. These rates are unaffected, but section references in user-facing
+// copy (87A, 115BAC, 10(13A), 44AD, 234B/234C, Form 10-IEA and the like) are
+// correct only for returns under the 1961 Act - that is, up to FY 2025-26.
+// They will need remapping before FY 2026-27 returns are filed in 2027.
 
 export const taxYear = {
   financialYear: "2025-26",
   assessmentYear: "2026-27",
+  /** Later years the same rates are known to apply to, unchanged. */
+  alsoApplies: "2026-27",
 } as const;
 
 export interface Slab {

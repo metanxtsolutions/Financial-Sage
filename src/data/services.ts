@@ -69,10 +69,34 @@ export const whoNeedsGst: BusinessTypeCard[] = [
   { label: "Startups", href: "/gst-registration-for-startups" },
 ];
 
-export const processSteps = [
-  { title: "Choose Service", body: "Pick GST registration, filing, or a compliance plan that fits your business stage." },
-  { title: "Submit Details", body: "Share your documents and business details over WhatsApp, email, or our online form." },
-  { title: "We Handle the Rest", body: "We file, follow up, and keep you posted until it's done. No portal logins or paperwork on your end." },
+export const processSteps: { title: string; body: string; details: string[] }[] = [
+  {
+    title: "Choose Service",
+    body: "Pick GST registration, filing, or a compliance plan that fits your business stage.",
+    details: [
+      "Takes under two minutes",
+      "Tell us the business type, not the paperwork",
+      "Free consultation before you pay anything",
+    ],
+  },
+  {
+    title: "Submit Details",
+    body: "Share your documents and business details over WhatsApp, email, or our online form.",
+    details: [
+      "Send photos of documents, no scanner needed",
+      "We tell you exactly what is missing",
+      "No office visit at any point",
+    ],
+  },
+  {
+    title: "We Handle the Rest",
+    body: "We file, follow up, and keep you posted until it's done. No portal logins or paperwork on your end.",
+    details: [
+      "Filed within 24 hours of documents and payment",
+      "ARN tracked until your GSTIN is issued",
+      "Ongoing filing support once you are registered",
+    ],
+  },
 ];
 
 export const whyFinancialSage: { title: string; body: string; icon: IconName }[] = [

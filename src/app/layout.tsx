@@ -9,6 +9,7 @@ import { Analytics } from "@/components/Analytics";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { JsonLd, organizationSchema, localBusinessSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
+import { buildSearchIndex } from "@/lib/search-index";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,6 +51,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const searchIndex = buildSearchIndex();
+
   return (
     <html
       lang="en"
@@ -63,7 +66,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <JsonLd data={[organizationSchema(), localBusinessSchema()]} />
-        <Header />
+        <Header searchIndex={searchIndex} />
         <MainContent>{children}</MainContent>
         <ConditionalChrome />
         <WhatsAppButton />

@@ -15,6 +15,7 @@ export type ServiceCategoryId =
   | "roc-compliance"
   | "ipr"
   | "business-changes"
+  | "international"
   | "gst-specialist";
 
 export interface ServiceCategory {
@@ -322,6 +323,53 @@ export const serviceCategories: ServiceCategory[] = [
     ctaSubmitLabel: "Request a Callback",
   },
   {
+    id: "international",
+    slug: "international-company-registration",
+    title: "International Business Setup",
+    blurb: "Incorporate outside India, from a UAE free zone to a US corporation, with the Indian-side reporting handled too.",
+    h1: "International Company Registration",
+    metaTitle: "International Company Registration: UAE, Singapore, US, UK | Financial Sage",
+    metaDescription: "Set up a company abroad from India. UAE mainland and free zone, Singapore, USA, UK, Canada, Australia, Saudi Arabia and more, with FEMA and ODI reporting handled.",
+    intro:
+      "Indian businesses incorporate abroad for three reasons: to invoice overseas customers in their own currency, to hold intellectual property closer to their market, or because a distributor or platform will not contract with an Indian entity. The overseas incorporation is only half the job. The Indian side, an Overseas Direct Investment filing with your bank under FEMA, is the half people forget.",
+    guidance: {
+      heading: "Choosing a jurisdiction",
+      body: "Pick for where your customers and your banking are, not for the headline tax rate. A structure you cannot open a bank account for is worth nothing.",
+      points: [
+        "Selling into the Gulf: a UAE company. Mainland if you need to trade inside the UAE market, a free zone if you are invoicing outside it. Both now allow full foreign ownership.",
+        "Selling to enterprise customers in Asia: Singapore. Full foreign ownership and S$1 minimum capital, but the law requires at least one director ordinarily resident in Singapore at all times.",
+        "Raising US venture capital or selling to US companies: a Delaware C-Corporation. Selling services without raising money: an LLC is usually simpler and cheaper.",
+        "Trading in Europe: the UK is the fastest and cheapest to form with no minimum capital, while a German GmbH carries a €25,000 share capital requirement and mandatory notarisation.",
+        "Every one of these needs substance. Regulators and banks both look for a real office, real activity and clean KYC before they will open an account.",
+      ],
+    },
+    faqs: [
+      {
+        id: "cat-intl-odi",
+        category: "financial-sage",
+        question: "What do I have to file in India?",
+        answer:
+          "Investing in a company abroad is Overseas Direct Investment under FEMA. It is routed through your authorised dealer bank, reported in Form FC, and followed by an Annual Performance Report for as long as you hold the stake. Skipping it is the most common and most expensive mistake, and we handle this side alongside the incorporation.",
+      },
+      {
+        id: "cat-intl-bank",
+        category: "financial-sage",
+        question: "Will I be able to open a bank account?",
+        answer:
+          "This is the real constraint, not the incorporation. Banks apply their own KYC and want to see genuine substance: an office, an activity they understand, and a clear explanation of where money comes from. A company with no substance can be incorporated and still fail at the banking stage, so we plan for it from the start.",
+      },
+      {
+        id: "cat-intl-visit",
+        category: "financial-sage",
+        question: "Do I need to travel?",
+        answer:
+          "Often not. Several jurisdictions allow remote incorporation with notarised and apostilled documents. Some banks still insist on meeting a director in person, and Germany requires notarisation of the formation deed. We tell you which category yours falls into before you commit.",
+      },
+    ],
+    ctaHeading: "Setting up abroad?",
+    ctaSubmitLabel: "Discuss My Structure",
+  },
+  {
     id: "gst-specialist",
     slug: "specialist-gst",
     title: "Specialist GST Work",
@@ -380,6 +428,12 @@ export function getServiceCategoryBySlug(slug: string): ServiceCategory | undefi
 export interface OtherService {
   slug: string;
   category: ServiceCategoryId;
+  /**
+   * Optional at-a-glance facts, rendered as a small table above the
+   * inclusions. Added for the international pages, where the entity type,
+   * regulator and ownership rule are the first things anyone wants.
+   */
+  facts?: { label: string; value: string }[];
   title: string;
   metaTitle: string;
   metaDescription: string;
@@ -1081,6 +1135,278 @@ export const otherServices: OtherService[] = [
     summary: "Striking off a dormant LLP under Form 24, including the pending Form 8 and Form 11 filings the Registrar will insist on first.",
     startingPrice: 999,
     bullets: ["Pending Form 8 and Form 11 clearance", "Partner consent and affidavits", "Statement of accounts certification", "Form 24 filing", "Bank account closure documentation"],
+  },
+
+  // ---------------------------------------------------------------------
+  // International Business Setup
+  //
+  // Facts here are deliberately limited to things that are stable and
+  // checkable - entity type, regulator, the foreign-ownership rule. Fees and
+  // tax rates move and are quoted per engagement rather than published here.
+  // ---------------------------------------------------------------------
+  {
+    slug: "company-registration-in-dubai",
+    category: "international",
+    title: "Company Registration in Dubai (Mainland)",
+    metaTitle: "Dubai Mainland Company Registration from India | Financial Sage",
+    metaDescription: "Set up a UAE mainland company with 100% foreign ownership, trade licence, visa quota and corporate tax registration. FEMA and ODI reporting handled from India.",
+    summary: "A UAE mainland company, which can trade freely inside the UAE market and bid for government contracts, now with full foreign ownership in most activities.",
+    startingPrice: 999,
+    facts: [
+      { label: "Entity", value: "Limited Liability Company (LLC)" },
+      { label: "Regulator", value: "Department of Economy and Tourism, Dubai" },
+      { label: "Foreign ownership", value: "100% permitted in most activities" },
+      { label: "Typical timeline", value: "2 to 4 weeks" },
+    ],
+    bullets: [
+      "Activity selection and trade name reservation",
+      "Initial approval and MOA drafting",
+      "Trade licence issuance",
+      "Establishment card and visa quota application",
+      "Corporate tax registration and bank account introduction",
+    ],
+  },
+  {
+    slug: "dubai-free-zone-company-registration",
+    category: "international",
+    title: "Dubai Free Zone Company Registration",
+    metaTitle: "Dubai Free Zone Company Setup from India | Financial Sage",
+    metaDescription: "Register a UAE free zone company for invoicing outside the UAE. Free zone selection, licence, visas and Qualifying Free Zone Person assessment.",
+    summary: "A free zone company, suited to businesses invoicing customers outside the UAE, with full foreign ownership and a lighter setup than mainland.",
+    startingPrice: 999,
+    facts: [
+      { label: "Entity", value: "Free Zone Company or Establishment" },
+      { label: "Regulator", value: "The relevant free zone authority" },
+      { label: "Foreign ownership", value: "100%" },
+      { label: "Typical timeline", value: "1 to 3 weeks" },
+    ],
+    bullets: [
+      "Free zone selection against your activity and visa needs",
+      "Trade name reservation and licence application",
+      "Flexi-desk or office allocation",
+      "Visa and Emirates ID processing",
+      "Assessment of Qualifying Free Zone Person conditions",
+    ],
+  },
+  {
+    slug: "company-registration-in-singapore",
+    category: "international",
+    title: "Company Registration in Singapore",
+    metaTitle: "Singapore Pte Ltd Registration from India | Financial Sage",
+    metaDescription: "Incorporate a Singapore private limited company with ACRA. Full foreign ownership, S$1 minimum capital, resident director and corporate secretary arranged.",
+    summary: "A Singapore private limited company, the usual choice for selling to enterprise customers across Asia, with full foreign ownership permitted.",
+    startingPrice: 999,
+    facts: [
+      { label: "Entity", value: "Private Company Limited by Shares (Pte Ltd)" },
+      { label: "Regulator", value: "ACRA" },
+      { label: "Foreign ownership", value: "100%, minimum paid-up capital S$1" },
+      { label: "Local requirement", value: "At least one director ordinarily resident in Singapore" },
+    ],
+    bullets: [
+      "Name application and ACRA incorporation",
+      "Resident director arrangement through a registered corporate service provider",
+      "Company secretary appointment within the statutory window",
+      "Registered office address",
+      "Corporate bank account introduction",
+    ],
+  },
+  {
+    slug: "company-registration-in-usa",
+    category: "international",
+    title: "Company Registration in the USA",
+    metaTitle: "US Company Registration (LLC or C-Corp) from India | Financial Sage",
+    metaDescription: "Form a US LLC or Delaware C-Corporation from India. State filing, registered agent, EIN from the IRS, and the FEMA reporting on the Indian side.",
+    summary: "A US LLC or Delaware C-Corporation, chosen according to whether you intend to raise US venture capital or simply invoice US customers.",
+    startingPrice: 999,
+    facts: [
+      { label: "Entity", value: "LLC or C-Corporation" },
+      { label: "Regulator", value: "Secretary of State of the chosen state" },
+      { label: "Foreign ownership", value: "Permitted; no US residency required" },
+      { label: "Also needed", value: "EIN from the IRS, and a registered agent" },
+    ],
+    bullets: [
+      "Entity and state selection, with Delaware the default for a C-Corp",
+      "Certificate of Formation or Incorporation filed",
+      "Registered agent appointment",
+      "EIN application with the IRS",
+      "Operating agreement or bylaws drafted",
+    ],
+  },
+  {
+    slug: "company-registration-in-uk",
+    category: "international",
+    title: "Company Registration in the UK",
+    metaTitle: "UK Company Registration from India | Financial Sage",
+    metaDescription: "Register a UK private limited company with Companies House. No minimum capital, no residency requirement, registered office and HMRC registration included.",
+    summary: "A UK private company limited by shares, the fastest and cheapest European incorporation, with no minimum capital and no director residency requirement.",
+    startingPrice: 999,
+    facts: [
+      { label: "Entity", value: "Private Company Limited by Shares (Ltd)" },
+      { label: "Regulator", value: "Companies House" },
+      { label: "Foreign ownership", value: "100%; no residency requirement for directors" },
+      { label: "Minimum capital", value: "None" },
+    ],
+    bullets: [
+      "Name check and Companies House incorporation",
+      "Registered office address in the UK",
+      "Articles of association",
+      "Person with significant control (PSC) register",
+      "HMRC corporation tax registration",
+    ],
+  },
+  {
+    slug: "company-registration-in-canada",
+    category: "international",
+    title: "Company Registration in Canada",
+    metaTitle: "Canada Company Registration from India | Financial Sage",
+    metaDescription: "Incorporate federally or provincially in Canada. Province selection around director residency rules, registered agent, and business number registration.",
+    summary: "Federal or provincial incorporation in Canada, with the province chosen around director-residency rules that differ across the country.",
+    startingPrice: 999,
+    facts: [
+      { label: "Entity", value: "Corporation, federal or provincial" },
+      { label: "Regulator", value: "Corporations Canada, or the province" },
+      { label: "Foreign ownership", value: "Permitted" },
+      { label: "Watch for", value: "Director residency rules vary by province" },
+    ],
+    bullets: [
+      "Federal versus provincial assessment",
+      "NUANS name search and reservation",
+      "Articles of incorporation filed",
+      "Registered office and agent",
+      "Business Number and GST/HST registration",
+    ],
+  },
+  {
+    slug: "company-registration-in-australia",
+    category: "international",
+    title: "Company Registration in Australia",
+    metaTitle: "Australia Pty Ltd Registration from India | Financial Sage",
+    metaDescription: "Register an Australian proprietary limited company with ASIC, including the resident director requirement, ACN, ABN and GST registration.",
+    summary: "An Australian proprietary limited company, which requires at least one director ordinarily resident in Australia.",
+    startingPrice: 999,
+    facts: [
+      { label: "Entity", value: "Proprietary Limited (Pty Ltd)" },
+      { label: "Regulator", value: "ASIC" },
+      { label: "Foreign ownership", value: "Permitted" },
+      { label: "Local requirement", value: "At least one Australian-resident director" },
+    ],
+    bullets: [
+      "Company name availability and ASIC registration",
+      "Resident director arrangement",
+      "Australian Company Number (ACN)",
+      "Australian Business Number (ABN) and GST registration",
+      "Director Identification Number applications",
+    ],
+  },
+  {
+    slug: "company-registration-in-saudi-arabia",
+    category: "international",
+    title: "Company Registration in Saudi Arabia",
+    metaTitle: "Saudi Arabia Company Registration (MISA Licence) | Financial Sage",
+    metaDescription: "Set up in Saudi Arabia with a MISA investment licence, commercial registration, Chamber of Commerce membership and ZATCA registration.",
+    summary: "A Saudi limited liability company under a MISA investment licence, with full foreign ownership permitted across most sectors.",
+    startingPrice: 999,
+    facts: [
+      { label: "Entity", value: "Limited Liability Company" },
+      { label: "Regulator", value: "Ministry of Investment (MISA)" },
+      { label: "Foreign ownership", value: "100% permitted in most sectors" },
+      { label: "Also needed", value: "Commercial registration and ZATCA registration" },
+    ],
+    bullets: [
+      "MISA investment licence application",
+      "Commercial registration (CR)",
+      "Articles of association and notarisation",
+      "Chamber of Commerce membership",
+      "ZATCA tax and VAT registration",
+    ],
+  },
+  {
+    slug: "company-registration-in-qatar",
+    category: "international",
+    title: "Company Registration in Qatar",
+    metaTitle: "Qatar Company Registration from India | Financial Sage",
+    metaDescription: "Register a company in Qatar with the Ministry of Commerce and Industry, or in the Qatar Financial Centre. Full foreign ownership permitted in most sectors.",
+    summary: "A Qatari limited liability company, or a QFC entity, with full foreign ownership permitted across most sectors.",
+    startingPrice: 999,
+    facts: [
+      { label: "Entity", value: "Limited Liability Company, or QFC entity" },
+      { label: "Regulator", value: "Ministry of Commerce and Industry, or the QFC" },
+      { label: "Foreign ownership", value: "100% permitted in most sectors" },
+      { label: "Typical timeline", value: "3 to 6 weeks" },
+    ],
+    bullets: [
+      "Mainland versus Qatar Financial Centre assessment",
+      "Trade name reservation and commercial registration",
+      "Articles of association",
+      "Trade licence and establishment card",
+      "Tax registration",
+    ],
+  },
+  {
+    slug: "company-registration-in-oman",
+    category: "international",
+    title: "Company Registration in Oman",
+    metaTitle: "Oman Company Registration from India | Financial Sage",
+    metaDescription: "Register an Omani LLC with the Ministry of Commerce, Industry and Investment Promotion. Full foreign ownership permitted in most activities.",
+    summary: "An Omani limited liability company, with full foreign ownership permitted in most activities under the Foreign Capital Investment Law.",
+    startingPrice: 999,
+    facts: [
+      { label: "Entity", value: "Limited Liability Company (LLC)" },
+      { label: "Regulator", value: "Ministry of Commerce, Industry and Investment Promotion" },
+      { label: "Foreign ownership", value: "100% permitted in most activities" },
+      { label: "Typical timeline", value: "3 to 5 weeks" },
+    ],
+    bullets: [
+      "Activity selection and name reservation",
+      "Commercial registration",
+      "Chamber of Commerce membership",
+      "Municipality and sector licences",
+      "Tax card and VAT registration",
+    ],
+  },
+  {
+    slug: "company-registration-in-malaysia",
+    category: "international",
+    title: "Company Registration in Malaysia",
+    metaTitle: "Malaysia Sdn Bhd Registration from India | Financial Sage",
+    metaDescription: "Incorporate a Malaysian Sdn Bhd with SSM, including the resident director requirement, company secretary and tax registration.",
+    summary: "A Malaysian Sendirian Berhad, the standard private limited structure, with foreign ownership permitted in most sectors.",
+    startingPrice: 999,
+    facts: [
+      { label: "Entity", value: "Sendirian Berhad (Sdn Bhd)" },
+      { label: "Regulator", value: "Companies Commission of Malaysia (SSM)" },
+      { label: "Foreign ownership", value: "Permitted in most sectors" },
+      { label: "Local requirement", value: "At least one resident director" },
+    ],
+    bullets: [
+      "Name search and SSM incorporation",
+      "Resident director arrangement",
+      "Company secretary appointment",
+      "Registered office address",
+      "LHDN tax file registration",
+    ],
+  },
+  {
+    slug: "company-registration-in-germany",
+    category: "international",
+    title: "Company Registration in Germany",
+    metaTitle: "Germany GmbH Registration from India | Financial Sage",
+    metaDescription: "Form a German GmbH, including the €25,000 share capital requirement, notarisation, commercial register entry and trade office registration.",
+    summary: "A German GmbH, the standard limited company, which carries a share capital requirement and mandatory notarisation of the formation deed.",
+    startingPrice: 999,
+    facts: [
+      { label: "Entity", value: "GmbH" },
+      { label: "Regulator", value: "Handelsregister (commercial register)" },
+      { label: "Share capital", value: "€25,000, part payable on registration" },
+      { label: "Watch for", value: "Formation deed must be notarised" },
+    ],
+    bullets: [
+      "Entity choice between GmbH and the lower-capital UG",
+      "Articles of association and notary appointment",
+      "Blocked capital account for the share capital",
+      "Commercial register entry",
+      "Trade office and tax registration",
+    ],
   },
 
   // ---------------------------------------------------------------------

@@ -62,6 +62,19 @@ export default async function OtherServicePage({ params }: { params: Promise<{ s
           <p className="mt-4 text-lg text-neutral-600">{service.summary}</p>
           <p className="mt-4 text-xl font-bold text-brand-700">From ₹{service.startingPrice}</p>
 
+          {service.facts && service.facts.length > 0 && (
+            <dl className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-neutral-200 bg-neutral-200 sm:grid-cols-2">
+              {service.facts.map((fact) => (
+                <div key={fact.label} className="bg-white px-5 py-4">
+                  <dt className="text-xs font-semibold tracking-wide text-neutral-500 uppercase">
+                    {fact.label}
+                  </dt>
+                  <dd className="mt-1 text-sm font-medium text-neutral-900">{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+
           <h2 className="mt-8 text-xl font-bold text-neutral-900">What&apos;s Included</h2>
           <ul className="mt-3 space-y-2 text-neutral-700">
             {service.bullets.map((b) => (
@@ -110,7 +123,17 @@ export default async function OtherServicePage({ params }: { params: Promise<{ s
           )}
 
           <p className="mt-10 text-sm text-neutral-500">
-            {isGstSpecialist ? (
+            {service.category === "international" ? (
+              <>
+                Investing in a company abroad is Overseas Direct Investment under FEMA and has to
+                be reported through your bank in India. We handle that alongside the incorporation,
+                and it is covered on the{" "}
+                <Link href="/services/international-company-registration" className="font-medium text-brand-700 underline">
+                  international setup page
+                </Link>
+                .
+              </>
+            ) : isGstSpecialist ? (
               <>
                 This is a one-off GST job. If you need ongoing monthly filing, see{" "}
                 <Link href="/gst-return-filing" className="font-medium text-brand-700 underline">

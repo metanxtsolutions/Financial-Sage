@@ -147,9 +147,10 @@ export function IncomeTaxCalculator() {
       )}
 
       <p className="text-xs text-neutral-500">
-        Slabs for FY {taxYear.financialYear} (AY {taxYear.assessmentYear}). Surcharge is applied
-        without marginal relief, so figures just above a surcharge threshold read slightly high.
-        This is an estimate, not a filed computation.
+        Slabs for FY {taxYear.financialYear} (AY {taxYear.assessmentYear}), unchanged for
+        FY {taxYear.alsoApplies}. Surcharge is applied without marginal relief, so figures just
+        above a surcharge threshold read slightly high, and the 87A rebate is treated as all or
+        nothing at the threshold. This is an estimate, not a filed computation.
       </p>
     </div>
   );

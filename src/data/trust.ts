@@ -24,19 +24,20 @@ export const marqueeItems: string[] = [
 ];
 
 // ---------------------------------------------------------------------------
-// Review badges.
+// Review badges. Real figures from the Google Business Profile, supplied by
+// the owner. Keep them in step with the live profile: a rating shown here that
+// no longer matches the one a visitor finds on Google is worse than showing
+// nothing at all.
 //
-// !! EMPTY BY DESIGN — FILL THIS IN !!
-// Add your real Google Business Profile rating and review count here and the
-// badge row appears on the homepage. Leave it empty and nothing renders.
+// `href` is intentionally absent until the public profile URL is added. A
+// checkable claim beats an unverifiable one, so add the g.page or Maps link
+// and the badge becomes a link to it automatically.
 //
-//   { id: "google", label: "Google Reviews", rating: "4.8", count: "127",
-//     href: "https://g.page/r/..." }
-//
-// NOTE: do NOT add AggregateRating JSON-LD off the back of this without
-// verifying the numbers against the live profile. See the comment at the top
-// of src/data/testimonials.ts — this codebase deliberately avoids review
-// schema it cannot stand behind.
+// NOTE: deliberately NOT marked up as AggregateRating JSON-LD. Google does not
+// permit self-serving aggregate-rating markup for an Organization or
+// LocalBusiness, and ratings aggregated from Google itself may not be marked
+// up on your own site. Displaying the number is fine; marking it up risks a
+// manual action. Same reasoning as the note atop src/data/testimonials.ts.
 // ---------------------------------------------------------------------------
 
 export interface ReviewSource {
@@ -50,7 +51,14 @@ export interface ReviewSource {
   href?: string;
 }
 
-export const reviewSources: ReviewSource[] = [];
+export const reviewSources: ReviewSource[] = [
+  {
+    id: "google",
+    label: "Google Reviews",
+    rating: "4.8",
+    count: "63",
+  },
+];
 
 // ---------------------------------------------------------------------------
 // Trust logo strip.

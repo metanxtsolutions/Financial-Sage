@@ -2,11 +2,19 @@ import { reviewSources } from "@/data/trust";
 
 function Stars({ rating }: { rating: string }) {
   const value = Number(rating);
-  const rounded = Number.isFinite(value) ? Math.round(value) : 0;
+  // Fill proportionally rather than rounding. Rounding 4.8 up to five full
+  // stars overstates the rating, which is the one thing a trust signal must
+  // not do.
+  const filled = Number.isFinite(value) ? Math.max(0, Math.min(100, (value / 5) * 100)) : 0;
   return (
-    <span aria-hidden="true" className="text-gold-400">
-      {"★".repeat(Math.min(5, rounded))}
-      <span className="text-white/25">{"★".repeat(Math.max(0, 5 - rounded))}</span>
+    <span aria-hidden="true" className="relative inline-block leading-none whitespace-nowrap">
+      <span className="text-white/25">★★★★★</span>
+      <span
+        className="absolute inset-y-0 left-0 overflow-hidden text-gold-400"
+        style={{ width: `${filled}%` }}
+      >
+        ★★★★★
+      </span>
     </span>
   );
 }

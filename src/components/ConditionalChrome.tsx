@@ -17,10 +17,23 @@ export function ConditionalChrome() {
   const isItrWizard = pathname?.startsWith("/itr-filing/apply");
   if (isItrLanding || isItrWizard) return null;
 
+  // On mobile the sticky bar is the most visible call to action on the page,
+  // and "Talk to a GST Expert" is wrong on the 80-odd non-GST service pages.
+  // GST paths keep the original wording; everything else gets a neutral one.
+  const isGstContext =
+    pathname === "/" ||
+    pathname?.startsWith("/gst-") ||
+    pathname?.startsWith("/other-services/gst-") ||
+    pathname === "/services/specialist-gst";
+
+  const cta = isGstContext
+    ? { label: "Talk to a GST Expert", href: "/gst-registration" }
+    : { label: "Talk to an Expert", href: "/contact" };
+
   return (
     <>
       <Footer />
-      <MobileStickyCta />
+      <MobileStickyCta label={cta.label} href={cta.href} />
     </>
   );
 }

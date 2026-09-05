@@ -175,7 +175,7 @@ export function Header() {
                       return (
                         <div key={category.id}>
                           <Link
-                            href={`/other-services#${category.id}`}
+                            href={`/services/${category.slug}`}
                             className="text-xs font-semibold tracking-wide text-neutral-900 uppercase hover:text-brand-700"
                           >
                             {category.title}
@@ -194,7 +194,7 @@ export function Header() {
                             {total > services.length && (
                               <li>
                                 <Link
-                                  href={`/other-services#${category.id}`}
+                                  href={`/services/${category.slug}`}
                                   className="text-sm font-medium text-brand-700 hover:underline"
                                 >
                                   +{total - services.length} more
@@ -308,7 +308,7 @@ export function Header() {
                 {serviceCategories.map((category) => (
                   <Link
                     key={category.id}
-                    href={`/other-services#${category.id}`}
+                    href={`/services/${category.slug}`}
                     className="rounded-md px-2 py-2 text-sm text-neutral-600 hover:bg-neutral-50 hover:text-brand-700"
                     onClick={() => setOpen(false)}
                   >

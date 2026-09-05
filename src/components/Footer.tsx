@@ -80,7 +80,7 @@ export function Footer() {
               return (
                 <div key={category.id}>
                   <Link
-                    href={`/other-services#${category.id}`}
+                    href={`/services/${category.slug}`}
                     className="text-xs font-semibold tracking-wide text-neutral-900 uppercase hover:text-brand-700"
                   >
                     {category.title}

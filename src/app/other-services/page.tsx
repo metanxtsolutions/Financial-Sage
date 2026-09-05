@@ -24,7 +24,8 @@ export default function OtherServicesPage() {
         </Link>
         . Everything below is an adjacent statutory service we file on the same document-first,
         WhatsApp-friendly process, with {otherServices.length} services across{" "}
-        {serviceCategories.length} categories.
+        {serviceCategories.length} categories. Each category has its own page explaining what
+        applies to whom.
       </p>
 
       <nav aria-label="Service categories" className="mt-8 flex flex-wrap gap-2">
@@ -45,7 +46,11 @@ export default function OtherServicesPage() {
 
         return (
           <section key={category.id} id={category.id} className="mt-14 scroll-mt-24">
-            <h2 className="text-2xl font-bold tracking-tight text-neutral-900">{category.title}</h2>
+            <h2 className="text-2xl font-bold tracking-tight text-neutral-900">
+              <Link href={`/services/${category.slug}`} className="hover:text-brand-700">
+                {category.title}
+              </Link>
+            </h2>
             <p className="mt-2 max-w-2xl text-neutral-600">{category.blurb}</p>
 
             <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -63,6 +68,14 @@ export default function OtherServicesPage() {
                 </Link>
               ))}
             </div>
+
+            <Link
+              href={`/services/${category.slug}`}
+              className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:underline"
+            >
+              More about {category.title}
+              <span aria-hidden="true">&rarr;</span>
+            </Link>
           </section>
         );
       })}

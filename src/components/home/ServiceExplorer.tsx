@@ -104,7 +104,7 @@ export function ServiceExplorer() {
 
         <div className="mt-6">
           <Link
-            href={`/other-services#${active.id}`}
+            href={`/services/${active.slug}`}
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:underline"
           >
             {services.length > PREVIEW_COUNT

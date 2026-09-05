@@ -27,20 +27,42 @@ const cityPaths = [
 // duplicate list here (which silently went stale last time), read the slugs
 // straight out of the data file. next-sitemap runs as CJS and can't import a
 // .ts module, so we scrape the `slug:` literals instead.
-const otherServiceSlugs = (() => {
-  const source = fs.readFileSync(
-    path.join(__dirname, "src", "data", "other-services.ts"),
-    "utf8",
+// Pull slugs out of the data file. Each list is scoped to its own array,
+// because `serviceCategories` and `otherServices` both use `slug:` at the same
+// indentation - a single regex over the file would mix them and emit URLs that
+// 404.
+function arrayBlock(source, declaration, file) {
+  const match = source.match(
+    new RegExp(`export const ${declaration}[^=]*= \\[([\\s\\S]*?)\\n\\];`),
   );
-  const slugs = [...source.matchAll(/^\s{4}slug: "([^"]+)"/gm)].map((m) => m[1]);
-  if (slugs.length === 0) {
+  if (!match) {
     throw new Error(
-      "next-sitemap: found no service slugs in src/data/other-services.ts. " +
-        "Did the file format change? Sitemap would be missing every service page.",
+      `next-sitemap: could not find ${declaration} in ${file}. Pages would be missing.`,
     );
   }
-  return slugs;
-})();
+  return match[1];
+}
+
+function slugsIn(block) {
+  return [...block.matchAll(/^\s{4}slug: "([^"]+)"/gm)].map((m) => m[1]);
+}
+
+const otherServicesSource = fs.readFileSync(
+  path.join(__dirname, "src", "data", "other-services.ts"),
+  "utf8",
+);
+
+const otherServiceSlugs = slugsIn(
+  arrayBlock(otherServicesSource, "otherServices", "other-services.ts"),
+);
+
+const serviceCategorySlugs = slugsIn(
+  arrayBlock(otherServicesSource, "serviceCategories", "other-services.ts"),
+);
+
+if (otherServiceSlugs.length === 0 || serviceCategorySlugs.length === 0) {
+  throw new Error("next-sitemap: no service or category slugs found in other-services.ts.");
+}
 
 const blogSlugs = [
   "gst-registration-checklist-2026", "gstr1-vs-gstr3b-explained", "gst-for-first-time-amazon-sellers",
@@ -103,6 +125,7 @@ module.exports = {
     ...clusterSlugs.map((slug) => ({ loc: `/${slug}` })),
     ...cityPaths.map(([state, city]) => ({ loc: `/gst-registration/${state}/${city}` })),
     ...otherServiceSlugs.map((slug) => ({ loc: `/other-services/${slug}` })),
+    ...serviceCategorySlugs.map((slug) => ({ loc: `/services/${slug}` })),
     ...blogSlugs.map((slug) => ({ loc: `/gst-guides/${slug}` })),
     ...serviceLocationPaths.map((loc) => ({ loc })),
   ],

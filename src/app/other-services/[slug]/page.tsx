@@ -51,7 +51,7 @@ export default async function OtherServicePage({ params }: { params: Promise<{ s
         items={[
           { name: "Home", href: "/" },
           { name: "Services", href: "/other-services" },
-          ...(category ? [{ name: category.title, href: `/other-services#${category.id}` }] : []),
+          ...(category ? [{ name: category.title, href: `/services/${category.slug}` }] : []),
           { name: service.title, href: `/other-services/${service.slug}` },
         ]}
       />

@@ -4,6 +4,13 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        // /services exists only as a parent of the category hubs, so send the
+        // bare path to the full catalogue.
+        source: "/services",
+        destination: "/other-services",
+        permanent: true,
+      },
+      {
         // /company-registration exists only as a parent of the city pages
         // below it, so send the bare path to the actual service page.
         source: "/company-registration",

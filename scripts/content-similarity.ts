@@ -26,6 +26,7 @@ import { cities } from "@/data/cities";
 import { getLocationPages, locationServiceIds } from "@/data/service-locations";
 import { geoCities } from "@/data/geo/cities";
 import { states } from "@/data/geo/states";
+import { allStatePages, stateServiceIds } from "@/data/services/copy";
 
 const CEILING = 0.65;
 const NGRAM = 5;
@@ -60,24 +61,50 @@ function placeNamesFor(stateSlug: string, citySlug: string, cityName: string, st
 function collect(): ServiceDocs[] {
   const out: ServiceDocs[] = [];
 
-  out.push({
-    service: "gst-registration",
-    docs: cities.map((c) => ({
+  const groupFor = (service: string): ServiceDocs => {
+    let group = out.find((g) => g.service === service);
+    if (!group) {
+      group = { service, docs: [] };
+      out.push(group);
+    }
+    return group;
+  };
+
+  // City pages.
+  groupFor("gst-registration").docs.push(
+    ...cities.map((c) => ({
       id: `/gst-registration/${c.stateSlug}/${c.citySlug}`,
       text: [c.localNote, c.localSectors].join(" "),
       placeNames: placeNamesFor(c.stateSlug, c.citySlug, c.city, c.state),
     })),
-  });
+  );
 
   for (const serviceId of locationServiceIds) {
-    out.push({
-      service: serviceId,
-      docs: getLocationPages(serviceId).map(({ city, copy }) => ({
+    groupFor(serviceId).docs.push(
+      ...getLocationPages(serviceId).map(({ city, copy }) => ({
         id: `/${serviceId}/${city.stateSlug}/${city.citySlug}`,
         text: [copy.intro, copy.demand].join(" "),
         placeNames: placeNamesFor(city.stateSlug, city.citySlug, city.city, city.state),
       })),
-    });
+    );
+  }
+
+  // State pages go into the SAME group as their service's city pages, on
+  // purpose: a state page that merely restates its metro's copy is exactly the
+  // failure this is meant to catch, and comparing each level only against its
+  // own level would miss it.
+  for (const serviceId of stateServiceIds) {
+    groupFor(serviceId).docs.push(
+      ...allStatePages(serviceId).map(({ state, copy }) => ({
+        id: `/${serviceId}/${state.slug}  [${copy.contentStatus}]`,
+        text: [copy.intro, ...copy.statutory, copy.jurisdiction, copy.costNote ?? ""].join(" "),
+        placeNames: [
+          state.name,
+          state.slug.replace(/-/g, " "),
+          ...state.aliases.map((a) => a.replace(/-/g, " ")),
+        ],
+      })),
+    );
   }
 
   return out;

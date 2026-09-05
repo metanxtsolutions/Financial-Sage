@@ -13,7 +13,8 @@ import { otherServices, serviceCategories } from "@/data/other-services";
 import { cities } from "@/data/cities";
 import { getLocationPages } from "@/data/service-locations";
 import { getAllPostSlugs } from "@/lib/blog";
-import { cityPath } from "@/lib/geo";
+import { publishedStates } from "@/data/services/copy";
+import { cityPath, statePath } from "@/lib/geo";
 
 type ChangeFrequency = "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
 
@@ -78,6 +79,12 @@ export const sitemapGroups: SitemapGroup[] = [
     urls: () => [
       url("/gst-registration", 1.0, "weekly"),
       ...clusterPages.map((c) => url(`/${c.slug}`, 0.8)),
+      // State pages rank above their cities in the hierarchy and carry the
+      // statutory differentiation, so they get the higher priority of the two.
+      // Only "ready" states appear here — a draft state has no route to point at.
+      ...publishedStates("gst-registration").map(({ state }) =>
+        url(statePath("/gst-registration", state), 0.9),
+      ),
       ...cities.map((c) =>
         url(cityPath("/gst-registration", { stateSlug: c.stateSlug, slug: c.citySlug }), 0.8),
       ),
@@ -86,10 +93,14 @@ export const sitemapGroups: SitemapGroup[] = [
   {
     id: "company-registration",
     label: "Company registration city pages",
-    urls: () =>
-      getLocationPages("company-registration").map(({ city }) =>
+    urls: () => [
+      ...publishedStates("company-registration").map(({ state }) =>
+        url(statePath("/company-registration", state), 0.9),
+      ),
+      ...getLocationPages("company-registration").map(({ city }) =>
         url(cityPath("/company-registration", { stateSlug: city.stateSlug, slug: city.citySlug }), 0.8),
       ),
+    ],
   },
   {
     id: "itr-filing",

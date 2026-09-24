@@ -7,7 +7,7 @@ import { ConditionalChrome } from "@/components/ConditionalChrome";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Analytics } from "@/components/Analytics";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
-import { JsonLd, organizationSchema, localBusinessSchema } from "@/lib/schema";
+import { JsonLd, organizationSchema, localBusinessSchema, webSiteSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
 import { buildSearchIndex } from "@/lib/search-index";
 
@@ -65,7 +65,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <JsonLd data={[organizationSchema(), localBusinessSchema()]} />
+        <JsonLd data={[organizationSchema(), localBusinessSchema(), webSiteSchema()]} />
         <Header searchIndex={searchIndex} />
         <MainContent>{children}</MainContent>
         <ConditionalChrome />

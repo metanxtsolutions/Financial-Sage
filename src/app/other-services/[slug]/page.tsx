@@ -11,6 +11,8 @@ import {
   otherServices,
 } from "@/data/other-services";
 import { getLocationPages, hasLocationPages, locationServices } from "@/data/service-locations";
+import { JsonLd, breadcrumbSchema, serviceSchema } from "@/lib/schema";
+import { siteConfig } from "@/lib/site-config";
 
 export const dynamicParams = false;
 
@@ -45,7 +47,31 @@ export default async function OtherServicePage({ params }: { params: Promise<{ s
     ? locationServices[service.slug].routeBase
     : null;
 
+  // These 90 pages carried no structured data. Service describes what is on the
+  // page and AggregateOffer carries the "from ₹X" that is already displayed, so
+  // nothing is asserted here that a visitor cannot see.
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/other-services" },
+    ...(category ? [{ name: category.title, href: `/services/${category.slug}` }] : []),
+    { name: service.title, href: `/other-services/${service.slug}` },
+  ];
+
   return (
+    <>
+      <JsonLd
+        data={[
+          serviceSchema({
+            name: service.title,
+            description: service.summary,
+            url: `${siteConfig.url}/other-services/${service.slug}`,
+            priceFrom: service.startingPrice,
+          }),
+          breadcrumbSchema(
+            crumbs.map((c) => ({ name: c.name, url: `${siteConfig.url}${c.href}` })),
+          ),
+        ]}
+      />
     <Section>
       <Breadcrumbs
         items={[
@@ -167,5 +193,6 @@ export default async function OtherServicePage({ params }: { params: Promise<{ s
         </div>
       </div>
     </Section>
+    </>
   );
 }

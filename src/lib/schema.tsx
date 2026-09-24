@@ -74,12 +74,30 @@ function areaServedNode(area: AreaServed): object {
   }
 }
 
+export function webSiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    description: siteConfig.tagline,
+    inLanguage: "en-IN",
+    publisher: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
+  };
+}
+
 export function serviceSchema(opts: {
   name: string;
   description: string;
   url: string;
   /** Defaults to the whole of India, which is correct for pillar pages only. */
   areaServed?: AreaServed;
+  /**
+   * Starting price in INR. Emitted as an AggregateOffer lowPrice rather than a
+   * fixed Offer price, because the site advertises "from ₹X" and a single
+   * `price` would assert a precision we do not have.
+   */
+  priceFrom?: number;
 }) {
   return {
     "@context": "https://schema.org",
@@ -94,6 +112,16 @@ export function serviceSchema(opts: {
       url: siteConfig.url,
     },
     areaServed: areaServedNode(opts.areaServed ?? { level: "country" }),
+    ...(opts.priceFrom
+      ? {
+          offers: {
+            "@type": "AggregateOffer",
+            priceCurrency: "INR",
+            lowPrice: opts.priceFrom,
+            availability: "https://schema.org/InStock",
+          },
+        }
+      : {}),
   };
 }
 
@@ -102,6 +130,8 @@ export function articleSchema(opts: {
   description: string;
   url: string;
   datePublished: string;
+  /** Only pass this when the post was actually revised. */
+  dateModified?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -111,7 +141,7 @@ export function articleSchema(opts: {
     url: opts.url,
     mainEntityOfPage: { "@type": "WebPage", "@id": opts.url },
     datePublished: opts.datePublished,
-    dateModified: opts.datePublished,
+    dateModified: opts.dateModified ?? opts.datePublished,
     // Posts are written by the firm rather than a named individual, so the
     // organisation is both author and publisher.
     author: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },

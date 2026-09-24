@@ -21,6 +21,12 @@ export interface PostFrontmatter {
   category: string;
   date: string;
   excerpt: string;
+  /**
+   * Optional. Set this only when a post is genuinely revised — it drives both
+   * the visible "Updated" line and schema.org dateModified, so an unearned
+   * value is a false freshness signal.
+   */
+  updated?: string;
 }
 
 export interface Post extends PostFrontmatter {
@@ -66,4 +72,14 @@ export function getRelatedPosts(slug: string, limit = 3): Post[] {
   const rest = others.filter((p) => p.category !== current.category);
 
   return [...sameCategory, ...rest].slice(0, limit);
+}
+
+/**
+ * Reading time in whole minutes at 220 words per minute. Shown on guides so a
+ * reader can judge the commitment before starting, which is what the better
+ * finance publishers do.
+ */
+export function readingTimeMinutes(content: string): number {
+  const words = content.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 220));
 }

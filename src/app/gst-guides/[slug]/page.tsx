@@ -7,7 +7,7 @@ import { MdxContent } from "@/components/MdxContent";
 import Link from "next/link";
 import { JsonLd, articleSchema, breadcrumbSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
-import { getAllPostSlugs, getPostBySlug, getRelatedPosts } from "@/lib/blog";
+import { getAllPostSlugs, getPostBySlug, getRelatedPosts, readingTimeMinutes } from "@/lib/blog";
 
 export const dynamicParams = false;
 
@@ -54,6 +54,7 @@ export default async function GstGuidePostPage({ params }: { params: Promise<{ s
             description: post.description,
             url: `${siteConfig.url}/gst-guides/${slug}`,
             datePublished: post.date,
+            dateModified: post.updated,
           }),
           breadcrumbSchema(breadcrumbs),
         ]}
@@ -69,9 +70,25 @@ export default async function GstGuidePostPage({ params }: { params: Promise<{ s
         <div className="mx-auto mt-4 max-w-2xl">
           <Badge tone="brand" variant="outline">{post.category}</Badge>
           <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">{post.title}</h1>
-          <p className="mt-3 text-sm text-neutral-400">
-            {new Date(post.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}
-          </p>
+          {/* Attribution, freshness and length. Answer engines weigh these, and
+              a reader deciding whether to start wants them too. "Updated" only
+              appears when a post was genuinely revised. */}
+          <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-neutral-500">
+            <span>{siteConfig.name}</span>
+            <span aria-hidden="true" className="text-neutral-300">·</span>
+            <span>
+              {post.updated ? "Updated" : "Published"}{" "}
+              <time dateTime={post.updated ?? post.date}>
+                {new Date(post.updated ?? post.date).toLocaleDateString("en-IN", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </time>
+            </span>
+            <span aria-hidden="true" className="text-neutral-300">·</span>
+            <span>{readingTimeMinutes(post.content)} min read</span>
+          </div>
           <MdxContent source={post.content} />
 
           {related.length > 0 && (

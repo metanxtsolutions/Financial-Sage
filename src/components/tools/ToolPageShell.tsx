@@ -2,6 +2,8 @@ import { ReactNode } from "react";
 import Link from "next/link";
 import { Section } from "@/components/Container";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { JsonLd, breadcrumbSchema } from "@/lib/schema";
+import { siteConfig } from "@/lib/site-config";
 
 export interface ToolSection {
   label: string;
@@ -31,8 +33,20 @@ export function ToolPageShell({
   footnote?: ReactNode;
   children: ReactNode;
 }) {
+  // These nine calculator pages carried no structured data at all.
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: section.label, href: section.href },
+    { name: title, href: `${section.href}/${slug}` },
+  ];
+
   return (
     <Section>
+      <JsonLd
+        data={breadcrumbSchema(
+          crumbs.map((c) => ({ name: c.name, url: `${siteConfig.url}${c.href}` })),
+        )}
+      />
       <Breadcrumbs
         items={[
           { name: "Home", href: "/" },

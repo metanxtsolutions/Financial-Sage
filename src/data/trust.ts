@@ -127,3 +127,42 @@ export const comparisonRows: ComparisonRow[] = [
     theirs: "Emailed back and forth, or carried in physically",
   },
 ];
+
+// ---------------------------------------------------------------------------
+// Anti-fraud and safety.
+//
+// Impersonation of compliance firms is common in India: a caller uses the
+// firm's name to demand an "approval fee" or a portal password. The defence is
+// a published, specific list of what we will and will not do, so a client can
+// check a suspicious request against it.
+//
+// EVERY CLAIM BELOW WAS CONFIRMED BY THE OWNER OR IS ALREADY PUBLISHED
+// ELSEWHERE ON THE SITE. Do not add a line here that has not been. A promise
+// the business does not keep is worse than no section at all.
+// ---------------------------------------------------------------------------
+
+export interface SafetyPoint {
+  title: string;
+  body: string;
+}
+
+export const contactHours = "Monday to Saturday, 10am to 7pm";
+
+export const safetyPoints: SafetyPoint[] = [
+  {
+    title: "We are not a government body",
+    body: "GSTIN issuance, approvals and timelines are decided by the GST department, not by us. Anyone promising a guaranteed approval, or a faster one for a fee, is not us.",
+  },
+  {
+    title: "We never ask for your portal password",
+    body: `We may ask you to read out an OTP, but only while a filing is actually being submitted, and only on a call from ${siteConfig.phoneDisplay}. We will never ask for your GST portal password, your bank login, or a card number.`,
+  },
+  {
+    title: "Money goes to the business, never a person",
+    body: "Pay through the checkout on this website, or by transfer to our registered company account. Check the account name reads Financial Sage before you send anything. A request to pay a personal account or a UPI ID in someone's name is fraud.",
+  },
+  {
+    title: `We call ${contactHours}`,
+    body: `Our calls come from ${siteConfig.phoneDisplay}, and we identify ourselves and the reason for the call. Contact outside those hours claiming to be us is worth stopping to verify.`,
+  },
+];

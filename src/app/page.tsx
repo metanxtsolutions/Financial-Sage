@@ -13,6 +13,7 @@ import { TrustLogos } from "@/components/home/TrustLogos";
 import { ReviewBadges } from "@/components/home/ReviewBadges";
 import { ServiceExplorer } from "@/components/home/ServiceExplorer";
 import { ComparisonTable } from "@/components/home/ComparisonTable";
+import { TrustSafety } from "@/components/home/TrustSafety";
 import { JsonLd, faqPageSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
 import { coreServices, whoNeedsGst, processSteps, whyFinancialSage } from "@/data/services";
@@ -338,6 +339,24 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
+          </div>
+        </ScrollReveal>
+      </Section>
+
+      {/* Safety. Placed before the FAQ so the reassurance lands next to the
+          other questions a cautious first-time client is asking. */}
+      <Section className="bg-neutral-50">
+        <ScrollReveal>
+          <span className="eyebrow">How we keep you safe</span>
+          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">
+            What we will and will not ask you for
+          </h2>
+          <p className="mt-2 max-w-2xl text-neutral-600">
+            People impersonate compliance firms to demand approval fees and portal passwords. Here
+            is exactly how we work, so you can check any approach against it.
+          </p>
+          <div className="mt-8">
+            <TrustSafety />
           </div>
         </ScrollReveal>
       </Section>

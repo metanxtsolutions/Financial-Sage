@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLd, orgPageSchema } from "@/lib/schema";
 import { Section, Container } from "@/components/Container";
 import { LeadForm } from "@/components/LeadForm";
 import { Button } from "@/components/Button";
@@ -12,6 +13,14 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
+    <>
+      <JsonLd
+        data={orgPageSchema({
+          type: "ContactPage",
+          name: `Contact ${siteConfig.name}`,
+          url: `${siteConfig.url}/contact`,
+        })}
+      />
     <Section>
       <Container className="grid grid-cols-1 gap-10 px-0 lg:grid-cols-2">
         <div>
@@ -50,5 +59,6 @@ export default function ContactPage() {
         </div>
       </Container>
     </Section>
+    </>
   );
 }

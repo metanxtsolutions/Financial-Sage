@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd, itemListSchema } from "@/lib/schema";
+import { siteConfig } from "@/lib/site-config";
 import Link from "next/link";
 import { Section } from "@/components/Container";
 import { otherServices, serviceCategories, getServicesByCategory } from "@/data/other-services";
@@ -12,6 +14,17 @@ export const metadata: Metadata = {
 
 export default function OtherServicesPage() {
   return (
+    <>
+      <JsonLd
+        data={itemListSchema({
+          name: "Business and compliance services",
+          url: `${siteConfig.url}/other-services`,
+          items: otherServices.map((s) => ({
+            name: s.title,
+            url: `${siteConfig.url}/other-services/${s.slug}`,
+          })),
+        })}
+      />
     <Section>
       <span className="eyebrow">Services</span>
       <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">
@@ -80,5 +93,6 @@ export default function OtherServicesPage() {
         );
       })}
     </Section>
+    </>
   );
 }

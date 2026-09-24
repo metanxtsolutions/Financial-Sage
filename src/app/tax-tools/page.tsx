@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLd, itemListSchema } from "@/lib/schema";
 import Link from "next/link";
 import { Section } from "@/components/Container";
 import { siteConfig } from "@/lib/site-config";
@@ -14,6 +15,14 @@ export const metadata: Metadata = {
 
 export default function TaxToolsPage() {
   return (
+    <>
+      <JsonLd
+        data={itemListSchema({
+          name: "Free income tax tools and calculators",
+          url: `${siteConfig.url}/tax-tools`,
+          items: taxTools.map((t) => ({ name: t.title, url: `${siteConfig.url}/tax-tools/${t.slug}` })),
+        })}
+      />
     <Section>
       <span className="eyebrow">Free Tools</span>
       <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">Income Tax Tools</h1>
@@ -50,5 +59,6 @@ export default function TaxToolsPage() {
         .
       </p>
     </Section>
+    </>
   );
 }

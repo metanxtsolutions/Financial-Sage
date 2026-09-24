@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLd, itemListSchema } from "@/lib/schema";
 import Link from "next/link";
 import { Section } from "@/components/Container";
 import { siteConfig } from "@/lib/site-config";
@@ -13,6 +14,14 @@ export const metadata: Metadata = {
 
 export default function GstToolsPage() {
   return (
+    <>
+      <JsonLd
+        data={itemListSchema({
+          name: "Free GST tools and calculators",
+          url: `${siteConfig.url}/gst-tools`,
+          items: tools.map((t) => ({ name: t.title, url: `${siteConfig.url}/gst-tools/${t.slug}` })),
+        })}
+      />
     <Section>
       <span className="eyebrow">Free Tools</span>
       <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">GST Tools</h1>
@@ -45,5 +54,6 @@ export default function GstToolsPage() {
         , including an old-vs-new regime comparison.
       </p>
     </Section>
+    </>
   );
 }

@@ -185,6 +185,48 @@ export function pricingOfferSchema(tiers: PricingTier[]) {
   }));
 }
 
+/**
+ * ItemList for a catalogue or index page. Describes what the page actually
+ * enumerates, which is what lets an answer engine say "they offer N services"
+ * without guessing from the HTML.
+ */
+export function itemListSchema(opts: {
+  name: string;
+  url: string;
+  items: { name: string; url: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: opts.name,
+    url: opts.url,
+    numberOfItems: opts.items.length,
+    itemListElement: opts.items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      url: item.url,
+    })),
+  };
+}
+
+/** AboutPage / ContactPage, tying the page to the organisation entity. */
+export function orgPageSchema(opts: { type: "AboutPage" | "ContactPage"; name: string; url: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": opts.type,
+    name: opts.name,
+    url: opts.url,
+    mainEntity: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+      email: siteConfig.email,
+      telephone: siteConfig.phoneE164,
+    },
+  };
+}
+
 export function breadcrumbSchema(items: { name: string; url: string }[]) {
   return {
     "@context": "https://schema.org",

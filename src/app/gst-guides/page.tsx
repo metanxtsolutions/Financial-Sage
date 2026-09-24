@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd, itemListSchema } from "@/lib/schema";
+import { siteConfig } from "@/lib/site-config";
 import Link from "next/link";
 import { Badge } from "@/components/Badge";
 import { Section } from "@/components/Container";
@@ -14,6 +16,14 @@ export default function GstGuidesPage() {
   const posts = getAllPosts();
 
   return (
+    <>
+      <JsonLd
+        data={itemListSchema({
+          name: "GST guides",
+          url: `${siteConfig.url}/gst-guides`,
+          items: posts.map((p) => ({ name: p.title, url: `${siteConfig.url}/gst-guides/${p.slug}` })),
+        })}
+      />
     <Section>
       <span className="eyebrow">Guides</span>
       <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">GST Guides</h1>
@@ -46,5 +56,6 @@ export default function GstGuidesPage() {
         ))}
       </div>
     </Section>
+    </>
   );
 }

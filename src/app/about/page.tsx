@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLd, orgPageSchema } from "@/lib/schema";
 import Link from "next/link";
 import { Section, Container } from "@/components/Container";
 import { siteConfig } from "@/lib/site-config";
@@ -12,6 +13,14 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
+    <>
+      <JsonLd
+        data={orgPageSchema({
+          type: "AboutPage",
+          name: `About ${siteConfig.name}`,
+          url: `${siteConfig.url}/about`,
+        })}
+      />
     <Section>
       <Container className="max-w-3xl px-0">
         <span className="eyebrow">About Us</span>
@@ -71,5 +80,6 @@ export default function AboutPage() {
         </p>
       </Container>
     </Section>
+    </>
   );
 }

@@ -44,6 +44,12 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
+  // Google Search Console ownership for the https://www.financialsage.co.in
+  // URL-prefix property, on legal.financialsage@gmail.com. Google re-checks
+  // this periodically, so removing it un-verifies the property.
+  verification: {
+    google: "9JDqtRW3yAWh5hsgT9rEXlxjMi05EpLu6bhJ63NeROk",
+  },
 };
 
 export default function RootLayout({

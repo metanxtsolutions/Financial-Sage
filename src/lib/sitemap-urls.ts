@@ -47,7 +47,7 @@ const url = (
 ): SitemapUrl => ({ path, priority, changeFrequency, ...(lastModified ? { lastModified } : {}) });
 
 // Hand-maintained pages. These are the only paths in this file that are not
-// derived from a data module, because they have no data module — each one is a
+// derived from a data module, because they have no data module, each one is a
 // route file with bespoke content.
 const staticPaths: SitemapUrl[] = [
   url("/", 1.0, "weekly"),
@@ -91,7 +91,7 @@ export const sitemapGroups: SitemapGroup[] = [
       ...clusterPages.map((c) => url(`/${c.slug}`, 0.8)),
       // State pages rank above their cities in the hierarchy and carry the
       // statutory differentiation, so they get the higher priority of the two.
-      // Only "ready" states appear here — a draft state has no route to point at.
+      // Only "ready" states appear here, a draft state has no route to point at.
       ...publishedStates("gst-registration").map(({ state }) =>
         url(statePath("/gst-registration", state), 0.9),
       ),

@@ -22,7 +22,7 @@ import { getLocationPages } from "@/data/service-locations";
 // This layer carries the differentiation the whole programme rests on: the
 // statutory section is genuinely per-state, and every city page beneath it
 // inherits that difference by linking up rather than restating it. Sections with
-// no data for a given state are omitted entirely rather than rendered empty —
+// no data for a given state are omitted entirely rather than rendered empty -
 // a half-filled section is worse than a missing one.
 
 /** Which city pages actually exist under this service, so we never link to a 404. */

@@ -15,7 +15,7 @@ export const gstRegistrationStateCopy: StateCopy[] = [
   {
     stateSlug: "west-bengal",
     intro:
-      "A GSTIN issued in West Bengal begins 19, and the application is assessed by the state's own jurisdictional officer rather than a central queue — which is why the ward and charge you declare at registration decides who you deal with for years afterwards. Most of the registrations we file here are for businesses that already have a West Bengal professional tax enrolment, so the entity details have to match across both or the officer raises a clarification.",
+      "A GSTIN issued in West Bengal begins 19, and the application is assessed by the state's own jurisdictional officer rather than a central queue, which is why the ward and charge you declare at registration decides who you deal with for years afterwards. Most of the registrations we file here are for businesses that already have a West Bengal professional tax enrolment, so the entity details have to match across both or the officer raises a clarification.",
     statutory: [
       "GST state code 19. Every GSTIN issued in West Bengal starts with these two digits.",
       "West Bengal levies professional tax under the State Tax on Professions, Trades, Callings and Employments Act, 1979. Businesses need an enrolment certificate, and an additional registration certificate once they employ salaried staff. VERIFY: current slab figures.",
@@ -38,7 +38,7 @@ export const gstRegistrationStateCopy: StateCopy[] = [
   {
     stateSlug: "maharashtra",
     intro:
-      "Maharashtra is the state where a GST registration most often arrives bundled with two other obligations. A GSTIN here starts 27, and businesses registering in Mumbai, Pune or Nashik almost always need professional tax alongside it — PTEC for the entity, PTRC once there is payroll. Filing the three separately, weeks apart, is the usual reason a Maharashtra business ends up with mismatched addresses across its registrations and a clarification notice to answer.",
+      "Maharashtra is the state where a GST registration most often arrives bundled with two other obligations. A GSTIN here starts 27, and businesses registering in Mumbai, Pune or Nashik almost always need professional tax alongside it, PTEC for the entity, PTRC once there is payroll. Filing the three separately, weeks apart, is the usual reason a Maharashtra business ends up with mismatched addresses across its registrations and a clarification notice to answer.",
     statutory: [
       "GST state code 27. Every GSTIN issued in Maharashtra starts with these two digits.",
       "Professional tax is levied under the Maharashtra State Tax on Professions, Trades, Callings and Employments Act, 1975, and most registering businesses need both PTEC and PTRC. VERIFY: current slab figures for each.",
@@ -84,7 +84,7 @@ export const gstRegistrationStateCopy: StateCopy[] = [
   {
     stateSlug: "delhi",
     intro:
-      "Delhi is one of the few places in India where a business registering for GST has no professional tax to register for at the same time — the territory does not levy it. That makes the running cost of a Delhi registration genuinely lower than an equivalent one in Maharashtra or Karnataka. What Delhi gives back is inter-state exposure: a trader in Chandni Chowk or Karol Bagh supplying into Haryana or Uttar Pradesh crosses a state line within a few kilometres, and inter-state supply forces registration regardless of turnover.",
+      "Delhi is one of the few places in India where a business registering for GST has no professional tax to register for at the same time, the territory does not levy it. That makes the running cost of a Delhi registration genuinely lower than an equivalent one in Maharashtra or Karnataka. What Delhi gives back is inter-state exposure: a trader in Chandni Chowk or Karol Bagh supplying into Haryana or Uttar Pradesh crosses a state line within a few kilometres, and inter-state supply forces registration regardless of turnover.",
     statutory: [
       "GST state code 07. Every GSTIN issued in Delhi starts with these two digits.",
       "Delhi does not levy professional tax, so there is no parallel enrolment to make alongside the GST registration. VERIFY: current status.",
@@ -92,7 +92,7 @@ export const gstRegistrationStateCopy: StateCopy[] = [
       "Delhi is a single GST jurisdiction with no city-versus-state distinction, so there is one registration for the whole territory.",
     ],
     jurisdiction:
-      "Registrations are assessed by the Delhi Department of Trade and Taxes, divided into wards. Businesses operating from Noida, Ghaziabad, Gurugram or Faridabad are not in Delhi's jurisdiction at all — they register under Uttar Pradesh or Haryana — which is the most common misconception we correct for clients who think of themselves as being in the NCR.",
+      "Registrations are assessed by the Delhi Department of Trade and Taxes, divided into wards. Businesses operating from Noida, Ghaziabad, Gurugram or Faridabad are not in Delhi's jurisdiction at all, they register under Uttar Pradesh or Haryana, which is the most common misconception we correct for clients who think of themselves as being in the NCR.",
     costNote: null,
     proof: null,
     faqIds: ["multiple-state-registration", "who-needs-gst-registration", "how-long-gst-registration-takes"],
@@ -129,7 +129,7 @@ export const gstRegistrationStateCopy: StateCopy[] = [
   {
     stateSlug: "tamil-nadu",
     intro:
-      "Professional tax in Tamil Nadu is not a state-portal affair — it is levied by the municipal corporation or town panchayat the business sits in, so a Chennai business and a Coimbatore business register with different bodies under different rules. A GSTIN here starts 33. For the auto-component and textile exporters that make up much of our Tamil Nadu work, the registration itself is the straightforward part; the LUT and the AD Code that follow it are what determine whether the first export shipment moves on time.",
+      "Professional tax in Tamil Nadu is not a state-portal affair, it is levied by the municipal corporation or town panchayat the business sits in, so a Chennai business and a Coimbatore business register with different bodies under different rules. A GSTIN here starts 33. For the auto-component and textile exporters that make up much of our Tamil Nadu work, the registration itself is the straightforward part; the LUT and the AD Code that follow it are what determine whether the first export shipment moves on time.",
     statutory: [
       "GST state code 33. Every GSTIN issued in Tamil Nadu starts with these two digits.",
       "Professional tax is levied by municipal corporations, municipalities and town panchayats rather than by a single state authority, so the slab and the registering body depend on the local body. VERIFY: current slabs for Chennai, Coimbatore and Madurai.",
@@ -152,7 +152,7 @@ export const gstRegistrationStateCopy: StateCopy[] = [
   {
     stateSlug: "telangana",
     intro:
-      "Telangana has existed as a GST jurisdiction only since the state was formed, and businesses with pre-2014 history sometimes still hold Andhra Pradesh records that do not match their current address — a mismatch the officer will pick up. A GSTIN here starts 36, distinct from Andhra Pradesh's 37. The pharma manufacturers and IT-services firms around HITEC City that make up most of our Telangana work usually register for export-linked reasons rather than domestic turnover.",
+      "Telangana has existed as a GST jurisdiction only since the state was formed, and businesses with pre-2014 history sometimes still hold Andhra Pradesh records that do not match their current address, a mismatch the officer will pick up. A GSTIN here starts 36, distinct from Andhra Pradesh's 37. The pharma manufacturers and IT-services firms around HITEC City that make up most of our Telangana work usually register for export-linked reasons rather than domestic turnover.",
     statutory: [
       "GST state code 36, distinct from Andhra Pradesh's 37. Businesses that operated before the 2014 bifurcation should check which state their older records sit under.",
       "Professional tax is levied under the Telangana Tax on Professions, Trades, Callings and Employments Act, 1987. VERIFY: current slab figures.",
@@ -175,7 +175,7 @@ export const gstRegistrationStateCopy: StateCopy[] = [
   {
     stateSlug: "odisha",
     intro:
-      "Most GST registrations we file in Odisha are first registrations rather than additions to an existing compliance stack — MSMEs in and around Bhubaneswar and Cuttack registering because a customer, a marketplace or a bank has asked for a GSTIN. A number here starts 21. That profile matters, because a first-time registrant has no prior filing history for the officer to check against, and the documentation on the application has to carry the whole weight of the verification.",
+      "Most GST registrations we file in Odisha are first registrations rather than additions to an existing compliance stack, MSMEs in and around Bhubaneswar and Cuttack registering because a customer, a marketplace or a bank has asked for a GSTIN. A number here starts 21. That profile matters, because a first-time registrant has no prior filing history for the officer to check against, and the documentation on the application has to carry the whole weight of the verification.",
     statutory: [
       "GST state code 21. Every GSTIN issued in Odisha starts with these two digits.",
       "Professional tax is levied under the Odisha State Tax on Professions, Trades, Callings and Employments Act, 2000. VERIFY: current slab figures.",

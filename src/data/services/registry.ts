@@ -1,4 +1,4 @@
-// Service registry — the other half of the page budget.
+// Service registry, the other half of the page budget.
 //
 // Page count is the product of two scores: this file's `locationTier` per
 // service, and the fixed location ladder (T0 pillar -> T1 metros -> T2 states ->
@@ -9,7 +9,7 @@
 // A service earns a higher tier only if BOTH tests pass: people actually search
 // "<service> in <city>", AND the delivery or the rules genuinely differ by
 // place. "It would be nice to rank for it" is not one of the tests. Every tier
-// here has been argued down wherever the local-intent case was weak — 300 pages
+// here has been argued down wherever the local-intent case was weak, 300 pages
 // that rank beat 3,000 that do not.
 
 export type LocationTier = 0 | 1 | 2 | 3;
@@ -18,7 +18,7 @@ export interface ServiceEntry {
   id: string;
   routeBase: string;
   label: string;
-  /** The label as it reads in running prose — not derivable by lower-casing. */
+  /** The label as it reads in running prose, not derivable by lower-casing. */
   labelLower: string;
   pillarHref: string;
   headKeyword: string;
@@ -45,7 +45,7 @@ export const serviceRegistry: ServiceEntry[] = [
     locationTier: 3,
     startingPrice: 999,
     whyLocationMatters:
-      "The GSTIN itself encodes the state — its first two digits are the state code — and the application is processed by that state's jurisdictional officer, division and range. Registration is also per-state, so a business supplying from two states needs two registrations.",
+      "The GSTIN itself encodes the state, its first two digits are the state code, and the application is processed by that state's jurisdictional officer, division and range. Registration is also per-state, so a business supplying from two states needs two registrations.",
   },
   {
     id: "company-registration",
@@ -74,7 +74,7 @@ export const serviceRegistry: ServiceEntry[] = [
     // is real ("ITR filing near me"), jurisdictional variance is thin. City is
     // the deepest level this justifies; localities would be doorway pages.
     whyLocationMatters:
-      "Income tax law is central, so the only genuine local variable is the assessing ward or circle a filer sits under. Local intent is strong but jurisdictional variance is thin — city is the deepest defensible level.",
+      "Income tax law is central, so the only genuine local variable is the assessing ward or circle a filer sits under. Local intent is strong but jurisdictional variance is thin, city is the deepest defensible level.",
   },
   {
     id: "shop-and-establishment-registration",
@@ -110,7 +110,7 @@ export const serviceRegistry: ServiceEntry[] = [
     locationTier: 2,
     startingPrice: null,
     whyLocationMatters:
-      "Applications are filed at one of five regional Trade Marks Registry offices — Delhi, Mumbai, Kolkata, Chennai and Ahmedabad — determined by the applicant's principal place of business. Real variance, but only five buckets, so state is where it bottoms out in practice.",
+      "Applications are filed at one of five regional Trade Marks Registry offices, Delhi, Mumbai, Kolkata, Chennai and Ahmedabad, determined by the applicant's principal place of business. Real variance, but only five buckets, so state is where it bottoms out in practice.",
   },
   {
     id: "fssai-state-licence",

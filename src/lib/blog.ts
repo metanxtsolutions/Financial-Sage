@@ -31,7 +31,7 @@ export interface PostFrontmatter {
   date: string;
   excerpt: string;
   /**
-   * Optional. Set this only when a post is genuinely revised — it drives both
+   * Optional. Set this only when a post is genuinely revised, it drives both
    * the visible "Updated" line and schema.org dateModified, so an unearned
    * value is a false freshness signal.
    */

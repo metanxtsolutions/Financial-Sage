@@ -5,7 +5,7 @@
 // following weeks. This diffs the new URL set against a snapshot of the last
 // next-sitemap output.
 //
-// Additions are reported and allowed — new pages are the point. Removals fail,
+// Additions are reported and allowed, new pages are the point. Removals fail,
 // because a URL leaving the sitemap should always be a decision, never a
 // side effect.
 //
@@ -30,7 +30,7 @@ const added = [...current].filter((p) => !baseline.has(p)).sort();
 
 console.log("\nSitemap groups:");
 for (const group of sitemapGroups) {
-  console.log(`  /sitemap/${group.id}.xml  ${String(group.urls().length).padStart(4)} URLs  — ${group.label}`);
+  console.log(`  /sitemap/${group.id}.xml  ${String(group.urls().length).padStart(4)} URLs , ${group.label}`);
 }
 console.log(`  ${" ".repeat(String(current.size).length)}       ${current.size} unique URLs total (baseline: ${baseline.size})\n`);
 

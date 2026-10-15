@@ -61,7 +61,7 @@ export function ItrStepPayment({
           phone={phone}
           productinfo="Financial Sage ITR Filing"
           udf1={applicationId}
-          label={`Pay Now — ₹${price}`}
+          label={`Pay Now - ₹${price}`}
           variant="outline"
           className="w-full rounded-xl !border-itr-green-500 !bg-itr-green-500 px-5 py-3.5 text-sm font-semibold !text-white hover:!bg-itr-green-600"
         />

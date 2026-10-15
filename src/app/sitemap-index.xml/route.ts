@@ -8,7 +8,7 @@ import { lastModifiedForGroup, sitemapGroups } from "@/lib/sitemap-urls";
 // without ever serving anything there, so a route handler at /sitemap.xml is
 // rejected at build time as a conflict. /sitemap.xml is the URL already
 // submitted to Search Console and referenced from robots.txt, so it is rewritten
-// here rather than orphaned — and an index over per-service files is what a site
+// here rather than orphaned, and an index over per-service files is what a site
 // with multiple sitemaps should serve there anyway.
 
 export const dynamic = "force-static";

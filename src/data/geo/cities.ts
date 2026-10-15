@@ -7,7 +7,7 @@
 //
 // `hubs` and `sectors` are the raw material for the "≥3 proper nouns unique to
 // this place" rule. An entry with an empty `hubs` array is NOT ready for a page
-// — it is a row on its state hub until someone fills it in with real markets,
+//, it is a row on its state hub until someone fills it in with real markets,
 // industrial estates or IT parks. Never invent them.
 
 export interface GeoCity {

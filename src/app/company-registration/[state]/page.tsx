@@ -24,7 +24,7 @@ export async function generateMetadata({
   if (!page) return {};
   return withOpenGraph({
     title: { absolute: `Company Registration in ${page.state.name} | Financial Sage` },
-    description: `Everything specific to incorporating a company in ${page.state.name} — the state rules, which office handles it, and what it costs. Filed online by Financial Sage.`,
+    description: `Everything specific to incorporating a company in ${page.state.name}, the state rules, which office handles it, and what it costs. Filed online by Financial Sage.`,
     alternates: { canonical: `/company-registration/${page.state.slug}` },
   });
 }

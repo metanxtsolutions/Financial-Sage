@@ -63,7 +63,7 @@ export const reviewSources: ReviewSource[] = [
 // ---------------------------------------------------------------------------
 // Trust logo strip.
 //
-// !! EMPTY BY DESIGN — FILL THIS IN !!
+// !! EMPTY BY DESIGN: FILL THIS IN !!
 // Drop the image files into /public/logos/ and list them here. Only use logos
 // you actually have the right to display: a regulator's logo implies approval
 // you may not have, and a publication's logo implies coverage that has to be

@@ -17,7 +17,7 @@ import { siteConfig } from "@/lib/site-config";
 
 type OpenGraph = NonNullable<Metadata["openGraph"]>;
 
-export const ogImageAlt = `${siteConfig.name} — ${siteConfig.tagline}`;
+export const ogImageAlt = `${siteConfig.name}: ${siteConfig.tagline}`;
 export const ogImageSize = { width: 1200, height: 630 } as const;
 
 /** Absolute URL for a site path. "/" is the bare origin, matching the canonical. */

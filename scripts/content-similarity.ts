@@ -2,12 +2,12 @@
 //
 // Pairwise 5-gram Jaccard similarity across the location pages of each service.
 // Above the ceiling the build fails, because near-duplicate location pages do
-// not compete as N pages — Google deduplicates them before ranking is
+// not compete as N pages, Google deduplicates them before ranking is
 // considered, and they spend crawl budget you would rather spend elsewhere.
 //
 // Two deliberate choices about what gets compared:
 //
-//  1. Only the DIFFERENTIATING copy is measured — the per-place intro, the local
+//  1. Only the DIFFERENTIATING copy is measured, the per-place intro, the local
 //     demand paragraph, the sector mix. Shared components (documents, process,
 //     pricing) are excluded on purpose: they are the boilerplate a reader
 //     genuinely wants, and including them would drown the signal in text that is

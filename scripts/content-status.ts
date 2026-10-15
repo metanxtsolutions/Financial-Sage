@@ -1,7 +1,7 @@
 // The Phase 2 worklist: what is written, what is published, and what has to be
 // checked before anything can be published.
 //
-// contentStatus is the indexation gate — generateStaticParams filters on
+// contentStatus is the indexation gate, generateStaticParams filters on
 // "ready", so a draft state has no route, no sitemap entry and no internal
 // link. This report is what you work through to move one across.
 //
@@ -29,7 +29,7 @@ for (const serviceId of stateServiceIds) {
 
   for (const { state, copy } of draft) {
     verifyTotal += copy.verify.length;
-    console.log(`  ${state.name} — draft, ${copy.verify.length} item(s) to check:`);
+    console.log(`  ${state.name}, draft, ${copy.verify.length} item(s) to check:`);
     for (const item of copy.verify) console.log(`      [ ] ${item}`);
   }
 

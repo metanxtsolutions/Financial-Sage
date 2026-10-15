@@ -8,3 +8,4 @@
 # One full 40-character commit hash per line. Lines starting with # are
 # comments. The file is also passed to `git blame --ignore-revs-file`, so keep
 # to that format.
+b4b65c0e9b7b9a3c54c621b613dc2299c148bf0c

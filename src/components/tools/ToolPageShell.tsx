@@ -2,7 +2,9 @@ import { ReactNode } from "react";
 import Link from "next/link";
 import { Section } from "@/components/Container";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { JsonLd, breadcrumbSchema } from "@/lib/schema";
+import { JsonLd, breadcrumbSchema, webApplicationSchema } from "@/lib/schema";
+import { Sources } from "@/components/Sources";
+import { toolSources, type SourceId } from "@/data/sources";
 import { siteConfig } from "@/lib/site-config";
 
 export interface ToolSection {
@@ -22,6 +24,7 @@ export function ToolPageShell({
   ctaLabel = "Talk to a GST expert",
   ctaHref = "/gst-registration",
   footnote,
+  verified,
   children,
 }: {
   title: string;
@@ -31,8 +34,16 @@ export function ToolPageShell({
   ctaLabel?: string;
   ctaHref?: string;
   footnote?: ReactNode;
+  /** A recorded check of the tool's figures against one of its sources. */
+  verified?: { date: string; what: string; against: SourceId };
   children: ReactNode;
 }) {
+  // Every tool applies a rate, a fee or a deadline the government sets, so each
+  // one names where that figure is published. Keyed by slug in
+  // src/data/sources.ts; a tool with no entry shows no block.
+  const sources = toolSources[slug] ?? [];
+  const url = `${siteConfig.url}${section.href}/${slug}`;
+
   // These nine calculator pages carried no structured data at all.
   const crumbs = [
     { name: "Home", href: "/" },
@@ -43,9 +54,14 @@ export function ToolPageShell({
   return (
     <Section>
       <JsonLd
-        data={breadcrumbSchema(
-          crumbs.map((c) => ({ name: c.name, url: `${siteConfig.url}${c.href}` })),
-        )}
+        data={[
+          // Says what the page is: a free tool that runs in the browser, not an
+          // article about one.
+          webApplicationSchema({ name: title, description, url }),
+          breadcrumbSchema(
+            crumbs.map((c) => ({ name: c.name, url: `${siteConfig.url}${c.href}` })),
+          ),
+        ]}
       />
       <Breadcrumbs
         items={[
@@ -63,6 +79,8 @@ export function ToolPageShell({
       </div>
 
       {footnote && <div className="mt-6 max-w-2xl text-sm text-neutral-500">{footnote}</div>}
+
+      <Sources ids={sources} verified={verified} className="mt-8 max-w-2xl" />
 
       <p className="mt-6 text-sm text-neutral-500">
         Need help beyond a calculation?{" "}

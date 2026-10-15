@@ -2,7 +2,7 @@
 //
 // The indexation gate lives here. `contentStatus` starts at "draft" and
 // generateStaticParams filters on "ready", so a place that has not been through
-// the pre-publish QA has no route at all — it cannot be crawled, cannot be
+// the pre-publish QA has no route at all, it cannot be crawled, cannot be
 // indexed, and cannot be linked to by accident. Nothing flips to "ready" from a
 // generation run; a human moves it, after clearing `verify`.
 
@@ -21,7 +21,7 @@ export interface StateCopy {
   /**
    * 3-5 concrete statutory bullets: professional tax, stamp duty, Shops &
    * Establishments, GST state code, RoC office. Concrete figures wherever they
-   * exist — and a `VERIFY:` prefix wherever they do not yet.
+   * exist, and a `VERIFY:` prefix wherever they do not yet.
    */
   statutory: string[];
 
@@ -33,7 +33,7 @@ export interface StateCopy {
 
   /**
    * Real delivery proof for this state, or null. Never invented, never a client
-   * count we cannot stand behind — this is the one source a competitor cannot
+   * count we cannot stand behind, this is the one source a competitor cannot
    * copy, and the one that does the most damage if it is fiction.
    */
   proof: string | null;

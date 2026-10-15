@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import Link from "next/link";
 import { Section } from "@/components/Container";
 import { Button } from "@/components/Button";
@@ -21,12 +22,12 @@ import { serviceCategories, otherServices } from "@/data/other-services";
 import { testimonials } from "@/data/testimonials";
 import { getFaqsByIds } from "@/data/faqs";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: { absolute: `${siteConfig.name}: GST Registration & Filing Made Simple for Indian Businesses` },
   description:
     "Expert-assisted GST registration and filing for Indian MSMEs. GST registration from ₹999, transparent pricing, Pan-India coverage, response within 40 minutes.",
   alternates: { canonical: "/" },
-};
+});
 
 const homeFaqIds = [
   "who-needs-gst-registration",

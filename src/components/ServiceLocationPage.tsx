@@ -6,6 +6,8 @@ import { StickyLeadSidebar } from "@/components/StickyLeadSidebar";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { JsonLd, faqPageSchema, serviceSchema, breadcrumbSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
+import { Sources } from "@/components/Sources";
+import { locationServiceSources } from "@/data/sources";
 import {
   getLocationFaqs,
   getLocationPage,
@@ -124,6 +126,8 @@ export function ServiceLocationPage({
             <div className="mt-4">
               <FaqAccordion faqs={faqs} />
             </div>
+
+            <Sources ids={locationServiceSources[serviceId]} className="mt-10" />
 
             {otherCities.length > 0 && (
               <>

@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { JsonLd, orgPageSchema } from "@/lib/schema";
 import { Section, Container } from "@/components/Container";
 import { LeadForm } from "@/components/LeadForm";
 import { Button } from "@/components/Button";
 import { siteConfig, whatsappLink, defaultWhatsappMessage } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "Contact Us",
   description: "Get in touch with Financial Sage for GST registration and filing on WhatsApp, phone, email, or the form below.",
   alternates: { canonical: "/contact" },
-};
+});
 
 export default function ContactPage() {
   return (

@@ -5,7 +5,7 @@ import type { StateCopy } from "./types";
 // This is the strongest state layer we have, because incorporation stamp duty
 // is set by the state rather than centrally: the same company genuinely costs a
 // different amount to incorporate in Maharashtra than in Gujarat. That makes
-// these pages non-duplicative by construction — but only once the figures are
+// these pages non-duplicative by construction, but only once the figures are
 // real. Every rupee amount below is a VERIFY, and no entry may become "ready"
 // while its cost figures are unconfirmed. A wrong stamp duty number quoted to a
 // founder is worse than no page.
@@ -14,7 +14,7 @@ export const companyRegistrationStateCopy: StateCopy[] = [
   {
     stateSlug: "west-bengal",
     intro:
-      "Companies incorporated from anywhere in West Bengal file with the Registrar of Companies at Kolkata, which also serves the North Eastern states routed through it. A large share of the incorporations we handle here are conversions rather than fresh starts: family partnerships and long-running proprietorships in the Burrabazar trade turning private limited because a bank or a large customer has begun asking for one. Conversions carry a documentation problem a fresh incorporation does not — the existing business's assets and contracts have to move across cleanly.",
+      "Companies incorporated from anywhere in West Bengal file with the Registrar of Companies at Kolkata, which also serves the North Eastern states routed through it. A large share of the incorporations we handle here are conversions rather than fresh starts: family partnerships and long-running proprietorships in the Burrabazar trade turning private limited because a bank or a large customer has begun asking for one. Conversions carry a documentation problem a fresh incorporation does not, the existing business's assets and contracts have to move across cleanly.",
     statutory: [
       "Incorporations file with the Registrar of Companies at Kolkata.",
       "VERIFY: stamp duty payable on the MOA and on authorised share capital in West Bengal, and how it scales with capital.",
@@ -24,7 +24,7 @@ export const companyRegistrationStateCopy: StateCopy[] = [
     jurisdiction:
       "Name approval, SPICe+ filing and the Certificate of Incorporation all run through the MCA portal centrally, but the file sits with RoC Kolkata, and any resubmission or clarification comes from there.",
     costNote:
-      "VERIFY: the all-in figure for West Bengal — our fee plus MCA filing fees plus state stamp duty at the authorised capital most clients choose — and how it compares with an equivalent incorporation in a neighbouring state.",
+      "VERIFY: the all-in figure for West Bengal, our fee plus MCA filing fees plus state stamp duty at the authorised capital most clients choose, and how it compares with an equivalent incorporation in a neighbouring state.",
     proof: null,
     faqIds: ["cr-conversion", "cr-registered-office", "cr-timeline"],
     contentStatus: "draft",
@@ -42,11 +42,11 @@ export const companyRegistrationStateCopy: StateCopy[] = [
     statutory: [
       "Incorporations file with the Registrar of Companies at Mumbai.",
       "VERIFY: stamp duty payable on the MOA and on authorised share capital under the Maharashtra Stamp Act, including how it scales and whether a cap applies.",
-      "A new company needs professional tax registration under the Maharashtra act — PTEC on incorporation, and PTRC once it has payroll. VERIFY: current slabs and enrolment deadlines.",
+      "A new company needs professional tax registration under the Maharashtra act, PTEC on incorporation, and PTRC once it has payroll. VERIFY: current slabs and enrolment deadlines.",
       "Shops and Establishments registration under the 2017 Maharashtra act applies once there is a commercial premises. VERIFY: current fee bands by headcount.",
     ],
     jurisdiction:
-      "RoC Mumbai handles the filing. A registered office in Pune, Thane or Navi Mumbai is still RoC Mumbai — the state has one Registrar — but the professional tax and Shops and Establishments registrations that follow are handled by the local authority for that address.",
+      "RoC Mumbai handles the filing. A registered office in Pune, Thane or Navi Mumbai is still RoC Mumbai, the state has one Registrar, but the professional tax and Shops and Establishments registrations that follow are handled by the local authority for that address.",
     costNote:
       "VERIFY: the all-in figure for Maharashtra at typical authorised capital, and the size of the stamp duty gap against Gujarat and Karnataka. This comparison is the page's main reason to exist, so it must be right.",
     proof: null,
@@ -87,7 +87,7 @@ export const companyRegistrationStateCopy: StateCopy[] = [
   {
     stateSlug: "delhi",
     intro:
-      "Delhi files more new incorporations than almost anywhere else in India, and the volume works against you at exactly one step: name approval. A proposed name that resembles an existing company or a registered trademark is rejected, and in a register this crowded that happens more often here than elsewhere — costing a resubmission and roughly a week. The offsetting advantage is that Delhi levies no professional tax, so a company incorporated here has one fewer state registration to make and maintain than one in Mumbai or Bengaluru.",
+      "Delhi files more new incorporations than almost anywhere else in India, and the volume works against you at exactly one step: name approval. A proposed name that resembles an existing company or a registered trademark is rejected, and in a register this crowded that happens more often here than elsewhere, costing a resubmission and roughly a week. The offsetting advantage is that Delhi levies no professional tax, so a company incorporated here has one fewer state registration to make and maintain than one in Mumbai or Bengaluru.",
     statutory: [
       "Incorporations file with the Registrar of Companies at Delhi.",
       "VERIFY: stamp duty payable on the MOA and on authorised share capital as applied in Delhi.",
@@ -95,7 +95,7 @@ export const companyRegistrationStateCopy: StateCopy[] = [
       "Shops and Establishments registration under the Delhi Shops and Establishments Act, 1954, applies once there is a commercial premises. VERIFY: current fee and renewal cycle.",
     ],
     jurisdiction:
-      "RoC Delhi handles the filing. A registered office in Noida, Ghaziabad, Gurugram or Faridabad is not a Delhi address for this purpose — it falls under Uttar Pradesh or Haryana, with that state's stamp duty and its own Registrar, which is the most common assumption we have to correct for NCR founders.",
+      "RoC Delhi handles the filing. A registered office in Noida, Ghaziabad, Gurugram or Faridabad is not a Delhi address for this purpose, it falls under Uttar Pradesh or Haryana, with that state's stamp duty and its own Registrar, which is the most common assumption we have to correct for NCR founders.",
     costNote:
       "VERIFY: the all-in figure for Delhi at typical authorised capital, and quantify the saving from having no professional tax registration to maintain.",
     proof: null,
@@ -111,7 +111,7 @@ export const companyRegistrationStateCopy: StateCopy[] = [
   {
     stateSlug: "gujarat",
     intro:
-      "Gujarat incorporations file with RoC Ahmedabad, and a good share of them are export-facing from the start — Surat's textile and diamond trade, the chemicals and pharma corridor around Ahmedabad and Vadodara. That front-loads work a domestic incorporation can defer: the Import Export Code, the LUT and the AD Code all want a company that already exists, so the sequencing between incorporation and the first shipment is what usually determines whether a founder's timeline holds.",
+      "Gujarat incorporations file with RoC Ahmedabad, and a good share of them are export-facing from the start, Surat's textile and diamond trade, the chemicals and pharma corridor around Ahmedabad and Vadodara. That front-loads work a domestic incorporation can defer: the Import Export Code, the LUT and the AD Code all want a company that already exists, so the sequencing between incorporation and the first shipment is what usually determines whether a founder's timeline holds.",
     statutory: [
       "Incorporations file with the Registrar of Companies at Ahmedabad.",
       "VERIFY: stamp duty payable on the MOA and on authorised share capital under the Gujarat Stamp Act.",
@@ -135,7 +135,7 @@ export const companyRegistrationStateCopy: StateCopy[] = [
   {
     stateSlug: "tamil-nadu",
     intro:
-      "Companies incorporated anywhere in Tamil Nadu file with RoC Chennai. The state's incorporation mix leans manufacturing — auto components around Chennai and Coimbatore, textiles around Tiruppur — and manufacturing incorporations carry a step that service companies skip: the registered office is usually also a factory or a unit, so the address proof has to satisfy the RoC and then support a separate set of state licences afterwards. Professional tax here is a local-body matter, so which corporation the office sits in determines who the company enrols with.",
+      "Companies incorporated anywhere in Tamil Nadu file with RoC Chennai. The state's incorporation mix leans manufacturing, auto components around Chennai and Coimbatore, textiles around Tiruppur, and manufacturing incorporations carry a step that service companies skip: the registered office is usually also a factory or a unit, so the address proof has to satisfy the RoC and then support a separate set of state licences afterwards. Professional tax here is a local-body matter, so which corporation the office sits in determines who the company enrols with.",
     statutory: [
       "Incorporations file with the Registrar of Companies at Chennai.",
       "VERIFY: stamp duty payable on the MOA and on authorised share capital in Tamil Nadu.",
@@ -184,7 +184,7 @@ export const companyRegistrationStateCopy: StateCopy[] = [
   {
     stateSlug: "odisha",
     intro:
-      "Odisha incorporations file with RoC Cuttack. Most of what we handle here is a first company rather than a founder's second or third — an MSME around Bhubaneswar or Cuttack incorporating because a customer, a tender or a lender has made it a condition. First-time founders tend to under-size authorised capital to keep the immediate cost down, which is reasonable until the first outside investment arrives and the increase has to be filed and stamped separately.",
+      "Odisha incorporations file with RoC Cuttack. Most of what we handle here is a first company rather than a founder's second or third, an MSME around Bhubaneswar or Cuttack incorporating because a customer, a tender or a lender has made it a condition. First-time founders tend to under-size authorised capital to keep the immediate cost down, which is reasonable until the first outside investment arrives and the increase has to be filed and stamped separately.",
     statutory: [
       "Incorporations file with the Registrar of Companies at Cuttack.",
       "VERIFY: stamp duty payable on the MOA and on authorised share capital in Odisha.",

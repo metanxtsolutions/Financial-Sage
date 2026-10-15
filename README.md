@@ -33,7 +33,7 @@ ranking. When you're ready to build it:
 - **TypeScript**, **Tailwind CSS v4**
 - **Prisma 7** (PostgreSQL), used for the `Lead` model only in Phase 1
 - **Resend** (free tier) for lead notification emails
-- **next-sitemap** for `sitemap.xml` / `robots.txt`
+- **App Router metadata routes** for the sitemaps, `robots.txt` and `llms.txt` (`src/app/sitemap.ts`, `src/app/robots.ts`, `src/app/llms.txt/`)
 - **next-mdx-remote** + **gray-matter** for the GST Guides blog
 - **Zod** for form validation
 
@@ -96,16 +96,60 @@ not hardcoded in components, so it's editable without touching page logic:
 | "Other Services" footer stubs | `src/data/other-services.ts` |
 | HSN/SAC lookup data | `src/data/hsn-sac.ts` |
 | GST Guides blog posts | `content/gst-guides/*.mdx` |
+| Official sources, and which page cites which | `src/data/sources.ts` |
+| "Last updated" dates for pillars, cluster and legal pages | `src/data/content-dates.ts` |
+| Named authors and reviewers (empty until a real person is added) | `src/data/authors.ts` |
 
-**Adding a new city page**: add an entry to `src/data/cities.ts`, then add the
-matching `[state, city]` pair to the `cityPaths` array in
-`next-sitemap.config.js` so it's included in the sitemap. That's it. The
-route template at `src/app/gst-registration/[state]/[city]/page.tsx` handles
-the rest.
+**Adding a new city page**: add an entry to `src/data/cities.ts`. The route
+template at `src/app/gst-registration/[state]/[city]/page.tsx` and the sitemap
+both read that file, so there is nothing else to update.
 
-**Adding a new cluster page**: same pattern. Add an entry to
-`src/data/gst-clusters.ts` and to the `clusterSlugs` array in
-`next-sitemap.config.js`.
+**Adding a new cluster page**: add an entry to `src/data/gst-clusters.ts`, and
+its date to `clusterDates` in `src/data/content-dates.ts`. The build fails with
+a message naming the page if the date is missing.
+
+**Adding a new guide**: add an `.mdx` file to `content/gst-guides/`. Besides the
+title, description, category, date and excerpt, the frontmatter must carry
+`answer`, `takeaways` (three to five) and `sources`. The build fails with the
+file named if any is missing. See "AEO and GEO" below for what each is for.
+
+## AEO and GEO
+
+Answer engines (Google AI Overviews, ChatGPT, Perplexity, Claude) quote pages
+they can read, date, attribute and check. Each piece below serves one of those.
+
+| What | Where | Notes |
+|---|---|---|
+| Crawler policy | `src/app/robots.ts` | AI crawlers are named and allowed. The file explains how to block the training crawlers without leaving AI search. |
+| `/llms.txt`, `/llms-full.txt` | `src/lib/llms.ts` | A markdown map of the site, and the full text of every guide and FAQ. Generated from the same data as the pages. |
+| Open Graph | `src/lib/metadata.ts` | Every page wraps its metadata in `withOpenGraph()`, which derives `og:url` from the canonical. A page with no canonical fails the build. |
+| Structured data | `src/lib/schema.tsx` | The firm and the website each have one `@id` that every page refers to. |
+| Short answer and key takeaways | guide frontmatter | Shown at the top of each guide and marked up as Speakable. They must say nothing the body does not. |
+| Tables in guides | `<Table>` in MDX | See `src/components/MdxContent.tsx` for the syntax. |
+| HowTo | `howTo` in guide frontmatter, `howToName` on a cluster page | Only for a page that shows the same steps as a numbered list. |
+| Official sources | `src/data/sources.ts`, `src/components/Sources.tsx` | A source says where a rule is published. It does not say the page was checked against it; that is a separate, dated claim. |
+| Dates | `src/data/content-dates.ts`, guide frontmatter | See below. |
+| Authors | `src/data/authors.ts` | See below. |
+
+### Dates are recorded, never generated
+
+"Last updated", `dateModified` and the sitemap's `<lastmod>` all come from a date
+someone wrote down: `src/data/content-dates.ts` for pillars, cluster pages and
+legal pages, and `date` / `updated` in a guide's frontmatter. Nothing reads the
+clock. A page with no recorded date publishes none.
+
+When you change a page's copy, change its date in the same commit.
+`npm run content:dates` lists every page whose file is newer in git than its
+recorded date. If a commit only restyled or refactored a page, add its hash to
+`scripts/content-dates-ignore.txt` instead of moving the date.
+
+### Authors and reviewers
+
+`src/data/authors.ts` is empty, and guides are attributed to the firm. The
+byline, the "Reviewed by" line, Person markup and the authors section on
+`/about` are all built and appear as soon as a person is added to that file.
+Add only real people with credentials that can be checked, and set
+`reviewedBy` / `reviewed` on a guide only when that person has reviewed it.
 
 ## A deliberate omission: review/rating schema
 
@@ -135,8 +179,8 @@ worth knowing before extending it:
 2. Import it in [Vercel](https://vercel.com/new).
 3. Add all the environment variables from `.env.example` in the Vercel
    project settings (Production + Preview).
-4. Deploy. Vercel runs `npm run build`, which also triggers
-   `next-sitemap` via the `postbuild` script.
+4. Deploy. Vercel runs `npm run build`. The sitemaps, `robots.txt` and
+   `llms.txt` are routes inside the app, so the build produces them.
 5. In your domain registrar / DNS provider, point `financialsage.co.in`
    (and `www`) at Vercel per their domain instructions, and add the domain
    in the Vercel project's Domains tab.
@@ -161,7 +205,12 @@ Since both domains share one Next.js app, you can't easily hit
 
 ```bash
 npm run dev      # local dev server (Turbopack)
-npm run build    # production build + sitemap generation
+npm run build    # production build
 npm run start    # run the production build locally
 npm run lint     # ESLint
+npm run check    # typecheck, sitemap parity, location-page similarity
+
+npm run content:status   # which location pages are draft or ready
+npm run content:dates    # pages whose source is newer than their recorded date
+npm run verify:geo       # statutory figures still marked VERIFY
 ```

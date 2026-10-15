@@ -4,7 +4,7 @@
 // publishedStates() is the ONLY thing route files may call from
 // generateStaticParams. It filters on contentStatus === "ready", so a state
 // whose statutory figures have not been checked has no route, 404s, and cannot
-// end up in the sitemap or the internal link graph. Draft is not "hidden" — it
+// end up in the sitemap or the internal link graph. Draft is not "hidden", it
 // genuinely does not exist as a URL.
 
 import { getState, type StateEntry } from "@/data/geo/states";

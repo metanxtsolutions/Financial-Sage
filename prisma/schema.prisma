@@ -1,8 +1,8 @@
-// Prisma schema for Financial Sage — Phase 1 (public site + lead capture only),
+// Prisma schema for Financial Sage, Phase 1 (public site + lead capture only),
 // plus the standalone ITR filing wizard (ItrApplication/ItrDocument below).
 // The ITR wizard intentionally has no user accounts: it's a single-session
 // pay-then-upload flow, not the client portal. A full client portal (User,
-// OTP auth, GSTRecord, ServiceHistory) is still Phase 2 — see README.md.
+// OTP auth, GSTRecord, ServiceHistory) is still Phase 2, see README.md.
 
 generator client {
   provider = "prisma-client"
@@ -73,7 +73,7 @@ model ItrApplication {
 }
 
 // Metadata only. The actual file bytes are not persisted anywhere durable
-// yet — that needs a cloud storage provider (Vercel Blob, S3, Cloudinary)
+// yet, that needs a cloud storage provider (Vercel Blob, S3, Cloudinary)
 // to be chosen before this is production-ready. See README.md.
 model ItrDocument {
   id            String         @id @default(cuid())

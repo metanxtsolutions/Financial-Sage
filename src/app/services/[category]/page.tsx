@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Section } from "@/components/Container";
@@ -6,6 +7,8 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { StickyLeadSidebar } from "@/components/StickyLeadSidebar";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { JsonLd, faqPageSchema, breadcrumbSchema } from "@/lib/schema";
+import { Sources } from "@/components/Sources";
+import { sourcesForCategory } from "@/data/sources";
 import { siteConfig } from "@/lib/site-config";
 import {
   getServicesByCategory,
@@ -30,11 +33,11 @@ export async function generateMetadata({
   const { category } = await params;
   const entry = getServiceCategoryBySlug(category);
   if (!entry) return {};
-  return {
+  return withOpenGraph({
     title: { absolute: entry.metaTitle },
     description: entry.metaDescription,
     alternates: { canonical: `/services/${entry.slug}` },
-  };
+  });
 }
 
 export default async function ServiceCategoryPage({
@@ -133,6 +136,8 @@ export default async function ServiceCategoryPage({
             <div className="mt-4">
               <FaqAccordion faqs={entry.faqs} />
             </div>
+
+            <Sources ids={sourcesForCategory(entry.id)} className="mt-10" />
 
             <h2 className="mt-12 text-2xl font-bold text-neutral-900">Other Service Categories</h2>
             <div className="mt-4 flex flex-wrap gap-2">

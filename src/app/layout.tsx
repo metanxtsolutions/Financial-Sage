@@ -9,6 +9,7 @@ import { Analytics } from "@/components/Analytics";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { JsonLd, organizationSchema, localBusinessSchema, webSiteSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
+import { sharedOpenGraph } from "@/lib/metadata";
 import { buildSearchIndex } from "@/lib/search-index";
 
 const geistSans = Geist({
@@ -35,12 +36,10 @@ export const metadata: Metadata = {
   },
   description:
     "GST registration from ₹999, monthly GST filing, and compliance support for Indian MSMEs. Transparent pricing, WhatsApp-first support, Pan-India coverage.",
-  openGraph: {
-    type: "website",
-    locale: "en_IN",
-    siteName: siteConfig.name,
-    url: siteConfig.url,
-  },
+  // No og:url here. A url in the layout is inherited by every page that does
+  // not set its own openGraph, which made 171 pages claim to be the homepage.
+  // Pages get theirs from withOpenGraph() in @/lib/metadata.
+  openGraph: sharedOpenGraph,
   twitter: {
     card: "summary_large_image",
   },
@@ -61,7 +60,7 @@ export default function RootLayout({
 
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col pb-16 lg:pb-0">

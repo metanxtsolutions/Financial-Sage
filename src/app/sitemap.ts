@@ -9,7 +9,7 @@ import { sitemapGroups, urlsForGroup } from "@/lib/sitemap-urls";
 // comments record that going stale twice: a duplicated cluster list drifted, and
 // a hardcoded blog list drifted. This route runs as TypeScript inside the build,
 // imports the same modules the pages import, and so cannot drift by
-// construction — a new city or guide is in the sitemap the moment it exists.
+// construction, a new city or guide is in the sitemap the moment it exists.
 //
 // generateSitemaps() emits one file per service, so Search Console's coverage
 // report answers "which service's location pages are not indexing" instead of
@@ -25,9 +25,11 @@ export default async function sitemap(props: {
   id: Promise<string>;
 }): Promise<MetadataRoute.Sitemap> {
   const id = await props.id;
-  return urlsForGroup(id).map(({ path, priority, changeFrequency }) => ({
+  // lastModified is a recorded content date or nothing. It used to be the
+  // build time, which stamped every URL as changed on every deploy.
+  return urlsForGroup(id).map(({ path, priority, changeFrequency, lastModified }) => ({
     url: `${siteConfig.url}${path === "/" ? "" : path}`,
-    lastModified: new Date(),
+    ...(lastModified ? { lastModified } : {}),
     changeFrequency,
     priority,
   }));

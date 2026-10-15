@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { GstinValidator } from "@/components/tools/GstinValidator";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "GSTIN Format Validator",
   description: "Check whether a 15-digit GSTIN follows the correct format: state code, PAN, entity code, and checksum.",
   alternates: { canonical: "/gst-tools/gstin-validator" },
-};
+});
 
 export default function GstinValidatorPage() {
   return (

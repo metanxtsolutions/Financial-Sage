@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { JsonLd, itemListSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
 import Link from "next/link";
@@ -6,11 +7,11 @@ import { Badge } from "@/components/Badge";
 import { Section } from "@/components/Container";
 import { getAllPosts, blogCategories } from "@/lib/blog";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "GST Guides: Registration, Filing & Compliance Explained",
   description: "Plain-English guides on GST registration, filing, notices, ITC, and compliance for Indian MSMEs and freelancers.",
   alternates: { canonical: "/gst-guides" },
-};
+});
 
 export default function GstGuidesPage() {
   const posts = getAllPosts();

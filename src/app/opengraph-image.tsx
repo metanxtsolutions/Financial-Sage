@@ -1,12 +1,16 @@
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/lib/site-config";
+import { ogImageAlt, ogImageSize } from "@/lib/metadata";
 
 // Sitewide Open Graph / Twitter card. The site had none, so every share on
 // WhatsApp, LinkedIn or an AI answer surface rendered without an image.
 // Generated at build time rather than shipped as a binary, so it stays in step
 // with siteConfig instead of going stale in /public.
-export const alt = `${siteConfig.name} — ${siteConfig.tagline}`;
-export const size = { width: 1200, height: 630 };
+//
+// alt and size come from @/lib/metadata, which also names this image in every
+// page's own Open Graph block.
+export const alt = ogImageAlt;
+export const size = { ...ogImageSize };
 export const contentType = "image/png";
 
 export default async function OpengraphImage() {

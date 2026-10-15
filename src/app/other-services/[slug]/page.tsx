@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Section } from "@/components/Container";
@@ -12,6 +13,8 @@ import {
 } from "@/data/other-services";
 import { getLocationPages, hasLocationPages, locationServices } from "@/data/service-locations";
 import { JsonLd, breadcrumbSchema, serviceSchema } from "@/lib/schema";
+import { Sources } from "@/components/Sources";
+import { sourcesForService } from "@/data/sources";
 import { siteConfig } from "@/lib/site-config";
 
 export const dynamicParams = false;
@@ -24,11 +27,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const service = getOtherService(slug);
   if (!service) return {};
-  return {
+  return withOpenGraph({
     title: { absolute: service.metaTitle },
     description: service.metaDescription,
     alternates: { canonical: `/other-services/${slug}` },
-  };
+  });
 }
 
 export default async function OtherServicePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -147,6 +150,10 @@ export default async function OtherServicePage({ params }: { params: Promise<{ s
               </div>
             </>
           )}
+
+          {/* The regulator for this service. Empty for the few that have no
+              single one, in which case nothing renders. */}
+          <Sources ids={sourcesForService(service.slug, service.category)} className="mt-10" />
 
           <p className="mt-10 text-sm text-neutral-500">
             {service.category === "international" ? (

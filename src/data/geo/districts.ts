@@ -1,4 +1,4 @@
-// District lookup — deliberately NOT a page source.
+// District lookup, deliberately NOT a page source.
 //
 // India has roughly 780 districts, and the single most expensive mistake in a
 // programmatic location build is treating that as 780 pages per service. Almost

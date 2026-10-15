@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import Link from "next/link";
 import { Section } from "@/components/Container";
 import { siteConfig } from "@/lib/site-config";
 import { getLocationPages } from "@/data/service-locations";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "File Your Income Tax Return in Minutes",
   description:
     "Simple, secure, expert-assisted ITR filing. Pick your ITR type, pay ₹999, upload your documents, and our tax expert takes it from there.",
   alternates: { canonical: "/itr-filing" },
-};
+});
 
 const benefits = ["Expert Filing", "Maximum Refund", "Secure Document Upload", "Dedicated Support"];
 

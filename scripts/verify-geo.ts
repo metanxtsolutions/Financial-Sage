@@ -12,7 +12,7 @@ import { geoCities } from "@/data/geo/cities";
 
 let outstanding = 0;
 
-console.log("\n=== STATES — statutory facts awaiting verification ===\n");
+console.log("\n=== STATES, statutory facts awaiting verification ===\n");
 for (const state of states) {
   if (state.verify.length === 0) continue;
   outstanding += state.verify.length;
@@ -22,7 +22,7 @@ for (const state of states) {
 }
 
 const citiesNeedingWork = geoCities.filter((c) => (c.verify?.length ?? 0) > 0);
-console.log("=== CITIES — local material awaiting research ===\n");
+console.log("=== CITIES, local material awaiting research ===\n");
 for (const city of citiesNeedingWork) {
   outstanding += city.verify!.length;
   console.log(`${city.name}, ${city.stateSlug}  (tier ${city.tier})`);
@@ -30,7 +30,7 @@ for (const city of citiesNeedingWork) {
 }
 
 const notPageReady = geoCities.filter((c) => c.hubs.length === 0 || c.sectors.length === 0);
-console.log("\n=== NOT PAGE-READY — no hubs or no sectors, so no page ===\n");
+console.log("\n=== NOT PAGE-READY, no hubs or no sectors, so no page ===\n");
 console.log(
   notPageReady.length === 0
     ? "  (none)"

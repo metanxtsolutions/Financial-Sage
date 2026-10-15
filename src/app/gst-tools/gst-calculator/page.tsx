@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { GstCalculator } from "@/components/tools/GstCalculator";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "GST Calculator: Add or Remove GST Online",
   description: "Free GST calculator. Add GST to a base amount or remove GST from a final price, with the CGST/SGST or IGST split.",
   alternates: { canonical: "/gst-tools/gst-calculator" },
-};
+});
 
 export default function GstCalculatorPage() {
   return (

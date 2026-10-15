@@ -2,7 +2,7 @@
 //
 // The reason this is not an inline template string: three UTs (Delhi,
 // Chandigarh, Puducherry) are the same thing as their principal city, so the
-// naive /service/state/city form produces /gst-registration/delhi/delhi — a
+// naive /service/state/city form produces /gst-registration/delhi/delhi, a
 // doubled segment nobody would type or link to. Those render one level up.
 
 import { getState, states, type StateEntry } from "@/data/geo/states";
@@ -72,7 +72,7 @@ export function statePath(routeBase: string, state: Pick<StateEntry, "slug">): s
  * Every doubled path that a singleSegment UT would otherwise have produced, so
  * next.config.ts can emit a permanent redirect for each. These URLs are live
  * today (/gst-registration/delhi/delhi is indexed), so they must be redirected
- * rather than dropped — see the migration note in src/app/sitemap.ts.
+ * rather than dropped, see the migration note in src/app/sitemap.ts.
  */
 export function doubledSegmentPaths(routeBase: string): { from: string; to: string }[] {
   return states

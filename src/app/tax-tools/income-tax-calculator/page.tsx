@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import Link from "next/link";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { IncomeTaxCalculator } from "@/components/tools/IncomeTaxCalculator";
-import { taxYear } from "@/data/tax-rates";
+import { ratesVerified, taxYear } from "@/data/tax-rates";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: `Income Tax Calculator FY ${taxYear.financialYear}: Old vs New Regime`,
   description:
     "Free income tax calculator. Enter your income and deductions to compare tax under the old and new regimes, with a full slab-by-slab breakdown.",
   alternates: { canonical: "/tax-tools/income-tax-calculator" },
-};
+});
 
 export default function IncomeTaxCalculatorPage() {
   return (
@@ -20,6 +21,7 @@ export default function IncomeTaxCalculatorPage() {
       section={{ label: "Income Tax Tools", href: "/tax-tools" }}
       ctaLabel="Get your ITR filed"
       ctaHref="/itr-filing"
+      verified={ratesVerified}
       footnote={
         <>
           The new regime is the default from FY 2023-24 onward. You can still opt into the old

@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { JsonLd, itemListSchema } from "@/lib/schema";
 import Link from "next/link";
 import { Section } from "@/components/Container";
 import { siteConfig } from "@/lib/site-config";
 import { tools } from "@/data/tools";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "Free GST Tools & Calculators",
   description:
     "Free GST calculator, reverse GST calculator, late fee & interest calculators, HSN/SAC search, GSTIN validator, and due-date checker. No login required.",
   alternates: { canonical: "/gst-tools" },
-};
+});
 
 export default function GstToolsPage() {
   return (

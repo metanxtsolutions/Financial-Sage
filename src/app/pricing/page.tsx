@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { Section } from "@/components/Container";
 import { PricingTable } from "@/components/PricingTable";
 import { FaqAccordion } from "@/components/FaqAccordion";
@@ -6,11 +7,11 @@ import { JsonLd, faqPageSchema, pricingOfferSchema } from "@/lib/schema";
 import { getFaqsByIds } from "@/data/faqs";
 import { monthlyFilingFrom, pricingTiers } from "@/data/pricing";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "Pricing: Transparent GST Registration & Filing Plans",
   description: `GST registration from ₹999, monthly filing from ₹${monthlyFilingFrom}. No hidden fees, published pricing for every plan.`,
   alternates: { canonical: "/pricing" },
-};
+});
 
 const faqIds = ["govt-fee-gst-registration", "payment-refund-policy", "how-long-gst-registration-takes"];
 

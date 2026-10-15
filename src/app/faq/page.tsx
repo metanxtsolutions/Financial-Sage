@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { Section } from "@/components/Container";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { JsonLd, faqPageSchema } from "@/lib/schema";
+import { Sources } from "@/components/Sources";
+import { pageSources } from "@/data/sources";
 import { faqs, faqCategoryLabels, getFaqsByCategory, type FaqCategory } from "@/data/faqs";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "GST FAQs: Registration, Filing, Compliance & ITC",
   description:
     "Answers to 60+ common questions on GST registration, return filing, compliance, penalties, ITC, and GST for e-commerce and freelancers.",
   alternates: { canonical: "/faq" },
-};
+});
 
 const categoryOrder = Object.keys(faqCategoryLabels) as FaqCategory[];
 
@@ -38,6 +41,8 @@ export default function FaqPage() {
             );
           })}
         </div>
+
+        <Sources ids={pageSources["/faq"]} className="mt-12 max-w-3xl" />
       </Section>
     </>
   );

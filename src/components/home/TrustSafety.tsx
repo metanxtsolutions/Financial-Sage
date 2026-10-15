@@ -71,8 +71,8 @@ export function TrustSafety() {
           . To check whether a GSTIN quoted to you is real, use our{" "}
           <Link href="/gst-tools/gstin-validator" className="font-medium text-brand-700 underline">
             GSTIN validator
-          </Link>{" "}
-          — it is free and needs no login.
+          </Link>
+          . It is free and needs no login.
         </p>
       </div>
     </div>

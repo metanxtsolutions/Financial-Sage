@@ -1,19 +1,28 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import Link from "next/link";
 import { Section } from "@/components/Container";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { StickyLeadSidebar } from "@/components/StickyLeadSidebar";
 import { FaqAccordion } from "@/components/FaqAccordion";
-import { JsonLd, faqPageSchema, serviceSchema, breadcrumbSchema } from "@/lib/schema";
+import { JsonLd, faqPageSchema, serviceSchema, breadcrumbSchema, webPageSchema, howToSchema } from "@/lib/schema";
+import { Sources } from "@/components/Sources";
+import { LastUpdated } from "@/components/LastUpdated";
+import { pageSources } from "@/data/sources";
+import { requirePageDate } from "@/data/content-dates";
 import { siteConfig } from "@/lib/site-config";
 import { getFaqsByIds } from "@/data/faqs";
 
-export const metadata: Metadata = {
-  title: "GST Registration Online in India: Documents, Fees & Process",
-  description:
-    "Complete guide to GST registration in India: eligibility, turnover thresholds, documents by entity type, fees, process, and penalties. Registration starts from ₹999.",
-  alternates: { canonical: "/gst-registration" },
-};
+const path = "/gst-registration";
+const title = "GST Registration Online in India: Documents, Fees & Process";
+const description =
+  "Complete guide to GST registration in India: eligibility, turnover thresholds, documents by entity type, fees, process, and penalties. Registration starts from ₹999.";
+
+export const metadata: Metadata = withOpenGraph({
+  title,
+  description,
+  alternates: { canonical: path },
+});
 
 const pageFaqIds = [
   "who-needs-gst-registration",
@@ -79,6 +88,21 @@ export default function GstRegistrationPage() {
             description: "Expert-assisted GST registration for Indian businesses, starting from ₹999.",
             url: `${siteConfig.url}/gst-registration`,
           }),
+          // The document itself: when its copy last changed and where the rules
+          // it describes are published.
+          webPageSchema({
+            name: title,
+            description,
+            url: `${siteConfig.url}${path}`,
+            dateModified: requirePageDate(path),
+            sources: pageSources[path],
+          }),
+          // The numbered process further down the page, as data.
+          howToSchema({
+            name: "How GST registration works, step by step",
+            url: `${siteConfig.url}${path}`,
+            steps: processSteps.map((step) => ({ name: step.title, text: step.body })),
+          }),
           faqPageSchema(faqs),
           breadcrumbSchema(breadcrumbs),
         ]}
@@ -98,6 +122,7 @@ export default function GstRegistrationPage() {
               to GSTIN issuance, from ₹999, with filing completed within 24 hours of receiving your
               documents and payment.
             </p>
+            <LastUpdated path={path} className="mt-3" />
 
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">What is GST & GSTIN?</h2>
             <p className="mt-3 text-neutral-700">
@@ -223,6 +248,8 @@ export default function GstRegistrationPage() {
             <div className="mt-4">
               <FaqAccordion faqs={faqs} />
             </div>
+
+            <Sources ids={pageSources[path]} className="mt-10" />
           </div>
 
           <div>

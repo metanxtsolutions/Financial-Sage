@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
+import { LastUpdated } from "@/components/LastUpdated";
 import { Section, Container } from "@/components/Container";
 import { siteConfig } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "Refund Policy",
   description: "Financial Sage's refund policy for GST registration, filing, and compliance services.",
   alternates: { canonical: "/refund-policy" },
-};
+});
 
 export default function RefundPolicyPage() {
   return (
     <Section>
       <Container className="max-w-3xl px-0">
         <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">Refund Policy</h1>
-        <p className="mt-2 text-sm text-neutral-500">Last updated: {new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}</p>
+        <LastUpdated path="/refund-policy" label="Last updated:" className="mt-2" />
 
         <p className="mt-6 text-neutral-700">
           Our fee covers the professional work of reviewing your documents, preparing your

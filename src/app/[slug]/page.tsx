@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Section } from "@/components/Container";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { StickyLeadSidebar } from "@/components/StickyLeadSidebar";
 import { FaqAccordion } from "@/components/FaqAccordion";
-import { JsonLd, faqPageSchema, serviceSchema, breadcrumbSchema } from "@/lib/schema";
+import { JsonLd, faqPageSchema, serviceSchema, breadcrumbSchema, webPageSchema, howToSchema } from "@/lib/schema";
+import { Sources } from "@/components/Sources";
+import { LastUpdated } from "@/components/LastUpdated";
+import { gstRegistrationSources } from "@/data/sources";
+import { requirePageDate } from "@/data/content-dates";
 import { siteConfig } from "@/lib/site-config";
 import { getClusterBySlug, getClusterSlugs } from "@/data/gst-clusters";
 import { getFaqsByIds } from "@/data/faqs";
@@ -23,11 +28,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const cluster = getClusterBySlug(slug);
   if (!cluster) return {};
-  return {
+  return withOpenGraph({
     title: { absolute: cluster.metaTitle },
     description: cluster.metaDescription,
     alternates: { canonical: `/${cluster.slug}` },
-  };
+  });
 }
 
 export default async function ClusterPageRoute({ params }: { params: Promise<{ slug: string }> }) {
@@ -40,6 +45,7 @@ export default async function ClusterPageRoute({ params }: { params: Promise<{ s
     .map((s) => getClusterBySlug(s))
     .filter((c): c is NonNullable<typeof c> => Boolean(c));
 
+  const path = `/${cluster.slug}`;
   const breadcrumbs = [
     { name: "Home", url: siteConfig.url },
     { name: "GST Registration", url: `${siteConfig.url}/gst-registration` },
@@ -55,6 +61,28 @@ export default async function ClusterPageRoute({ params }: { params: Promise<{ s
             description: cluster.metaDescription,
             url: `${siteConfig.url}/${cluster.slug}`,
           }),
+          // requirePageDate throws for a slug with no entry in
+          // src/data/content-dates.ts, so a new cluster page cannot ship undated.
+          webPageSchema({
+            name: cluster.h1,
+            description: cluster.metaDescription,
+            url: `${siteConfig.url}${path}`,
+            dateModified: requirePageDate(path),
+            sources: gstRegistrationSources,
+          }),
+          ...(cluster.howToName
+            ? [
+                howToSchema({
+                  name: cluster.howToName,
+                  url: `${siteConfig.url}${path}`,
+                  // Titles on these pages carry their own "1. " numbering.
+                  steps: cluster.highlights.map((h) => ({
+                    name: h.title.replace(/^\d+\.\s*/, ""),
+                    text: h.body,
+                  })),
+                }),
+              ]
+            : []),
           faqPageSchema(faqs),
           breadcrumbSchema(breadcrumbs),
         ]}
@@ -73,6 +101,7 @@ export default async function ClusterPageRoute({ params }: { params: Promise<{ s
             <span className="eyebrow">GST Registration</span>
             <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">{cluster.h1}</h1>
             <p className="mt-4 text-lg text-neutral-600">{cluster.intro}</p>
+            <LastUpdated path={path} className="mt-3" />
 
             <div className="mt-8 grid grid-cols-1 gap-4">
               {cluster.highlights.map((h) => (
@@ -112,6 +141,8 @@ export default async function ClusterPageRoute({ params }: { params: Promise<{ s
                 </ul>
               </>
             )}
+
+            <Sources ids={gstRegistrationSources} className="mt-10" />
 
             <p className="mt-8 text-sm text-neutral-500">
               For the full GST registration walkthrough, covering eligibility, documents, fees, and

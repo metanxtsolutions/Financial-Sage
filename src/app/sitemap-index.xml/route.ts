@@ -1,5 +1,5 @@
 import { siteConfig } from "@/lib/site-config";
-import { sitemapGroups } from "@/lib/sitemap-urls";
+import { lastModifiedForGroup, sitemapGroups } from "@/lib/sitemap-urls";
 
 // The sitemap index, served at /sitemap.xml via a rewrite in next.config.ts.
 //
@@ -14,12 +14,18 @@ import { sitemapGroups } from "@/lib/sitemap-urls";
 export const dynamic = "force-static";
 
 export function GET() {
-  const lastmod = new Date().toISOString();
+  // <lastmod> is the newest recorded content date inside the file, and is left
+  // out for a group with none. It used to be the build time.
   const entries = sitemapGroups
-    .map(
-      (group) =>
-        `  <sitemap>\n    <loc>${siteConfig.url}/sitemap/${group.id}.xml</loc>\n    <lastmod>${lastmod}</lastmod>\n  </sitemap>`,
-    )
+    .map((group) => {
+      const lastmod = lastModifiedForGroup(group.id);
+      return [
+        "  <sitemap>",
+        `    <loc>${siteConfig.url}/sitemap/${group.id}.xml</loc>`,
+        ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
+        "  </sitemap>",
+      ].join("\n");
+    })
     .join("\n");
 
   return new Response(

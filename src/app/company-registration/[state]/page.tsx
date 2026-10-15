@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { StateLocationPage } from "@/components/StateLocationPage";
 import { getPublishedState, publishedStates } from "@/data/services/copy";
 
@@ -21,11 +22,11 @@ export async function generateMetadata({
   const { state } = await params;
   const page = getPublishedState("company-registration", state);
   if (!page) return {};
-  return {
+  return withOpenGraph({
     title: { absolute: `Company Registration in ${page.state.name} | Financial Sage` },
     description: `Everything specific to incorporating a company in ${page.state.name} — the state rules, which office handles it, and what it costs. Filed online by Financial Sage.`,
     alternates: { canonical: `/company-registration/${page.state.slug}` },
-  };
+  });
 }
 
 export default async function StatePage({ params }: { params: Promise<{ state: string }> }) {

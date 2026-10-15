@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { LateFeeCalculator } from "@/components/tools/LateFeeCalculator";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "GST Late Fee Calculator",
   description: "Estimate the late fee for filing GSTR-1 or GSTR-3B after the due date, for a regular or NIL return.",
   alternates: { canonical: "/gst-tools/gst-late-fee-calculator" },
-};
+});
 
 export default function LateFeeCalculatorPage() {
   return (

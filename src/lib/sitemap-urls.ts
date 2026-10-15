@@ -12,7 +12,8 @@ import { clusterPages } from "@/data/gst-clusters";
 import { otherServices, serviceCategories } from "@/data/other-services";
 import { cities } from "@/data/cities";
 import { getLocationPages } from "@/data/service-locations";
-import { getAllPostSlugs } from "@/lib/blog";
+import { getAllPosts } from "@/lib/blog";
+import { getPageDate } from "@/data/content-dates";
 import { publishedStates } from "@/data/services/copy";
 import { cityPath, statePath } from "@/lib/geo";
 
@@ -22,6 +23,13 @@ export interface SitemapUrl {
   path: string;
   priority: number;
   changeFrequency: ChangeFrequency;
+  /**
+   * "YYYY-MM-DD", present only when a real date is recorded for the page. A URL
+   * without one is published with no <lastmod> at all, which search engines
+   * handle fine; a <lastmod> that is always the build time is what they learn
+   * to ignore.
+   */
+  lastModified?: string;
 }
 
 export interface SitemapGroup {
@@ -34,7 +42,9 @@ const url = (
   path: string,
   priority = 0.7,
   changeFrequency: ChangeFrequency = "monthly",
-): SitemapUrl => ({ path, priority, changeFrequency });
+  // Defaults to the date recorded in src/data/content-dates.ts, if any.
+  lastModified: string | undefined = getPageDate(path),
+): SitemapUrl => ({ path, priority, changeFrequency, ...(lastModified ? { lastModified } : {}) });
 
 // Hand-maintained pages. These are the only paths in this file that are not
 // derived from a data module, because they have no data module — each one is a
@@ -120,7 +130,11 @@ export const sitemapGroups: SitemapGroup[] = [
   {
     id: "guides",
     label: "GST guides",
-    urls: () => getAllPostSlugs().map((slug) => url(`/gst-guides/${slug}`, 0.7, "weekly")),
+    // A guide's date is its own frontmatter: `updated` once revised, else `date`.
+    urls: () =>
+      getAllPosts().map((post) =>
+        url(`/gst-guides/${post.slug}`, 0.7, "weekly", post.updated ?? post.date),
+      ),
   },
 ];
 
@@ -132,6 +146,18 @@ export function urlsForGroup(id: string): SitemapUrl[] {
     throw new Error(`Unknown sitemap group "${id}". Known groups: ${sitemapGroups.map((g) => g.id).join(", ")}`);
   }
   return group.urls();
+}
+
+/**
+ * The newest recorded date in a group, for the sitemap index. Undefined when
+ * no URL in the group has one.
+ */
+export function lastModifiedForGroup(id: string): string | undefined {
+  return urlsForGroup(id)
+    .map((u) => u.lastModified)
+    .filter((d): d is string => Boolean(d))
+    .sort()
+    .at(-1);
 }
 
 /** Every indexable path on the site, deduplicated. Used by the parity check. */

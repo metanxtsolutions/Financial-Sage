@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { JsonLd, itemListSchema } from "@/lib/schema";
 import Link from "next/link";
 import { Section } from "@/components/Container";
@@ -6,12 +7,12 @@ import { siteConfig } from "@/lib/site-config";
 import { taxTools } from "@/data/tax-tools";
 import { taxYear } from "@/data/tax-rates";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "Free Income Tax Tools & Calculators",
   description:
     "Free income tax calculator comparing the old and new regimes, and an HRA exemption calculator. No login required.",
   alternates: { canonical: "/tax-tools" },
-};
+});
 
 export default function TaxToolsPage() {
   return (

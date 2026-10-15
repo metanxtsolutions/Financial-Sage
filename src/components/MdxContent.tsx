@@ -16,6 +16,27 @@ const components = {
       <a {...props} />
     ),
   strong: (props: ComponentProps<"strong">) => <strong className="font-semibold text-neutral-900" {...props} />,
+
+  // A comparison or a set of thresholds is a table, and a table is the form an
+  // answer engine can lift a single cell from. Written in a guide as:
+  //
+  //   <Table caption="What the table shows">
+  //     <thead><tr><th>…</th><th>…</th></tr></thead>
+  //     <tbody><tr><th scope="row">…</th><td>…</td></tr></tbody>
+  //   </Table>
+  //
+  // Plain HTML rows rather than a `rows={[…]}` prop or markdown pipes: the MDX
+  // renderer strips JavaScript expressions by default, and pipe tables need a
+  // remark plugin this project does not carry. The cells are styled from the
+  // wrapper, because literal tags in MDX bypass the component map above.
+  Table: ({ caption, children }: { caption: string; children: React.ReactNode }) => (
+    <div className="mt-6 overflow-x-auto rounded-lg border border-neutral-200">
+      <table className="w-full text-left text-sm [&_tbody_th]:font-medium [&_tbody_th]:text-neutral-900 [&_tbody_tr]:border-t [&_tbody_tr]:border-neutral-200 [&_td]:px-4 [&_td]:py-3 [&_td]:align-top [&_td]:text-neutral-700 [&_th]:px-4 [&_th]:py-3 [&_th]:align-top [&_thead]:bg-neutral-50 [&_thead_th]:font-semibold [&_thead_th]:text-neutral-900">
+        <caption className="sr-only">{caption}</caption>
+        {children}
+      </table>
+    </div>
+  ),
 };
 
 export function MdxContent({ source }: { source: string }) {

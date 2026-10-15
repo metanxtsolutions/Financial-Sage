@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { DueDateChecker } from "@/components/tools/DueDateChecker";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "GST Due Date Checker",
   description: "Check your next GSTR-1, GSTR-3B, and GSTR-9 due dates for monthly or QRMP filing.",
   alternates: { canonical: "/gst-tools/gst-due-date-checker" },
-};
+});
 
 export default function DueDateCheckerPage() {
   return (

@@ -6,6 +6,11 @@ export interface ClusterPage {
   metaDescription: string;
   intro: string;
   highlights: { title: string; body: string }[];
+  /**
+   * Set on a page whose highlights are a numbered procedure. The name given
+   * here titles the HowTo markup built from them.
+   */
+  howToName?: string;
   faqIds: string[];
   relatedSlugs: string[];
 }
@@ -73,6 +78,7 @@ export const clusterPages: ClusterPage[] = [
     slug: "gst-registration-process",
     type: "topic",
     h1: "The GST Registration Process, Step by Step",
+    howToName: "How GST registration works, step by step",
     metaTitle: "GST Registration Process in India: Step-by-Step | Financial Sage",
     metaDescription:
       "The complete GST registration process from consultation to GSTIN issuance, and how Financial Sage handles each step within 24 hours of your documents.",

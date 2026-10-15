@@ -13,7 +13,8 @@
     "check:sitemap": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/alias-loader-register.mjs scripts/check-sitemap-parity.ts",
     "check:similarity": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/alias-loader-register.mjs scripts/content-similarity.ts",
     "verify:geo": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/alias-loader-register.mjs scripts/verify-geo.ts",
-    "content:status": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/alias-loader-register.mjs scripts/content-status.ts"
+    "content:status": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/alias-loader-register.mjs scripts/content-status.ts",
+    "content:dates": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./scripts/alias-loader-register.mjs scripts/content-dates.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",

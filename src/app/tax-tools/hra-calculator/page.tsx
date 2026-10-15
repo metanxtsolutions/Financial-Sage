@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import Link from "next/link";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { HraCalculator } from "@/components/tools/HraCalculator";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "HRA Exemption Calculator: How Much House Rent Allowance Is Tax Free",
   description:
     "Free HRA calculator. Enter your basic salary, HRA, and rent paid to see the exempt amount under Section 10(13A), with the three-way test shown in full.",
   alternates: { canonical: "/tax-tools/hra-calculator" },
-};
+});
 
 export default function HraCalculatorPage() {
   return (

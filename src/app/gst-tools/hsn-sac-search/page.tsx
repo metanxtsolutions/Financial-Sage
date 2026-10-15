@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { HsnSacSearchTool } from "@/components/tools/HsnSacSearch";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "HSN/SAC Code Search & GST Rate Lookup",
   description: "Search HSN codes for goods and SAC codes for services to find the applicable GST rate.",
   alternates: { canonical: "/gst-tools/hsn-sac-search" },
-};
+});
 
 export default function HsnSacSearchPage() {
   return (

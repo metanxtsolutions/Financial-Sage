@@ -25,9 +25,11 @@ export default async function sitemap(props: {
   id: Promise<string>;
 }): Promise<MetadataRoute.Sitemap> {
   const id = await props.id;
-  return urlsForGroup(id).map(({ path, priority, changeFrequency }) => ({
+  // lastModified is a recorded content date or nothing. It used to be the
+  // build time, which stamped every URL as changed on every deploy.
+  return urlsForGroup(id).map(({ path, priority, changeFrequency, lastModified }) => ({
     url: `${siteConfig.url}${path === "/" ? "" : path}`,
-    lastModified: new Date(),
+    ...(lastModified ? { lastModified } : {}),
     changeFrequency,
     priority,
   }));

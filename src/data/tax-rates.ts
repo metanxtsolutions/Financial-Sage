@@ -23,6 +23,17 @@
 // correct only for returns under the 1961 Act - that is, up to FY 2025-26.
 // They will need remapping before FY 2026-27 returns are filed in 2027.
 
+/**
+ * The check described at the top of this file, as data, so the calculator page
+ * can show it. Change the date only when the figures below have been compared
+ * against the department's page again.
+ */
+export const ratesVerified = {
+  date: "2026-09-05",
+  what: "Slabs, rebate, surcharge and cess",
+  against: "income-tax-salaried",
+} as const;
+
 export const taxYear = {
   financialYear: "2025-26",
   assessmentYear: "2026-27",

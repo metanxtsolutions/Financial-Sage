@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
+import { LastUpdated } from "@/components/LastUpdated";
 import { Section, Container } from "@/components/Container";
 import { siteConfig } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "Privacy Policy",
   description: "How Financial Sage collects, uses, and protects your personal information.",
   alternates: { canonical: "/privacy-policy" },
-};
+});
 
 export default function PrivacyPolicyPage() {
   return (
     <Section>
       <Container className="max-w-3xl px-0">
         <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">Privacy Policy</h1>
-        <p className="mt-2 text-sm text-neutral-500">Last updated: {new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}</p>
+        <LastUpdated path="/privacy-policy" label="Last updated:" className="mt-2" />
 
         <p className="mt-6 text-neutral-700">
           This policy explains what information {siteConfig.name} collects when you use this

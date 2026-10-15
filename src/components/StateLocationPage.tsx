@@ -6,6 +6,8 @@ import { StickyLeadSidebar } from "@/components/StickyLeadSidebar";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { JsonLd, faqPageSchema, serviceSchema, breadcrumbSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
+import { Sources } from "@/components/Sources";
+import { gstRegistrationSources, locationServiceSources } from "@/data/sources";
 import { getFaqsByIds } from "@/data/faqs";
 import { getService } from "@/data/services/registry";
 import { getPublishedState, type StateServiceId } from "@/data/services/copy";
@@ -213,6 +215,15 @@ export function StateLocationPage({
             <div className="mt-4">
               <FaqAccordion faqs={faqs} />
             </div>
+
+            <Sources
+              ids={
+                serviceId === "gst-registration"
+                  ? gstRegistrationSources
+                  : locationServiceSources[serviceId]
+              }
+              className="mt-10"
+            />
           </div>
 
           <div>

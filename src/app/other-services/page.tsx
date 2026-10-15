@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { JsonLd, itemListSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
 import Link from "next/link";
 import { Section } from "@/components/Container";
 import { otherServices, serviceCategories, getServicesByCategory } from "@/data/other-services";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "Business Services: Registration, Licences, Tax, ROC & Trademark",
   description:
     "Company and LLP registration, FSSAI and IEC licences, income tax and TDS filing, ROC annual compliance, trademark and patent work, and specialist GST jobs. Filed by Financial Sage.",
   alternates: { canonical: "/other-services" },
-};
+});
 
 export default function OtherServicesPage() {
   return (

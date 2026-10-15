@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Section } from "@/components/Container";
@@ -9,6 +10,8 @@ import { JsonLd, faqPageSchema, serviceSchema, breadcrumbSchema } from "@/lib/sc
 import { siteConfig } from "@/lib/site-config";
 import { cities, getCity } from "@/data/cities";
 import { getFaqsByIds } from "@/data/faqs";
+import { Sources } from "@/components/Sources";
+import { gstRegistrationSources } from "@/data/sources";
 
 // Programmatic city pages. See src/data/cities.ts for the single source of
 // truth. Add more state/city entries there to scale to hundreds of pages
@@ -27,11 +30,11 @@ export async function generateMetadata({
   const { state, city } = await params;
   const entry = getCity(state, city);
   if (!entry) return {};
-  return {
+  return withOpenGraph({
     title: { absolute: `GST Registration in ${entry.city}, ${entry.state} | Financial Sage` },
     description: `Apply for GST registration in ${entry.city} online. Documents, process, and fees explained. Financial Sage files within 24 hours, Pan-India.`,
     alternates: { canonical: `/gst-registration/${entry.stateSlug}/${entry.citySlug}` },
-  };
+  });
 }
 
 export default async function CityGstPage({
@@ -147,6 +150,8 @@ export default async function CityGstPage({
             <div className="mt-4">
               <FaqAccordion faqs={faqs} />
             </div>
+
+            <Sources ids={gstRegistrationSources} className="mt-10" />
           </div>
 
           <div>

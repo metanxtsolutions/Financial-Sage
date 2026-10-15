@@ -1,25 +1,31 @@
 import type { Metadata } from "next";
-import { JsonLd, orgPageSchema } from "@/lib/schema";
+import { withOpenGraph } from "@/lib/metadata";
+import { JsonLd, orgPageSchema, personSchema } from "@/lib/schema";
+import { authors } from "@/data/authors";
 import Link from "next/link";
 import { Section, Container } from "@/components/Container";
 import { siteConfig } from "@/lib/site-config";
 import { whyFinancialSage } from "@/data/services";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "About Financial Sage",
   description: "Financial Sage is India's GST registration and compliance specialist for MSMEs. Transparent pricing, WhatsApp-first support, Pan-India coverage.",
   alternates: { canonical: "/about" },
-};
+});
 
 export default function AboutPage() {
   return (
     <>
       <JsonLd
-        data={orgPageSchema({
-          type: "AboutPage",
-          name: `About ${siteConfig.name}`,
-          url: `${siteConfig.url}/about`,
-        })}
+        data={[
+          orgPageSchema({
+            type: "AboutPage",
+            name: `About ${siteConfig.name}`,
+            url: `${siteConfig.url}/about`,
+          }),
+          // One Person per named author. Guides point at these by @id.
+          ...authors.map((author) => ({ "@context": "https://schema.org", ...personSchema(author) })),
+        ]}
       />
     <Section>
       <Container className="max-w-3xl px-0">
@@ -68,6 +74,51 @@ export default function AboutPage() {
             </div>
           ))}
         </div>
+
+        {/* Renders once src/data/authors.ts names a real person, and not before.
+            Each card's id is the anchor that guide bylines link to. */}
+        {authors.length > 0 && (
+          <>
+            <h2 className="mt-10 text-2xl font-bold text-neutral-900">Who Writes and Reviews Our Guides</h2>
+            <div className="mt-4 space-y-4">
+              {authors.map((author) => (
+                <div
+                  key={author.id}
+                  id={author.id}
+                  className="scroll-mt-24 rounded-lg border border-neutral-200 bg-white p-5 shadow-card"
+                >
+                  <div className="font-semibold text-neutral-900">{author.name}</div>
+                  <div className="text-sm text-neutral-600">{author.jobTitle}</div>
+                  <p className="mt-2 text-sm text-neutral-700">{author.bio}</p>
+                  {author.credentials.length > 0 && (
+                    <ul className="mt-2 space-y-1 text-sm text-neutral-600">
+                      {author.credentials.map((credential) => (
+                        <li key={credential}>• {credential}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {author.sameAs.length > 0 && (
+                    <p className="mt-2 text-sm">
+                      {author.sameAs.map((profile, i) => (
+                        <span key={profile}>
+                          {i > 0 && ", "}
+                          <a
+                            href={profile}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-medium text-brand-700 underline"
+                          >
+                            {new URL(profile).hostname.replace(/^www\./, "")}
+                          </a>
+                        </span>
+                      ))}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
 
         <h2 className="mt-10 text-2xl font-bold text-neutral-900">Beyond GST</h2>
         <p className="mt-3 text-neutral-700">

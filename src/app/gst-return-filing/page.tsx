@@ -1,20 +1,29 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import Link from "next/link";
 import { Section } from "@/components/Container";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { StickyLeadSidebar } from "@/components/StickyLeadSidebar";
 import { FaqAccordion } from "@/components/FaqAccordion";
-import { JsonLd, faqPageSchema, serviceSchema, breadcrumbSchema } from "@/lib/schema";
+import { JsonLd, faqPageSchema, serviceSchema, breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { Sources } from "@/components/Sources";
+import { LastUpdated } from "@/components/LastUpdated";
+import { pageSources } from "@/data/sources";
+import { requirePageDate } from "@/data/content-dates";
 import { siteConfig } from "@/lib/site-config";
 import { getFaqsByIds } from "@/data/faqs";
 import { monthlyFilingFrom } from "@/data/pricing";
 
-export const metadata: Metadata = {
-  title: "GST Return Filing: GSTR-1, GSTR-3B & GSTR-9",
-  description:
-    "Monthly and quarterly GST return filing (GSTR-1, GSTR-3B, GSTR-9) for Indian businesses, starting from ₹299. On-time filing, reconciled before submission.",
-  alternates: { canonical: "/gst-return-filing" },
-};
+const path = "/gst-return-filing";
+const title = "GST Return Filing: GSTR-1, GSTR-3B & GSTR-9";
+const description =
+  "Monthly and quarterly GST return filing (GSTR-1, GSTR-3B, GSTR-9) for Indian businesses, starting from ₹299. On-time filing, reconciled before submission.";
+
+export const metadata: Metadata = withOpenGraph({
+  title,
+  description,
+  alternates: { canonical: path },
+});
 
 const pageFaqIds = [
   "gstr1-vs-gstr3b",
@@ -51,6 +60,15 @@ export default function GstReturnFilingPage() {
             description: "Monthly, quarterly, and annual GST return filing for Indian businesses.",
             url: `${siteConfig.url}/gst-return-filing`,
           }),
+          // The document itself: when its copy last changed and where the rules
+          // it describes are published.
+          webPageSchema({
+            name: title,
+            description,
+            url: `${siteConfig.url}${path}`,
+            dateModified: requirePageDate(path),
+            sources: pageSources[path],
+          }),
           faqPageSchema(faqs),
           breadcrumbSchema(breadcrumbs),
         ]}
@@ -70,6 +88,7 @@ export default function GstReturnFilingPage() {
               per return, with every filing reconciled against your purchase and sales data before
               submission.
             </p>
+            <LastUpdated path={path} className="mt-3" />
 
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">Overview of GST Returns</h2>
             <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -157,6 +176,8 @@ export default function GstReturnFilingPage() {
             <div className="mt-4">
               <FaqAccordion faqs={faqs} />
             </div>
+
+            <Sources ids={pageSources[path]} className="mt-10" />
           </div>
 
           <div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { ServiceLocationPage } from "@/components/ServiceLocationPage";
 import { getLocationPage, getLocationPages } from "@/data/service-locations";
 
@@ -22,13 +23,13 @@ export async function generateMetadata({
   const page = getLocationPage("company-registration", state, city);
   if (!page) return {};
   const { city: entry } = page;
-  return {
+  return withOpenGraph({
     title: {
       absolute: `Company Registration in ${entry.city}, ${entry.state} | Financial Sage`,
     },
     description: `Register a private limited company in ${entry.city} online. Name approval, DSC, SPICe+ filing, PAN and TAN, from ₹999. Filed by Financial Sage.`,
     alternates: { canonical: `/company-registration/${entry.stateSlug}/${entry.citySlug}` },
-  };
+  });
 }
 
 export default async function CompanyRegistrationCityPage({

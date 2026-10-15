@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
+import { LastUpdated } from "@/components/LastUpdated";
 import Link from "next/link";
 import { Section, Container } from "@/components/Container";
 import { siteConfig } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withOpenGraph({
   title: "Terms of Service",
   description: "The terms that govern use of the Financial Sage website and our GST registration and compliance services.",
   alternates: { canonical: "/terms" },
-};
+});
 
 export default function TermsPage() {
   return (
     <Section>
       <Container className="max-w-3xl px-0">
         <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">Terms of Service</h1>
-        <p className="mt-2 text-sm text-neutral-500">Last updated: {new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}</p>
+        <LastUpdated path="/terms" label="Last updated:" className="mt-2" />
 
         <p className="mt-6 text-neutral-700">
           These terms govern your use of the {siteConfig.name} website and our GST registration,

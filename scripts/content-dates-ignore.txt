@@ -1,0 +1,10 @@
+# Commits that `npm run content:dates` should look straight through.
+#
+# List a commit here when it touched a page's file without changing what the
+# page says: a restyle, a refactor, a template change applied across the site.
+# Without this, every such commit would make the report claim the copy is newer
+# than its recorded date.
+#
+# One full 40-character commit hash per line. Lines starting with # are
+# comments. The file is also passed to `git blame --ignore-revs-file`, so keep
+# to that format.

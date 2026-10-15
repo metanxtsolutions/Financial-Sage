@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withOpenGraph } from "@/lib/metadata";
 import { ServiceLocationPage } from "@/components/ServiceLocationPage";
 import { getLocationPage, getLocationPages } from "@/data/service-locations";
 
@@ -23,11 +24,11 @@ export async function generateMetadata({
   const page = getLocationPage("itr-filing", state, city);
   if (!page) return {};
   const { city: entry } = page;
-  return {
+  return withOpenGraph({
     title: { absolute: `ITR Filing in ${entry.city}, ${entry.state} | Financial Sage` },
     description: `File your income tax return in ${entry.city} online. Old vs new regime compared, AIS reconciled, refund tracked. From ₹999 with Financial Sage.`,
     alternates: { canonical: `/itr-filing/${entry.stateSlug}/${entry.citySlug}` },
-  };
+  });
 }
 
 export default async function ItrFilingCityPage({

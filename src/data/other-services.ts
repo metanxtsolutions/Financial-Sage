@@ -7,6 +7,7 @@
 // intent. Each category also has a hub page at /services/[slug].
 
 import type { Faq } from "@/data/faqs";
+import { formatPrice, servicePrices } from "@/data/pricing";
 
 export type ServiceCategoryId =
   | "company-incorporation"
@@ -52,7 +53,7 @@ export const serviceCategories: ServiceCategory[] = [
     blurb: "Pick a legal structure and get incorporated, from a one-person company to a subsidiary of a foreign parent.",
     h1: "Company & Entity Registration in India",
     metaTitle: "Company Registration in India: Pvt Ltd, LLP, OPC & More | Financial Sage",
-    metaDescription: "Register a private limited company, LLP, OPC, or partnership firm. Compare structures, see what each one costs to run, and get incorporated from ₹999.",
+    metaDescription: "Register a private limited company, LLP, OPC, or partnership firm. Compare structures, see what each one costs to run, and get incorporated from ₹999 (sole proprietorship) to ₹4,999 (Private Limited).",
     intro:
       "The structure you incorporate under decides how much compliance you carry every year, how easily you can raise money, and whether your personal assets are exposed. It is far cheaper to choose correctly now than to convert later.",
     guidance: {
@@ -78,7 +79,7 @@ export const serviceCategories: ServiceCategory[] = [
         category: "financial-sage",
         question: "What does incorporation actually cost?",
         answer:
-          "Our fee starts at ₹999. On top of that sit government fees and stamp duty, and stamp duty is set by the state, so the same company costs a different amount to incorporate in Maharashtra than in Gujarat. We quote both parts before filing rather than after.",
+          "Our fee starts at ₹999 for a sole proprietorship, ₹1,999 for a partnership firm, ₹3,999 for an LLP and ₹4,999 for a Private Limited company. On top of that sit government fees and stamp duty, and stamp duty is set by the state, so the same company costs a different amount to incorporate in Maharashtra than in Gujarat. We quote both parts before filing rather than after.",
       },
       {
         id: "cat-inc-convert",
@@ -145,7 +146,7 @@ export const serviceCategories: ServiceCategory[] = [
     blurb: "Return filing, TDS compliance, and notice handling for individuals, firms, and companies.",
     h1: "Income Tax & TDS Filing",
     metaTitle: "Income Tax Return & TDS Filing Services | Financial Sage",
-    metaDescription: "ITR-1 through ITR-7, quarterly TDS returns, PF and ESI filing, advance tax planning and notice responses. Filed and reconciled from ₹299.",
+    metaDescription: "ITR-1 through ITR-7, quarterly TDS returns, PF and ESI filing, advance tax planning and notice responses. Filed and reconciled, with salaried ITR from ₹499.",
     intro:
       "Most filing problems are not arithmetic. They are the wrong form, a mismatch against the Annual Information Statement, or a deadline missed by a week. All three are avoidable, and all three are expensive to fix after the fact.",
     guidance: {
@@ -191,7 +192,7 @@ export const serviceCategories: ServiceCategory[] = [
     blurb: "The recurring filings that keep a registered company or LLP in good standing with the Registrar.",
     h1: "ROC & Annual Compliance",
     metaTitle: "ROC Annual Compliance for Companies & LLPs | Financial Sage",
-    metaDescription: "AOC-4, MGT-7, LLP Form 11 and Form 8, DIR-3 KYC, INC-20A and auditor appointment. Annual ROC compliance filed on time from ₹999.",
+    metaDescription: "AOC-4, MGT-7, LLP Form 11 and Form 8, DIR-3 KYC, INC-20A and auditor appointment. Annual ROC compliance filed on time from ₹2,999.",
     intro:
       "Annual compliance is the part founders forget, because nothing appears to go wrong when it is skipped. The penalties accrue quietly, per day, against the company and its directors personally, and they do not lapse.",
     guidance: {
@@ -237,7 +238,7 @@ export const serviceCategories: ServiceCategory[] = [
     blurb: "Protect the brand name, logo, design, or invention your business is built on.",
     h1: "Trademark & Intellectual Property",
     metaTitle: "Trademark Registration, Copyright & Patent Filing | Financial Sage",
-    metaDescription: "Trademark search and registration, objection replies, oppositions and renewals, plus copyright, patent and design filing. From ₹999.",
+    metaDescription: "Trademark search and registration, objection replies, oppositions and renewals, plus copyright, patent and design filing. Trademark filing from ₹999 per class, government fees extra.",
     intro:
       "Registering a company name does not protect it. The MCA register and the trademark register are separate, and it is the trademark that stops someone else trading under your name. Businesses usually discover this when somebody else files first.",
     guidance: {
@@ -440,10 +441,16 @@ export interface OtherService {
   metaDescription: string;
   summary: string;
   startingPrice: number;
+  /** Billing basis appended to the price, e.g. "/month". */
+  priceUnit?: string;
+  /** True when the price is a floor ("From ₹X"); false when it is fixed. */
+  priceFrom?: boolean;
+  /** Disclosure shown with the price, e.g. "Government fees extra". */
+  priceNote?: string;
   bullets: string[];
 }
 
-export const otherServices: OtherService[] = [
+const rawOtherServices: OtherService[] = [
   // ---------------------------------------------------------------------
   // Company & Entity Registration
   // ---------------------------------------------------------------------
@@ -452,9 +459,9 @@ export const otherServices: OtherService[] = [
     category: "company-incorporation",
     title: "Private Limited Company Registration",
     metaTitle: "Private Limited Company Registration | Financial Sage",
-    metaDescription: "Register your Private Limited company online. MOA/AOA drafting, DIN, DSC, and incorporation certificate from ₹999.",
+    metaDescription: "Register your Private Limited company online. MOA/AOA drafting, DIN, DSC, and incorporation certificate from ₹4,999.",
     summary: "Full incorporation of a Private Limited company, covering name approval, MOA/AOA drafting, and PAN/TAN application.",
-    startingPrice: 999,
+    startingPrice: 4999,
     bullets: ["Name reservation (RUN)", "MOA & AOA drafting", "DIN & DSC for directors", "PAN & TAN application", "Certificate of Incorporation"],
   },
   {
@@ -462,9 +469,9 @@ export const otherServices: OtherService[] = [
     category: "company-incorporation",
     title: "LLP Registration",
     metaTitle: "LLP Registration Online | Financial Sage",
-    metaDescription: "Register a Limited Liability Partnership online. LLP agreement drafting, DPIN, and incorporation from ₹999.",
+    metaDescription: "Register a Limited Liability Partnership online. LLP agreement drafting, DPIN, and incorporation from ₹3,999.",
     summary: "LLP incorporation for professional practices and small businesses that want limited liability without full corporate compliance.",
-    startingPrice: 999,
+    startingPrice: 3999,
     bullets: ["Name reservation", "LLP agreement drafting", "Designated Partner Identification Number (DPIN)", "Certificate of Incorporation", "PAN & TAN application"],
   },
   {
@@ -472,9 +479,9 @@ export const otherServices: OtherService[] = [
     category: "company-incorporation",
     title: "One Person Company (OPC) Registration",
     metaTitle: "OPC Registration Online | Financial Sage",
-    metaDescription: "Register a One Person Company online, for solo founders who want a corporate structure with limited liability. From ₹999.",
+    metaDescription: "Register a One Person Company online, for solo founders who want a corporate structure with limited liability. From ₹3,999.",
     summary: "Incorporate a One Person Company, a single-owner structure with the liability protection of a private limited company.",
-    startingPrice: 999,
+    startingPrice: 3999,
     bullets: ["Name reservation", "Nominee appointment", "MOA & AOA drafting", "Certificate of Incorporation", "PAN & TAN application"],
   },
   {
@@ -482,9 +489,9 @@ export const otherServices: OtherService[] = [
     category: "company-incorporation",
     title: "Partnership Firm Registration",
     metaTitle: "Partnership Firm Registration | Financial Sage",
-    metaDescription: "Draft and register a partnership deed for your firm, starting from ₹999.",
+    metaDescription: "Draft and register a partnership deed for your firm, starting from ₹1,999.",
     summary: "Partnership deed drafting and (optional) registration with the Registrar of Firms.",
-    startingPrice: 999,
+    startingPrice: 1999,
     bullets: ["Partnership deed drafting", "PAN application for the firm", "Registrar of Firms registration (optional)", "Bank account opening support"],
   },
   {
@@ -566,9 +573,9 @@ export const otherServices: OtherService[] = [
     category: "licences",
     title: "MSME / Udyam Registration",
     metaTitle: "MSME Udyam Registration Online | Financial Sage",
-    metaDescription: "Register your business under Udyam (MSME) to access government schemes, collateral-free loans, and delayed-payment protection, starting from ₹999.",
+    metaDescription: "Register your business under Udyam (MSME) to access government schemes, collateral-free loans, and delayed-payment protection, starting from ₹299.",
     summary: "Udyam registration to classify your business as a Micro, Small, or Medium Enterprise and open up MSME benefits.",
-    startingPrice: 999,
+    startingPrice: 299,
     bullets: ["Udyam certificate", "Access to MSME loan schemes", "Delayed payment protection under MSME Act", "Government tender eligibility"],
   },
   {
@@ -750,9 +757,9 @@ export const otherServices: OtherService[] = [
     category: "tax-filing",
     title: "ITR Filing",
     metaTitle: "Income Tax Return (ITR) Filing | Financial Sage",
-    metaDescription: "Individual and business income tax return filing, with deduction planning, starting from ₹299.",
+    metaDescription: "Individual and business income tax return filing, with deduction planning, starting from ₹499.",
     summary: "Income tax return filing for individuals, freelancers, and businesses, with applicable deductions and advance tax planning.",
-    startingPrice: 299,
+    startingPrice: 499,
     bullets: ["Income & deduction review", "ITR form selection & filing", "Advance tax estimation", "Notice/refund follow-up"],
   },
   {
@@ -760,9 +767,9 @@ export const otherServices: OtherService[] = [
     category: "tax-filing",
     title: "ITR-1 (Sahaj) Filing",
     metaTitle: "ITR-1 Sahaj Filing for Salaried Individuals | Financial Sage",
-    metaDescription: "File ITR-1 for salary, one house property, and other income up to ₹50 lakh. Reviewed by a preparer, from ₹299.",
+    metaDescription: "File ITR-1 for salary, one house property, and other income up to ₹50 lakh. Reviewed by a preparer, from ₹499.",
     summary: "ITR-1 filing for salaried individuals with income up to ₹50 lakh from salary, one house property, and other sources.",
-    startingPrice: 299,
+    startingPrice: 499,
     bullets: ["Form 16 and AIS reconciliation", "Deduction review under the chosen regime", "Return preparation and e-filing", "E-verification support", "Refund tracking"],
   },
   {
@@ -770,9 +777,9 @@ export const otherServices: OtherService[] = [
     category: "tax-filing",
     title: "ITR-2 Filing",
     metaTitle: "ITR-2 Filing for Capital Gains & Multiple Properties | Financial Sage",
-    metaDescription: "File ITR-2 if you have capital gains, more than one house property, or foreign income. From ₹299.",
+    metaDescription: "File ITR-2 if you have capital gains, more than one house property, or foreign income. From ₹1,499.",
     summary: "ITR-2 filing for individuals and HUFs with capital gains, multiple house properties, foreign assets, or income above the ITR-1 threshold.",
-    startingPrice: 299,
+    startingPrice: 1499,
     bullets: ["Capital gains computation", "House property income schedules", "Foreign asset and income reporting", "Return preparation and e-filing", "Refund tracking"],
   },
   {
@@ -780,9 +787,9 @@ export const otherServices: OtherService[] = [
     category: "tax-filing",
     title: "ITR-3 Filing",
     metaTitle: "ITR-3 Filing for Business & Professional Income | Financial Sage",
-    metaDescription: "File ITR-3 for proprietors and professionals with business income, including books of account and audit checks. From ₹299.",
+    metaDescription: "File ITR-3 for proprietors and professionals with business income, including books of account and audit checks. From ₹1,499.",
     summary: "ITR-3 filing for proprietors and professionals carrying on a business, including the profit and loss and balance sheet schedules.",
-    startingPrice: 299,
+    startingPrice: 1499,
     bullets: ["Profit & loss and balance sheet schedules", "Business income computation", "Audit applicability check", "Return preparation and e-filing", "Refund tracking"],
   },
   {
@@ -790,9 +797,9 @@ export const otherServices: OtherService[] = [
     category: "tax-filing",
     title: "ITR-4 (Sugam) Filing",
     metaTitle: "ITR-4 Sugam Filing for Presumptive Taxation | Financial Sage",
-    metaDescription: "File ITR-4 under presumptive taxation (Section 44AD/44ADA) for small businesses and professionals. From ₹299.",
+    metaDescription: "File ITR-4 under presumptive taxation (Section 44AD/44ADA) for small businesses and professionals. From ₹999.",
     summary: "ITR-4 filing under the presumptive taxation scheme, the simplest route for small businesses and professionals below the turnover limits of Section 44AD and 44ADA.",
-    startingPrice: 299,
+    startingPrice: 999,
     bullets: ["Presumptive eligibility check", "44AD / 44ADA computation", "Turnover and receipt reconciliation", "Return preparation and e-filing", "Refund tracking"],
   },
   {
@@ -810,9 +817,9 @@ export const otherServices: OtherService[] = [
     category: "tax-filing",
     title: "TDS Return Filing",
     metaTitle: "TDS Return Filing (24Q, 26Q, 27Q) | Financial Sage",
-    metaDescription: "Quarterly TDS return filing with challan reconciliation and Form 16/16A generation. From ₹299.",
+    metaDescription: "Quarterly TDS return filing with challan reconciliation and Form 16/16A generation. From ₹999/quarter.",
     summary: "Quarterly TDS return filing across Forms 24Q, 26Q, and 27Q, with challan reconciliation and certificate generation.",
-    startingPrice: 299,
+    startingPrice: 999,
     bullets: ["Deduction and challan reconciliation", "24Q / 26Q / 27Q preparation", "Return upload and correction statements", "Form 16 and 16A generation", "Default and late fee resolution"],
   },
   {
@@ -830,9 +837,9 @@ export const otherServices: OtherService[] = [
     category: "tax-filing",
     title: "Income Tax Notice Response",
     metaTitle: "Income Tax Notice Reply & Representation | Financial Sage",
-    metaDescription: "Received a 143(1), 139(9), or 148 notice? We read it, draft the response, and file it on the portal. From ₹999.",
+    metaDescription: "Received a 143(1), 139(9), or 148 notice? We read it, draft the response, and file it on the portal. From ₹1,499.",
     summary: "Reading, drafting, and filing responses to income tax notices, from a simple 143(1) intimation mismatch through to a scrutiny or reassessment notice.",
-    startingPrice: 999,
+    startingPrice: 1499,
     bullets: ["Notice interpretation and deadline mapping", "Document and evidence compilation", "Response drafting", "E-proceedings portal submission", "Follow-up until closure"],
   },
   {
@@ -854,9 +861,9 @@ export const otherServices: OtherService[] = [
     category: "roc-compliance",
     title: "ROC Annual Filing",
     metaTitle: "ROC Annual Filing for Companies & LLPs | Financial Sage",
-    metaDescription: "Annual ROC compliance for Private Limited companies and LLPs. AOC-4, MGT-7, and LLP Form 11/8 from ₹999.",
+    metaDescription: "Annual ROC compliance for Private Limited companies and LLPs. AOC-4, MGT-7, and LLP Form 11/8 from ₹3,499.",
     summary: "Mandatory annual compliance filings with the Registrar of Companies for Private Limited companies and LLPs.",
-    startingPrice: 999,
+    startingPrice: 3499,
     bullets: ["AOC-4 (financial statements)", "MGT-7 (annual return)", "LLP Form 11 & Form 8", "Director KYC (DIR-3 KYC)"],
   },
   {
@@ -864,9 +871,9 @@ export const otherServices: OtherService[] = [
     category: "roc-compliance",
     title: "Private Limited Annual Compliance",
     metaTitle: "Annual Compliance Package for Private Limited Companies | Financial Sage",
-    metaDescription: "A full-year compliance package for a Private Limited company: board meetings, statutory registers, AOC-4, MGT-7, and DIR-3 KYC. From ₹999.",
+    metaDescription: "A full-year compliance package for a Private Limited company: board meetings, statutory registers, AOC-4, MGT-7, and DIR-3 KYC. From ₹3,499.",
     summary: "A single package covering everything a Private Limited company must do in a financial year, from board meeting minutes through to the annual ROC filings.",
-    startingPrice: 999,
+    startingPrice: 3499,
     bullets: ["Board and AGM minutes drafting", "Statutory register maintenance", "AOC-4 and MGT-7 filing", "DIR-3 KYC for every director", "Auditor appointment (ADT-1)"],
   },
   {
@@ -874,9 +881,9 @@ export const otherServices: OtherService[] = [
     category: "roc-compliance",
     title: "LLP Annual Compliance",
     metaTitle: "LLP Annual Compliance: Form 11 & Form 8 | Financial Sage",
-    metaDescription: "Annual LLP compliance including Form 11, Form 8, and the income tax return. Filed before the deadline, from ₹999.",
+    metaDescription: "Annual LLP compliance including Form 11, Form 8, and the income tax return. Filed before the deadline, from ₹2,999.",
     summary: "Annual compliance for an LLP, covering Form 11, Form 8, and the LLP income tax return, filed well before the deadlines that carry ₹100-a-day penalties.",
-    startingPrice: 999,
+    startingPrice: 2999,
     bullets: ["Form 11 (annual return)", "Form 8 (statement of accounts & solvency)", "LLP income tax return", "DIR-3 KYC for designated partners", "Penalty exposure review"],
   },
   {
@@ -914,9 +921,9 @@ export const otherServices: OtherService[] = [
     category: "roc-compliance",
     title: "Bookkeeping & Accounting",
     metaTitle: "Outsourced Bookkeeping & Accounting Services | Financial Sage",
-    metaDescription: "Monthly bookkeeping, bank reconciliation, and management accounts, kept ready for GST and income tax filing. From ₹999.",
+    metaDescription: "Monthly bookkeeping, bank reconciliation, and management accounts, kept ready for GST and income tax filing. From ₹1,999/month.",
     summary: "Monthly bookkeeping kept in a state where your GST returns, TDS returns, and annual accounts can all be filed from the same set of books.",
-    startingPrice: 999,
+    startingPrice: 1999,
     bullets: ["Purchase and sales entry", "Bank and card reconciliation", "GST-ready ledger maintenance", "Monthly P&L and balance sheet", "Year-end finalisation for audit"],
   },
   {
@@ -958,7 +965,7 @@ export const otherServices: OtherService[] = [
     category: "ipr",
     title: "Trademark Registration",
     metaTitle: "Trademark Registration Online | Financial Sage",
-    metaDescription: "Protect your brand name and logo with trademark registration. Class search, application filing, and objection support from ₹999.",
+    metaDescription: "Protect your brand name and logo with trademark registration. Class search, application filing, and objection support from ₹999 per class.",
     summary: "Trademark search and application filing to protect your brand name, logo, or tagline nationally.",
     startingPrice: 999,
     bullets: ["Trademark class search", "Application filing (TM-A)", "Objection/opposition support", "Renewal reminders"],
@@ -1521,9 +1528,9 @@ export const otherServices: OtherService[] = [
     category: "gst-specialist",
     title: "Revocation of Cancelled GST Registration",
     metaTitle: "Revoke a Cancelled GST Registration (REG-21) | Financial Sage",
-    metaDescription: "GSTIN cancelled by the officer? Apply for revocation in REG-21 within the deadline and get your registration back. From ₹999.",
+    metaDescription: "GSTIN cancelled by the officer? Apply for revocation in REG-21 within the deadline and get your registration back. From ₹1,499.",
     summary: "Revocation of a GSTIN cancelled by the department, filed in REG-21 after the pending returns and dues that triggered the cancellation are cleared.",
-    startingPrice: 999,
+    startingPrice: 1499,
     bullets: ["Cancellation order analysis", "Pending return and tax dues clearance", "REG-21 revocation application", "Show cause response where issued", "Restoration confirmation"],
   },
   {
@@ -1578,6 +1585,20 @@ export const otherServices: OtherService[] = [
   },
 ];
 
+// Retail prices come from src/data/pricing.ts so there is one place to edit.
+// A slug missing from servicePrices keeps the startingPrice written above.
+export const otherServices: OtherService[] = rawOtherServices.map((service) => {
+  const price = servicePrices[service.slug];
+  if (!price) return service;
+  return {
+    ...service,
+    startingPrice: price.amount,
+    priceUnit: price.unit,
+    priceFrom: price.from ?? false,
+    priceNote: price.note,
+  };
+});
+
 export function getOtherService(slug: string): OtherService | undefined {
   return otherServices.find((s) => s.slug === slug);
 }
@@ -1591,4 +1612,9 @@ export function getRelatedServices(slug: string, limit = 6): OtherService[] {
   const service = getOtherService(slug);
   if (!service) return [];
   return otherServices.filter((s) => s.category === service.category && s.slug !== slug).slice(0, limit);
+}
+
+/** The price label every listing shows, e.g. "From ₹1,999/month". */
+export function formatServicePrice(service: OtherService): string {
+  return formatPrice({ amount: service.startingPrice, unit: service.priceUnit, from: service.priceFrom ?? true });
 }

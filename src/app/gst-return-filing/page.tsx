@@ -12,7 +12,7 @@ import { monthlyFilingFrom } from "@/data/pricing";
 export const metadata: Metadata = {
   title: "GST Return Filing: GSTR-1, GSTR-3B & GSTR-9",
   description:
-    "Monthly and quarterly GST return filing (GSTR-1, GSTR-3B, GSTR-9) for Indian businesses, starting from ₹299. On-time filing, reconciled before submission.",
+    "Monthly and quarterly GST return filing (GSTR-1, GSTR-3B, GSTR-9) for Indian businesses, starting from ₹299 a month. On-time filing, reconciled before submission.",
   alternates: { canonical: "/gst-return-filing" },
 };
 
@@ -67,7 +67,7 @@ export default function GstReturnFilingPage() {
             <p className="mt-4 text-lg text-neutral-600">
               Every GST-registered business must file returns on a fixed schedule, whether or not
               there was any sale in that period. Our GST filing plans start from ₹{monthlyFilingFrom}{" "}
-              per return, with every filing reconciled against your purchase and sales data before
+              per month (nil return), with every filing reconciled against your purchase and sales data before
               submission.
             </p>
 

@@ -28,7 +28,7 @@ export default function IncomeTaxCalculatorPage() {
           <Link href="/itr-filing" className="font-medium text-brand-700 underline">
             file your return
           </Link>{" "}
-          from ₹999.
+          from ₹499.
         </>
       }
     >

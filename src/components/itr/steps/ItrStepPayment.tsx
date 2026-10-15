@@ -1,7 +1,7 @@
 "use client";
 
 import { PayUCheckoutButton } from "@/components/PayUCheckoutButton";
-import { siteConfig } from "@/lib/site-config";
+import { itrWizardPrices, type ItrWizardType } from "@/data/pricing";
 
 const paymentMethods = ["UPI", "Cards", "Net Banking", "Wallets"];
 
@@ -11,23 +11,25 @@ export function ItrStepPayment({
   email,
   phone,
   paymentFailed,
+  itrType,
 }: {
   applicationId: string;
   name: string;
   email: string;
   phone: string;
   paymentFailed?: boolean;
+  itrType: ItrWizardType;
 }) {
-  const price = siteConfig.pricingFrom.itrFilingWizard;
+  const price = itrWizardPrices[itrType];
 
   return (
     <div>
       <h1 className="text-2xl font-extrabold tracking-tight text-itr-navy-500">Payment</h1>
-      <p className="mt-1 text-sm text-neutral-500">One payment, everything included.</p>
+      <p className="mt-1 text-sm text-neutral-500">One payment for our filing service. Exclusive of 18% GST; there is no government fee for filing a return.</p>
 
       <div className="mt-5 rounded-2xl border border-neutral-200 bg-white p-5">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-neutral-500">ITR Filing Service</span>
+          <span className="text-neutral-500">ITR Filing Service ({itrType.replace("_", "-")})</span>
           <span className="font-semibold text-neutral-900">₹{price}</span>
         </div>
         <div className="mt-3 flex items-center justify-between border-t border-neutral-100 pt-3">

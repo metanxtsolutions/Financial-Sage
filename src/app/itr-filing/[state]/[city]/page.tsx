@@ -25,7 +25,7 @@ export async function generateMetadata({
   const { city: entry } = page;
   return {
     title: { absolute: `ITR Filing in ${entry.city}, ${entry.state} | Financial Sage` },
-    description: `File your income tax return in ${entry.city} online. Old vs new regime compared, AIS reconciled, refund tracked. From ₹999 with Financial Sage.`,
+    description: `File your income tax return in ${entry.city} online. Old vs new regime compared, AIS reconciled, refund tracked. From ₹499 with Financial Sage.`,
     alternates: { canonical: `/itr-filing/${entry.stateSlug}/${entry.citySlug}` },
   };
 }

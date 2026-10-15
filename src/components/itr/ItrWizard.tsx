@@ -114,13 +114,14 @@ export function ItrWizard() {
         />
       )}
 
-      {wizard.step === 3 && wizard.applicationId && (
+      {wizard.step === 3 && wizard.applicationId && wizard.itrType && (
         <ItrStepPayment
           applicationId={wizard.applicationId}
           name={wizard.name}
           email={wizard.email}
           phone={wizard.phone}
           paymentFailed={wizard.paymentFailed}
+          itrType={wizard.itrType}
         />
       )}
 

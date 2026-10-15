@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { ItrType } from "@/components/itr/ItrWizard";
+import { itrWizardPrices } from "@/data/pricing";
 
 const itrTypes: { type: ItrType; title: string; subtitle: string; points: string[] }[] = [
   {
@@ -127,6 +128,10 @@ export function ItrStepType({
           >
             <div className="text-lg font-extrabold text-itr-navy-500">{item.title}</div>
             <div className="mt-0.5 text-sm text-neutral-500">{item.subtitle}</div>
+            <div className="mt-2 text-base font-bold text-itr-navy-500">
+              ₹{itrWizardPrices[item.type].toLocaleString("en-IN")}{" "}
+              <span className="text-xs font-medium text-neutral-500">+ 18% GST</span>
+            </div>
             <ul className="mt-3 space-y-1">
               {item.points.map((p) => (
                 <li key={p} className="text-sm text-neutral-700">

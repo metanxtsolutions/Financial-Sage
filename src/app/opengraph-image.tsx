@@ -74,7 +74,7 @@ export default async function OpengraphImage() {
 
         <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
           <div style={{ color: "#f2b429", fontSize: 26, fontWeight: 700 }}>
-            {`Plans from ₹${siteConfig.pricingFrom.gstRegistration}`}
+            {`GST registration from ₹${siteConfig.pricingFrom.gstRegistration}`}
           </div>
           <div style={{ color: "rgba(255,255,255,0.45)", fontSize: 26 }}>
             {siteConfig.url.replace(/^https?:\/\//, "")}

@@ -12,6 +12,8 @@
 // here has been argued down wherever the local-intent case was weak — 300 pages
 // that rank beat 3,000 that do not.
 
+import { gstRegistrationPrice, itrWizardFrom, monthlyFilingFrom, servicePrices } from "@/data/pricing";
+
 export type LocationTier = 0 | 1 | 2 | 3;
 
 export interface ServiceEntry {
@@ -43,7 +45,7 @@ export const serviceRegistry: ServiceEntry[] = [
     pillarHref: "/gst-registration",
     headKeyword: "gst registration",
     locationTier: 3,
-    startingPrice: 999,
+    startingPrice: gstRegistrationPrice,
     whyLocationMatters:
       "The GSTIN itself encodes the state — its first two digits are the state code — and the application is processed by that state's jurisdictional officer, division and range. Registration is also per-state, so a business supplying from two states needs two registrations.",
   },
@@ -55,7 +57,7 @@ export const serviceRegistry: ServiceEntry[] = [
     pillarHref: "/other-services/company-registration",
     headKeyword: "company registration",
     locationTier: 3,
-    startingPrice: 999,
+    startingPrice: servicePrices["company-registration"].amount,
     whyLocationMatters:
       "Stamp duty on the MOA and on authorised share capital is set by the state, not centrally, so the same company costs a different amount to incorporate in Maharashtra than in Gujarat or Karnataka. The filing also goes to a specific Registrar of Companies office by state.",
   },
@@ -67,7 +69,7 @@ export const serviceRegistry: ServiceEntry[] = [
     pillarHref: "/itr-filing",
     headKeyword: "itr filing",
     locationTier: 2,
-    startingPrice: 999,
+    startingPrice: itrWizardFrom,
     // Argued down from 3. Income tax is wholly central: the slabs, the forms and
     // the portal are identical in every state. The only genuine local hook is the
     // assessing ward/circle, which most filers never interact with. Local intent
@@ -132,7 +134,7 @@ export const serviceRegistry: ServiceEntry[] = [
     pillarHref: "/gst-return-filing",
     headKeyword: "gst return filing",
     locationTier: 1,
-    startingPrice: 299,
+    startingPrice: monthlyFilingFrom,
     // Argued down from 2: returns are filed on a central portal to a central
     // schedule. Nothing about GSTR-1 or GSTR-3B differs in Pune versus Patna.
     whyLocationMatters: null,
@@ -156,7 +158,7 @@ export const serviceRegistry: ServiceEntry[] = [
     pillarHref: "/other-services/msme-udyam-registration",
     headKeyword: "udyam registration",
     locationTier: 1,
-    startingPrice: null,
+    startingPrice: servicePrices["msme-udyam-registration"].amount,
     // Argued down from 2: Udyam is a single central portal, free, Aadhaar-linked,
     // identical everywhere. Only state MSME incentive schemes differ, and that is
     // a guide, not a location page.

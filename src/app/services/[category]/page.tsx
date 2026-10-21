@@ -11,6 +11,7 @@ import { Sources } from "@/components/Sources";
 import { sourcesForCategory } from "@/data/sources";
 import { siteConfig } from "@/lib/site-config";
 import {
+  formatServicePrice,
   getServicesByCategory,
   getServiceCategoryBySlug,
   serviceCategories,
@@ -109,7 +110,7 @@ export default async function ServiceCategoryPage({
                   </span>
                   <span className="mt-2 flex-1 text-sm text-neutral-600">{service.summary}</span>
                   <span className="mt-3 text-sm font-semibold text-brand-700">
-                    From ₹{service.startingPrice}
+                    {formatServicePrice(service)}
                   </span>
                 </Link>
               ))}

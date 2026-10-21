@@ -8,6 +8,7 @@ import { JsonLd, faqPageSchema, serviceSchema, breadcrumbSchema } from "@/lib/sc
 import { siteConfig } from "@/lib/site-config";
 import { Sources } from "@/components/Sources";
 import { locationServiceSources } from "@/data/sources";
+import { PRICE_DISCLOSURE } from "@/data/pricing";
 import {
   getLocationFaqs,
   getLocationPage,
@@ -79,7 +80,10 @@ export function ServiceLocationPage({
               {service.label} in {city.city}, {city.state}
             </h1>
             <p className="mt-4 text-lg text-neutral-600">{copy.intro}</p>
-            <p className="mt-4 text-xl font-bold text-brand-700">From ₹{service.startingPrice}</p>
+            <p className="mt-4 text-xl font-bold text-brand-700">
+              From ₹{service.startingPrice.toLocaleString("en-IN")}
+            </p>
+            <p className="mt-1 text-sm text-neutral-500">{PRICE_DISCLOSURE}</p>
 
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">
               {service.audienceHeading(city.city)}

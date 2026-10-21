@@ -19,7 +19,7 @@ export const marqueeItems: string[] = [
   `Real replies in ${siteConfig.responseTime}`,
   "Pan-India, fully remote",
   "WhatsApp-first onboarding",
-  "Plans from ₹999",
+  "GST registration from ₹399",
   "No hidden fees, no quote forms",
 ];
 
@@ -98,7 +98,7 @@ export interface ComparisonRow {
 export const comparisonRows: ComparisonRow[] = [
   {
     dimension: "What it costs",
-    ours: "Plans from ₹999, published on the pricing page",
+    ours: "GST registration from ₹399, published on the pricing page",
     theirs: "₹10,000 or more a year on retainer, quoted case by case",
   },
   {

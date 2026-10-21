@@ -16,7 +16,7 @@ import { getFaqsByIds } from "@/data/faqs";
 const path = "/gst-registration";
 const title = "GST Registration Online in India: Documents, Fees & Process";
 const description =
-  "Complete guide to GST registration in India: eligibility, turnover thresholds, documents by entity type, fees, process, and penalties. Registration starts from ₹999.";
+  "Complete guide to GST registration in India: eligibility, turnover thresholds, documents by entity type, fees, process, and penalties. Registration starts from ₹399.";
 
 export const metadata: Metadata = withOpenGraph({
   title,
@@ -85,7 +85,7 @@ export default function GstRegistrationPage() {
         data={[
           serviceSchema({
             name: "GST Registration",
-            description: "Expert-assisted GST registration for Indian businesses, starting from ₹999.",
+            description: "Expert-assisted GST registration for Indian businesses, starting from ₹399.",
             url: `${siteConfig.url}/gst-registration`,
           }),
           // The document itself: when its copy last changed and where the rules
@@ -119,7 +119,7 @@ export default function GstRegistrationPage() {
             <p className="mt-4 text-lg text-neutral-600">
               GST registration enrols your business under India&apos;s Goods and Services Tax system
               and gives you a GSTIN. Financial Sage handles the whole process, from document review
-              to GSTIN issuance, from ₹999, with filing completed within 24 hours of receiving your
+              to GSTIN issuance, from ₹399, with filing completed within 24 hours of receiving your
               documents and payment.
             </p>
             <LastUpdated path={path} className="mt-3" />
@@ -215,7 +215,7 @@ export default function GstRegistrationPage() {
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">Fees & Timeline</h2>
             <p className="mt-3 text-neutral-700">
               The government charges <strong>zero fee</strong> for GST registration. Our service fee
-              starts from <strong>₹999</strong>{" "}
+              starts from <strong>₹399</strong>{" "}
               and covers consultation, document review, filing, and
               follow-up. We file your application within 24 hours of receiving documents and payment;
               GSTIN issuance typically takes 3 to 7 working days depending on the department&apos;s review.
@@ -241,7 +241,7 @@ export default function GstRegistrationPage() {
             <p className="mt-3 text-neutral-700">
               We review every document before filing to avoid clarification notices, track your ARN
               instead of leaving you to check the portal, and stay reachable on WhatsApp
-              throughout, all at a transparent, published price.
+              throughout, all at a transparent, published price (₹399 plus 18% GST; the government charges no fee for registration).
             </p>
 
             <h2 className="mt-10 text-2xl font-bold text-neutral-900">Frequently Asked Questions</h2>

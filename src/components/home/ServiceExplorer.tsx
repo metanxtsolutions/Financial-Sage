@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import clsx from "clsx";
-import { serviceCategories, getServicesByCategory } from "@/data/other-services";
+import { serviceCategories, getServicesByCategory, formatServicePrice } from "@/data/other-services";
 
 const PREVIEW_COUNT = 8;
 
@@ -96,7 +96,7 @@ export function ServiceExplorer() {
                 {service.title}
               </span>
               <span className="mt-auto pt-3 text-xs font-semibold text-brand-700">
-                From ₹{service.startingPrice}
+                {formatServicePrice(service)}
               </span>
             </Link>
           ))}

@@ -27,7 +27,7 @@ export async function generateMetadata({
     title: {
       absolute: `Company Registration in ${entry.city}, ${entry.state} | Financial Sage`,
     },
-    description: `Register a private limited company in ${entry.city} online. Name approval, DSC, SPICe+ filing, PAN and TAN, from ₹999. Filed by Financial Sage.`,
+    description: `Register a private limited company in ${entry.city} online. Name approval, DSC, SPICe+ filing, PAN and TAN, from ₹4,999. Filed by Financial Sage.`,
     alternates: { canonical: `/company-registration/${entry.stateSlug}/${entry.citySlug}` },
   });
 }

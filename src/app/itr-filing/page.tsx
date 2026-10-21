@@ -2,21 +2,19 @@ import type { Metadata } from "next";
 import { withOpenGraph } from "@/lib/metadata";
 import Link from "next/link";
 import { Section } from "@/components/Container";
-import { siteConfig } from "@/lib/site-config";
+import { itrWizardPrices } from "@/data/pricing";
 import { getLocationPages } from "@/data/service-locations";
 
 export const metadata: Metadata = withOpenGraph({
   title: "File Your Income Tax Return in Minutes",
   description:
-    "Simple, secure, expert-assisted ITR filing. Pick your ITR type, pay ₹999, upload your documents, and our tax expert takes it from there.",
+    "Simple, secure, expert-assisted ITR filing. Pick your ITR type, pay from ₹499, upload your documents, and our tax expert takes it from there.",
   alternates: { canonical: "/itr-filing" },
 });
 
 const benefits = ["Expert Filing", "Maximum Refund", "Secure Document Upload", "Dedicated Support"];
 
 export default function ItrFilingLandingPage() {
-  const price = siteConfig.pricingFrom.itrFilingWizard;
-
   return (
     <Section className="bg-white">
       <div className="mx-auto max-w-lg text-center">
@@ -35,8 +33,16 @@ export default function ItrFilingLandingPage() {
         </Link>
 
         <div className="mt-8 rounded-3xl border border-neutral-200 bg-white p-6 shadow-card">
-          <div className="text-3xl font-extrabold text-itr-navy-500">₹{price} Only</div>
-          <div className="text-sm text-neutral-500">(All Inclusive)</div>
+          <div className="text-sm font-semibold text-neutral-500">Starting from</div>
+          <div className="text-3xl font-extrabold text-itr-navy-500">
+            ₹{itrWizardPrices.ITR_1.toLocaleString("en-IN")}
+          </div>
+          <div className="text-sm text-neutral-500">Salaried individuals (ITR-1), + 18% GST</div>
+          <dl className="mt-4 space-y-1 text-left text-sm text-neutral-600">
+            <div className="flex justify-between"><dt>ITR-2 (capital gains, foreign assets)</dt><dd>₹{itrWizardPrices.ITR_2.toLocaleString("en-IN")}</dd></div>
+            <div className="flex justify-between"><dt>ITR-3 (business, professional, F&amp;O)</dt><dd>₹{itrWizardPrices.ITR_3.toLocaleString("en-IN")}</dd></div>
+            <div className="flex justify-between"><dt>ITR-4 (presumptive income)</dt><dd>₹{itrWizardPrices.ITR_4.toLocaleString("en-IN")}</dd></div>
+          </dl>
           <ul className="mt-4 space-y-2 text-left">
             {benefits.map((b) => (
               <li key={b} className="flex items-center gap-2 text-sm text-neutral-700">

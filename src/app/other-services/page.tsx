@@ -4,7 +4,7 @@ import { JsonLd, itemListSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
 import Link from "next/link";
 import { Section } from "@/components/Container";
-import { otherServices, serviceCategories, getServicesByCategory } from "@/data/other-services";
+import { otherServices, serviceCategories, getServicesByCategory, formatServicePrice } from "@/data/other-services";
 
 export const metadata: Metadata = withOpenGraph({
   title: "Business Services: Registration, Licences, Tax, ROC & Trademark",
@@ -77,7 +77,7 @@ export default function OtherServicesPage() {
                   <h3 className="font-semibold text-neutral-900">{service.title}</h3>
                   <p className="mt-2 flex-1 text-sm text-neutral-600">{service.summary}</p>
                   <p className="mt-3 text-sm font-semibold text-brand-700">
-                    From ₹{service.startingPrice}
+                    {formatServicePrice(service)}
                   </p>
                 </Link>
               ))}

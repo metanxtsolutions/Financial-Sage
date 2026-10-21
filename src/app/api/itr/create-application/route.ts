@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { itrApplicationSchema } from "@/lib/validation";
 import { isRateLimited } from "@/lib/rate-limit";
-import { siteConfig } from "@/lib/site-config";
+import { itrWizardPrices } from "@/data/pricing";
 
 export async function POST(request: Request) {
   const ip = request.headers.get("x-forwarded-for") ?? "unknown";
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
       email: parsed.data.email,
       pan: parsed.data.pan,
       state: parsed.data.state || undefined,
-      amount: siteConfig.pricingFrom.itrFilingWizard * 100,
+      amount: itrWizardPrices[parsed.data.itrType] * 100,
     },
   });
 

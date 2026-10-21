@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description:
-    "GST registration from ₹999, monthly GST filing, and compliance support for Indian MSMEs. Transparent pricing, WhatsApp-first support, Pan-India coverage.",
+    "GST registration from ₹399, monthly GST filing, and compliance support for Indian MSMEs. Transparent pricing, WhatsApp-first support, Pan-India coverage.",
   // No og:url here. A url in the layout is inherited by every page that does
   // not set its own openGraph, which made 171 pages claim to be the homepage.
   // Pages get theirs from withOpenGraph() in @/lib/metadata.

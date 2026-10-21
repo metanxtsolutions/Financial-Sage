@@ -1,5 +1,7 @@
 // Single source of truth for business facts shown across the site. The owner
 // sets these display figures; update them here and every page picks up the change.
+// Prices live in src/data/pricing.ts; pricingFrom below only re-exports the headline ones.
+import { gstRegistrationPrice, itrWizardFrom, monthlyFilingFrom } from "@/data/pricing";
 
 export const siteConfig = {
   name: "Financial Sage",
@@ -19,12 +21,12 @@ export const siteConfig = {
     enquiries: "800+",
   },
   pricingFrom: {
-    gstRegistration: 999,
+    gstRegistration: gstRegistrationPrice,
     otherRegistration: 999,
-    filing: 299,
-    // Standalone ITR filing wizard price (/itr-filing). Distinct from the
-    // ₹299 listing on /other-services/itr-filing - that page is untouched.
-    itrFilingWizard: 999,
+    filing: monthlyFilingFrom,
+    // Lowest ITR wizard price (/itr-filing, salaried ITR-1). Per-form amounts
+    // are in itrWizardPrices.
+    itrFilingWizard: itrWizardFrom,
   },
 } as const;
 

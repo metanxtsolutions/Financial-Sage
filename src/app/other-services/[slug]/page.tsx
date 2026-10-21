@@ -7,6 +7,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { StickyLeadSidebar } from "@/components/StickyLeadSidebar";
 import {
   getOtherService,
+  formatServicePrice,
   getRelatedServices,
   getServiceCategory,
   otherServices,
@@ -16,6 +17,7 @@ import { JsonLd, breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import { Sources } from "@/components/Sources";
 import { sourcesForService } from "@/data/sources";
 import { siteConfig } from "@/lib/site-config";
+import { PRICE_DISCLOSURE } from "@/data/pricing";
 
 export const dynamicParams = false;
 
@@ -89,7 +91,11 @@ export default async function OtherServicePage({ params }: { params: Promise<{ s
           <span className="eyebrow">{category?.title ?? "Services"}</span>
           <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">{service.title}</h1>
           <p className="mt-4 text-lg text-neutral-600">{service.summary}</p>
-          <p className="mt-4 text-xl font-bold text-brand-700">From ₹{service.startingPrice}</p>
+          <p className="mt-4 text-xl font-bold text-brand-700">{formatServicePrice(service)}</p>
+          <p className="mt-1 text-sm text-neutral-500">
+            {service.priceNote ? `${service.priceNote}. ` : ""}
+            {PRICE_DISCLOSURE}
+          </p>
 
           {service.facts && service.facts.length > 0 && (
             <dl className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-neutral-200 bg-neutral-200 sm:grid-cols-2">

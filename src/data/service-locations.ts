@@ -8,6 +8,7 @@
 
 import type { Faq } from "@/data/faqs";
 import { cities, type CityEntry } from "@/data/cities";
+import { itrWizardFrom, servicePrices } from "@/data/pricing";
 
 export type LocationServiceId = "company-registration" | "itr-filing";
 
@@ -40,7 +41,7 @@ export const locationServices: Record<LocationServiceId, LocationService> = {
     label: "Company Registration",
     pillarHref: "/other-services/company-registration",
     pillarLabel: "company registration guide",
-    startingPrice: 999,
+    startingPrice: servicePrices["company-registration"].amount,
     labelLower: "company registration",
     audienceHeading: (city) => `Company Registration for ${city} Businesses`,
     ctaHeading: "Talk to an Incorporation Expert",
@@ -60,7 +61,7 @@ export const locationServices: Record<LocationServiceId, LocationService> = {
     label: "ITR Filing",
     pillarHref: "/itr-filing",
     pillarLabel: "ITR filing service",
-    startingPrice: 999,
+    startingPrice: itrWizardFrom,
     labelLower: "ITR filing",
     audienceHeading: (city) => `Who We File For in ${city}`,
     ctaHeading: "Talk to a Tax Expert",

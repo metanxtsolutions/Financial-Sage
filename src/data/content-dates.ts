@@ -24,10 +24,10 @@
 // (`date`, and `updated` once it has been revised).
 
 const pillars: Record<string, string> = {
-  "/gst-registration": "2026-07-24",
-  "/gst-return-filing": "2026-07-22",
+  "/gst-registration": "2026-10-15",
+  "/gst-return-filing": "2026-10-15",
   "/gst-compliance": "2026-07-22",
-  "/itr-filing": "2026-09-05",
+  "/itr-filing": "2026-10-15",
 };
 
 const legal: Record<string, string> = {
@@ -38,8 +38,8 @@ const legal: Record<string, string> = {
 
 // Keyed by cluster slug, which is also the URL path without the leading slash.
 export const clusterDates: Record<string, string> = {
-  "gst-registration-online": "2026-07-24",
-  "gst-registration-fees": "2026-07-24",
+  "gst-registration-online": "2026-10-15",
+  "gst-registration-fees": "2026-10-15",
   "gst-registration-process": "2026-07-20",
   "gst-registration-documents": "2026-07-20",
   "gst-registration-status": "2026-07-20",

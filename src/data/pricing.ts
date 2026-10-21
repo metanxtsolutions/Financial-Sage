@@ -2,7 +2,10 @@ export interface PricingTier {
   id: string;
   name: string;
   price: number;
-  priceNote: string;
+  /** Billing basis shown next to the price, e.g. "one-time". */
+  billing: string;
+  /** What the plan's contents cost bought one by one, when it is a bundle. */
+  separatePrice?: number;
   description: string;
   features: string[];
   highlighted?: boolean;
@@ -151,12 +154,22 @@ export function formatPrice(p: Pick<ServicePrice, "amount" | "unit" | "from">): 
   return `${p.from ? "From " : ""}₹${p.amount.toLocaleString("en-IN")}${p.unit ?? ""}`;
 }
 
+// Bundles are priced from the a-la-carte prices so the saving is real and
+// checkable: registration + 12 months of the up-to-10-invoice filing band,
+// then GSTR-9 and one notice reply on top.
+const businessSeparate = gstRegistrationPrice + 12 * gstFilingPlans[1].price; // 6,387
+const complianceProSeparate =
+  businessSeparate + servicePrices["gstr-9-annual-return"].amount + servicePrices["gst-notice-reply"].amount; // 9,385
+
+/** No government fee applies to GST registration or to filing returns. */
+export const TIER_TAX_NOTE = "+ 18% GST. No government fee for GST registration or returns.";
+
 export const pricingTiers: PricingTier[] = [
   {
     id: "starter",
     name: "Starter",
     price: gstRegistrationPrice,
-    priceNote: "+ 18% GST and applicable Govt fee",
+    billing: "one-time",
     description: "GST registration only, for businesses just getting started.",
     features: [
       "Free eligibility consultation",
@@ -170,8 +183,9 @@ export const pricingTiers: PricingTier[] = [
   {
     id: "business",
     name: "Business",
-    price: 5999, // review: bundle = 399 + 12 x 499, rounded
-    priceNote: "+ 18% GST and applicable Govt fee",
+    price: 5999,
+    billing: "one-time, covers 12 months",
+    separatePrice: businessSeparate,
     description:
       "Registration plus a full year of return filing, for businesses that want to file and forget.",
     features: [
@@ -187,15 +201,16 @@ export const pricingTiers: PricingTier[] = [
   {
     id: "compliance-pro",
     name: "Compliance Pro",
-    price: 7999, // review: Business + GSTR-9 (1,499) + advisory
-    priceNote: "+ 18% GST and applicable Govt fee",
+    price: 7999,
+    billing: "one-time, covers 12 months",
+    separatePrice: complianceProSeparate,
     description:
       "Full-year compliance cover for businesses that want annual filing and notice support handled end-to-end.",
     features: [
       "Everything in Business",
       "GSTR-9 annual return filing",
       "Input Tax Credit (ITC) advisory",
-      "GST notice handling & response drafting",
+      "Reply to one GST notice, drafted and filed",
       "Priority support (faster-than-standard response)",
     ],
     ctaLabel: "Choose Compliance Pro",

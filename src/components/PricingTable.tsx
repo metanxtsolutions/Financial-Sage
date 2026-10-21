@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
-import { pricingTiers } from "@/data/pricing";
+import { pricingTiers, TIER_TAX_NOTE } from "@/data/pricing";
 
 export function PricingTable() {
   return (
@@ -25,7 +25,16 @@ export function PricingTable() {
           <p className="mt-1 text-sm text-neutral-600">{tier.description}</p>
           <div className="mt-4">
             <span className="text-3xl font-extrabold text-neutral-900">₹{tier.price.toLocaleString("en-IN")}</span>
-            <span className="ml-1 text-sm text-neutral-500">{tier.priceNote}</span>
+            <p className="mt-1 text-sm font-medium text-neutral-700">Paid {tier.billing}</p>
+            {tier.separatePrice && (
+              <p className="mt-1 text-sm text-neutral-500">
+                <s>₹{tier.separatePrice.toLocaleString("en-IN")}</s> if bought separately,{" "}
+                <span className="font-semibold text-accent-600">
+                  save ₹{(tier.separatePrice - tier.price).toLocaleString("en-IN")}
+                </span>
+              </p>
+            )}
+            <p className="mt-1 text-xs text-neutral-500">{TIER_TAX_NOTE}</p>
           </div>
           <ul className="mt-5 space-y-2 text-sm text-neutral-700">
             {tier.features.map((feature) => (

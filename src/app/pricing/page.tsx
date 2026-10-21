@@ -94,9 +94,10 @@ export default function PricingPage() {
         </div>
 
         <p className="mt-6 text-sm text-neutral-500">
-          {PRICE_DISCLOSURE} The bundled plans above are one-time prices covering the services
-          listed in each plan. All plans exclude applicable government/GST fees, which are paid directly to the
-          department where applicable. GST registration itself has no government fee.
+          {PRICE_DISCLOSURE} The three plans above are paid once: Starter covers registration,
+          Business and Compliance Pro cover registration plus 12 months of filing. GST registration
+          and return filing carry no government fee; late fees or tax paid to the department are
+          never part of our fee.
         </p>
 
         <h2 className="mt-14 text-2xl font-bold text-neutral-900">Pricing FAQs</h2>

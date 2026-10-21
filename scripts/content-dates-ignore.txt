@@ -9,3 +9,10 @@
 # comments. The file is also passed to `git blame --ignore-revs-file`, so keep
 # to that format.
 b4b65c0e9b7b9a3c54c621b613dc2299c148bf0c
+
+# 5362b30: removed em dashes from copy. Checked word for word: punctuation only in every guide.
+5362b30b5cbeb356021fc0ea7b303da0a72ce433
+# 70f0b17: merge of main into aeo-geo-foundations. Adds no copy of its own.
+70f0b17180d9f5833ca18e96e84e35be778a1314
+# 609d970: moved the recorded dates themselves.
+609d97088a842b370e7b6dd2841d5fcd830850ab

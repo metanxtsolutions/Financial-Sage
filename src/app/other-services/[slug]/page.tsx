@@ -8,6 +8,7 @@ import { StickyLeadSidebar } from "@/components/StickyLeadSidebar";
 import {
   getOtherService,
   formatServicePrice,
+  isQuotedService,
   getRelatedServices,
   getServiceCategory,
   otherServices,
@@ -70,7 +71,7 @@ export default async function OtherServicePage({ params }: { params: Promise<{ s
             name: service.title,
             description: service.summary,
             url: `${siteConfig.url}/other-services/${service.slug}`,
-            priceFrom: service.startingPrice,
+            priceFrom: isQuotedService(service) ? undefined : service.startingPrice,
           }),
           breadcrumbSchema(
             crumbs.map((c) => ({ name: c.name, url: `${siteConfig.url}${c.href}` })),
@@ -93,8 +94,9 @@ export default async function OtherServicePage({ params }: { params: Promise<{ s
           <p className="mt-4 text-lg text-neutral-600">{service.summary}</p>
           <p className="mt-4 text-xl font-bold text-brand-700">{formatServicePrice(service)}</p>
           <p className="mt-1 text-sm text-neutral-500">
-            {service.priceNote ? `${service.priceNote}. ` : ""}
-            {PRICE_DISCLOSURE}
+            {isQuotedService(service)
+              ? "Our fee depends on the jurisdiction and structure. Local government, licence and registered-agent fees are charged separately."
+              : `${service.priceNote ? `${service.priceNote}. ` : ""}${PRICE_DISCLOSURE}`}
           </p>
 
           {service.facts && service.facts.length > 0 && (

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { dscTypeIds } from "@/data/pricing";
 
 export const leadSchema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(120),
@@ -57,3 +58,28 @@ export type ItrApplicationInput = z.infer<typeof itrApplicationSchema>;
 // Max upload size, matching the spec's "Maximum 20MB" per document.
 export const ITR_MAX_FILE_BYTES = 20 * 1024 * 1024;
 export const ITR_ALLOWED_MIME_TYPES = ["application/pdf", "image/jpeg", "image/png"];
+
+export const dscOrderSchema = z.object({
+  dscType: z.enum(dscTypeIds),
+  name: z.string().trim().min(2, "Please enter your name as on PAN").max(120),
+  phone: z
+    .string()
+    .trim()
+    .regex(/^[0-9+\-\s]{8,15}$/, "Enter a valid phone number"),
+  email: z.string().trim().email("Enter a valid email"),
+  pan: z
+    .string()
+    .trim()
+    .toUpperCase()
+    .regex(/^[A-Z]{5}[0-9]{4}[A-Z]$/, "Enter a valid 10-character PAN"),
+  address: z.string().trim().min(10, "Enter the full delivery address").max(500),
+  city: z.string().trim().min(2, "Enter your city").max(120),
+  state: z.string().trim().min(2, "Enter your state").max(120),
+  pincode: z
+    .string()
+    .trim()
+    .regex(/^[1-9][0-9]{5}$/, "Enter a valid 6-digit PIN code"),
+  consent: z.literal(true, { message: "Please accept the Terms & Privacy Policy" }),
+});
+
+export type DscOrderInput = z.infer<typeof dscOrderSchema>;

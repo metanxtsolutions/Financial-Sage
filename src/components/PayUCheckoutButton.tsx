@@ -20,15 +20,7 @@ interface PayUFields {
   hash: string;
 }
 
-interface PayUCheckoutButtonProps {
-  /** Amount in rupees. */
-  amount: number;
-  name: string;
-  email: string;
-  phone: string;
-  productinfo?: string;
-  /** Opaque value PayU echoes back untouched in its postback, e.g. an application id to reconcile later. */
-  udf1?: string;
+interface CommonProps {
   label?: string;
   className?: string;
   /** Base Button variant. Use "outline" (not "primary") when overriding colors via
@@ -37,17 +29,28 @@ interface PayUCheckoutButtonProps {
   variant?: ButtonVariant;
 }
 
-export function PayUCheckoutButton({
-  amount,
-  name,
-  email,
-  phone,
-  productinfo = "Financial Sage Payment",
-  udf1,
-  label = "Pay Now",
-  className,
-  variant = "primary",
-}: PayUCheckoutButtonProps) {
+interface DirectPaymentProps extends CommonProps {
+  /** Amount in rupees. */
+  amount: number;
+  name: string;
+  email: string;
+  phone: string;
+  productinfo?: string;
+  /** Opaque value PayU echoes back untouched in its postback, e.g. an application id to reconcile later. */
+  udf1?: string;
+  initiate?: never;
+}
+
+interface OrderPaymentProps extends CommonProps {
+  /** A route that signs the PayU fields from an order saved on the server, so
+   *  the amount never comes from the browser (e.g. /api/dsc/pay). */
+  initiate: { url: string; body: Record<string, unknown> };
+}
+
+type PayUCheckoutButtonProps = DirectPaymentProps | OrderPaymentProps;
+
+export function PayUCheckoutButton(props: PayUCheckoutButtonProps) {
+  const { label = "Pay Now", className, variant = "primary" } = props;
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
   const [fields, setFields] = useState<PayUFields | null>(null);
@@ -65,10 +68,21 @@ export function PayUCheckoutButton({
     setError(null);
 
     try {
-      const res = await fetch("/api/payu/initiate", {
+      const request = props.initiate ?? {
+        url: "/api/payu/initiate",
+        body: {
+          amount: props.amount,
+          name: props.name,
+          email: props.email,
+          phone: props.phone,
+          productinfo: props.productinfo ?? "Financial Sage Payment",
+          udf1: props.udf1,
+        },
+      };
+      const res = await fetch(request.url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount, name, email, phone, productinfo, udf1 }),
+        body: JSON.stringify(request.body),
       });
       const data = await res.json();
       if (!res.ok) {

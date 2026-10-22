@@ -86,3 +86,35 @@ model ItrDocument {
   mimeType      String
   createdAt     DateTime       @default(now())
 }
+
+// Digital signature certificate orders. Same pay-first, no-account flow as the
+// ITR wizard; the order is fulfilled offline (eKYC, issuance, courier), so the
+// statuses after PAID are updated by hand.
+enum DscOrderStatus {
+  PAYMENT_PENDING
+  PAID
+  KYC_PENDING
+  ISSUED
+  DISPATCHED
+  DELIVERED
+  CANCELLED
+}
+
+model DscOrder {
+  id            String         @id @default(cuid())
+  dscType       String // id from dscPrices in src/data/pricing.ts, e.g. "sign-2y"
+  name          String
+  phone         String
+  email         String
+  pan           String
+  address       String
+  city          String
+  state         String
+  pincode       String
+  amount        Int // paise, price + 18% GST, e.g. 294882 for ₹2,948.82
+  status        DscOrderStatus @default(PAYMENT_PENDING)
+  payuTxnId     String?
+  payuPaymentId String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}

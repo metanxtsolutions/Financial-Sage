@@ -9,7 +9,7 @@ import { sitemapGroups } from "@/lib/sitemap-urls";
 
 // The ITR wizard is a multi-step form behind a payment, not a landing page, and
 // the API routes are not documents.
-const disallow = ["/api/", "/itr-filing/apply"];
+const disallow = ["/api/", "/itr-filing/apply", "/digital-signature-certificate/apply"];
 
 // AI crawlers, named so the policy is a decision on the record rather than an
 // accident of the wildcard rule.

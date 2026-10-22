@@ -60,6 +60,18 @@ export const DSC_INCLUSIONS = [
   "Complete setup assistance",
 ];
 export const DSC_TIMELINE = { processing: "1–2 working days", delivery: "2–3 working days" } as const;
+export type DscTypeId = (typeof dscPrices)[number]["id"];
+export const dscTypeIds = dscPrices.map((d) => d.id) as [DscTypeId, ...DscTypeId[]];
+
+/** What a DSC order charges, in paise. Unlike the other services, DSC is paid
+ *  online with 18% GST added at checkout, since the price list states it is
+ *  not GST inclusive. */
+export function dscCharge(id: DscTypeId) {
+  const dsc = dscPrices.find((d) => d.id === id)!;
+  const price = dsc.price * 100;
+  const gst = Math.round(price * 0.18);
+  return { dsc, price, gst, total: price + gst };
+}
 
 export interface ServicePrice {
   amount: number;

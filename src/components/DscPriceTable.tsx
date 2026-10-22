@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { DSC_INCLUSIONS, DSC_TIMELINE, dscPrices } from "@/data/pricing";
 
 /** The DSC price list, shown on /pricing and on the DSC service page. */
@@ -5,13 +6,14 @@ export function DscPriceTable() {
   return (
     <div>
       <div className="overflow-x-auto rounded-2xl border border-neutral-200 bg-white">
-        <table className="w-full min-w-[480px] text-left text-sm">
+        <table className="w-full min-w-[560px] text-left text-sm">
           <thead className="bg-neutral-50 text-xs font-semibold tracking-wide text-neutral-500 uppercase">
             <tr>
               <th scope="col" className="px-5 py-3">DSC type</th>
               <th scope="col" className="px-5 py-3">Validity</th>
               <th scope="col" className="px-5 py-3">USB token</th>
               <th scope="col" className="px-5 py-3 text-right">Price</th>
+              <th scope="col" className="px-5 py-3"><span className="sr-only">Buy</span></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-neutral-100">
@@ -22,6 +24,14 @@ export function DscPriceTable() {
                 <td className="px-5 py-3 text-neutral-700">Included</td>
                 <td className="px-5 py-3 text-right font-semibold text-neutral-900">
                   ₹{dsc.price.toLocaleString("en-IN")}
+                </td>
+                <td className="px-5 py-3 text-right">
+                  <Link
+                    href={`/digital-signature-certificate/apply?type=${dsc.id}`}
+                    className="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-700"
+                  >
+                    Buy
+                  </Link>
                 </td>
               </tr>
             ))}
@@ -41,7 +51,7 @@ export function DscPriceTable() {
           <h3 className="font-bold text-neutral-900">Timelines</h3>
           <p className="mt-2">Processing: {DSC_TIMELINE.processing}</p>
           <p>Token delivery: {DSC_TIMELINE.delivery}</p>
-          <p className="mt-2 text-neutral-500">Prices exclude 18% GST. There is no separate government fee.</p>
+          <p className="mt-2 text-neutral-500">Prices exclude 18% GST, which is added at checkout. There is no separate government fee.</p>
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { generatePayURequestHash, getPayUActionUrl } from "@/lib/payu";
 import { payuInitiateSchema } from "@/lib/validation";
 import { isRateLimited } from "@/lib/rate-limit";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
   const ip = request.headers.get("x-forwarded-for") ?? "unknown";
@@ -19,9 +20,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: parsed.error.issues[0]?.message ?? "Invalid input" }, { status: 400 });
   }
 
-  const { amount, name, email, phone, productinfo, udf1 } = parsed.data;
+  const { name, email, phone, productinfo, udf1 } = parsed.data;
+  let amountStr = parsed.data.amount.toFixed(2);
+
+  // udf1 is an ITR application id. Charge the amount saved on that row at
+  // create-application, never the one the browser sent, so a tampered
+  // request cannot pay less than the displayed price.
+  if (udf1) {
+    const application = await prisma.itrApplication.findUnique({ where: { id: udf1 } });
+    if (!application) {
+      return NextResponse.json({ error: "Application not found" }, { status: 404 });
+    }
+    if (application.status !== "PAYMENT_PENDING") {
+      return NextResponse.json({ error: "This application has already been paid." }, { status: 409 });
+    }
+    amountStr = (application.amount / 100).toFixed(2);
+  }
+
   const txnid = `fs_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
-  const amountStr = amount.toFixed(2);
 
   let hash: string;
   let key: string;

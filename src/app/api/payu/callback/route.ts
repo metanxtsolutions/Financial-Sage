@@ -60,17 +60,25 @@ export async function POST(request: Request) {
     return redirectToApp(siteUrl, { payu: "error" });
   }
 
-  if (status === "success") {
-    await prisma.itrApplication.update({
-      where: { id: application.id },
-      data: {
-        status: "DOCUMENTS_PENDING",
-        payuTxnId: txnid,
-        payuPaymentId: mihpayid || null,
-      },
-    });
-    return redirectToApp(siteUrl, { payu: "success", applicationId: application.id });
+  if (status !== "success") {
+    return redirectToApp(siteUrl, { payu: "failed", applicationId: application.id });
   }
 
-  return redirectToApp(siteUrl, { payu: "failed", applicationId: application.id });
+  // A genuine PayU postback can still carry the wrong amount if the request
+  // was tampered with before it reached PayU, so it must match the application.
+  if (Number(amount).toFixed(2) !== (application.amount / 100).toFixed(2)) {
+    console.error("PayU callback: amount mismatch", { txnid, amount, expected: application.amount });
+    return redirectToApp(siteUrl, { payu: "error", applicationId: application.id });
+  }
+
+  // PayU can post the same success twice; only the first one moves the status.
+  await prisma.itrApplication.updateMany({
+    where: { id: application.id, status: "PAYMENT_PENDING" },
+    data: {
+      status: "DOCUMENTS_PENDING",
+      payuTxnId: txnid,
+      payuPaymentId: mihpayid || null,
+    },
+  });
+  return redirectToApp(siteUrl, { payu: "success", applicationId: application.id });
 }

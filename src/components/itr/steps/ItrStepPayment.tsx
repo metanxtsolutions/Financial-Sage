@@ -7,16 +7,10 @@ const paymentMethods = ["UPI", "Cards", "Net Banking", "Wallets"];
 
 export function ItrStepPayment({
   applicationId,
-  name,
-  email,
-  phone,
   paymentFailed,
   itrType,
 }: {
   applicationId: string;
-  name: string;
-  email: string;
-  phone: string;
   paymentFailed?: boolean;
   itrType: ItrWizardType;
 }) {
@@ -57,12 +51,7 @@ export function ItrStepPayment({
 
       <div className="mt-5">
         <PayUCheckoutButton
-          amount={price}
-          name={name}
-          email={email}
-          phone={phone}
-          productinfo="Financial Sage ITR Filing"
-          udf1={applicationId}
+          initiate={{ url: "/api/itr/pay", body: { applicationId } }}
           label={`Pay Now - ₹${price}`}
           variant="outline"
           className="w-full rounded-xl !border-itr-green-500 !bg-itr-green-500 px-5 py-3.5 text-sm font-semibold !text-white hover:!bg-itr-green-600"

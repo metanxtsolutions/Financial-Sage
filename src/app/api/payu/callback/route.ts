@@ -6,6 +6,7 @@ import { verifyPayUResponseHash } from "@/lib/payu";
 // is what distinguishes success from failure) as a real browser navigation,
 // not a fetch from our own JS, so the only way back to the app is an HTTP
 // redirect - a 303 turns PayU's POST into a plain GET on the way back.
+// Only /api/itr/pay points PayU here, and it sets udf1 to the applicationId.
 function redirectToApp(siteUrl: string, params: Record<string, string>) {
   const url = new URL("/itr-filing/apply", siteUrl);
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
@@ -32,7 +33,7 @@ export async function POST(request: Request) {
   const mihpayid = get("mihpayid");
   const udf1 = get("udf1");
 
-  if (!txnid || !hash) {
+  if (!txnid || !hash || !udf1) {
     return redirectToApp(siteUrl, { payu: "error" });
   }
 
@@ -47,12 +48,6 @@ export async function POST(request: Request) {
   if (!isValid) {
     console.error("PayU callback: hash mismatch", { txnid });
     return redirectToApp(siteUrl, { payu: "error" });
-  }
-
-  // udf1 carries our own applicationId through untouched - only the ITR
-  // wizard's payment step sets it.
-  if (!udf1) {
-    return redirectToApp(siteUrl, { payu: status === "success" ? "success" : "failed" });
   }
 
   const application = await prisma.itrApplication.findUnique({ where: { id: udf1 } });

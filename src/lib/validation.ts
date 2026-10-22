@@ -22,20 +22,6 @@ export const leadSchema = z.object({
 
 export type LeadInput = z.infer<typeof leadSchema>;
 
-export const payuInitiateSchema = z.object({
-  amount: z.number().positive("Amount must be greater than 0"),
-  name: z.string().trim().min(1, "Name is required").max(120),
-  email: z.string().trim().email("Enter a valid email"),
-  phone: z
-    .string()
-    .trim()
-    .regex(/^[0-9+\-\s]{8,15}$/, "Enter a valid phone number"),
-  productinfo: z.string().trim().min(1).max(200).optional().default("Financial Sage Payment"),
-  udf1: z.string().trim().max(200).optional(),
-});
-
-export type PayUInitiateInput = z.infer<typeof payuInitiateSchema>;
-
 export const itrApplicationSchema = z.object({
   itrType: z.enum(["ITR_1", "ITR_2", "ITR_3", "ITR_4"]),
   name: z.string().trim().min(2, "Please enter your name").max(120),

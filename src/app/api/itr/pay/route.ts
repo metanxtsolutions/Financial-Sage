@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
-import { generatePayURequestHash, getPayUActionUrl } from "@/lib/payu";
-import { payuInitiateSchema } from "@/lib/validation";
-import { isRateLimited } from "@/lib/rate-limit";
 import { prisma } from "@/lib/prisma";
+import { generatePayURequestHash, getPayUActionUrl } from "@/lib/payu";
+import { isRateLimited } from "@/lib/rate-limit";
 
+// The amount is never taken from the browser: it is read from the application
+// saved at create-application, and the callback checks PayU's amount against
+// the same row.
 export async function POST(request: Request) {
   const ip = request.headers.get("x-forwarded-for") ?? "unknown";
   if (isRateLimited(ip)) {
@@ -11,44 +13,33 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json().catch(() => null);
-  if (!body) {
+  const applicationId = typeof body?.applicationId === "string" ? body.applicationId : null;
+  if (!applicationId) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const parsed = payuInitiateSchema.safeParse(body);
-  if (!parsed.success) {
-    return NextResponse.json({ error: parsed.error.issues[0]?.message ?? "Invalid input" }, { status: 400 });
+  const application = await prisma.itrApplication.findUnique({ where: { id: applicationId } });
+  if (!application) {
+    return NextResponse.json({ error: "Application not found" }, { status: 404 });
   }
-
-  const { name, email, phone, productinfo, udf1 } = parsed.data;
-  let amountStr = parsed.data.amount.toFixed(2);
-
-  // udf1 is an ITR application id. Charge the amount saved on that row at
-  // create-application, never the one the browser sent, so a tampered
-  // request cannot pay less than the displayed price.
-  if (udf1) {
-    const application = await prisma.itrApplication.findUnique({ where: { id: udf1 } });
-    if (!application) {
-      return NextResponse.json({ error: "Application not found" }, { status: 404 });
-    }
-    if (application.status !== "PAYMENT_PENDING") {
-      return NextResponse.json({ error: "This application has already been paid." }, { status: 409 });
-    }
-    amountStr = (application.amount / 100).toFixed(2);
+  if (application.status !== "PAYMENT_PENDING") {
+    return NextResponse.json({ error: "This application has already been paid." }, { status: 409 });
   }
 
   const txnid = `fs_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
+  const amount = (application.amount / 100).toFixed(2);
+  const productinfo = "Financial Sage ITR Filing";
 
   let hash: string;
   let key: string;
   try {
     ({ hash, key } = generatePayURequestHash({
       txnid,
-      amount: amountStr,
+      amount,
       productinfo,
-      firstname: name,
-      email,
-      udf1,
+      firstname: application.name,
+      email: application.email,
+      udf1: application.id,
     }));
   } catch (err) {
     console.error("PayU hash generation failed:", err);
@@ -61,12 +52,12 @@ export async function POST(request: Request) {
     action: getPayUActionUrl(),
     key,
     txnid,
-    amount: amountStr,
+    amount,
     productinfo,
-    firstname: name,
-    email,
-    phone,
-    udf1: udf1 ?? "",
+    firstname: application.name,
+    email: application.email,
+    phone: application.phone,
+    udf1: application.id,
     surl: `${siteUrl}/api/payu/callback`,
     furl: `${siteUrl}/api/payu/callback`,
     hash,

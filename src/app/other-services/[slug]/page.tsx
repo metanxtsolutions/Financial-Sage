@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Section } from "@/components/Container";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { StickyLeadSidebar } from "@/components/StickyLeadSidebar";
+import { DscPriceTable } from "@/components/DscPriceTable";
 import {
   getOtherService,
   formatServicePrice,
@@ -118,6 +119,15 @@ export default async function OtherServicePage({ params }: { params: Promise<{ s
               <li key={b}>• {b}</li>
             ))}
           </ul>
+
+          {service.slug === "digital-signature-certificate" && (
+            <>
+              <h2 className="mt-10 text-xl font-bold text-neutral-900">DSC Price List</h2>
+              <div className="mt-4">
+                <DscPriceTable />
+              </div>
+            </>
+          )}
 
           {locationPages.length > 0 && locationRouteBase && (
             <>

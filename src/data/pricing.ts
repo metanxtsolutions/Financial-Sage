@@ -42,6 +42,25 @@ export const gstFilingPlans = [
   { id: "26-50", label: "26 to 50 invoices", volume: "GSTR-1 and GSTR-3B", price: 999 },
 ] as const;
 
+/** Digital signature certificates (Vsign), priced per certificate with the USB
+ *  token, verification support and courier included. 18% GST is extra. */
+export const dscPrices = [
+  { id: "sign-1y", type: "Class 3 Individual (Sign Only)", validity: "1 Year", price: 2499 },
+  { id: "sign-2y", type: "Class 3 Individual (Sign Only)", validity: "2 Years", price: 3499 },
+  { id: "sign-3y", type: "Class 3 Individual (Sign Only)", validity: "3 Years", price: 5499 },
+  { id: "sign-encrypt-1y", type: "Class 3 Individual (Sign + Encrypt)", validity: "1 Year", price: 6000 },
+  { id: "sign-encrypt-2y", type: "Class 3 Individual (Sign + Encrypt)", validity: "2 Years", price: 9000 },
+] as const;
+export const dscFrom = Math.min(...dscPrices.map((d) => d.price));
+export const DSC_INCLUSIONS = [
+  "Official Vsign certificate",
+  "USB token",
+  "eKYC and video verification support",
+  "Doorstep courier delivery",
+  "Complete setup assistance",
+];
+export const DSC_TIMELINE = { processing: "1–2 working days", delivery: "2–3 working days" } as const;
+
 export interface ServicePrice {
   amount: number;
   /** Billing interval or basis, appended to the amount, e.g. "/month". */
@@ -140,6 +159,7 @@ export const servicePrices: Record<string, ServicePrice> = {
   "gst-refund-application": { amount: 2999, from: true },
   "gst-e-invoice-setup": { amount: 1499 },
   "e-way-bill-registration": { amount: 499 },
+  "digital-signature-certificate": { amount: dscFrom, from: true, note: "USB token and courier included" },
 };
 
 /** One-off advisory session, not tied to a catalogue page. */

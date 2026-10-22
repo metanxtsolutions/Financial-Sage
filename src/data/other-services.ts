@@ -619,6 +619,22 @@ const rawOtherServices: OtherService[] = [
     bullets: ["DGFT application filing", "Digital signature coordination", "Bank certificate handling", "IEC certificate", "Annual IEC update filing"],
   },
   {
+    slug: "digital-signature-certificate",
+    category: "licences",
+    title: "Digital Signature Certificate (DSC)",
+    metaTitle: "Class 3 DSC Online | Digital Signature Certificate | Financial Sage",
+    metaDescription: "Class 3 digital signature certificate (Vsign) with USB token, video verification and doorstep delivery. Sign only or sign + encrypt, from ₹2,499.",
+    summary: "A Class 3 individual digital signature certificate from Vsign, for MCA, GST, income tax and e-tender filings, delivered on a USB token and set up on your computer.",
+    startingPrice: 2499,
+    facts: [
+      { label: "Certificate", value: "Class 3 Individual, Sign Only or Sign + Encrypt" },
+      { label: "Validity", value: "1, 2 or 3 years" },
+      { label: "Processing time", value: "1–2 working days" },
+      { label: "Token delivery", value: "2–3 working days" },
+    ],
+    bullets: ["Official Vsign certificate", "USB token", "eKYC and video verification support", "Doorstep courier delivery", "Complete setup assistance"],
+  },
+  {
     slug: "ad-code-registration",
     category: "licences",
     title: "AD Code Registration",

@@ -3,6 +3,7 @@ import { withOpenGraph } from "@/lib/metadata";
 import { Section } from "@/components/Container";
 import { PricingTable } from "@/components/PricingTable";
 import { FaqAccordion } from "@/components/FaqAccordion";
+import { DscPriceTable } from "@/components/DscPriceTable";
 import { JsonLd, faqPageSchema, pricingOfferSchema } from "@/lib/schema";
 import { getFaqsByIds } from "@/data/faqs";
 import Link from "next/link";
@@ -63,6 +64,19 @@ export default function PricingPage() {
         <p className="mt-4 text-sm text-neutral-500">
           Above 50 invoices a month we quote from the 26 to 50 band once we see the volume.
         </p>
+
+        <h2 className="mt-14 text-2xl font-bold text-neutral-900">Digital Signature Certificate (DSC)</h2>
+        <p className="mt-2 max-w-2xl text-neutral-600">
+          Class 3 individual certificates from Vsign, priced per certificate with the token and
+          delivery included. See the{" "}
+          <Link href="/other-services/digital-signature-certificate" className="font-medium text-brand-700 underline">
+            DSC page
+          </Link>{" "}
+          for what it is used for.
+        </p>
+        <div className="mt-5">
+          <DscPriceTable />
+        </div>
 
         <h2 className="mt-14 text-2xl font-bold text-neutral-900">Every Service, Priced</h2>
         <p className="mt-2 max-w-2xl text-neutral-600">

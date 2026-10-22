@@ -6,13 +6,13 @@ type Variant = "primary" | "secondary" | "whatsapp" | "outline" | "ghostDark";
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-brand-gradient text-white shadow-[0_10px_30px_-8px_rgba(79,70,229,0.45)] hover:-translate-y-0.5 hover:shadow-[0_16px_38px_-8px_rgba(79,70,229,0.55)]",
+    "bg-ember-600 text-white shadow-[0_10px_28px_-10px_rgba(239,106,38,0.7)] hover:-translate-y-0.5 hover:bg-ember-700 hover:shadow-[0_16px_36px_-10px_rgba(239,106,38,0.75)]",
   secondary:
-    "bg-neutral-900 text-white shadow-card hover:bg-neutral-800 hover:shadow-card-hover hover:-translate-y-0.5",
+    "bg-navy text-white shadow-card hover:bg-neutral-800 hover:shadow-card-hover hover:-translate-y-0.5",
   whatsapp:
     "bg-accent-500 text-white shadow-card hover:bg-accent-600 hover:shadow-card-hover hover:-translate-y-0.5",
   outline:
-    "border border-neutral-200 bg-white/70 text-neutral-900 backdrop-blur hover:border-brand-300 hover:bg-white hover:-translate-y-0.5",
+    "border border-neutral-200 bg-white/70 text-neutral-900 backdrop-blur hover:border-ember-300 hover:bg-white hover:-translate-y-0.5",
   ghostDark:
     "border border-white/20 bg-white/10 text-white backdrop-blur hover:border-white/40 hover:bg-white/15 hover:-translate-y-0.5",
 };
@@ -37,7 +37,7 @@ export function Button({
   disabled,
 }: ButtonProps) {
   const classes = clsx(
-    "inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none",
+    "inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none",
     variantClasses[variant],
     className,
   );

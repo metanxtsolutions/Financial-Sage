@@ -35,7 +35,7 @@ function PanelColumn({ title, href, children }: { title: string; href: string; c
     <div>
       <Link
         href={href}
-        className="text-xs font-semibold tracking-wide text-neutral-900 uppercase hover:text-brand-700"
+        className="text-xs font-semibold tracking-wide text-neutral-900 uppercase hover:text-ember-600"
       >
         {title}
       </Link>
@@ -47,7 +47,7 @@ function PanelColumn({ title, href, children }: { title: string; href: string; c
 function PanelLink({ href, children }: { href: string; children: ReactNode }) {
   return (
     <li>
-      <Link href={href} className="text-sm text-neutral-600 hover:text-brand-700">
+      <Link href={href} className="text-sm text-neutral-600 hover:text-ember-600">
         {children}
       </Link>
     </li>
@@ -129,7 +129,7 @@ export function Header({ searchIndex }: { searchIndex: SearchEntry[] }) {
 
   const linkClass = clsx(
     "text-sm font-medium whitespace-nowrap transition-colors duration-300",
-    onHero ? "text-white/75 hover:text-white" : "text-neutral-700 hover:text-brand-700",
+    onHero ? "text-white/75 hover:text-white" : "text-neutral-700 hover:text-ember-600",
   );
 
   const gstCities = cities.slice(0, 9);
@@ -154,7 +154,7 @@ export function Header({ searchIndex }: { searchIndex: SearchEntry[] }) {
         )}
       >
         <Link href="/" className="flex shrink-0 items-center gap-2 whitespace-nowrap">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-gradient text-sm font-bold text-white shadow-[0_6px_16px_-6px_rgba(79,70,229,0.6)]">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ember-600 text-sm font-bold text-white shadow-[0_6px_16px_-6px_rgba(239,106,38,0.7)]">
             FS
           </span>
           <span
@@ -256,7 +256,7 @@ export function Header({ searchIndex }: { searchIndex: SearchEntry[] }) {
                                 <li>
                                   <Link
                                     href={`/services/${category.slug}`}
-                                    className="text-sm font-medium text-brand-700 hover:underline"
+                                    className="text-sm font-medium text-ember-600 hover:underline"
                                   >
                                     +{list.length - preview.length} more
                                   </Link>
@@ -291,7 +291,7 @@ export function Header({ searchIndex }: { searchIndex: SearchEntry[] }) {
                       <p className="text-sm text-neutral-500">
                         Not sure what you need? We&apos;ll tell you on a call, free.
                       </p>
-                      <Link href={m.href} className="text-sm font-semibold text-brand-700 hover:underline">
+                      <Link href={m.href} className="text-sm font-semibold text-ember-600 hover:underline">
                         View all &rarr;
                       </Link>
                     </div>
@@ -315,7 +315,7 @@ export function Header({ searchIndex }: { searchIndex: SearchEntry[] }) {
             href={`tel:${siteConfig.phoneE164}`}
             className={clsx(
               "hidden items-center gap-1.5 text-sm font-medium whitespace-nowrap transition-colors xl:flex",
-              onHero ? "text-white/75 hover:text-white" : "text-neutral-700 hover:text-brand-700",
+              onHero ? "text-white/75 hover:text-white" : "text-neutral-700 hover:text-ember-600",
             )}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -330,18 +330,17 @@ export function Header({ searchIndex }: { searchIndex: SearchEntry[] }) {
               "rounded-full border px-4 py-1.5 text-sm font-medium whitespace-nowrap transition-colors",
               onHero
                 ? "border-white/30 text-white/85 hover:border-white/60 hover:text-white"
-                : "border-neutral-300 text-neutral-700 hover:border-brand-400 hover:text-brand-700",
+                : "border-neutral-300 text-neutral-700 hover:border-ember-300 hover:text-ember-600",
             )}
           >
             Login
           </Link>
 
-          {/* Gold rather than brand violet. On the dark hero a violet button sits
-              on a violet-tinted ground and recedes; this is the only warm colour
-              on the page, so it reads as the one thing to click. */}
+          {/* Orange, the site's one call-to-action colour, so it reads as the
+              thing to click on both the navy hero and the white bar. */}
           <Link
             href="/gst-registration"
-            className="inline-flex items-center gap-2 rounded-full bg-gold-500 px-4 py-2 text-sm font-bold whitespace-nowrap text-ink shadow-[0_8px_20px_-8px_rgba(224,160,0,0.7)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-gold-400"
+            className="inline-flex items-center gap-2 rounded-full bg-ember-600 px-4 py-2 text-sm font-semibold whitespace-nowrap text-white shadow-[0_8px_20px_-8px_rgba(239,106,38,0.7)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-ember-700"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.58 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.58 3.6a1 1 0 01-.25 1z" />
@@ -446,7 +445,7 @@ export function Header({ searchIndex }: { searchIndex: SearchEntry[] }) {
               </Link>
             ))}
 
-            <a href={`tel:${siteConfig.phoneE164}`} className="rounded-md px-2 py-2 text-sm font-medium text-brand-700">
+            <a href={`tel:${siteConfig.phoneE164}`} className="rounded-md px-2 py-2 text-sm font-medium text-ember-600">
               {siteConfig.phoneDisplay}
             </a>
             <Link href={siteConfig.loginUrl} className="rounded-md px-2 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50">
@@ -455,7 +454,7 @@ export function Header({ searchIndex }: { searchIndex: SearchEntry[] }) {
             <div className="mt-2 px-2">
               <Link
                 href="/gst-registration"
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-gold-500 px-4 py-3 text-sm font-bold text-ink"
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-ember-600 px-4 py-3 text-sm font-semibold text-white"
                 onClick={() => setOpen(false)}
               >
                 Talk to an Expert

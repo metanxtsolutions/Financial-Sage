@@ -23,12 +23,17 @@ const companyLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-neutral-200 bg-neutral-50">
+    <footer className="bg-navy text-white/60">
       <Container className="grid grid-cols-2 gap-8 py-12 sm:grid-cols-4">
         <div className="col-span-2">
-          <div className="text-lg font-bold text-brand-700">{siteConfig.name}</div>
-          <p className="mt-2 max-w-xs text-sm text-neutral-600">{siteConfig.tagline}</p>
-          <p className="mt-4 text-sm text-neutral-600">
+          <Link href="/" className="inline-flex items-center gap-2">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ember-600 text-sm font-bold text-white">
+              FS
+            </span>
+            <span className="font-heading text-lg font-bold text-white">{siteConfig.name}</span>
+          </Link>
+          <p className="mt-3 max-w-xs text-sm text-white/60">{siteConfig.tagline}</p>
+          <p className="mt-4 text-sm text-white/60">
             {siteConfig.phoneDisplay}
             <br />
             {siteConfig.email}
@@ -36,11 +41,11 @@ export function Footer() {
         </div>
 
         <div>
-          <div className="text-sm font-semibold text-neutral-900">GST &amp; Tax</div>
+          <div className="text-sm font-semibold text-white">GST &amp; Tax</div>
           <ul className="mt-3 space-y-2">
             {gstLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="text-sm text-neutral-600 hover:text-brand-700">
+                <Link href={link.href} className="text-sm text-white/60 transition-colors hover:text-ember-300">
                   {link.label}
                 </Link>
               </li>
@@ -49,11 +54,11 @@ export function Footer() {
         </div>
 
         <div>
-          <div className="text-sm font-semibold text-neutral-900">Company</div>
+          <div className="text-sm font-semibold text-white">Company</div>
           <ul className="mt-3 space-y-2">
             {companyLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="text-sm text-neutral-600 hover:text-brand-700">
+                <Link href={link.href} className="text-sm text-white/60 transition-colors hover:text-ember-300">
                   {link.label}
                 </Link>
               </li>
@@ -63,8 +68,8 @@ export function Footer() {
 
         <div className="col-span-2 sm:col-span-4">
           <div className="flex flex-wrap items-baseline gap-x-3">
-            <div className="text-sm font-semibold text-neutral-900">Business & Compliance Services</div>
-            <Link href="/other-services" className="text-sm text-brand-700 hover:underline">
+            <div className="text-sm font-semibold text-white">Business & Compliance Services</div>
+            <Link href="/other-services" className="text-sm text-ember-300 hover:underline">
               View all
             </Link>
           </div>
@@ -81,7 +86,7 @@ export function Footer() {
                 <div key={category.id}>
                   <Link
                     href={`/services/${category.slug}`}
-                    className="text-xs font-semibold tracking-wide text-neutral-900 uppercase hover:text-brand-700"
+                    className="text-xs font-semibold tracking-wide text-white uppercase hover:text-ember-300"
                   >
                     {category.title}
                   </Link>
@@ -90,7 +95,7 @@ export function Footer() {
                       <li key={service.slug}>
                         <Link
                           href={`/other-services/${service.slug}`}
-                          className="text-sm text-neutral-600 hover:text-brand-700"
+                          className="text-sm text-white/60 transition-colors hover:text-ember-300"
                         >
                           {service.title}
                         </Link>
@@ -105,13 +110,13 @@ export function Footer() {
 
       </Container>
 
-      <div className="border-t border-neutral-200 py-6">
-        <Container className="flex flex-col gap-3 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between">
+      <div className="border-t border-white/10 py-6">
+        <Container className="flex flex-col gap-3 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
           <div className="flex flex-wrap gap-x-4 gap-y-1">
-            <Link href="/privacy-policy" className="hover:text-brand-700">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-brand-700">Terms of Service</Link>
-            <Link href="/refund-policy" className="hover:text-brand-700">Refund Policy</Link>
+            <Link href="/privacy-policy" className="hover:text-white">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white">Terms of Service</Link>
+            <Link href="/refund-policy" className="hover:text-white">Refund Policy</Link>
           </div>
           <p>{siteConfig.legalNote}</p>
         </Container>

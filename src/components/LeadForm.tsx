@@ -109,7 +109,7 @@ export function LeadForm({ source, compact = false, submitLabel = "Start GST Reg
             name="name"
             required
             placeholder="Full Name"
-            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-ember-500 focus:outline-none focus:ring-2 focus:ring-ember-500/30"
           />
         </div>
         <div>
@@ -121,7 +121,7 @@ export function LeadForm({ source, compact = false, submitLabel = "Start GST Reg
             name="phone"
             required
             placeholder="Phone Number"
-            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-ember-500 focus:outline-none focus:ring-2 focus:ring-ember-500/30"
           />
         </div>
         <div>
@@ -133,7 +133,7 @@ export function LeadForm({ source, compact = false, submitLabel = "Start GST Reg
             name="email"
             type="email"
             placeholder="Email (optional)"
-            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-ember-500 focus:outline-none focus:ring-2 focus:ring-ember-500/30"
           />
         </div>
         <div>
@@ -144,7 +144,7 @@ export function LeadForm({ source, compact = false, submitLabel = "Start GST Reg
             id={`${source}-businessType`}
             name="businessType"
             defaultValue=""
-            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-neutral-700 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm text-neutral-700 focus:border-ember-500 focus:outline-none focus:ring-2 focus:ring-ember-500/30"
           >
             <option value="" disabled>
               Business Type
@@ -164,7 +164,7 @@ export function LeadForm({ source, compact = false, submitLabel = "Start GST Reg
             id={`${source}-city`}
             name="city"
             placeholder="City"
-            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
+            className="w-full rounded-lg border border-neutral-200 px-4 py-3 text-sm focus:border-ember-500 focus:outline-none focus:ring-2 focus:ring-ember-500/30"
           />
         </div>
       </div>

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { withOpenGraph } from "@/lib/metadata";
 import Link from "next/link";
+import { ReactNode } from "react";
 import { Section } from "@/components/Container";
-import { Button } from "@/components/Button";
 import { LeadForm } from "@/components/LeadForm";
 import { PricingTable } from "@/components/PricingTable";
 import { FaqAccordion } from "@/components/FaqAccordion";
-import { Icon } from "@/components/Icon";
+import { Icon, type IconName } from "@/components/Icon";
 import { CountUp } from "@/components/CountUp";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Marquee } from "@/components/home/Marquee";
@@ -16,7 +16,7 @@ import { ServiceExplorer } from "@/components/home/ServiceExplorer";
 import { ComparisonTable } from "@/components/home/ComparisonTable";
 import { TrustSafety } from "@/components/home/TrustSafety";
 import { JsonLd, faqPageSchema } from "@/lib/schema";
-import { siteConfig } from "@/lib/site-config";
+import { siteConfig, whatsappLink, defaultWhatsappMessage } from "@/lib/site-config";
 import { coreServices, whoNeedsGst, processSteps, whyFinancialSage } from "@/data/services";
 import { serviceCategories, otherServices } from "@/data/other-services";
 import { testimonials } from "@/data/testimonials";
@@ -42,140 +42,240 @@ const trustStats = [
   { value: siteConfig.stats.registrations, label: "GST Registrations" },
   { value: siteConfig.stats.activeClients, label: "Active Monthly Clients" },
   { value: "Pan-India", label: "Coverage" },
-  { value: "24 Hrs", label: "GST turnaround" },
+  { value: "24 Hrs", label: "GST Turnaround" },
 ];
+
+// Every line here restates something the site already commits to elsewhere
+// (pricing, response time, service count); no new claims.
+const aboutPoints: { title: string; body: string; icon: IconName }[] = [
+  {
+    title: "What we do",
+    body: `GST registration, returns, notices and annual filings for MSMEs, plus ${otherServices.length} other compliance services.`,
+    icon: "document-check",
+  },
+  {
+    title: "How we price",
+    body: "Published, fixed fees. GST registration is ₹399 plus 18% GST, and the government charges nothing.",
+    icon: "tag",
+  },
+  {
+    title: "How we work",
+    body: `WhatsApp-first and fully remote, with real replies in ${siteConfig.responseTime} during business hours.`,
+    icon: "chat",
+  },
+];
+
+function SectionHeading({
+  eyebrow,
+  title,
+  intro,
+  light = false,
+}: {
+  eyebrow: string;
+  title: ReactNode;
+  intro?: ReactNode;
+  light?: boolean;
+}) {
+  return (
+    <div className="mx-auto max-w-2xl text-center">
+      <span className={light ? "eyebrow eyebrow-ember-light" : "eyebrow eyebrow-ember"}>{eyebrow}</span>
+      <h2
+        className={
+          light
+            ? "mt-3 text-3xl font-bold text-white sm:text-[2.75rem] sm:leading-[1.1]"
+            : "mt-3 text-3xl font-bold text-neutral-900 sm:text-[2.75rem] sm:leading-[1.1]"
+        }
+      >
+        {title}
+      </h2>
+      {intro && <p className={light ? "mt-4 text-white/65" : "mt-4 text-neutral-600"}>{intro}</p>}
+    </div>
+  );
+}
+
+const primaryPill =
+  "group inline-flex items-center justify-center gap-2 rounded-full bg-ember-600 px-6 py-3.5 text-sm font-semibold text-white shadow-[0_12px_30px_-10px_rgba(239,106,38,0.7)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-ember-700";
+const darkPill =
+  "inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:border-white/40 hover:bg-white/10";
 
 export default function HomePage() {
   const homeFaqs = getFaqsByIds(homeFaqIds);
 
   return (
-    <>
+    <div className="home-ember">
       <JsonLd data={faqPageSchema(homeFaqs)} />
 
-      {/* Hero */}
-      <Section className="hero-dark relative -mt-16 overflow-hidden pt-28 sm:pt-32">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.12]"
-          style={{
-            backgroundImage: "radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-            maskImage: "radial-gradient(60% 55% at 35% 25%, black, transparent 80%)",
-          }}
-        />
-        <div className="relative grid grid-cols-1 gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div>
-            <span className="eyebrow eyebrow-light">GST specialists for Indian MSMEs</span>
-            <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-[3.4rem]">
-              Get your GST
-              <br />
-              <span className="text-gradient-light">at ₹399.</span>
-            </h1>
-            <p className="mt-5 max-w-xl text-lg text-white/70">
-              Most CAs charge ₹10,000 or more a year and still leave you confused about ITC. Our GST registration fee is ₹399 plus 18% GST; the government charges nothing. We
-              register, file, and explain everything over WhatsApp, real replies in{" "}
-              {siteConfig.responseTime}. And when the business needs more than GST, the same team
-              handles that too.
-            </p>
+      {/* Hero: centred headline on navy, warm glows, faint grid */}
+      <section className="hero-ember relative -mt-16 overflow-hidden px-4 pt-36 pb-36 sm:px-6 sm:pt-44 sm:pb-44 lg:px-8">
+        <div aria-hidden="true" className="grid-overlay pointer-events-none absolute inset-0" />
+        <div className="relative mx-auto max-w-4xl text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 text-xs font-medium text-white/80 backdrop-blur">
+            <span aria-hidden="true" className="text-ember-400">
+              ✦
+            </span>
+            GST specialists for Indian MSMEs
+          </span>
+          <h1 className="mt-7 text-[2.6rem] leading-[1.05] font-bold text-white sm:text-6xl lg:text-7xl">
+            Get your GST registered
+            <br />
+            <span className="text-ember-gradient">at just ₹399.</span>
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-base text-white/65 sm:text-lg">
+            Most CAs charge ₹10,000 or more a year and still leave you confused about ITC. We
+            register, file, and explain everything over WhatsApp, with real replies in{" "}
+            {siteConfig.responseTime}. The government charges nothing for registration.
+          </p>
 
+          <div className="flex justify-center [&>div]:justify-center">
             <ReviewBadges />
+          </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Button
-                href="/gst-registration"
-                variant="primary"
-                className="group px-6 py-3.5 text-base"
-              >
-                Get GST from ₹399
-                <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">
-                  &rarr;
-                </span>
-              </Button>
-              <Button href="/contact" variant="ghostDark">
-                Talk to a GST Expert
-              </Button>
+          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link href="/gst-registration" className={primaryPill}>
+              Get GST from ₹399
+              <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">
+                &rarr;
+              </span>
+            </Link>
+            <Link href="#pricing" className={darkPill}>
+              See Pricing
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Stat card overlapping the bottom of the hero */}
+      <section className="relative z-10 -mt-20 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-5xl grid-cols-2 divide-neutral-200 overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-[0_30px_60px_-30px_rgba(10,15,31,0.35)] sm:grid-cols-4 sm:divide-x">
+          {trustStats.map((stat, i) => (
+            <div
+              key={stat.label}
+              className={
+                i < 2
+                  ? "border-b border-neutral-200 px-4 py-7 text-center sm:border-b-0"
+                  : "px-4 py-7 text-center"
+              }
+            >
+              <div className="font-heading text-2xl font-bold whitespace-nowrap text-neutral-900 sm:text-4xl">
+                <CountUp label={stat.value} />
+              </div>
+              <div className="mt-1.5 text-xs text-neutral-500 sm:text-sm">{stat.label}</div>
             </div>
+          ))}
+        </div>
+      </section>
 
-            <div className="mt-10 flex max-w-xl flex-wrap gap-x-10 gap-y-5 border-t border-white/10 pt-7">
-              {trustStats.map((stat) => (
-                <div key={stat.label}>
-                  <div className="font-heading text-2xl font-extrabold text-white">
-                    <CountUp label={stat.value} />
-                  </div>
-                  <div className="mt-0.5 text-xs leading-tight text-white/50">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+      {/* Fact strip */}
+      <div className="pt-16 sm:pt-20">
+        <p className="mb-5 text-center text-[0.7rem] font-semibold tracking-[0.16em] text-neutral-400 uppercase">
+          Trusted by MSMEs, freelancers and sellers across India
+        </p>
+        <Marquee />
+      </div>
+      <TrustLogos />
 
-            <div className="mt-8 border-t border-white/10 pt-6">
-              <p className="text-xs font-semibold tracking-wide text-white/40 uppercase">
-                Beyond GST, same team &middot; {otherServices.length} services
+      {/* About */}
+      <Section>
+        <ScrollReveal>
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
+            <div>
+              <span className="eyebrow eyebrow-ember">About {siteConfig.name}</span>
+              <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-[2.75rem] sm:leading-[1.1]">
+                Built for businesses that would rather not think about GST.
+              </h2>
+              <p className="mt-5 text-neutral-600">
+                Small businesses were paying CA retainers for work that is mostly routine, and still
+                waiting days for an answer. We do the same statutory work on a different model:
+                published prices, one dedicated expert, and updates on the app you already use.
               </p>
-              <div className="mt-3 flex flex-wrap gap-2">
+              <p className="mt-4 text-neutral-600">
+                GST is the specialisation. When the business needs more, the same team handles that
+                too.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-2">
                 {serviceCategories
                   .filter((category) => category.id !== "gst-specialist")
                   .map((category) => (
                     <Link
                       key={category.id}
                       href={`/services/${category.slug}`}
-                      className="rounded-full border border-white/15 bg-white/[0.06] px-3 py-1.5 text-xs font-medium text-white/70 transition-colors duration-200 hover:border-white/35 hover:text-white"
+                      className="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs font-medium text-neutral-700 transition-colors duration-200 hover:border-ember-300 hover:bg-ember-50 hover:text-ember-700"
                     >
                       {category.title}
                     </Link>
                   ))}
               </div>
             </div>
-          </div>
-
-          <div className="relative">
-            <div
-              aria-hidden="true"
-              className="absolute -inset-5 rounded-[2rem] bg-brand-gradient opacity-25 blur-3xl"
-            />
-            <div className="relative rounded-2xl bg-white p-6 shadow-[0_32px_64px_-24px_rgba(0,0,0,0.5)] sm:p-7">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex h-2 w-2 rounded-full bg-accent-500" />
-                <span className="text-xs font-semibold uppercase tracking-wide text-accent-600">
-                  Free consultation
-                </span>
-              </div>
-              <h2 className="mt-3 font-heading text-xl font-bold text-neutral-900">
-                Get your GST sorted
-              </h2>
-              <p className="mt-1 text-sm text-neutral-600">
-                Tell us about your business, and we&apos;ll take it from there.
-              </p>
-              <div className="mt-5">
-                <LeadForm source="homepage-hero" />
-              </div>
+            <div className="space-y-4">
+              {aboutPoints.map((point) => (
+                <div
+                  key={point.title}
+                  className="flex gap-4 rounded-2xl border border-neutral-200 bg-white p-5 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
+                >
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-ember-50 text-ember-600">
+                    <Icon name={point.icon} className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-neutral-900">{point.title}</h3>
+                    <p className="mt-1 text-sm text-neutral-600">{point.body}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </Section>
 
-      <Marquee />
-      <TrustLogos />
+      {/* Why us */}
+      <Section className="bg-neutral-50">
+        <ScrollReveal>
+          <SectionHeading
+            eyebrow="Why Financial Sage"
+            title="Eight commitments behind every filing"
+            intro="You focus on the business. We handle the compliance."
+          />
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {whyFinancialSage.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-neutral-200/70 bg-white p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-navy text-white">
+                  <Icon name={item.icon} className="h-5 w-5" />
+                </div>
+                <h3 className="mt-5 font-semibold text-neutral-900">{item.title}</h3>
+                <p className="mt-1.5 text-sm text-neutral-600">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
+      </Section>
 
       {/* Core GST services */}
       <Section>
         <ScrollReveal>
-          <span className="eyebrow">What we do</span>
-          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">Core GST Services</h2>
-          <p className="mt-2 max-w-2xl text-neutral-600">Everything you need to register and stay compliant. Nothing you don&apos;t.</p>
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <SectionHeading
+            eyebrow="Services"
+            title="Everything you need to register and stay compliant"
+            intro="Nothing you don't."
+          />
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {coreServices.map((service) => (
               <Link
                 key={service.title}
                 href={service.href}
-                className="group rounded-2xl border border-neutral-200 bg-white p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-brand-200 hover:shadow-card-hover"
+                className="group flex flex-col rounded-2xl border border-neutral-200 bg-white p-6 shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-ember-200 hover:shadow-card-hover"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-[0_8px_20px_-8px_rgba(79,70,229,0.6)]">
-                  <Icon name={service.icon} className="h-6 w-6" />
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-ember-50 text-ember-600">
+                  <Icon name={service.icon} className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 font-semibold text-neutral-900">{service.title}</h3>
-                <p className="mt-2 text-sm text-neutral-600">{service.description}</p>
-                <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                  Learn more <span aria-hidden="true">&rarr;</span>
+                <h3 className="mt-5 font-semibold text-neutral-900">{service.title}</h3>
+                <p className="mt-2 flex-1 text-sm text-neutral-600">{service.description}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-ember-600">
+                  Read more
+                  <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">
+                    &rarr;
+                  </span>
                 </span>
               </Link>
             ))}
@@ -186,39 +286,13 @@ export default function HomePage() {
       {/* Everything beyond GST */}
       <Section className="bg-neutral-50">
         <ScrollReveal>
-          <span className="eyebrow">Beyond GST</span>
-          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">
-            Everything Else We File
-          </h2>
-          <p className="mt-2 max-w-2xl text-neutral-600">
-            GST is the specialisation, but it is rarely the only thing a business needs. Pick a
-            category to see what we handle.
-          </p>
-          <div className="mt-8">
+          <SectionHeading
+            eyebrow="Beyond GST"
+            title="Everything else we file"
+            intro="GST is the specialisation, but it is rarely the only thing a business needs. Pick a category to see what we handle."
+          />
+          <div className="mt-12">
             <ServiceExplorer />
-          </div>
-        </ScrollReveal>
-      </Section>
-
-      {/* Why Financial Sage */}
-      <Section className="bg-neutral-50">
-        <ScrollReveal>
-          <span className="eyebrow">Why us</span>
-          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">Why Financial Sage</h2>
-          <p className="mt-2 max-w-2xl text-neutral-600">You focus on business. We handle compliance.</p>
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {whyFinancialSage.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-2xl border border-neutral-200/60 bg-white p-5 shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
-              >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-                  <Icon name={item.icon} className="h-5 w-5" />
-                </div>
-                <h3 className="mt-3 font-semibold text-neutral-900">{item.title}</h3>
-                <p className="mt-1 text-sm text-neutral-600">{item.body}</p>
-              </div>
-            ))}
           </div>
         </ScrollReveal>
       </Section>
@@ -226,33 +300,80 @@ export default function HomePage() {
       {/* Comparison */}
       <Section>
         <ScrollReveal>
-          <span className="eyebrow">The difference</span>
-          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">
-            What You Get Instead of a Retainer
-          </h2>
-          <p className="mt-2 max-w-2xl text-neutral-600">
-            The same statutory work, done on a different operating model.
-          </p>
-          <div className="mt-8">
+          <SectionHeading
+            eyebrow="Compare your options"
+            title="What you get instead of a retainer"
+            intro="The same statutory work, done on a different operating model."
+          />
+          <div className="mt-12">
             <ComparisonTable />
           </div>
         </ScrollReveal>
       </Section>
 
+      {/* Process: dark band with a vertical timeline */}
+      <section className="relative overflow-hidden bg-navy px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
+        <div aria-hidden="true" className="grid-overlay pointer-events-none absolute inset-0 opacity-60" />
+        <div className="relative mx-auto max-w-6xl">
+          <ScrollReveal>
+            <SectionHeading
+              light
+              eyebrow="Our process"
+              title="From first message to GSTIN, in three steps"
+            />
+            <ol className="relative mx-auto mt-14 max-w-2xl">
+              <div aria-hidden="true" className="absolute top-2 bottom-2 left-[7px] w-px bg-white/15" />
+              {processSteps.map((step, i) => (
+                <li key={step.title} className="relative pb-12 pl-12 last:pb-0">
+                  <span
+                    aria-hidden="true"
+                    className="absolute top-1 left-0 h-[15px] w-[15px] rounded-full border-[3px] border-navy bg-ember-500 ring-2 ring-ember-500/40"
+                  />
+                  <div className="text-xs font-semibold tracking-wide text-ember-300">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <h3 className="mt-1 text-xl font-semibold text-white">{step.title}</h3>
+                  <p className="mt-2 text-sm text-white/65">{step.body}</p>
+                  <ul className="mt-3 space-y-1.5">
+                    {step.details.map((detail) => (
+                      <li key={detail} className="flex items-start gap-2 text-sm text-white/55">
+                        <span aria-hidden="true" className="text-ember-400">
+                          ✓
+                        </span>
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ol>
+            <p className="mx-auto mt-12 max-w-2xl text-center text-sm text-white/55">
+              Registration is typically completed within 24 hours of receiving your documents and
+              payment, with GSTIN issuance taking up to a few working days for government approval.
+              See the full{" "}
+              <Link href="/gst-registration-process" className="font-medium text-ember-300 underline">
+                step-by-step GST registration process
+              </Link>
+              .
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* Who needs GST */}
       <Section>
         <ScrollReveal>
-          <span className="eyebrow">Who it&apos;s for</span>
-          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">Who Needs GST Registration?</h2>
-          <p className="mt-2 max-w-2xl text-neutral-600">
-            If you run any of these, GST registration probably already applies to you. Tap yours to see the specifics.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <SectionHeading
+            eyebrow="Who it's for"
+            title="Who needs GST registration?"
+            intro="If you run any of these, GST registration probably already applies to you. Tap yours to see the specifics."
+          />
+          <div className="mx-auto mt-10 flex max-w-4xl flex-wrap justify-center gap-3">
             {whoNeedsGst.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className="rounded-full border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-700 transition-colors duration-200 hover:border-brand-500 hover:bg-brand-50 hover:text-brand-700"
+                className="rounded-full border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-700 transition-colors duration-200 hover:border-ember-400 hover:bg-ember-50 hover:text-ember-700"
               >
                 {item.label}
               </Link>
@@ -261,86 +382,60 @@ export default function HomePage() {
         </ScrollReveal>
       </Section>
 
-      {/* Process */}
-      <Section className="bg-neutral-50">
-        <ScrollReveal>
-          <span className="eyebrow">How it works</span>
-          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">Three steps, that&apos;s it</h2>
-          <div className="relative mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
-            <div
-              aria-hidden="true"
-              className="absolute top-[26px] right-0 left-0 hidden h-0.5 bg-gradient-to-r from-brand-200 via-violet-400 to-brand-200 sm:block"
-              style={{ marginInline: "16.6%" }}
-            />
-            {processSteps.map((step, i) => (
-              <div key={step.title} className="relative rounded-2xl border border-neutral-200/60 bg-white p-6 shadow-card">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-gradient font-heading text-base font-bold text-white shadow-[0_8px_20px_-8px_rgba(79,70,229,0.6)]">
-                  {i + 1}
-                </div>
-                <h3 className="mt-4 font-semibold text-neutral-900">{step.title}</h3>
-                <p className="mt-1 text-sm text-neutral-600">{step.body}</p>
-                <ul className="mt-4 space-y-2 border-t border-neutral-100 pt-4">
-                  {step.details.map((detail) => (
-                    <li key={detail} className="flex items-start gap-2 text-sm text-neutral-600">
-                      <span aria-hidden="true" className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" />
-                      {detail}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-          <p className="mt-6 text-sm text-neutral-600">
-            Registration is typically completed within 24 hours of receiving your documents and
-            payment, with GSTIN issuance taking up to a few working days for government approval. See
-            the full{" "}
-            <Link href="/gst-registration-process" className="font-medium text-brand-700 underline">
-              step-by-step GST registration process
-            </Link>
-            .
-          </p>
-        </ScrollReveal>
-      </Section>
-
-      {/* Pricing */}
-      <Section>
-        <ScrollReveal>
-          <span className="eyebrow">Pricing</span>
-          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">Transparent Pricing</h2>
-          <p className="mt-2 max-w-2xl text-neutral-600">No hidden fees, no &quot;request a quote&quot; forms.</p>
-          <div className="mt-8">
-            <PricingTable />
-          </div>
-          <p className="mt-4 text-center text-sm text-neutral-500">
-            See the full breakdown on our <Link href="/pricing" className="font-medium text-brand-700 underline">Pricing page</Link>.
-          </p>
-        </ScrollReveal>
-      </Section>
-
       {/* Testimonials */}
       <Section className="bg-neutral-50">
         <ScrollReveal>
-          <span className="eyebrow">Sample client feedback</span>
-          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">What MSMEs Say</h2>
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <SectionHeading
+            eyebrow="Testimonials"
+            title="What MSMEs say"
+            intro="Sample client feedback, shown for illustration."
+          />
+          <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
             {testimonials.map((t) => (
-              <div key={t.name} className="relative rounded-2xl border border-neutral-200/60 bg-white p-6 shadow-card">
-                <span className="text-gradient font-heading text-5xl leading-none" aria-hidden="true">
+              <figure
+                key={t.name}
+                className="flex flex-col rounded-3xl border border-neutral-200/70 bg-white p-7 shadow-card"
+              >
+                <span aria-hidden="true" className="font-heading text-5xl leading-none text-ember-400">
                   &ldquo;
                 </span>
-                <p className="-mt-3 text-sm text-neutral-700">{t.quote}</p>
-                <div className="mt-4 flex items-center gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-gradient text-sm font-bold text-white">
+                <blockquote className="-mt-2 flex-1 text-[0.95rem] text-neutral-700">{t.quote}</blockquote>
+                <figcaption className="mt-6 flex items-center gap-3 border-t border-neutral-100 pt-5">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">
                     {t.name.charAt(0)}
                   </div>
                   <div>
                     <div className="text-sm font-semibold text-neutral-900">{t.name}</div>
-                    <div className="text-xs text-neutral-500">{t.business} · {t.city}</div>
+                    <div className="text-xs text-neutral-500">
+                      {t.business} · {t.city}
+                    </div>
                   </div>
-                </div>
-              </div>
+                </figcaption>
+              </figure>
             ))}
           </div>
+        </ScrollReveal>
+      </Section>
+
+      {/* Pricing */}
+      <Section id="pricing" className="scroll-mt-20">
+        <ScrollReveal>
+          <SectionHeading
+            eyebrow="Pricing"
+            title="Plans built to grow with your business"
+            intro={'Transparent pricing. No hidden fees, no "request a quote" forms.'}
+          />
+          <div className="mt-14">
+            <PricingTable tone="ember" />
+          </div>
+          <p className="mt-8 text-center text-sm">
+            <Link
+              href="/pricing"
+              className="inline-flex items-center gap-1 rounded-full border border-neutral-200 px-4 py-2 font-medium text-neutral-800 transition-colors hover:border-ember-300 hover:text-ember-700"
+            >
+              View full pricing details <span aria-hidden="true">&rarr;</span>
+            </Link>
+          </p>
         </ScrollReveal>
       </Section>
 
@@ -348,59 +443,82 @@ export default function HomePage() {
           other questions a cautious first-time client is asking. */}
       <Section className="bg-neutral-50">
         <ScrollReveal>
-          <span className="eyebrow">How we keep you safe</span>
-          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">
-            What we will and will not ask you for
-          </h2>
-          <p className="mt-2 max-w-2xl text-neutral-600">
-            People impersonate compliance firms to demand approval fees and portal passwords. Here
-            is exactly how we work, so you can check any approach against it.
-          </p>
-          <div className="mt-8">
+          <SectionHeading
+            eyebrow="How we keep you safe"
+            title="What we will and will not ask you for"
+            intro="People impersonate compliance firms to demand approval fees and portal passwords. Here is exactly how we work, so you can check any approach against it."
+          />
+          <div className="mt-12">
             <TrustSafety />
           </div>
         </ScrollReveal>
       </Section>
 
-      {/* FAQ teaser */}
+      {/* FAQ */}
       <Section>
         <ScrollReveal>
-          <span className="eyebrow">Answers</span>
-          <h2 className="mt-3 text-3xl font-bold text-neutral-900 sm:text-4xl">Frequently Asked Questions</h2>
-          <div className="mt-8 max-w-3xl">
+          <SectionHeading eyebrow="FAQ" title="Questions businesses ask us" />
+          <div className="mx-auto mt-10 max-w-3xl">
             <FaqAccordion faqs={homeFaqs} />
           </div>
-          <div className="mt-6">
-            <Button href="/faq" variant="outline">See All FAQs</Button>
+          <div className="mt-8 text-center">
+            <Link
+              href="/faq"
+              className="inline-flex items-center gap-1 rounded-full border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-800 transition-colors hover:border-ember-300 hover:text-ember-700"
+            >
+              See all FAQs <span aria-hidden="true">&rarr;</span>
+            </Link>
           </div>
         </ScrollReveal>
       </Section>
 
-      {/* Final CTA */}
-      <Section className="py-16 sm:py-20 lg:py-24">
-        <div className="bg-brand-gradient relative overflow-hidden rounded-3xl px-8 py-12 shadow-[0_30px_60px_-24px_rgba(79,70,229,0.55)] sm:px-12 sm:py-14">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 opacity-20"
-            style={{
-              backgroundImage:
-                "radial-gradient(24rem 18rem at 90% -20%, rgba(255,255,255,0.7), transparent 60%), radial-gradient(20rem 16rem at 0% 120%, rgba(255,255,255,0.5), transparent 55%)",
-            }}
-          />
-          <div className="relative flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-white sm:text-4xl">Stop paying CA prices for GST.</h2>
-              <p className="mt-2 text-white/80">Free consultation. Transparent pricing. Filed within 24 hours.</p>
+      {/* Final CTA: dark card with the lead form */}
+      <section className="px-4 pb-20 sm:px-6 sm:pb-24 lg:px-8">
+        <div className="hero-ember relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] px-6 py-12 sm:px-12 sm:py-16">
+          <div aria-hidden="true" className="grid-overlay pointer-events-none absolute inset-0" />
+          <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div className="text-center lg:text-left">
+              <h2 className="text-3xl font-bold text-white sm:text-[2.75rem] sm:leading-[1.1]">
+                Stop paying CA prices for GST.
+              </h2>
+              <p className="mt-4 text-white/65">
+                Free consultation. Transparent pricing. Filed within 24 hours of your documents.
+              </p>
+              <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
+                <Link href="/gst-registration" className={primaryPill}>
+                  Get GST from ₹399
+                  <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">
+                    &rarr;
+                  </span>
+                </Link>
+                <a
+                  href={whatsappLink(defaultWhatsappMessage)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={darkPill}
+                >
+                  Chat on WhatsApp
+                </a>
+              </div>
             </div>
-            <Link
-              href="/gst-registration"
-              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-brand-700 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
-            >
-              Get GST from ₹399 <span aria-hidden="true">&rarr;</span>
-            </Link>
+            <div className="rounded-2xl bg-white p-6 shadow-[0_32px_64px_-24px_rgba(0,0,0,0.6)] sm:p-7">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex h-2 w-2 rounded-full bg-ember-500" />
+                <span className="text-xs font-semibold tracking-wide text-ember-600 uppercase">
+                  Free consultation
+                </span>
+              </div>
+              <h3 className="mt-3 text-xl font-bold text-neutral-900">Get your GST sorted</h3>
+              <p className="mt-1 text-sm text-neutral-600">
+                Tell us about your business, and we&apos;ll take it from there.
+              </p>
+              <div className="mt-5">
+                <LeadForm source="homepage-hero" />
+              </div>
+            </div>
           </div>
         </div>
-      </Section>
-    </>
+      </section>
+    </div>
   );
 }

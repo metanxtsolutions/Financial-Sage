@@ -88,7 +88,7 @@ export function SiteSearch({ index, onHero }: { index: SearchEntry[]; onHero: bo
         onClick={() => setOpen(true)}
         className={clsx(
           "flex h-8 w-8 items-center justify-center rounded-full transition-colors",
-          onHero ? "text-white/70 hover:bg-white/10 hover:text-white" : "text-neutral-500 hover:bg-neutral-100 hover:text-brand-700",
+          onHero ? "text-white/70 hover:bg-white/10 hover:text-white" : "text-neutral-500 hover:bg-neutral-100 hover:text-ember-600",
         )}
       >
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
@@ -145,7 +145,7 @@ export function SiteSearch({ index, onHero }: { index: SearchEntry[]; onHero: bo
                       onClick={() => go(entry.href)}
                       className={clsx(
                         "flex w-full items-center justify-between gap-4 px-4 py-2.5 text-left",
-                        i === active ? "bg-brand-50" : "hover:bg-neutral-50",
+                        i === active ? "bg-ember-50" : "hover:bg-neutral-50",
                       )}
                     >
                       <span className="text-sm font-medium text-neutral-900">{entry.title}</span>

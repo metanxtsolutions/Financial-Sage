@@ -33,6 +33,18 @@
   --color-neutral-900: #0f172a;
   --color-ink: #0b1020;
 
+  /* Homepage accent: warm orange on deep navy. ember-600 is the darkest step
+     that still reads as orange and holds 4.5:1 against white button text. */
+  --color-ember-50: #fff5ef;
+  --color-ember-100: #ffe7d8;
+  --color-ember-200: #fdcaa9;
+  --color-ember-300: #fca56f;
+  --color-ember-400: #f9853f;
+  --color-ember-500: #ef6a26;
+  --color-ember-600: #cc4e17;
+  --color-ember-700: #a83f12;
+  --color-navy: #0a0f1f;
+
   --color-gold-400: #f2b429;
   --color-gold-500: #e0a000;
   --color-gold-600: #b87f00;
@@ -75,6 +87,16 @@
 
   --color-accent-500: var(--color-accent-500);
   --color-accent-600: var(--color-accent-600);
+
+  --color-ember-50: var(--color-ember-50);
+  --color-ember-100: var(--color-ember-100);
+  --color-ember-200: var(--color-ember-200);
+  --color-ember-300: var(--color-ember-300);
+  --color-ember-400: var(--color-ember-400);
+  --color-ember-500: var(--color-ember-500);
+  --color-ember-600: var(--color-ember-600);
+  --color-ember-700: var(--color-ember-700);
+  --color-navy: var(--color-navy);
 
   --color-gold-400: var(--color-gold-400);
   --color-gold-500: var(--color-gold-500);
@@ -173,6 +195,37 @@ h1, h2, h3, h4 {
     radial-gradient(30rem 22rem at 55% 115%, rgba(59, 104, 242, 0.22), transparent 60%);
 }
 
+/* Homepage look: navy + warm orange, Space Grotesk headings. Scoped to the
+   wrapper on src/app/page.tsx so the rest of the site keeps its own identity.
+   Unlayered like the h1-h4 rule above, and more specific, so it wins. */
+.home-ember :is(h1, h2, h3, h4) {
+  font-family: var(--font-display-grotesk), var(--font-sans), sans-serif;
+  letter-spacing: -0.025em;
+}
+
+.hero-ember {
+  background-color: var(--color-navy);
+  background-image:
+    radial-gradient(38rem 26rem at 18% -6%, rgba(239, 106, 38, 0.28), transparent 62%),
+    radial-gradient(34rem 26rem at 88% 14%, rgba(204, 78, 23, 0.32), transparent 60%),
+    radial-gradient(40rem 22rem at 50% 120%, rgba(239, 106, 38, 0.12), transparent 60%);
+}
+/* Faint grid over the dark bands, fading out towards the edges */
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(70% 60% at 50% 30%, black, transparent 85%);
+  mask-image: radial-gradient(70% 60% at 50% 30%, black, transparent 85%);
+}
+.text-ember-gradient {
+  background-image: linear-gradient(100deg, #fcb37a 0%, #f9853f 45%, #ef6a26 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* Small uppercase section label */
 .eyebrow {
   display: inline-flex;
@@ -186,6 +239,12 @@ h1, h2, h3, h4 {
 }
 .eyebrow-light {
   color: #c4b5fd;
+}
+.eyebrow-ember {
+  color: var(--color-ember-600);
+}
+.eyebrow-ember-light {
+  color: var(--color-ember-300);
 }
 
 /* Smooth-height accordion panels (grid-rows trick, no JS height measuring) */
